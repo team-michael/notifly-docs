@@ -2,7 +2,6 @@
   "label": "Client SDK",
   "position": 2,
   "link": {
-    "type": "generated-index",
-    "description": "Client SDK 사용법을 설명합니다."
+    "type": "generated-index"
   }
 }

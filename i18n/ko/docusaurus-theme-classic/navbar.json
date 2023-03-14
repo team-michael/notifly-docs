@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Notifly",
+    "description": "The title in the navbar"
+  },
+  "item.label.Docs": {
+    "message": "Docs",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Notifly": {
+    "message": "Notifly",
+    "description": "Navbar item with label Notifly"
+  }
+}
