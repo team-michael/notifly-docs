@@ -81,16 +81,82 @@ fetch(url, {
 
 ### Endpoint
 
+`POST https://api.notifly.tech/track-event`
+
 ### Request
 
-#### Parameters
-
+| Parameter                 | Type    | Required | Description                                                                                                                       |
+| ------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| projectID                 | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.                             |
+| eventName                 | String  | Yes      | 이벤트명                                                                                                                          |
+| isGlobalEvent             | Boolean | Yes      | 특정 유저에게만 발생하는 것이 아니라 서비스 레벨에서 발생하는 이벤트인지의 여부                                                      |
+| eventParams               | Object  | No       | 이벤트 파라미터 값들                                                                                                              |
+| segmentationEventParamKeys | Array   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다. |
+| userID                    | String  | No       | 유저 ID                                                                                                                           |
 
 #### Headers
 
+| Parameter      | Value            | Description                                                                  |
+| -------------- | ---------------- | ---------------------------------------------------------------------------- |
+| Content-Type   | application/json | Request body 의 MIME Type                                                  |
+| Authorization  | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰                            |
+
 #### Response (예시)
 
+| Parameter     | Value                                             |
+| ------------- | ------------------------------------------------- |
+| Status code   | 200 OK                                            |
+| Content-Type  | application/json                                  |
+| json          | {"data":"some-success-response-from-notifly-engine","error":null} |
+
 ### 코드 예시
+
+Node.js
+
+```js
+// Endpoint
+const url = "https://api.notifly.tech/track-event";
+
+// Headers
+const headers = {
+    "Content-Type": "application/json",
+    Authorization: "some-token" // retrieve this from authorization endpoint
+};
+
+// Body
+const body = {
+    projectID: "provided_project_id",
+    eventName: "show_end",
+    isGlobalEvent: true, // true if the event is not associated with a specific user
+    eventParams: {},
+    segmentationEventParamKeys: [],
+    userID: null, // null if global event but should be specified otherwise
+};
+const encodedBody = JSON.stringify(body);
+
+// Fetch call
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: encodedBody,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        // Get response data
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+/**
+ * Response data 예시
+{
+    data: 'some-success-response-from-notifly-engine',
+    error: null
+}
+**/
+```
 
 
 ## 3. Set User Properties Endpoint
@@ -99,13 +165,73 @@ fetch(url, {
 
 ### Endpoint
 
+`POST https://api.notifly.tech/set-user-properties`
+
 ### Request
 
-#### Parameters
-
+| Parameter      | Type   | Required | Description                                                                                                                   |
+| -------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| projectID      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.                   |
+| userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                                                  |
+| userID         | String | Yes      | 유저 ID                                                                                                                       |
 
 #### Headers
 
+| Parameter      | Value            | Description                                                           |
+| -------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type   | application/json | Request body 의 MIME Type                                             |
+| Authorization  | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰                       |
+
 #### Response (예시)
 
+| Parameter     | Value                                             |
+| ------------- | ------------------------------------------------- |
+| Status code   | 200 OK                                            |
+| Content-Type  | application/json                                  |
+| json          | {"data":"some-success-response-from-notifly-engine","error":null} |
+
 ### 코드 예시
+
+Node.js
+
+```js
+// Endpoint
+const url = "https://api.notifly.tech/set-user-properties";
+
+// Headers
+const headers = {
+    "Content-Type": "application/json",
+    Authorization: "some-token" // retrieve this from authorization endpoint
+};
+
+// Body
+const body = {
+    projectID: "provided_project_id",
+    userProperties: {},
+    userID: "some-user-id",
+};
+const encodedBody = JSON.stringify(body);
+
+// Fetch call
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: encodedBody,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+        // Get response data
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+/**
+ * Response data 예시
+{
+    data: 'some-success-response-from-notifly-engine',
+    error: null
+}
+**/
+```
