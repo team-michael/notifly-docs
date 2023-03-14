@@ -25,12 +25,12 @@ __Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인�
 
 ```js
  import notifly from 'notifly-sdk';
- . . .
+...
  useEffect(() => {
     notifly.initialize('project_id', 'user_name', 'password', false) 
         .then(() => { notifly.setUserId('user_id') }) // optional (user_id: string)
  , []); 
- . . .
+...
 ```
 
 ### 2-ver2) (Advanced) 푸시알림 클릭 핸들러 커스터마이징
@@ -41,7 +41,7 @@ __주의) 커스터마이징을 위하여, notifly.initialize의 네번째 인�
  // Example code of customizing
 import notifly from 'notifly-sdk';
 import messaging from "@react-native-firebase/messaging";
- . . .
+...
  useEffect(() => {
     notifly.initialize('project_id', 'user_name', 'password', true) // true if you want to customize push notification click event handler
         .then(() => { notifly.setUserId('user_id') }) // optional (user_id: string)
@@ -58,7 +58,7 @@ import messaging from "@react-native-firebase/messaging";
             });
         })
  , []); 
- . . .
+...
 ```
 
 ## 2. How to set user information
@@ -94,13 +94,13 @@ const handleLogin = () => {
 
 ```js
 const handleRejectPushNoti = () => {
-    …
+    ...
     notifly.setUserProperties({
         "push_subscription_channel1": false,
         "push_subscription_channel2": false,
         "push_subscription_channel3": false,
     });
-    …
+    ...
 }
 ```
 
@@ -124,11 +124,11 @@ const handleRejectPushNoti = () => {
 
 ```js
 const handlePurchaseTicket = () => {
-    …
+    ...
     notifly.trackEvent("ticket_purchase", {
         "show_id": "sample_show_id",
         "performance_start_time": 1674104659
     }, ["show_id"]);
-    …
+    ...
 }
 ```
