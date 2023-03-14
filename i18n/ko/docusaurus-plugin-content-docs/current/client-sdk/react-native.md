@@ -66,7 +66,7 @@ import messaging from "@react-native-firebase/messaging";
 - Notifly에서는 user의 id 및 property를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
 - 캠페인 집행 시 설정된 user property를 타겟 유저들 선정 기준으로 활용함으로써 보다 효율적인 마케팅을 펼칠 수 있습니다.
     - cf) Notifly에서는 채널별 푸시 알림 수신 동의 여부를 user property로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
-    - __주의 : 1에서의 notifly initialize가 완료된 후 사용해주세요.__
+    - __주의 : 1에서의 notifly initialize를 마친 후 사용해주세요.__
 
 ### 1) Register user_id
 
@@ -80,6 +80,12 @@ import messaging from "@react-native-firebase/messaging";
 const handleLogin = () => {
     ...
     notifly.setUserId('user_id'); // (user_id: string)
+    ...
+}
+
+const handleLogout = () => {
+    ...
+    notifly.setUserId(); // unregister user id
     ...
 }
 ```
@@ -110,7 +116,7 @@ const handleRejectPushNoti = () => {
 - 트래킹 된 event는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
 - 더욱이 segmentation_event_param_keys를 활용하여 event params를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field를 segmentation_event_param_keys에 지정해주세요.
     - 현재는 segmentation_event_param_key를 한 개까지 지원하고 있기 때문에, segmentation_event_param_keys는 길이는 1이하인 List이여야합니다.
-    - __주의 : 1에서의 notifly의 initialize와 foreground_setting을 마치고 사용해주세요.__
+    - __주의 : 1에서의 notifly의 initialize를 마친 후 사용해주세요.__
 
 ### 1) track event
 
