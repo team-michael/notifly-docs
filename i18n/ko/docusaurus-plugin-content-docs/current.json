@@ -14,5 +14,13 @@
   "sidebar.docsSidebar.category.HTTP API": {
     "message": "HTTP API",
     "description": "The label for category HTTP API in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Google Analytics Integration": {
+    "message": "Google Analytics Integration",
+    "description": "The label for category Google Analytics Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Google Analytics Integration.link.generated-index.description": {
+    "message": "Google Analytics Integration.",
+    "description": "The generated-index page description for category Google Analytics Integration in sidebar docsSidebar"
   }
 }
