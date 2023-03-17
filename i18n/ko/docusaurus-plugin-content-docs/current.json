@@ -16,11 +16,11 @@
     "description": "The label for category HTTP API in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Google Analytics Integration": {
-    "message": "Google Analytics Integration",
+    "message": "Google Analytics 연동",
     "description": "The label for category Google Analytics Integration in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Google Analytics Integration.link.generated-index.description": {
-    "message": "Google Analytics Integration.",
+    "message": "Notifly에서는 Google Analytics와 연동하여 Google Analytics로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Google Analytics 연동에 대해 알아보고 연동을 설정하세요.",
     "description": "The generated-index page description for category Google Analytics Integration in sidebar docsSidebar"
   }
 }
