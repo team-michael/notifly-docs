@@ -46,13 +46,13 @@ npm install
 |-----------------------------|--------------------------------------------------------------|------------------------------|
 | `notifly.location`            | Cloud Function을 배포할 Google Cloud region.       | 'asia-northeast3'           |
 | `notifly.conversion_events`   | Notifly로 전송할 Google Analytics 전환 이벤트 목록 (쉼표로 구분)   | 'ticket_purchase,loginpage_visit' |
-| `notifly.project_id`          | Notifly project ID                                       | 'michael'                    |
-| `notifly.username`            | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 이름이 생성됩니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.               | 'jordan'                    |
+| `notifly.project_id`          | Notifly project ID                                       | '788333391af642e49bac04bed74c06ce'                    |
+| `notifly.username`            | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 이름이 생성됩니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.               | 'michael'                    |
 | `notifly.password`            | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 비밀번호가 생성됩니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.                | '111111'                     |
 
 예시:
 ```
-firebase functions:config:set notifly.location='asia-northeast3' notifly.conversion_events='ticket_purchase,loginpage_visit' notifly.project_id='michael' notifly.username='jordan' notifly.password='111111'
+firebase functions:config:set notifly.location='asia-northeast3' notifly.conversion_events='ticket_purchase,loginpage_visit' notifly.project_id='788333391af642e49bac04bed74c06ce' notifly.username='michael' notifly.password='111111'
 ```
 
 Cloud function들의 환경설정을 확인하시기 위해서는 다음을 실행하세요:

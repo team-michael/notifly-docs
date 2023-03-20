@@ -41,13 +41,13 @@ Set 5 configurations:
 |-----------------------------|--------------------------------------------------------------|------------------------------|
 | notifly.location            | The location/region for the Cloud Functions deployment       | 'asia-northeast3'           |
 | notifly.conversion_events   | Comma-separated list of Google Analytics conversion events   | 'ticket_purchase,loginpage_visit' |
-| notifly.project_id          | The Notifly project ID                                       | 'michael'                    |
-| notifly.username            | The Notifly username used for authentication                | 'jordan'                    |
+| notifly.project_id          | The Notifly project ID                                       | '788333391af642e49bac04bed74c06ce'                    |
+| notifly.username            | The Notifly username used for authentication                | 'michael'                    |
 | notifly.password            | The Notifly password used for authentication                | '111111'                     |
 
 Example:
 ```console
-firebase functions:config:set notifly.location='asia-northeast3' notifly.conversion_events='ticket_purchase,loginpage_visit' notifly.project_id='michael' notifly.username='minyong' notifly.password='111111'
+firebase functions:config:set notifly.location='asia-northeast3' notifly.conversion_events='ticket_purchase,loginpage_visit' notifly.project_id='788333391af642e49bac04bed74c06ce' notifly.username='michael' notifly.password='111111'
 ```
 
 If you want to check the cloud function configuration, run
