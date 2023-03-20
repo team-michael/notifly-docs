@@ -55,7 +55,7 @@ Firebase 프로젝트에서 Events를 찾아 선택해 주세요.
 
 Notifly 캠페인 생성 페이지에서 이벤트 기반 발송 드롭다운에서 `firebase__` 로 시작하는 이벤트 이름이 보이시면 연동이 완료된 것입니다.
 
-* Extenstion 설치 및 이벤트 발생 이후 약 15분 정도의 딜레이가 발생할 수 있습니다.
+* Extenstion 설치 및 이벤트 발생 이후 약 30분 정도의 딜레이가 발생할 수 있습니다.
 * 혹시 확인이 안 되시면 노티플라이 팀에게 문의 부탁드립니다.
 
 ![Firebase integration success](./img/firebase_integration_success.png)
