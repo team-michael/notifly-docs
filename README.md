@@ -32,6 +32,12 @@ npm i
 
 There are no env variables, so no `.env` file. 
 
+### Translations
+
+```
+npm run write-translations -- --locale ko
+```
+
 ### Local development
 
 __NOTE: Each locale is a distinct standalone single-page application: it is not possible to start the Docusaurus sites in all locales at the same time.__

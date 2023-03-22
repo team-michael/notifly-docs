@@ -22,5 +22,13 @@
   "sidebar.docsSidebar.category.Google Analytics Integration.link.generated-index.description": {
     "message": "Notifly에서는 Google Analytics와 연동하여 Google Analytics로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Google Analytics 연동에 대해 알아보고 연동을 설정하세요.",
     "description": "The generated-index page description for category Google Analytics Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.SMS": {
+    "message": "문자",
+    "description": "The label for category SMS in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.SMS.link.generated-index.description": {
+    "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category SMS in sidebar docsSidebar"
   }
 }
