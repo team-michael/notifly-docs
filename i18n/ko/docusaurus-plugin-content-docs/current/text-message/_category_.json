@@ -1,6 +1,6 @@
 {
   "label": "문자 발송",
-  "position": 5,
+  "position": 6,
   "link": {
     "type": "generated-index",
     "description": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다."
