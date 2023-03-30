@@ -21,4 +21,4 @@ sidebar_position: 2
 
 ![Aligo API key information](./img/text_message_aligo_api_key.png)
 
-설정을 완료하신 이후에는 [문자 발송 테스트하기](//ko/text-message/text-message-guide#문자-발송-테스트하기) 를 통해 실제로 잘 연결이 되었는지 확인해 주시길 바랍니다.
+설정을 완료하신 이후에는 [문자 발송 테스트하기](/ko/text-message/text-message-guide#문자-발송-테스트하기) 를 통해 실제로 잘 연결이 되었는지 확인해 주시길 바랍니다.
