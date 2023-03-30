@@ -30,5 +30,13 @@
   "sidebar.docsSidebar.category.SMS.link.generated-index.description": {
     "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category SMS in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Mixpanel Integration": {
+    "message": "Mixpanel Integration",
+    "description": "The label for category Mixpanel Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Mixpanel Integration.link.generated-index.description": {
+    "message": "Mixpanel Integration.",
+    "description": "The generated-index page description for category Mixpanel Integration in sidebar docsSidebar"
   }
 }
