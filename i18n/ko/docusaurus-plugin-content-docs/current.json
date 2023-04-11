@@ -32,11 +32,19 @@
     "description": "The generated-index page description for category SMS in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Mixpanel Integration": {
-    "message": "Mixpanel Integration",
+    "message": "Mixpanel 연동",
     "description": "The label for category Mixpanel Integration in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Mixpanel Integration.link.generated-index.description": {
-    "message": "Mixpanel Integration.",
+    "message": "Notifly에서는 Mixpanel과 연동하여 Mixpanel에서 만든 코호트를 대상으로 캠페인을 진행할 수 있습니다. 이 가이드를 참조하여 Mixpanel 연동에 대해 알아보세요.",
     "description": "The generated-index page description for category Mixpanel Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Amplitude Integration": {
+    "message": "Amplitude 연동",
+    "description": "The label for category Amplitude Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Amplitude Integration.link.generated-index.description": {
+    "message": "Notifly에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
+    "description": "The generated-index page description for category Amplitude Integration in sidebar docsSidebar"
   }
 }
