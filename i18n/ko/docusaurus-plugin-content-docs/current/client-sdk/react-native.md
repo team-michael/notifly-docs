@@ -4,47 +4,66 @@ sidebar_position: 1
 
 # Client SDK - React Native
 
-## 1. Initial SDK Setup
+## 1. Notifly SDK 셋업
 
-### 1-1. 다음 node package들을 설치합니다.
+### 1-1. SDK 설치
 
-`npm install --save ...`
+* [notifly-sdk npm](https://www.npmjs.com/package/notifly-sdk)
 
-```js
- "notifly-sdk": "^2.0.0",
- "@react-native-async-storage/async-storage": "^1.17.11",
- "@react-native-firebase/app": "^16.4.3",
- "@react-native-firebase/messaging": "^16.4.3",
- "react-native-device-info": "^8.1.4",
- "uuid": "^8.3.0"
+패키지를 설치하기 위해, 다음을 실행해 주세요:
+
+```shell
+npm install notifly-sdk@latest --save
 ```
 
-### 2-ver1) (Recommended) Notifly SDK 초기화 코드를 추가합니다.
+yarn을 사용하시는 경우:
 
-__Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화된 핸들러를 사용하시고 싶으신 분들은 ver1이 아닌 ver2를 참고해주세요.__
+```shell
+yarn add notifly-sdk@latest
+```
+
+추가적으로, notifly-sdk에서 사용하는 peer dependency도 같이 설치를 해주세요.
+
+
+```shell
+npm install \
+  @react-native-async-storage/async-storage@^1.17.11 \
+  @react-native-firebase/app@^16.4.3 \
+  @react-native-firebase/messaging@^16.4.3 \
+  react-native-device-info@^8.1.4 \
+  react-native-modal@^13.0.1 \
+  react-native-root-siblings@^4.1.1 \
+  react-native-webview@^11.26.1 \
+  uuid@^8.3.0
+```
+
+### 1-2. Notifly SDK 초기화 코드 추가
+
+_Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화된 핸들러를 사용하시고 싶으신 분들은 다음 section인 '(Advanced) 푸시알림 클릭 핸들러 커스터마이징'을 확인해 주세요._
 
 ```js
- import notifly from 'notifly-sdk';
+ // Example code
+import notifly from 'notifly-sdk';
 ...
- useEffect(() => {
-    notifly.initialize('project_id', 'user_name', 'password', false) 
-        .then(() => { notifly.setUserId('user_id') }) // optional (user_id: string)
- , []); 
+useEffect(() => {
+    notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
+        .then(() => { ... })
+, []); 
 ...
 ```
 
-### 2-ver2) (Advanced) 푸시알림 클릭 핸들러 커스터마이징
+#### (Advanced) 푸시알림 클릭 핸들러 커스터마이징
 
-__주의) 커스터마이징을 위하여, notifly.initialize의 네번째 인자로 꼭 true(bool)를 기입해주세요.__
+커스터마이징을 위하여, notifly.initialize의 네번째 인자로 true를 입력해주세요.
 
 ```js
- // Example code of customizing
+ // Example code
 import notifly from 'notifly-sdk';
 import messaging from "@react-native-firebase/messaging";
 ...
- useEffect(() => {
-    notifly.initialize('project_id', 'user_name', 'password', true) // true if you want to customize push notification click event handler
-        .then(() => { notifly.setUserId('user_id') }) // optional (user_id: string)
+useEffect(() => {
+    notifly.initialize('myProjectId', 'myUserName', 'myPassword', true)
+        .then(() => { notifly.setUserId(USER_ID) }) 
         .then(() => { 
             messaging()
             .getInitialNotification()
@@ -57,29 +76,31 @@ import messaging from "@react-native-firebase/messaging";
                 }
             });
         })
- , []); 
+, []); 
 ...
 ```
 
-## 2. How to set user information
+## 2. 사용자 프로퍼티 등록하기
 
-- Notifly에서는 user의 id 및 property를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
-- 캠페인 집행 시 설정된 user property를 타겟 유저들 선정 기준으로 활용함으로써 보다 효율적인 마케팅을 펼칠 수 있습니다.
-    - cf) Notifly에서는 채널별 푸시 알림 수신 동의 여부를 user property로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
-    - __주의 : 1에서의 notifly initialize를 마친 후 사용해주세요.__
+- Notifly에서는 사용자의 아아디 (user_id) 및 프로퍼티 (user_properties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+    - Notifly에서는 채널별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 1) Register user_id
+### 2-1. user_id 등록
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
 | user_id   | String | Yes      |
 
-`notifly.setUserId(user_id);`
+```js
+notifly.setUserId(user_id);
+```
 
 ```js
+ // Example code
 const handleLogin = () => {
     ...
-    notifly.setUserId('user_id'); // (user_id: string)
+    notifly.setUserId('example_user_id');
     ...
 }
 
@@ -90,16 +111,19 @@ const handleLogout = () => {
 }
 ```
 
-### 2) Set user_properties
+### 2-2. user_properties 등록
 
 | Parameter         | Type | Required |
 | ----------------- | ---- | -------- |
 | user_properties   | json | Yes      |
 
-`notifly.setUserProperties( user_properties (json) );`
+```js
+notifly.setUserProperties(user_properties);
+```
 
 ```js
-const handleRejectPushNoti = () => {
+ // Example code
+const handleRejectPushNotification = () => {
     ...
     notifly.setUserProperties({
         "push_subscription_channel1": false,
@@ -110,15 +134,14 @@ const handleRejectPushNoti = () => {
 }
 ```
 
-## 3. How to track events
+## 3. 이벤트 로깅
 
-- Notifly에서는 사용자의 행동 등 이벤트를 tracking하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다.
-- 트래킹 된 event는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
-- 더욱이 segmentation_event_param_keys를 활용하여 event params를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field를 segmentation_event_param_keys에 지정해주세요.
+- Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
+- segmentation_event_param_keys를 활용하여 이벤트 변수 (event_params)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field의 key 값을 segmentation_event_param_keys에 지정해주세요.
     - 현재는 segmentation_event_param_key를 한 개까지 지원하고 있기 때문에, segmentation_event_param_keys는 길이는 1이하인 List이여야합니다.
-    - __주의 : 1에서의 notifly의 initialize를 마친 후 사용해주세요.__
 
-### 1) track event
+### 3-1. 이벤트 로깅
 
 | Parameter                 | Type | Required |
 | ------------------------- | ---- | -------- |
@@ -126,9 +149,12 @@ const handleRejectPushNoti = () => {
 | event_params              | json | No       |
 | segmentation_event_param_keys | List | No       |
 
-`notifly.trackEvent( event_name, event_params, event_param_key_for_targeting );`
+```js
+notifly.trackEvent(event_name, event_params, event_param_key_for_targeting);
+```
 
 ```js
+ // Example code
 const handlePurchaseTicket = () => {
     ...
     notifly.trackEvent("ticket_purchase", {
