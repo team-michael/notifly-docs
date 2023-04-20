@@ -141,12 +141,12 @@ const config = {
         typesenseServerConfig: {
           nodes: [
             {
-              host: 'udhtqbp6j3lw5orep-1.a1.typesense.net',
+              host: 'bakpg1hyxec9fow0p-1.a1.typesense.net',
               port: 443,
               protocol: 'https',
             },
           ],
-          apiKey: 'APdBoo5qX5c2EOwVpFmad1lJsPYCl6XO', // Search-only API key
+          apiKey: '1fEbxnQmaCreZDHOMpHM470sq5gqWOb3', // Search-only API key
         },
 
         // Optional: Typesense search parameters: https://typesense.org/docs/0.24.0/api/search.html#search-parameters

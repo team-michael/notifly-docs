@@ -13,7 +13,7 @@ chmod +x ./index_docs.sh && ./index_docs.sh
 
 ```
 TYPESENSE_API_KEY=...
-TYPESENSE_HOST=udhtqbp6j3lw5orep-1.a1.typesense.net
+TYPESENSE_HOST=bakpg1hyxec9fow0p-1.a1.typesense.net
 TYPESENSE_PORT=443
 TYPESENSE_PROTOCOL=https
 ```
