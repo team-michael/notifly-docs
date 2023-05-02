@@ -4,6 +4,14 @@ sidebar_position: 1
 
 # Client SDK - React Native
 
+Notifly React Native SDK는 노티플라이를 React Native 어플리케이션과 연동하기 위해 사용할 수 있습니다. 다음과 같은 기능들을 지원합니다:
+
+- 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시, 인앱 메시지를 React Native 앱에서 수신할 수 있습니다.
+    - 노티플라이에서 앱 푸시는 앱이 Background나 Quit 상태일 때 수신됩니다. 앱이 Foreground 상태일 때도 앱 푸시를 수신하기 위해서는 Foreground handler를 직접 구현해 주셔야 합니다.
+    - 노티플라이의 인앱 메시지는 앱이 Foreground 상태일 때만 수신됩니다. Backgound나 Quit 상태일 때는 무시됩니다.
+- 이벤트, 사용자 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다. 
+- 캠페인의 성과를 측정할 수 있도록 이벤트를 로깅합니다. 
+
 ## 1. Notifly SDK 셋업
 
 ### 1-1. SDK 설치
@@ -78,6 +86,55 @@ useEffect(() => {
         })
 , []); 
 ...
+```
+
+### 1-3. 푸시 수신 측정 셋업하기
+
+앱 푸시 캠페인의 성과를 측정하기 위해서는 사용자들이 푸시를 수신했는지 여부를 측정하는 것이 중요합니다.
+
+다음과 같은 예시들에서 발송된 푸시를 사용자들이 수신하지 않을 수 있습니다:
+- 사용자가 앱에 대해 푸시를 수신하지 않음으로 설정한 경우
+- 사용자가 앱을 삭제한 경우
+- 앱 푸시 토큰이 만료된 경우
+- 사용자의 기기가 인터넷에 연결되어 있지 않은 경우
+
+푸시 수신 여부를 측정하기 위해서는 앱의 Background handler에서 노티플라이의 handler를 등록해 주셔야 합니다. 이미 Firebase Cloud Messaging의 background handler가 앱에 구현되어 있는지 없는지에 따라 등록 방식이 다릅니다.
+
+_참고: 여러 개의 background handler가 등록되는 경우 가장 마지막에 등록된 background handler만 작동합니다._
+
+#### Case 1: Firebase Cloud Messaging의 background handler가 이미 구현되어 있는 경우
+
+```js
+notiflyBackgroundHandler(remoteMessage);
+```
+
+```js
+// index.js -- Example code
+...
+import messaging from '@react-native-firebase/messaging';
+import { notiflyBackgroundHandler } from 'notifly-sdk-dev';
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+    ... // Existing background handler logic
+    await notiflyBackgroundHandler(remoteMessage);
+}); */
+
+AppRegistry.registerComponent(...);
+```
+
+#### Case 2: Firebase Cloud Messaging의 background handler가 없는 경우
+
+```js
+setNotiflyBackgroundMessageHandler();
+```
+
+```js
+// index.js -- Example code
+...
+import {setNotiflyBackgroundMessageHandler} from 'notifly-sdk-dev';
+
+setNotiflyBackgroundMessageHandler();
+AppRegistry.registerComponent(...);
 ```
 
 ## 2. 사용자 프로퍼티 등록하기
