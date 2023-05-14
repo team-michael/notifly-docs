@@ -58,9 +58,9 @@ sidebar_position: 1
 
 1. **Client SDK** : 어플리케이션에서 클라이언트 SDK를 이용하여 유저의 특정 액션에 알맞게 이벤트를 발생시킬 수 있습니다. 자세한 내용은 [Client SDK](/ko/category/client-sdk)를 참고해주세요.
 
-2. **HTTP API**: 노티플라이는 REST API를 통하여 이벤트를 발생시키는 방법을 제공합니다. REST API를 통하여 특정 유저에게만 발생하는 이벤트 뿐만 아니라, 서비스 레벨에서 발생하는 이벤트(공연 종료 이벤트 등)도 노티플라이에 전달할 수 있습니다. 자세한 내용은 [HTTP API](/ko/http-api/http-api-guide)를 참고해주세요.
+2. **HTTP API**: 노티플라이는 REST API를 통하여 이벤트를 발생시키는 방법을 제공합니다. REST API를 통하여 특정 유저에게만 발생하는 이벤트 뿐만 아니라, 서비스 레벨에서 발생하는 이벤트(공연 종료 이벤트 등)도 노티플라이에 전달할 수 있습니다. 자세한 내용은 [HTTP API](/ko/user-guide/http-api/http-api-guide)를 참고해주세요.
 
-3. **외부 분석 도구 연동** : Amplitude, GA(Google Analytics) 등 분석 도구를 이미 사용하고 계시다면, 기존에 사용하던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다. 자세한 방법은 [Amplitude 연동](/ko/amplitude/amplitude-introduction), [Google Analytics 연동](/ko/category/google-analytics-integration)을 참고해주세요.
+3. **외부 분석 도구 연동** : Amplitude, GA(Google Analytics) 등 분석 도구를 이미 사용하고 계시다면, 기존에 사용하던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다. 자세한 방법은 [Amplitude 연동](/ko/user-guide/amplitude/amplitude-introduction), [Google Analytics 연동](/ko/user-guide/google-analytics/google-analytics-introduction)을 참고해주세요.
 
 이벤트 기반 발송 캠페인은 다음과 같이 생성할 수 있습니다.
 
@@ -73,8 +73,8 @@ sidebar_position: 1
 
 ## 사용자 세그먼트
 
-노티플라이 캠페인은 쉽고 빠르게 원하는 사용자에게 도달하는 방법을 제공합니다. 현재 지원하는 대상 설정 방법은 **새로운 세그먼트를 제작하는 방법, 믹스패널 등의 외부 분석 툴로부터 코호트 정보를 불러오는 방법, 그리고 CSV 파일을 업로드 하는 방법**이 있습니다. 자세한 정보는 [발송 대상 세그먼팅](/ko/campaigns/segment) 페이지를 확인해주세요.
+노티플라이 캠페인은 쉽고 빠르게 원하는 사용자에게 도달하는 방법을 제공합니다. 현재 지원하는 대상 설정 방법은 **새로운 세그먼트를 제작하는 방법, 믹스패널 등의 외부 분석 툴로부터 코호트 정보를 불러오는 방법, 그리고 CSV 파일을 업로드 하는 방법**이 있습니다. 자세한 정보는 [발송 대상 세그먼팅](/ko/user-guide/campaigns/segment) 페이지를 확인해주세요.
 
 ## 메시지 개인화
 
-노티플라이 캠페인은 사용자에게 메시지를 개인화하여 발송할 수 있는 방법을 제공합니다. 자세한 정보는 [메시지 개인화](/ko/campaigns/message-personalization) 페이지를 확인해주세요.
+노티플라이 캠페인은 사용자에게 메시지를 개인화하여 발송할 수 있는 방법을 제공합니다. 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 페이지를 확인해주세요.

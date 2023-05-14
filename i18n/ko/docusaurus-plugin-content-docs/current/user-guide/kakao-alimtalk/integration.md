@@ -72,6 +72,6 @@ SOLAPI의 경우, 네 가지의 정보를 필수적으로 등록해야 정상적
 ![SOLAPI Integration 2](./img/aligo_integration_2.png)
 
 1. [알리고](https://smartsms.aligo.in/)에 접속, 로그인 후 상단 **문자 API - 신청/인증** 탭에 방문합니다.
-2. **알리고 플랫폼은 반드시 노티플라이 발송 서버의 IP 인증이 필요합니다.** 해당 방법에 대해서는 [이 곳](/ko/text-message/integration#알리고-연결)을 참고해 주세요.
+2. **알리고 플랫폼은 반드시 노티플라이 발송 서버의 IP 인증이 필요합니다.** 해당 방법에 대해서는 [이 곳](/ko/user-guide/text-message/integration#알리고-연결)을 참고해 주세요.
 3. 상단 네비게이션의 **카카오톡 - 신청/인증** 탭에 방문 후, **기존 API Key** 목록에서 `Identifier`, `발급 키`값을 각각 노티플라이 발신자 등록창의 `api_id`, `api_secret_key` 값에 등록합니다. API Key를 생성하지 않았다면, 하단의 **API KEY 발급 신청** 버튼을 이용하여 Key를 발급합니다.
 4. 아래 **발신 번호** 목록에서 `발신 번호`를 노티플라이 발신자 등록창의 `sender_phone_number` 값에 등록합니다. 등록된 발신번호가 없다면, **발신 번호 추가하기** 버튼을 눌러 발신번호를 추가해주세요.

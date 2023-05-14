@@ -97,9 +97,15 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'intro',
-            position: 'right',
-            label: 'Docs',
+            docId: 'user-guide/intro',
+            position: 'left',
+            label: 'User Guide',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'developerGuide',
+            label: 'Developer Guide',
           },
           {
             href: 'https://www.notifly.tech',

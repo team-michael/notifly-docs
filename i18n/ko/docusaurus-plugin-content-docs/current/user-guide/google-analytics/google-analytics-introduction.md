@@ -49,7 +49,7 @@ Firebase 프로젝트에서 Events를 찾아 선택해 주세요.
 
 ### 2. Firebase - Notifly extension 설치
 
-[Firebase - Notifly extension](/ko/google-analytics/firebase-notifly-extension)가이드를 참고해 주세요.
+[Firebase - Notifly extension](/ko/user-guide/google-analytics/firebase-notifly-extension) 가이드를 참고해 주세요.
 
 ### 3. 실제 로깅된 Google Analytics 이벤트를 노티플라이에서 확인하기
 

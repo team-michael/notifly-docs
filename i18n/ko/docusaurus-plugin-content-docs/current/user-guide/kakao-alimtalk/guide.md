@@ -27,7 +27,7 @@ sidebar_position: 1
 
 ![Kakao alimtalk add platform](./img/kakao_alimtalk_add_platform.png)
 
-플랫폼 별 발송 정보 등록은 [카카오 알림톡 발송 대행사 연결](/ko/kakao-alimtalk/integration) 페이지를 확인해주세요.
+플랫폼 별 발송 정보 등록은 [카카오 알림톡 발송 대행사 연결](/ko/user-guide/kakao-alimtalk/integration) 페이지를 확인해주세요.
 
 ## 카카오 알림톡 캠페인 시작하기
 
@@ -39,17 +39,17 @@ sidebar_position: 1
 
 카카오 알림톡의 경우, 지원되는 발송 대상 세그먼팅의 종류는
 
-1. [새로운 세그먼트](/ko/campaigns/segment#새로운-세그먼트)
-2. [CSV 업로드](/ko/campaigns/segment#csv-업로드)
+1. [새로운 세그먼트](/ko/user-guide/campaigns/segment#새로운-세그먼트)
+2. [CSV 업로드](/ko/user-guide/campaigns/segment#csv-업로드)
 3. 코호트 불러오기
 
 #### 새로운 세그먼트
 
-자세한 내용은 [새로운 세그먼트](/ko/campaigns/segment#새로운-세그먼트) 섹션을 참고해주세요.
+자세한 내용은 [새로운 세그먼트](/ko/user-guide/campaigns/segment#새로운-세그먼트) 섹션을 참고해주세요.
 
 #### CSV 업로드
 
-노티플라이 데이터베이스에 등록되지 않은 사용자에게도 직접 발송하고 싶다면, CSV 업로드 기능을 활용할 수 있습니다. 자세한 내용은 [발송 대상 세그먼팅 - CSV 업로드](/ko/campaigns/segment#csv-업로드) 섹션을 참고해주세요.
+노티플라이 데이터베이스에 등록되지 않은 사용자에게도 직접 발송하고 싶다면, CSV 업로드 기능을 활용할 수 있습니다. 자세한 내용은 [발송 대상 세그먼팅 - CSV 업로드](/ko/user-guide/campaigns/segment#csv-업로드) 섹션을 참고해주세요.
 
 - **카카오톡 발송에서 `phone_number` 컬럼은 필수이며 중복되거나 비어있으면 안됩니다.**
 
@@ -61,9 +61,9 @@ sidebar_position: 1
 
 ### 메시지
 
-카카오 알림톡은 **템플릿 기반으로 발송**됩니다. 템플릿에는 치환 가능한 변수 필드가 존재하며, `#{변수}`와 같은 형식으로 되어있습니다. 해당 변수는 **직접 입력**으로도 치환가능하며, **[메시지 개인화](/ko/campaigns/message-personalization)**를 통하여 개인에게 다르게 알림톡을 보낼 수도 있습니다.
+카카오 알림톡은 **템플릿 기반으로 발송**됩니다. 템플릿에는 치환 가능한 변수 필드가 존재하며, `#{변수}`와 같은 형식으로 되어있습니다. 해당 변수는 **직접 입력**으로도 치환가능하며, **[메시지 개인화](/ko/user-guide/campaigns/message-personalization)**를 통하여 개인에게 다르게 알림톡을 보낼 수도 있습니다.
 
-1. 새로운 세그먼트 기능을 이용하여 대상을 지정할 때에는, **모든 변수명에 대하여 치환할 문구**를 입력하셔야 합니다. 치환 문구를 입력하실 때에, 개인화가 필요하다면 우측 상단 '메시지 개인화' 버튼을 눌러서 개인화 문구를 추가해주세요. 필요하지 않다면 고정된 내용을 입력해 주세요. 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/campaigns/message-personalization) 섹션을 참고해주세요.
+1. 새로운 세그먼트 기능을 이용하여 대상을 지정할 때에는, **모든 변수명에 대하여 치환할 문구**를 입력하셔야 합니다. 치환 문구를 입력하실 때에, 개인화가 필요하다면 우측 상단 '메시지 개인화' 버튼을 눌러서 개인화 문구를 추가해주세요. 필요하지 않다면 고정된 내용을 입력해 주세요. 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 
 ![Kakao Alimtalk Template Parameter - Build Segment](./img/kakao_alimtalk_template_parameter_build_segment.png)
 

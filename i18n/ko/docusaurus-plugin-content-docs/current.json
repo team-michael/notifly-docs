@@ -3,64 +3,64 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.docsSidebar.category.Client SDK": {
+  "sidebar.userGuide.category.Client SDK": {
     "message": "Client SDK",
-    "description": "The label for category Client SDK in sidebar docsSidebar"
+    "description": "The label for category Client SDK in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Client SDK.link.generated-index.description": {
+  "sidebar.userGuide.category.Client SDK.link.generated-index.description": {
     "message": "Notifly SDK는 모바일 애플리케이션 개발자가 앱에 푸시 알림과 인앱 메시지를 쉽게 구현할 수 있도록 하는 소프트웨어 개발 키트입니다. 이 SDK는 사용자 세션, 기기 정보 및 푸시 토큰에 대한 데이터를 자동으로 수집합니다. 이 SDK는 이 모든 데이터를 사용자 프로파일로 통합하며, 이를 사용하여 대상 사용자에게 타겟팅된 개인화된 푸시 알림과 인앱 메시지를 보낼 수 있습니다.",
-    "description": "The generated-index page description for category Client SDK in sidebar docsSidebar"
+    "description": "The generated-index page description for category Client SDK in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.HTTP API": {
+  "sidebar.userGuide.category.HTTP API": {
     "message": "HTTP API",
-    "description": "The label for category HTTP API in sidebar docsSidebar"
+    "description": "The label for category HTTP API in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Google Analytics Integration": {
+  "sidebar.userGuide.category.Google Analytics Integration": {
     "message": "Google Analytics 연동",
-    "description": "The label for category Google Analytics Integration in sidebar docsSidebar"
+    "description": "The label for category Google Analytics Integration in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Google Analytics Integration.link.generated-index.description": {
+  "sidebar.userGuide.category.Google Analytics Integration.link.generated-index.description": {
     "message": "Notifly에서는 Google Analytics와 연동하여 Google Analytics로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Google Analytics 연동에 대해 알아보고 연동을 설정하세요.",
-    "description": "The generated-index page description for category Google Analytics Integration in sidebar docsSidebar"
+    "description": "The generated-index page description for category Google Analytics Integration in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Campaigns": {
+  "sidebar.userGuide.category.Campaigns": {
     "message": "노티플라이 캠페인",
-    "description": "The label for category Campaigns in sidebar docsSidebar"
+    "description": "The label for category Campaigns in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Campaigns.link.generated-index.description": {
+  "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
     "message": "노티플라이 캠페인에 대한 정보를 설명하고, 생성부터 활용하는 법을 알아봅니다.",
-    "description": "The generated-index page description for category Campaigns in sidebar docsSidebar"
+    "description": "The generated-index page description for category Campaigns in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.SMS": {
+  "sidebar.userGuide.category.SMS": {
     "message": "문자",
-    "description": "The label for category SMS in sidebar docsSidebar"
+    "description": "The label for category SMS in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.SMS.link.generated-index.description": {
+  "sidebar.userGuide.category.SMS.link.generated-index.description": {
     "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category SMS in sidebar docsSidebar"
+    "description": "The generated-index page description for category SMS in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Kakao Alimtalk": {
+  "sidebar.userGuide.category.Kakao Alimtalk": {
     "message": "카카오 알림톡",
-    "description": "The label for category Kakao Alimtalk in sidebar docsSidebar"
+    "description": "The label for category Kakao Alimtalk in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Kakao Alimtalk.link.generated-index.description": {
+  "sidebar.userGuide.category.Kakao Alimtalk.link.generated-index.description": {
     "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Kakao Alimtalk in sidebar docsSidebar"
+    "description": "The generated-index page description for category Kakao Alimtalk in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Mixpanel Integration": {
+  "sidebar.userGuide.category.Mixpanel Integration": {
     "message": "Mixpanel 연동",
-    "description": "The label for category Mixpanel Integration in sidebar docsSidebar"
+    "description": "The label for category Mixpanel Integration in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Mixpanel Integration.link.generated-index.description": {
+  "sidebar.userGuide.category.Mixpanel Integration.link.generated-index.description": {
     "message": "Notifly에서는 Mixpanel과 연동하여 Mixpanel에서 만든 코호트를 대상으로 캠페인을 진행할 수 있습니다. 이 가이드를 참조하여 Mixpanel 연동에 대해 알아보세요.",
-    "description": "The generated-index page description for category Mixpanel Integration in sidebar docsSidebar"
+    "description": "The generated-index page description for category Mixpanel Integration in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Amplitude Integration": {
+  "sidebar.userGuide.category.Amplitude Integration": {
     "message": "Amplitude 연동",
-    "description": "The label for category Amplitude Integration in sidebar docsSidebar"
+    "description": "The label for category Amplitude Integration in sidebar userGuide"
   },
-  "sidebar.docsSidebar.category.Amplitude Integration.link.generated-index.description": {
+  "sidebar.userGuide.category.Amplitude Integration.link.generated-index.description": {
     "message": "Notifly에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
-    "description": "The generated-index page description for category Amplitude Integration in sidebar docsSidebar"
+    "description": "The generated-index page description for category Amplitude Integration in sidebar userGuide"
   }
 }
