@@ -60,7 +60,7 @@ sidebar_position: 1
 
 2. **HTTP API**: 노티플라이는 REST API를 통하여 이벤트를 발생시키는 방법을 제공합니다. REST API를 통하여 특정 유저에게만 발생하는 이벤트 뿐만 아니라, 서비스 레벨에서 발생하는 이벤트(공연 종료 이벤트 등)도 노티플라이에 전달할 수 있습니다. 자세한 내용은 [HTTP API](/ko/developer-guide/http-api/http-api-guide)를 참고해주세요.
 
-3. **외부 분석 도구 연동** : Amplitude, GA(Google Analytics) 등 분석 도구를 이미 사용하고 계시다면, 기존에 사용하던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다. 자세한 방법은 [Amplitude 연동](/ko/user-guide/amplitude/amplitude-introduction), [Google Analytics 연동](/ko/user-guide/google-analytics/google-analytics-introduction)을 참고해주세요.
+3. **외부 분석 도구 연동** : Amplitude를 이미 사용하고 계시다면, 기존에 사용하던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다. 자세한 방법은 [Amplitude 연동](/ko/user-guide/amplitude/amplitude-introduction)을 참고해주세요.
 
 이벤트 기반 발송 캠페인은 다음과 같이 생성할 수 있습니다.
 
