@@ -11,8 +11,8 @@ sidebar_position: 2
 발송 채널 별로 유저 정보로 등록되어야 할 필수적인 요소들이 존재합니다.
 
 - **푸시 알림 - 디바이스 토큰** : 디바이스 토큰은 현재 [Client SDK](/ko/category/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 토큰을 매뉴얼하게 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
-- **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 [유저 등록](https://notifly.tech/users/register) 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/user-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/user-guide/client-sdk/react-native#2-how-to-set-user-information)를 통해서도 등록할 수 있습니다.
-- **이메일 - 이메일 주소** : 이메일 주소 또한 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/user-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/user-guide/client-sdk/react-native#2-how-to-set-user-information)를 통해서도 등록할 수 있습니다.
+- **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 [유저 등록](https://notifly.tech/users/register) 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **이메일 - 이메일 주소** : 이메일 주소 또한 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 ## 새로운 세그먼트
 
@@ -33,11 +33,11 @@ sidebar_position: 2
 
 1. 사용자의 속성
 
-- [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/user-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/user-guide/client-sdk/react-native#2-how-to-set-user-information)를 통해서도 등록할 수 있습니다.
+- [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 2. 사용자의 디바이스 정보
 
-- 디바이스 정보는 현재 [Client SDK](/ko/user-guide/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 정보를 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
+- 디바이스 정보는 현재 [Client SDK](/ko/category/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 정보를 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
 
 3. 사용자의 이벤트 발생 기록
 
@@ -78,7 +78,7 @@ sidebar_position: 2
 
 ### 주의사항
 
-- **새로운 세그먼트** 제작 기능은 노티플라이 시스템 내부에 등록된 유저를 사용하는 기능입니다. 따라서, **메시지 개인화를 할 때에 유저 및 디바이스 정보 뿐만 아니라 발생한 이벤트 파라미터(이벤트 기반 발송일 경우)를 모두 사용**하실 수 있습니다. 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message#메시지-개인화) 섹션을 참고해주세요.
+- **새로운 세그먼트** 제작 기능은 노티플라이 시스템 내부에 등록된 유저를 사용하는 기능입니다. 따라서, **메시지 개인화를 할 때에 유저 및 디바이스 정보 뿐만 아니라 발생한 이벤트 파라미터(이벤트 기반 발송일 경우)를 모두 사용**하실 수 있습니다. 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 - [채널 별 발송 필수 정보](#발송-필수-정보)가 노티플라이 유저 데이터베이스에 존재해야 발송이 가능하며, 존재하지 않을 경우에는 발송되지 않습니다.
 
 ## CSV 업로드
@@ -102,6 +102,6 @@ sidebar_position: 2
 
 ![MS Excel csv export settings](./img/csv_export_settings.png)
 
-- **CSV 업로드** 기능은 노티플라이에 등록된 유저와 무관하게 발송됩니다. 따라서 메시지 개인화를 할 때에는, 노티플라이 데이터베이스에 등록된 유저 정보를 활용할 수 없습니다. CSV 파일 업로드를 했을 때는 **CSV 파일에 등록된 정보만으로 메시지 개인화를 할 수 있으며**, 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message#메시지-개인화) 섹션을 참고해주세요.
+- **CSV 업로드** 기능은 노티플라이에 등록된 유저와 무관하게 발송됩니다. 따라서 메시지 개인화를 할 때에는, 노티플라이 데이터베이스에 등록된 유저 정보를 활용할 수 없습니다. CSV 파일 업로드를 했을 때는 **CSV 파일에 등록된 정보만으로 메시지 개인화를 할 수 있으며**, 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 
 <!-- TODO: 외부 툴 연동 코호트 -->

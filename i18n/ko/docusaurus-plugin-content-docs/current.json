@@ -3,17 +3,17 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.userGuide.category.Client SDK": {
+  "sidebar.developerGuide.category.Client SDK": {
     "message": "Client SDK",
-    "description": "The label for category Client SDK in sidebar userGuide"
+    "description": "The label for category Client SDK in sidebar developerGuide"
   },
-  "sidebar.userGuide.category.Client SDK.link.generated-index.description": {
+  "sidebar.developerGuide.category.Client SDK.link.generated-index.description": {
     "message": "Notifly SDK는 모바일 애플리케이션 개발자가 앱에 푸시 알림과 인앱 메시지를 쉽게 구현할 수 있도록 하는 소프트웨어 개발 키트입니다. 이 SDK는 사용자 세션, 기기 정보 및 푸시 토큰에 대한 데이터를 자동으로 수집합니다. 이 SDK는 이 모든 데이터를 사용자 프로파일로 통합하며, 이를 사용하여 대상 사용자에게 타겟팅된 개인화된 푸시 알림과 인앱 메시지를 보낼 수 있습니다.",
-    "description": "The generated-index page description for category Client SDK in sidebar userGuide"
+    "description": "The generated-index page description for category Client SDK in sidebar developerGuide"
   },
-  "sidebar.userGuide.category.HTTP API": {
+  "sidebar.developerGuide.category.HTTP API": {
     "message": "HTTP API",
-    "description": "The label for category HTTP API in sidebar userGuide"
+    "description": "The label for category HTTP API in sidebar developerGuide"
   },
   "sidebar.userGuide.category.Google Analytics Integration": {
     "message": "Google Analytics 연동",
