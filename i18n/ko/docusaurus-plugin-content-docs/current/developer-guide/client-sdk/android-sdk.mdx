@@ -16,14 +16,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Notifly Android SDK에서는 푸시를 발송하기 위해 Firebase Cloud Messaging을 활용하고 있습니다. [Firebase 프로젝트 셋업](https://firebase.google.com/docs/android/setup?authuser=0&hl=ko)이 되었는지 확인해 주세요. 
-
+Notifly Android SDK에서는 푸시를 발송하기 위해 Firebase Cloud Messaging을 활용하고 있습니다. [Firebase 프로젝트 셋업](https://firebase.google.com/docs/android/setup?authuser=0&hl=ko)이 된 상태에서 초기화를 진행해 주세요.
 
 ## 1. Notifly SDK 셋업
 
 ### 1-1. SDK 설치
 
-Notifly Android SDK는 오픈소스 패키지 배포 플랫폼 Jitpack을 통해 배포되고 있습니다. Jitpack의 패키지를 앱에 설치하기 위해 다음과 같이 설정해 주세요.
+Notifly Android SDK는 오픈소스 패키지 배포 플랫폼 [Jitpack](https://jitpack.io/)을 통해 배포되고 있습니다. Jitpack의 패키지를 앱에 설치하기 위해 다음과 같이 설정해 주세요.
 
 <Tabs>
 <TabItem value="gradle_1" label="Gradle version >= 7.0">
@@ -40,7 +39,7 @@ dependencyResolutionManagement {
 ```
 
 </TabItem>
-<TabItem value="gradle_2" label="Gradle version <= 7.0">
+<TabItem value="gradle_2" label="Gradle version < 7.0">
 
 ```gradle title="build.gradle (root)"
 allprojects {
@@ -55,9 +54,7 @@ allprojects {
 </TabItem>
 </Tabs>
 
-Notifly Android SDK를 다음과 같이 설치해 주세요. 
-
-SDK의 현재 최신 버전: [![](https://jitpack.io/v/team-michael/notifly-android-sdk.svg)](https://jitpack.io/#team-michael/notifly-android-sdk) 
+Notifly Android SDK를 다음과 같이 설치해 주세요. (현재 최신 버전: [![](https://jitpack.io/v/team-michael/notifly-android-sdk.svg)](https://jitpack.io/#team-michael/notifly-android-sdk) )
 
 ```gradle title="build.gradle (Module: app)"
 dependencies {
@@ -67,7 +64,7 @@ dependencies {
 
 ### 1-2. Notifly SDK 초기화 코드 추가
 
-초기화는 Application 클래스에서 해주시는 것을 권장합니다. Activity 단계에서 초기화를 하시게 되면 다른 Activity들에 초기화가 적용되지 않을 수 있습니다.
+초기화는 Application 클래스에서 해주시는 것을 권장합니다. 특정 Activity에서 초기화를 하시게 되면 다른 Activity들에 초기화가 적용되지 않을 수 있습니다.
 
 아직 Application 클래스가 없다면 `AndroidManifest.xml`에서 `android:name`을 추가하고 Application 클래스 파일을 만들어 주세요.
 
@@ -104,6 +101,8 @@ class SampleApplication : Application() {
     }
 }
 ```
+
+`projectId`, `username`, `password`는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
 
 </TabItem>
 <TabItem value="java" label="Java">
@@ -167,7 +166,7 @@ Notifly.setUserId(
 <TabItem value="java" label="Java">
 
 ```java title="Example Java code for setUserId"
-import tech.notifly.Notifly
+import tech.notifly.Notifly;
 
 Context context = getActivity();
 Notifly.setUserId(context, userId);
@@ -202,7 +201,7 @@ Notifly.setUserProperties(
 <TabItem value="java" label="Java">
 
 ```java title="Example Java code for setUserProperties"
-import tech.notifly.Notifly
+import tech.notifly.Notifly;
 
 Context context = getActivity();
 HashMap<String, Object> map = new HashMap<>();
@@ -271,6 +270,8 @@ Button(
 <TabItem value="java" label="Java">
 
 ```java title="Example Java code for trackEvent"
+import tech.notifly.Notifly;
+
 HashMap<String, Object> map = new HashMap<>();
 map.put("keyString", "value1");
 map.put("keyBoolean", true);
