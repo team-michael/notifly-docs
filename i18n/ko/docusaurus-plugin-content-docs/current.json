@@ -54,5 +54,9 @@
   "sidebar.userGuide.category.Amplitude Integration.link.generated-index.description": {
     "message": "Notifly에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
     "description": "The generated-index page description for category Amplitude Integration in sidebar userGuide"
+  },
+  "sidebar.developerGuide.category.심화 연동 가이드": {
+    "message": "심화 연동 가이드",
+    "description": "The label for category 심화 연동 가이드 in sidebar developerGuide"
   }
 }
