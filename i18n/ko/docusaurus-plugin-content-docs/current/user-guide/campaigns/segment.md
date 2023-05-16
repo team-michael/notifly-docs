@@ -11,12 +11,12 @@ sidebar_position: 2
 발송 채널 별로 유저 정보로 등록되어야 할 필수적인 요소들이 존재합니다.
 
 - **푸시 알림 - 디바이스 토큰** : 디바이스 토큰은 현재 [Client SDK](/ko/category/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 토큰을 매뉴얼하게 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
-- **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 [유저 등록](https://notifly.tech/users/register) 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
-- **이메일 - 이메일 주소** : 이메일 주소 또한 [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 [유저 등록](https://notifly.tech/console/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 [유저 등록](https://notifly.tech/console/users/register) 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **이메일 - 이메일 주소** : 이메일 주소 또한 [유저 등록](https://notifly.tech/console/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 ## 새로운 세그먼트
 
-노티플라이 데이터베이스에 등록된 사용자들은 [노티플라이 유저 리스트](https://notifly.tech/users)에서 확인할 수 있습니다. 사용자의 속성, 디바이스 정보와 이벤트 발생 기록을 활용하여 발송 대상 사용자를 지정할 수 있습니다.
+노티플라이 데이터베이스에 등록된 사용자들은 [노티플라이 유저 리스트](https://notifly.tech/console/users)에서 확인할 수 있습니다. 사용자의 속성, 디바이스 정보와 이벤트 발생 기록을 활용하여 발송 대상 사용자를 지정할 수 있습니다.
 
 ### 그룹과 조건
 
@@ -33,7 +33,7 @@ sidebar_position: 2
 
 1. 사용자의 속성
 
-- [유저 등록](https://notifly.tech/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- [유저 등록](https://notifly.tech/console/users/register) 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 2. 사용자의 디바이스 정보
 
@@ -94,7 +94,9 @@ sidebar_position: 2
 
 - CSV 업로드를 할 때, [발송 필수 정보](#발송-필수-정보)가 존재해야 CSV 파일이 정상적으로 업로드 됩니다.
 
-  - **푸시 알림**: 현재 CSV 업로드 기능이 지원되지 않습니다.
+  - **푸시 알림**: `device_token`, `platform` 컬럼이 존재해야 합니다.
+    - `device_token` 컬럼에는 기기의 유효한 **FCM Token** 값이 기재되어야 합니다.
+    - `platform` 컬럼은 반드시 `ios`, `android` **중 하나의 값을 가져야** 정상적으로 발송되니 꼭 주의해주세요.
   - **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지**: `phone_number` 컬럼이 존재해야 합니다.
   - **이메일** : `email` 컬럼이 존재해야 합니다.
 

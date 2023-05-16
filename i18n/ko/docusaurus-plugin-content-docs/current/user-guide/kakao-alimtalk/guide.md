@@ -18,7 +18,7 @@ sidebar_position: 1
 
 ## 카카오 알림톡 발신자 정보 등록하기
 
-[노티플라이 프로젝트 설정 페이지](https://notifly.tech/settings)에서 카카오 알림톡 발송 플랫폼과 정보를 입력할 수 있습니다.
+[노티플라이 프로젝트 설정 페이지](https://notifly.tech/console/settings)에서 카카오 알림톡 발송 플랫폼과 정보를 입력할 수 있습니다.
 (_참고: 현재 지원되는 발송 플랫폼도 여기서 확인하실 수 있습니다. 사용하시는 대행사가 목록에 없는 경우 노티플라이 팀에 말씀해 주세요._)
 
 ![Kakao alimtalk settings](./img/kakao_alimtalk_settings.png)
@@ -31,7 +31,7 @@ sidebar_position: 1
 
 ## 카카오 알림톡 캠페인 시작하기
 
-[노티플라이 캠페인 생성 페이지](https://notifly.tech/campaign/create)에서 카카오 알림톡을 선택해 주세요.
+[노티플라이 캠페인 생성 페이지](https://notifly.tech/console/campaign/create)에서 카카오 알림톡을 선택해 주세요.
 
 카카오 알림톡에서 **휴대폰 번호** 정보는 발송에 필요한 필수 요소입니다. 휴대폰 번호를 불러오는 방법은 발송 대상 세그먼팅의 방법마다 조금씩 상이할 수 있습니다.
 
