@@ -53,10 +53,10 @@ _Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화
  // Example code
 import notifly from 'notifly-sdk';
 ...
-useEffect(() => {
-    notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
-        .then(() => { ... })
-, []); 
+notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
+    .then(() => { 
+        notifly.setUserId('example_user_id') 
+    })
 ...
 ```
 
@@ -69,22 +69,20 @@ useEffect(() => {
 import notifly from 'notifly-sdk';
 import messaging from "@react-native-firebase/messaging";
 ...
-useEffect(() => {
-    notifly.initialize('myProjectId', 'myUserName', 'myPassword', true)
-        .then(() => { notifly.setUserId(USER_ID) }) 
-        .then(() => { 
-            messaging()
-            .getInitialNotification()
-            .then((remoteMessage) => {
-                if (remoteMessage) {
-                    /*
-                        TODO: Implement your customized handler                     
-                    */
-                    notifly.clickHandler(remoteMessage); // required
-                }
-            });
-        })
-, []); 
+notifly.initialize('myProjectId', 'myUserName', 'myPassword', true)
+    .then(() => { notifly.setUserId('example_user_id') }) 
+    .then(() => { 
+        messaging()
+        .getInitialNotification()
+        .then((remoteMessage) => {
+            if (remoteMessage) {
+                /*
+                    TODO: Implement your customized handler                     
+                */
+                notifly.clickHandler(remoteMessage); // required
+            }
+        });
+    })
 ...
 ```
 
