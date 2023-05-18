@@ -49,6 +49,7 @@ npm install \
 * index.js 또는 App.js에서 Notifly SDK 초기화 코드를 추가해 주세요.
 
 _Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화된 핸들러를 사용하시고 싶으신 분들은 다음 section인 '(Advanced) 푸시알림 클릭 핸들러 커스터마이징'을 확인해 주세요._
+<span style={{ color: "red" }}><em>* myProjectId, myUserName, myPassword 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
 
 ```js
 // index.js -- Example code
