@@ -1,0 +1,349 @@
+---
+sidebar_position: 4
+---
+
+# Client SDK - iOS
+
+Notifly iOS SDK는 노티플라이를 iOS 어플리케이션과 연동하기 위해 사용할 수 있습니다. 다음과 같은 기능들을 지원합니다:
+
+- 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시, 인앱 메시지를 iOS 앱에서 수신할 수 있습니다.
+  - 노티플라이의 인앱 메시지는 앱이 Foreground 상태일 때만 수신됩니다. Background 및 Quit 상태일 때는 무시됩니다.
+- 이벤트, 사용자 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다.
+- 캠페인의 성과를 측정할 수 있도록 이벤트를 로깅합니다.
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+Notifly iOS SDK에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다.
+
+1. [Firebase 프로젝트 셋업](https://firebase.google.com/docs/ios/setup?authuser=0&hl=ko)
+2. [iOS APNS 인증 정보 설정](http://docs.notifly.tech/ko/developer-guide/client-sdk/Client%20SDK%20-%20iOS/ios-sdk)
+
+을 마친 후, Notifly iOS SDK 연동을 시작해주세요.
+
+## 1. Capability 설정
+
+1. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **14.0** 혹은 그 이상으로 설정합니다.
+2. Push Notification Capability를 추가합니다.
+   ![Add Capabilities](./image/ios_setting_add_capability1.png)
+
+3. Background Modes Capability를 추가합니다. - Remote notifications과 Background Fetch를 선택합니다.
+   ![Add Capabilities](./image/ios_setting_add_capability2.png)
+
+## 2. CocoaPods에서 Notifly iOS SDK 설치
+
+Notifly iOS SDK는 CocoaPods를 통해 설치할 수 있습니다.
+
+1. Xcode 프로젝트에 CocoaPods 설치가 되어있는지 확인합니다.
+   설치가 되어있지 않은 경우 [CocoaPods 설치 가이드](https://guides.cocoapods.org/using/getting-started.html)를 참고해 주세요.
+2. Podfile 파일의 상단에 **platform :ios, '14.0'** 또는 그 이상의 버전으로 입력해 주세요.
+3. Podfile 파일에 다음 코드를 추가해 주세요.
+
+<Tabs>
+<TabItem value="PodFile" label="Podfile">
+
+```swift title="Podfile (root)"
+target 'YOUR_PROJECT_NAME' do
+
+ pod 'notifly_ios_sdk', '~>1.0.4'
+
+end
+```
+
+</TabItem>
+</Tabs>
+
+## 3. Notifly 연동 코드 작성
+
+### 3-1. (SwiftUI) AppDelegate.swift 파일 수정
+
+만약, **SwiftUI**프로젝트를 사용하고 계시다면, AppDelegate.swift 파일이 없을 수 있습니다. 이 경우, 다음과 같이 AppDelegate.swift 파일을 생성해 주세요.
+
+이미 존재한다면 3-2로 넘어가 주세요.
+
+<Tabs>
+<TabItem value="SwiftUIAppDelegate" label="AppDelegate.swift">
+
+```swift title="AppDelegate.swift (새로 추가할 파일)"
+import UIKit
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        return true
+    }
+}
+```
+
+</TabItem>
+<TabItem value="SwiftUIAppFile" label="<YOUR_PROJECT_NAME>App.swift">
+
+```swift title="<YOUR_PROJECT_NAME>App.swift (기존 파일)"
+struct <YOUR_PROJECT_NAME>App: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate // add this line
+}
+```
+
+</TabItem>
+</Tabs>
+
+### 3-2. Notifly 연동 코드 작성
+
+#### `AppDelegate.swift` 파일 에서 다음 코드들을 추가해 주세요.
+
+- `notifly_ios_sdk` 프래임워크를 임포트 합니다.
+
+    ```swift
+    import notifly_ios_sdk
+    ```
+
+- 다음 **`AppDelegate.swift`**의 `UIApplicationDelegate` 함수들 내에 각각 Notifly코드를 추가해 주세요.
+
+    1. **`application(_:didFinishLaunchingWithOptions:)`**
+        - Notifly SDK 초기화에 앞서 Firebase SDK를 초기화 합니다. *(Required)*
+        - *PROJECT_ID, USERNAME, PASSWORD* 는 [노티플라이 홈페이지의 설정 페이지](https://notifly.tech/ko/console/settings)에서 확인하실 수 있습니다.
+        - Notifly SDK를 초기화 합니다.
+    2. **`application(_:didRegisterForRemoteNotificationsWithDeviceToken:)`**
+        - APNS 토큰을 Notifly에 등록합니다.
+    3. **`application(_:didFailToRegisterForRemoteNotificationsWithError:)`**
+        - APNS 토큰 등록에 실패한 경우, Notifly에 알립니다.
+    4. **`application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`**
+        - Notifly로부터 데이터를 수신합니다.
+        
+        <Tabs>
+        <TabItem value="SwiftUIAppDelegate1" label="Swift">
+
+        ```swift title="Example Code in AppDelegate.swift"
+        import notifly_ios_sdk 
+
+        class AppDelegate: UIResponder, UIApplicationDelegate {
+            func application(_: UIApplication,
+                        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                /* ...YOUR CODE */
+                
+                // 아래 코드를 추가해주세요.
+                FirebaseApp.configure() // if you don't configure Firebase SDK yet.
+                Notifly.initialize(projectID: "YOUR_PROJECT_NAME", username: "YOUR_USERNAME", password: "YOUR_PASSWORD")
+                UNUserNotificationCenter.current().delegate = self
+                return true
+            }
+
+            func application(_ application: UIApplication,
+                didFailToRegisterForRemoteNotificationsWithError error: Error) {
+                /* ...YOUR CODE */
+                
+                // 아래 코드를 추가해주세요.
+                Notifly.application(application,
+                                    didFailToRegisterForRemoteNotificationsWithError: error)
+            }
+
+            func application(_ application: UIApplication,
+                didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+                /* ...YOUR CODE */
+                
+                // 아래 코드를 추가해주세요.
+                Notifly.application(application,
+                    didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+            }
+
+            func application(_ application: UIApplication,
+                didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+                /* ...YOUR CODE */
+
+                // 아래 코드를 추가해주세요.
+                Notifly.application(application,
+                                    didReceiveRemoteNotification: userInfo,
+                                    fetchCompletionHandler: completionHandler)
+            }
+            /* ...YOUR CODE */
+        }
+
+        ```
+        </TabItem>
+        </Tabs>
+
+- 노티피케이션 트래픽을 **`Notifly`**에도 전달하도록 **`UNUserNotificationCenterDelegate`**프로토콜에 다음 코드를 추가합니다.
+    1. **`userNotificationCenter(_:willPresent:withCompletionHandler:)`**
+        - 앱이 실행 중일 때, 노티피케이션 트래픽을 Notifly로 전달합니다.
+    2. **`userNotificationCenter(_:didReceive:withCompletionHandler:)`**
+        - 노티피케이션 클릭 이벤트를, Notifly로 전달합니다.
+
+        <Tabs>
+        <TabItem value="SwiftUIAppDelegate2" label="Swift">
+
+        ```swift title="Example Code of UNUserNotificationCenterDelegate"
+        import notifly_ios_sdk 
+
+        class AppDelegate: UIResponder, UIApplicationDelegate {
+            /* ...YOUR CODE */
+        }
+
+        // Extension of AppDelegate conforming to the UNUserNotificationCenterDelegate protocol
+        extension AppDelegate: UNUserNotificationCenterDelegate {
+            func userNotificationCenter(_ notificationCenter: UNUserNotificationCenter,
+                                        didReceive response: UNNotificationResponse,
+                                        withCompletionHandler completion: () -> Void) {
+                /* ...YOUR CODE */
+                
+                // 아래 코드를 추가해주세요.
+                Notifly.userNotificationCenter(notificationCenter,
+                                            didReceive: response,
+                                            withCompletionHandler: completion)
+            }
+
+            func userNotificationCenter(_ notificationCenter: UNUserNotificationCenter,
+                                        willPresent notification: UNNotification,
+                                        withCompletionHandler completion: (UNNotificationPresentationOptions) -> Void) {
+                /* ...YOUR CODE */
+                
+                // 아래 코드를 추가해주세요.
+                Notifly.userNotificationCenter(notificationCenter,
+                                            willPresent: notification,
+                                            withCompletionHandler: completion)
+            }
+        }
+        ```
+        </TabItem>
+        </Tabs>
+
+## 4. 사용자 프로퍼티 등록하기
+
+- Notifly에서는 사용자의 아이디 (user_id) 및 프로퍼티 (user_properties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+    - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+
+### 4-1. user_id 등록
+
+| Parameter | Type     | Required |
+| --------- | -------- | -------- |
+|  user_id  | `String` |   Yes    |
+
+```swift
+Notifly.setUserID(userID: String)
+```
+
+<Tabs>
+<TabItem value="swift" label="Swift">
+
+```kotlin title="Example Swift code for Notifly.setUserID"
+import notifly_ios_sdk
+
+Notifly.setUserID(userID: "exampleUserId")
+```
+
+</TabItem>
+</Tabs>
+
+### 4-2. user_properties 등록
+
+| Parameter         | Type                | Required |
+| ----------------- | ------------------- | -------- |
+| user_properties   | `[String, Any]`     |   Yes    |
+
+```swift
+Notifly.setUserProperties(user_properties: Map<String, Any>)
+```
+
+<Tabs>
+<TabItem value="swift" label="Swift">
+
+```swift title="Example Swift code for Notifly.setUserProperties"
+import notifly_ios_sdk
+
+let sampleUserProperties = [
+    "age": 15,
+    "sex": "male",
+    "push_allowed": true
+] as [String : Any]
+
+Notifly.setUserProperties(user_properties: sampleUserProperties)
+```
+
+</TabItem>
+</Tabs>
+
+
+## 5. 이벤트 로깅
+
+- Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
+- segmentation_event_param_keys를 활용하여 이벤트 변수 (event_params)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field의 key 값을 segmentation_event_param_keys에 지정해주세요.
+    - **현재는 segmentation_event_param_key를 한 개까지 지원하고 있기 때문에, segmentation_event_param_keys는 길이는 1이하인 List이어야합니다.**
+
+### 3-1. 이벤트 로깅
+
+| Parameter                     | Type                | Required |
+| ----------------------------- | ------------------- | -------- |
+| event_name                    | `String`            |    Yes   |
+| event_params                  | `[String:Any]`      |    No    |
+| segmentation_event_param_keys | `[String]`          |    No    |
+
+```swift
+Notifly.trackEvent(
+    event_name: String,
+    event_params: [String, Any],
+    segmentationEventParamKeys: [String]
+)
+```
+
+<Tabs>
+<TabItem value="Swift_compose" label="Swift">
+
+```swift title="Example Swift code for Notifly.trackEvent"
+import notifly_ios_sdk
+
+...
+    Button(action: {
+        Notifly.trackEvent(event_name: "click_button_1")
+    }) {
+    Text("버튼1")
+        .padding(5)
+        .background(Color.red)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+    }
+
+...
+
+    Button(action: {
+        Notifly.trackEvent(
+            event_name: "ticket_purchase", 
+            event_params: [
+                "ticket_name": "exampleTicket",
+                "ticket_price": 10000,
+                "ticket_purchase_date": "2021-01-01"
+            ], 
+            segmentationEventParamKeys: ["ticket_name"]
+        )
+    }) {
+    Text("티켓 구매하기")
+        .padding(5)
+        .background(Color.black)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+    }
+...
+```
+
+</TabItem>
+</Tabs>
+
+## 6. 연동 테스트
+    
+- [Client SDK - 연동 Test](http://docs.notifly.tech/ko/developer-guide/client-sdk/ios-sdk) 섹션에서 테스트를 진행합니다.
+
+## 7. (Advanced) 푸시 알림 동의 프롬프트
+
+[(Advanced) Client SDK - iOS](/ko/developer-guide/client-sdk/advanced/ios-sdk-advanced) 를 참고해 주세요.
+
+## FAQ
+
+- Q. 이미 Firebase Cloud Messaging을 사용 중인데 어떻게 해야 할까요?
+  - A. Notifly iOS SDK는 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과 함께 사용하실 수 있습니다.
+
+
+- Q. SwiftUI를 사용하고 있습니다. 연동 후, 앱 푸시는 작동하는데 인앱 메시지가 작동하지 않는데 무엇이 문제일까요?
+  - A. Info.plist에 **FirebaseAppDelegateProxyEnabled**를 **NO(BOOL)**로 설정해주세요.
+  - A. [Firebase 공식 문서](https://firebase.google.com/docs/ios/learn-more?hl=ko#swiftui)에 따르면 특정 문제로 인해 SwiftUI를 사용할 때 FirebaseAppDelegateProxyEnabled를 NO로 설정해야만 정상적으로 작동한다고 합니다.
