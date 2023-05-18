@@ -221,3 +221,7 @@ const handlePurchaseTicket = () => {
     ...
 }
 ```
+
+## 4. 연동 테스트
+    
+- [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
