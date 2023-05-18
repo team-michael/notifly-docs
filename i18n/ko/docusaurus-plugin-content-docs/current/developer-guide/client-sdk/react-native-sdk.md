@@ -46,17 +46,15 @@ npm install \
 ```
 
 ### 1-2. Notifly SDK 초기화 코드 추가
+* index.js 또는 App.js에서 Notifly SDK 코드를 추가해 주세요.
 
 _Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화된 핸들러를 사용하시고 싶으신 분들은 다음 section인 '(Advanced) 푸시알림 클릭 핸들러 커스터마이징'을 확인해 주세요._
 
 ```js
- // Example code
+// index.js -- Example code
 import notifly from 'notifly-sdk';
 ...
 notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
-    .then(() => { 
-        notifly.setUserId('example_user_id') 
-    })
 ...
 ```
 
@@ -65,12 +63,11 @@ notifly.initialize('myProjectId', 'myUserName', 'myPassword', false)
 커스터마이징을 위하여, notifly.initialize의 네번째 인자로 true를 입력해주세요.
 
 ```js
- // Example code
+// index.js -- Example code
 import notifly from 'notifly-sdk';
 import messaging from "@react-native-firebase/messaging";
 ...
 notifly.initialize('myProjectId', 'myUserName', 'myPassword', true)
-    .then(() => { notifly.setUserId('example_user_id') }) 
     .then(() => { 
         messaging()
         .getInitialNotification()
@@ -103,18 +100,19 @@ _참고: 여러 개의 background handler가 등록되는 경우 가장 마지�
 #### Case 1: Firebase Cloud Messaging의 background handler가 이미 구현되어 있는 경우
 
 ```js
-notiflyBackgroundHandler(remoteMessage);
+notifly.notiflyBackgroundHandler(remoteMessage);
 ```
 
 ```js
 // index.js -- Example code
 ...
 import messaging from '@react-native-firebase/messaging';
-import { notiflyBackgroundHandler } from 'notifly-sdk-dev';
+import notifly from 'notifly-sdk';
 
+notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
     ... // Existing background handler logic
-    await notiflyBackgroundHandler(remoteMessage);
+    await notifly.notiflyBackgroundHandler(remoteMessage);
 }); */
 
 AppRegistry.registerComponent(...);
@@ -129,9 +127,10 @@ setNotiflyBackgroundMessageHandler();
 ```js
 // index.js -- Example code
 ...
-import {setNotiflyBackgroundMessageHandler} from 'notifly-sdk-dev';
+import notifly from 'notifly-sdk';
 
-setNotiflyBackgroundMessageHandler();
+notifly.initialize('myProjectId', 'myUserName', 'myPassword', false) 
+notifly.setNotiflyBackgroundMessageHandler();
 AppRegistry.registerComponent(...);
 ```
 
