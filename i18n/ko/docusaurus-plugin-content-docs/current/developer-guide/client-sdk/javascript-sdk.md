@@ -36,8 +36,7 @@ yarn add notifly-js-sdk@latest
 ```
 
 ### 1-2. Notifly JS SDK 초기화 코드 추가
-
-Notifly JS SDK에서는 Firebase Cloud Messaging의 device token이 필수적입니다. 토큰이 준비된 시점에서 최대한 이른 시점에 notifly를 initialize 해주세요.
+- index.js 또는 App.js에서 Notifly SDK 초기화 코드를 추가해 주세요.
 
 <span style={{ color: "red" }}><em>* projectID, userName, password 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
 
@@ -46,21 +45,16 @@ Notifly JS SDK에서는 Firebase Cloud Messaging의 device token이 필수적입
 | projectID   | String | Yes      |
 | userName    | String | Yes      |
 | password    | String | Yes      |
-| deviceToken | String | Yes      |
 
 ```js
-notifly.initialize(projectID, userName, password, deviceToken);
+notifly.initialize(projectID, userName, password);
 ```
 
 ```js
- // Example code
+// index.js, App.js, _app.jsx or equivalent -- Example code
 import notifly from 'notifly-js-sdk';
 ...
-useEffect(() => {
-    const fcmToken = ...
-    notifly.initialize('myProjectId', 'myUserName', 'myPassword', fcmToken)
-        .then(() => { ... })
-, []);
+notifly.initialize('myProjectId', 'myUserName', 'myPassword');
 ...
 ```
 
@@ -117,14 +111,43 @@ const handleRejectPushNotification = () => {
 }
 ```
 
-## 3. 이벤트 로깅
+## 3. 디바이스 토큰 등록하기
+- 푸시 전송을 위해, Firebase Cloud Messaging의 device token을 등록합니다.
+
+### 3-1. user_id 등록
+
+| Parameter | Type   | Required |
+| --------- | ------ | -------- |
+| device_token | String | Yes      |
+
+```js
+notifly.setDeviceToken(device_token);
+```
+
+```js
+// Example code
+useEffect(() => {
+    async function initializeFCMToken() {
+        try {
+            const token = await getFCMToken();
+            notifly.setDeviceToken(token);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    initializeFCMToken();
+}, []);
+```
+
+
+## 4. 이벤트 로깅
 
 - Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
   - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
 - segmentation_event_param_keys를 활용하여 이벤트 변수 (event_params)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field의 key 값을 segmentation_event_param_keys에 지정해주세요.
   - 현재는 segmentation_event_param_key를 한 개까지 지원하고 있기 때문에, segmentation_event_param_keys는 길이는 1이하인 List이어야합니다.
 
-### 3-1. 이벤트 로깅
+### 4-1. 이벤트 로깅
 
 | Parameter                     | Type   | Required |
 | ----------------------------- | ------ | -------- |
