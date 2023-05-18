@@ -102,7 +102,8 @@ struct <YOUR_PROJECT_NAME>App: App {
 
     1. **`application(_:didFinishLaunchingWithOptions:)`**
         - Notifly SDK 초기화에 앞서 Firebase SDK를 초기화 합니다. *(Required)*
-        - *PROJECT_ID, USERNAME, PASSWORD* 는 [노티플라이 홈페이지의 설정 페이지](https://notifly.tech/ko/console/settings)에서 확인하실 수 있습니다.
+        - *PROJECT_ID, USERNAME, PASSWORD* 는 [노티플라이 홈페이지의 설정 페이지](https://notifly.tech/ko/console/settings)의 SDK, API 인증정보 섹션에서 확인하실 수 있습니다. 
+            - *`개발/프로덕션`에 따라 PROJECT_ID가 다릅니다.*
         - Notifly SDK를 초기화 합니다.
     2. **`application(_:didRegisterForRemoteNotificationsWithDeviceToken:)`**
         - APNS 토큰을 Notifly에 등록합니다.
