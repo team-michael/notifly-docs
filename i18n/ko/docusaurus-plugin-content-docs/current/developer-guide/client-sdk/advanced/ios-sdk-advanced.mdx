@@ -18,7 +18,6 @@ Notifly iOS SDK에서는 따로 사용자에게 푸시 알림 수신 동의를 �
 다음 코드는 예시입니다. 실제 알림 요청 타이밍, UI, 문구 등은 앱의 특성에 맞게 구현해 주세요.
 
 ```swift title="Example code for notification permission request"
-// highlight-start
 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
     if let error = error {
         print("Failed to request authorization: \(error)")
@@ -33,5 +32,4 @@ UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge
         }
     }
 }
-// highlight-end
 ```
