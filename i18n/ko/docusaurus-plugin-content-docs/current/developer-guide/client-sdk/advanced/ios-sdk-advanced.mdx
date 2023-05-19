@@ -1,0 +1,37 @@
+---
+sidebar_position: 2
+---
+
+# (Advanced) Client SDK - iOS
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 1. 푸시 알림 사전 동의
+
+유저가 푸시 알림을 수신하기 위해서는 푸시 알림 수신 동의를 받아야 합니다.
+Notifly iOS SDK에서는 따로 사용자에게 푸시 알림 수신 동의를 요청하지 않고 있습니다.
+사용자 알림 수신 동의는 Notifly iOS SDK 설치와 무관하게 앱 내에서 직접 구현하셔야 합니다.
+
+다음 코드는 예시입니다. 실제 알림 요청 타이밍, UI, 문구 등은 앱의 특성에 맞게 구현해 주세요.
+
+```swift title="Example code for notification permission request"
+// highlight-start
+UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+    if let error = error {
+        print("Failed to request authorization: \(error)")
+        return
+    } else {
+        guard granted else {
+            print("Notification permission denied")
+            return
+        }
+        DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+}
+// highlight-end
+```
