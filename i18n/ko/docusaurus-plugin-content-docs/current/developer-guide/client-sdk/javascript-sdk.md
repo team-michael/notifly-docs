@@ -54,7 +54,11 @@ notifly.initialize(projectID, userName, password);
 // index.js, App.js, _app.jsx or equivalent -- Example code
 import notifly from 'notifly-js-sdk';
 ...
-notifly.initialize(process.env.NOTIFLY_PROJECT_ID, process.env.NOTIFLY_USERNAME, process.env.NOTIFLY_PASSWORD);
+notifly.initialize(
+    process.env.NOTIFLY_PROJECT_ID,
+    process.env.NOTIFLY_USERNAME,
+    process.env.NOTIFLY_PASSWORD,
+);
 ...
 ```
 
@@ -64,7 +68,7 @@ notifly.initialize(process.env.NOTIFLY_PROJECT_ID, process.env.NOTIFLY_USERNAME,
   - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 2-1. user_id 등록
+### 2-1. 사용자 아이디 등록
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
@@ -89,7 +93,7 @@ const handleLogout = () => {
 }
 ```
 
-### 2-2. user_properties 등록
+### 2-2. 사용자 프로퍼티 등록
 
 | Parameter        | Type                 | Required |
 | ---------------- | -------------------- | -------- |
@@ -113,8 +117,6 @@ const handleRejectPushNotification = () => {
 
 ## 3. 디바이스 토큰 등록하기
 - 푸시 전송을 위해, Firebase Cloud Messaging의 device token을 등록합니다.
-
-### 3-1. user_id 등록
 
 | Parameter   | Type   | Required |
 | ----------- | ------ | -------- |
@@ -144,7 +146,7 @@ useEffect(() => {
 
 - Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
   - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
-- segmentationEventParamKeys 활용하여 이벤트 변수 (event_params)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
+- segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams의)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
   - 현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.
 
 ### 4-1. 이벤트 로깅
@@ -169,7 +171,7 @@ const handleContentView = () => {
     ...
 }
 
-// Example code -- with segmentation_event_param_keys
+// Example code -- with segmentationEventParamKeys
 const handlePurchaseTicket = () => {
     ...
     notifly.trackEvent("ticket_purchase", {

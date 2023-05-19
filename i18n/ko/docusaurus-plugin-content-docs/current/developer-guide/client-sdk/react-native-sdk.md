@@ -55,7 +55,11 @@ _Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화
 // index.js -- Example code
 import notifly from 'notifly-sdk';
 ...
-notifly.initialize(process.env.NOTIFLY_PROJECT_ID, process.env.NOTIFLY_USERNAME, process.env.NOTIFLY_PASSWORD);
+notifly.initialize(
+    process.env.NOTIFLY_PROJECT_ID,
+    process.env.NOTIFLY_USERNAME,
+    process.env.NOTIFLY_PASSWORD
+);
 AppRegistry.registerComponent(...);
 ...
 ```
@@ -69,19 +73,23 @@ AppRegistry.registerComponent(...);
 import notifly from 'notifly-sdk';
 import messaging from "@react-native-firebase/messaging";
 ...
-notifly.initialize('myProjectId', 'myUserName', 'myPassword', true)
-    .then(() => { 
-        messaging()
-        .getInitialNotification()
-        .then((remoteMessage) => {
-            if (remoteMessage) {
-                /*
-                    TODO: Implement your customized handler                     
-                */
-                notifly.clickHandler(remoteMessage); // required
-            }
-        });
+notifly.initialize(
+    process.env.NOTIFLY_PROJECT_ID,
+    process.env.NOTIFLY_USERNAME,
+    process.env.NOTIFLY_PASSWORD,
+    true,
+).then(() => { 
+    messaging()
+    .getInitialNotification()
+    .then((remoteMessage) => {
+        if (remoteMessage) {
+            /*
+                TODO: Implement your customized handler                     
+            */
+            notifly.clickHandler(remoteMessage); // required
+        }
     });
+});
 AppRegistry.registerComponent(...);
 ...
 ```
@@ -143,7 +151,7 @@ AppRegistry.registerComponent(...);
     - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 2-1. user_id 등록
+### 2-1. 사용자 아이디 등록
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
@@ -168,7 +176,7 @@ const handleLogout = () => {
 }
 ```
 
-### 2-2. user_properties 등록
+### 2-2. 사용자 프로퍼티 등록
 
 | Parameter  | Type   | Required |
 | ---------- | ------ | -------- |
