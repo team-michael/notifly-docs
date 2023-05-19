@@ -9,7 +9,7 @@ Notifly React Native SDK는 노티플라이를 React Native 어플리케이션�
 - 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시, 인앱 메시지를 React Native 앱에서 수신할 수 있습니다.
     - 노티플라이에서 앱 푸시는 앱이 Background나 Quit 상태일 때 수신됩니다. 앱이 Foreground 상태일 때도 앱 푸시를 수신하기 위해서는 Foreground handler를 직접 구현해 주셔야 합니다.
     - 노티플라이의 인앱 메시지는 앱이 Foreground 상태일 때만 수신됩니다. Background나 Quit 상태일 때는 무시됩니다.
-- 이벤트, 사용자 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다. 
+- 이벤트, 유저 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다. 
 - 캠페인의 성과를 측정할 수 있도록 이벤트를 로깅합니다. 
 
 ## 1. Notifly SDK 셋업
@@ -96,13 +96,13 @@ AppRegistry.registerComponent(...);
 
 ### 1-3. 푸시 수신 측정 셋업하기
 
-앱 푸시 캠페인의 성과를 측정하기 위해서는 사용자들이 푸시를 수신했는지 여부를 측정하는 것이 중요합니다.
+앱 푸시 캠페인의 성과를 측정하기 위해서는 유저들이 푸시를 수신했는지 여부를 측정하는 것이 중요합니다.
 
-다음과 같은 예시들에서 발송된 푸시를 사용자들이 수신하지 않을 수 있습니다:
-- 사용자가 앱에 대해 푸시를 수신하지 않음으로 설정한 경우
-- 사용자가 앱을 삭제한 경우
+다음과 같은 예시들에서 발송된 푸시를 유저들이 수신하지 않을 수 있습니다:
+- 유저가 앱에 대해 푸시를 수신하지 않음으로 설정한 경우
+- 유저가 앱을 삭제한 경우
 - 앱 푸시 토큰이 만료된 경우
-- 사용자의 기기가 인터넷에 연결되어 있지 않은 경우
+- 유저의 기기가 인터넷에 연결되어 있지 않은 경우
 
 푸시 수신 여부를 측정하기 위해서는 앱의 Background handler에서 노티플라이의 handler를 등록해 주셔야 합니다. 이미 Firebase Cloud Messaging의 background handler가 앱에 구현되어 있는지 없는지에 따라 등록 방식이 다릅니다.
 
@@ -145,13 +145,13 @@ notifly.setNotiflyBackgroundMessageHandler();
 AppRegistry.registerComponent(...);
 ```
 
-## 2. 사용자 프로퍼티 등록하기
+## 2. 유저 프로퍼티 등록하기
 
-- Notifly에서는 사용자의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
-    - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+- Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+    - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 2-1. 사용자 아이디 등록
+### 2-1. 유저 아이디 등록
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
@@ -176,7 +176,7 @@ const handleLogout = () => {
 }
 ```
 
-### 2-2. 사용자 프로퍼티 등록
+### 2-2. 유저 프로퍼티 등록
 
 | Parameter  | Type   | Required |
 | ---------- | ------ | -------- |
@@ -201,9 +201,9 @@ const handleRejectPushNotification = () => {
 
 ## 3. 이벤트 로깅
 
-- Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
+- Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
-- segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
+- segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams)를 유저 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 유저 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
     - 현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.
 
 ### 3-1. 이벤트 로깅
