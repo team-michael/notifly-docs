@@ -49,13 +49,13 @@ npm install \
 * index.js 또는 App.js에서 Notifly SDK 초기화 코드를 추가해 주세요.
 
 _Notifly에서 제공하는 푸시알림 클릭 핸들러에 추가로 개인화된 핸들러를 사용하시고 싶으신 분들은 다음 section인 '(Advanced) 푸시알림 클릭 핸들러 커스터마이징'을 확인해 주세요._
-<span style={{ color: "red" }}><em>* myProjectId, myUserName, myPassword 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
+<span style={{ color: "red" }}><em>* NOTIFLY_PROJECT_ID, NOTIFLY_USERNAME, NOTIFLY_PASSWORD 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
 
 ```js
 // index.js -- Example code
 import notifly from 'notifly-sdk';
 ...
-notifly.initialize('myProjectId', 'myUserName', 'myPassword', false);
+notifly.initialize(process.env.NOTIFLY_PROJECT_ID, process.env.NOTIFLY_USERNAME, process.env.NOTIFLY_PASSWORD);
 AppRegistry.registerComponent(...);
 ...
 ```
@@ -139,7 +139,7 @@ AppRegistry.registerComponent(...);
 
 ## 2. 사용자 프로퍼티 등록하기
 
-- Notifly에서는 사용자의 아이디 (user_id) 및 프로퍼티 (user_properties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+- Notifly에서는 사용자의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
     - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
@@ -147,10 +147,10 @@ AppRegistry.registerComponent(...);
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
-| user_id   | String | Yes      |
+| userId    | String | Yes      |
 
 ```js
-notifly.setUserId(user_id);
+notifly.setUserId(userId);
 ```
 
 ```js
@@ -170,12 +170,12 @@ const handleLogout = () => {
 
 ### 2-2. user_properties 등록
 
-| Parameter         | Type | Required |
-| ----------------- | ---- | -------- |
-| user_properties   | json | Yes      |
+| Parameter  | Type   | Required |
+| ---------- | ------ | -------- |
+| params     | Object | Yes      |
 
 ```js
-notifly.setUserProperties(user_properties);
+notifly.setUserProperties(params);
 ```
 
 ```js
@@ -195,19 +195,19 @@ const handleRejectPushNotification = () => {
 
 - Notifly에서는 사용자의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
-- segmentation_event_param_keys를 활용하여 이벤트 변수 (event_params)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 event params의 특정 field의 key 값을 segmentation_event_param_keys에 지정해주세요.
-    - 현재는 segmentation_event_param_key를 한 개까지 지원하고 있기 때문에, segmentation_event_param_keys는 길이는 1이하인 List이어야합니다.
+- segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams)를 사용자 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 사용자 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
+    - 현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.
 
 ### 3-1. 이벤트 로깅
 
-| Parameter                 | Type | Required |
-| ------------------------- | ---- | -------- |
-| event_name                | String | Yes     |
-| event_params              | json | No       |
-| segmentation_event_param_keys | List | No       |
+| Parameter                  | Type   | Required |
+| -------------------------- | ------ | -------- |
+| eventName                  | String | Yes      |
+| eventParams                | Object | No       |
+| segmentationEventParamKeys | List   | No       |
 
 ```js
-notifly.trackEvent(event_name, event_params, event_param_key_for_targeting);
+notifly.trackEvent(eventName, eventParams, segmentationEventParamKeys);
 ```
 
 ```js

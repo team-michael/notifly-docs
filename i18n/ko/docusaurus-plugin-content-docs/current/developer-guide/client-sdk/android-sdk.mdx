@@ -139,11 +139,12 @@ public class MainApplication extends Application {
     - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 사용자 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 2-1. user_id 등록
+### 2-1. 사용자 아이디 등록
 
-| Parameter | Type     | Required |
-| --------- | -------- | -------- |
-| user_id   | `String` | Yes      |
+| Parameter | Type      | Required |
+| --------- | --------- | -------- |
+| context   | `Context` | Yes      |
+| userId    | `String`  | Yes      |
 
 ```kotlin
 Notifly.setUserId(context: Context, userId: String)
@@ -171,11 +172,12 @@ Notifly.setUserId(context, "exampleUserId");
 </TabItem>
 </Tabs>
 
-### 2-2. user_properties 등록
+### 2-2. 사용자 프로퍼티 등록
 
-| Parameter         | Type                | Required |
-| ----------------- | ------------------- | -------- |
-| user_properties   | `Map<String, Any?>` | Yes      |
+| Parameter   | Type                | Required |
+| ----------- | ------------------- | -------- |
+| context     | `Context`           | Yes      |
+| params      | `Map<String, Any?>` | Yes      |
 
 ```kotlin
 Notifly.setUserProperties(context: Context, params: Map<String, Any?>)
@@ -220,10 +222,11 @@ Notifly.setUserProperties(context, userProperties);
 ### 3-1. 이벤트 로깅
 
 | Parameter                     | Type                | Required |
-| ----------------------------- | ------------------- | -------- |
-| event_name                    | `String`            | Yes      |
-| event_params                  | `Map<String, Any?>` | No       |
-| segmentation_event_param_keys | `List<String>`      | No       |
+| --------------------------- | ------------------- | -------- |
+| context                     | `Context`           | Yes      |
+| eventName                   | `String`            | Yes      |
+| eventParams                 | `Map<String, Any?>` | No       |
+| segmentationEventParamKeys  | `List<String>`      | No       |
 
 ```kotlin
 Notifly.trackEvent(
