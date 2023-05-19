@@ -36,15 +36,16 @@ yarn add notifly-js-sdk@latest
 ```
 
 ### 1-2. Notifly JS SDK 초기화 코드 추가
+
 - index.js 또는 App.js에서 Notifly SDK 초기화 코드를 추가해 주세요.
 
-<span style={{ color: "red" }}><em>* projectID, userName, password 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
+<span style={{ color: "red" }}><em>\* projectID, userName, password 파라미터는 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다. 설정 페이지에 해당 값들이 존재하지 않거나 찾는데 어려움을 겪고 계시다면, 꼭 담당자에게 문의 부탁드립니다.</em></span>
 
-| Parameter   | Type   | Required |
-| ----------- | ------ | -------- |
-| projectID   | String | Yes      |
-| userName    | String | Yes      |
-| password    | String | Yes      |
+| Parameter | Type   | Required |
+| --------- | ------ | -------- |
+| projectID | String | Yes      |
+| userName  | String | Yes      |
+| password  | String | Yes      |
 
 ```js
 notifly.initialize(projectID, userName, password);
@@ -54,11 +55,15 @@ notifly.initialize(projectID, userName, password);
 // index.js, App.js, _app.jsx or equivalent -- Example code
 import notifly from 'notifly-js-sdk';
 ...
-notifly.initialize(
-    process.env.NOTIFLY_PROJECT_ID,
-    process.env.NOTIFLY_USERNAME,
-    process.env.NOTIFLY_PASSWORD,
-);
+useEffect(() => {
+    if (typeof window !== undefined) {
+        notifly.initialize(
+            process.env.NOTIFLY_PROJECT_ID,
+            process.env.NOTIFLY_USERNAME,
+            process.env.NOTIFLY_PASSWORD,
+        );
+    }
+}
 ...
 ```
 
@@ -95,9 +100,9 @@ const handleLogout = () => {
 
 ### 2-2. 사용자 프로퍼티 등록
 
-| Parameter        | Type                 | Required |
-| ---------------- | -------------------- | -------- |
-| userProperties   | Record<string, any>  | Yes      |
+| Parameter      | Type                | Required |
+| -------------- | ------------------- | -------- |
+| userProperties | Record<string, any> | Yes      |
 
 ```js
 notifly.setUserProperties(userProperties);
@@ -116,6 +121,7 @@ const handleRejectPushNotification = () => {
 ```
 
 ## 3. 디바이스 토큰 등록하기
+
 - 푸시 전송을 위해, Firebase Cloud Messaging의 device token을 등록합니다.
 
 | Parameter   | Type   | Required |
@@ -129,18 +135,17 @@ notifly.setDeviceToken(deviceToken);
 ```js
 // Example code
 useEffect(() => {
-    async function initializeFCMToken() {
-        try {
-            const token = await getFCMToken();
-            notifly.setDeviceToken(token);
-        } catch (e) {
-            console.error(e);
-        }
+  async function initializeFCMToken() {
+    try {
+      const token = await getFCMToken();
+      notifly.setDeviceToken(token);
+    } catch (e) {
+      console.error(e);
     }
-    initializeFCMToken();
+  }
+  initializeFCMToken();
 }, []);
 ```
-
 
 ## 4. 이벤트 로깅
 
@@ -151,11 +156,11 @@ useEffect(() => {
 
 ### 4-1. 이벤트 로깅
 
-| Parameter                  | Type                 | Required |
-| -------------------------- | -------------------- | -------- |
-| eventName                  | String               | Yes      |
-| eventParams                | Record<string, any>  | No       |
-| segmentationEventParamKeys | string[]             | No       |
+| Parameter                  | Type                | Required |
+| -------------------------- | ------------------- | -------- |
+| eventName                  | String              | Yes      |
+| eventParams                | Record<string, any> | No       |
+| segmentationEventParamKeys | string[]            | No       |
 
 ```js
 notifly.trackEvent(eventName, eventParams, segmentationEventParamKeys);
