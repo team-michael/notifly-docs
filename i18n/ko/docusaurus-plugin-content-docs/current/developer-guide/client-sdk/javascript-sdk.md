@@ -9,9 +9,10 @@ Notifly Javascript (JS) SDK는 노티플라이를 웹 브라우저 어플리케�
 - 서비스가 웹 브라우저에서 실행되는 경우 Notifly에서는 웹 푸시를 발송하게 됩니다.
 - 프로그레시브 웹 앱의 경우 Android와 iOS의 앱 푸시를 모두 지원합니다.
 
-Notifly JS SDK에서는 푸시를 발송하기 위해 Firebase Cloud Messaging을 활용하고 있습니다. 다음이 모두 준비되었는지 확인해 주세요.
+Notifly에서는 푸시를 발송하기 위해 Firebase Cloud Messaging을 활용하고 있습니다. 다음이 모두 준비되었는지 확인해 주세요.
 
 1. Firebase 프로젝트 셋업이 되어 있어야 푸시 수신이 가능합니다.
+    - [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup) 을 마친 후, SDK 연동을 시작해주세요.
 2. Firebase Cloud Messaging에서 사용하는 token을 Notifly에 등록할 수 있는 준비가 되었는지 확인해 주세요.
 3. 푸시를 Foreground 및 Background 상태에서 수신할 수 있는 handler 가 준비되었는지 확인해 주세요.
 
