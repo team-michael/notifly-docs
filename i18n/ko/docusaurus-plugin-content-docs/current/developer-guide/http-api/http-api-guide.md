@@ -12,7 +12,7 @@ sidebar_position: 1
 
 `POST https://api.notifly.tech/authorize`
 
-### Request
+### Specifications
 
 #### Parameters
 
@@ -43,30 +43,30 @@ const url = "https://api.notifly.tech/authorize";
 
 // Headers
 const headers = {
-  "Content-Type": "application/json",
+	"Content-Type": "application/json",
 };
 
 // Body
 const body = {
-  userName: "provided_username",
-  password: "provided_password",
+	userName: "provided_username",
+	password: "provided_password",
 };
 const encodedBody = JSON.stringify(body);
 
 // Fetch call
 fetch(url, {
-  method: "POST",
-  headers: headers,
-  body: encodedBody,
+	method: "POST",
+	headers: headers,
+	body: encodedBody,
 })
-  .then((response) => response.json())
-  .then((data) => {
-    // Get response data
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+	.then((response) => response.json())
+	.then((data) => {
+		// Get response data
+		console.log(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 /**
  * Response data 예시
@@ -85,7 +85,7 @@ fetch(url, {
 
 `POST https://api.notifly.tech/track-event`
 
-### Request
+### Specifications
 
 | Parameter                  | Type    | Required | Description                                                                                                                                     |
 | -------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -121,35 +121,35 @@ const url = "https://api.notifly.tech/track-event";
 
 // Headers
 const headers = {
-  "Content-Type": "application/json",
-  Authorization: "some-token", // retrieve this from authorization endpoint
+	"Content-Type": "application/json",
+	Authorization: "some-token", // retrieve this from authorization endpoint
 };
 
 // Body
 const body = {
-  projectID: "provided_project_id",
-  eventName: "show_end",
-  isGlobalEvent: true, // true if the event is not associated with a specific user
-  eventParams: {},
-  segmentationEventParamKeys: [],
-  userID: null, // null if global event but should be specified otherwise
+	projectID: "provided_project_id",
+	eventName: "show_end",
+	isGlobalEvent: true, // true if the event is not associated with a specific user
+	eventParams: {},
+	segmentationEventParamKeys: [],
+	userID: null, // null if global event but should be specified otherwise
 };
 const encodedBody = JSON.stringify(body);
 
 // Fetch call
 fetch(url, {
-  method: "POST",
-  headers: headers,
-  body: encodedBody,
+	method: "POST",
+	headers: headers,
+	body: encodedBody,
 })
-  .then((response) => response.json())
-  .then((data) => {
-    // Get response data
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+	.then((response) => response.json())
+	.then((data) => {
+		// Get response data
+		console.log(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 /**
  * Response data 예시
@@ -168,7 +168,7 @@ fetch(url, {
 
 `POST https://api.notifly.tech/set-user-properties`
 
-### Request
+### Specifications
 
 | Parameter      | Type   | Required | Description                                                                                                |
 | -------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------- |
@@ -203,36 +203,36 @@ const url = "https://api.notifly.tech/set-user-properties";
 
 // Headers
 const headers = {
-  "Content-Type": "application/json",
-  Authorization: "some-token", // retrieve this from authorization endpoint
+	"Content-Type": "application/json",
+	Authorization: "some-token", // retrieve this from authorization endpoint
 };
 
 // Body
 const body = {
-  projectID: "provided_project_id",
-  userProperties: {
-    $email: "email@example.com",
-    $phone_number: "010-7777-7777",
-    // ... more properties
-  },
-  userID: "some-user-id",
+	projectID: "provided_project_id",
+	userProperties: {
+		$email: "email@example.com",
+		$phone_number: "010-7777-7777",
+		// ... more properties
+	},
+	userID: "some-user-id",
 };
 const encodedBody = JSON.stringify(body);
 
 // Fetch call
 fetch(url, {
-  method: "POST",
-  headers: headers,
-  body: encodedBody,
+	method: "POST",
+	headers: headers,
+	body: encodedBody,
 })
-  .then((response) => response.json())
-  .then((data) => {
-    // Get response data
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+	.then((response) => response.json())
+	.then((data) => {
+		// Get response data
+		console.log(data);
+	})
+	.catch((err) => {
+		console.log(err);
+	});
 
 /**
  * Response data 예시
@@ -242,3 +242,108 @@ fetch(url, {
 }
 **/
 ```
+
+## 4. Campaign Triggering Endpoint
+
+본 API 를 통해 캠페인을 트리거링할 수 있습니다. 등록된 유저 및 디바이스의 속성 뿐만 아니라 API Request Body의 파라미터까지 모두 사용하여 메시지를 개인화할 수 있습니다.
+
+### Endpoint
+
+`POST https://api.notifly.tech/campaign/{projectId}/{campaignId}/send`
+
+### Specifications
+
+#### Path Parameters
+
+| Parameter  | Type   | Required | Description                                                                                                                       |
+| ---------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| projectId  | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                                          |
+| campaignId | String | Yes      | [캠페인 리스트](https://notifly.tech/console/campaign/list)의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
+
+#### Request
+
+| Parameter     | Type   | Required | Description                                                                              |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| recipients    | List   | Yes      | 메시지를 발송할 유저의 ID 및 이벤트 파라미터를 포함하는 객체의 리스트 입니다.            |
+| - userId      | String | Yes      | 메시지를 발송할 유저의 ID 입니다.                                                        |
+| - eventParams | Object | Yes      | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다. |
+
+#### Headers
+
+| Parameter     | Value            | Description                                                                                          |
+| ------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                                                            |
+| Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 (해당 Endpoint에서는 **Bearer Token**을 사용합니다.) |
+
+#### Response
+
+| Status Code            | Content-Type     | Example Response                                 |
+| ---------------------- | ---------------- | ------------------------------------------------ |
+| 200 OK                 | application/json | `{"success":true,"error":null}`                  |
+| 400 Bad Request        | application/json | `{"success":false,"error":"some-error-message"}` |
+| 405 Method Not Allowed | application/json | `{"success":false,"error":"Method not allowed"}` |
+
+#### 코드 예시
+
+Node.js
+
+```js
+// Endpoint
+const projectId = "example_project_id";
+const campaignId = "example_campaign_id";
+const url = `https://api.notifly.tech/campaign/${projectId}/${campaignId}/send`;
+
+// Request header
+const headers = {
+	"Content-Type": "application/json",
+	Authorization: `Bearer ${authToken}`, // retrieve this authToken from authorization endpoint
+};
+
+// Request body
+const body = {
+	recipients: [
+		{
+			userId: "alice",
+			eventParams: {
+				messageTitle: "Hello Alice!",
+				messageBody: "How are you?",
+				// ... more event params
+			},
+		},
+		{
+			userId: "bob",
+			eventParams: {
+				messageTitle: "Hello Bob!",
+				messageBody: "How are you?",
+				// ... more event params
+			},
+		},
+		// ... more recipients
+	],
+};
+
+// Fetch call
+fetch(url, {
+	method: "POST",
+	headers: headers,
+	body: JSON.stringify(body),
+})
+	.then((response) => response.json())
+	.then((data) => {
+		// Get response data
+		if (data.success) {
+			// Campaign triggered successfully
+			console.log("Campaign triggered successfully");
+		} else {
+			// Campaign triggering failed, handle error
+			console.error(data.error);
+		}
+	})
+	.catch((err) => {
+		console.log(err);
+	});
+```
+
+### 주의 사항
+
+- HTTP Rest API를 이용한 Triggering은 캠페인이 **API 기반 발송**으로 설정되어있는 경우에만 사용 가능합니다.

@@ -32,7 +32,7 @@ sidebar_position: 1
 
 ## 발송 시점
 
-캠페인을 발송할 타이밍을 설정합니다. 노티플라이는 두 가지의 발송 시점 결정 방법을 지원합니다. 특정한 시점에 발송을 예약하는 것 뿐만 아니라, 이벤트가 발생했을 때 발송하는 이벤트 기반 발송도 활용하여 고객 인게이지먼트를 끌어올려 보세요.
+캠페인을 발송할 타이밍을 설정합니다. 노티플라이는 세 가지의 발송 시점 결정 방법을 지원합니다. **특정한 시점**에 캠페인을 집행하거나, **특정 이벤트가 발생했을 때** 캠페인을 집행하는 것 뿐만 아니라 **HTTP API**를 활용하여 고객 인게이지먼트를 끌어올려 보세요.
 
 ### 예약 발송
 
@@ -70,6 +70,10 @@ sidebar_position: 1
 ![Event based campaign - Triggering event 2](./img/campaign_event_based_timing_2.png)
 
 2. **딜레이 지정**: 트리거링 이벤트가 발생한 후, 실제 발송이 일어날 타이밍을 선택할 수 있습니다. 딜레이는 분 단위로 지정할 수 있습니다.
+
+### API 기반 발송
+
+노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 현재 API 기반 발송은 푸시 알림만 지원합니다. 자세한 API 명세는 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)를 참고해주세요. **_API 기반 발송에서 발송 대상 세그먼팅은 UI에서 지정할 수 없습니다. API Request Body에서 발송 대상을 지정해 주세요._**
 
 ## 사용자 세그먼트
 

@@ -6,6 +6,8 @@ sidebar_position: 2
 
 노티플라이 캠페인은 쉽고 빠르게 원하는 사용자에게 도달할 수 있는 방법을 제공합니다. 발송 대상을 설정하는 방법은 **새로운 세그먼트 만들기**, **외부 분석 툴으로부터 코호트 정보 불러오기**, **CSV 파일 업로드**가 지원됩니다.
 
+_[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)인 경우 아래 방법들을 사용할 수 없습니다. 해당 경우 발송 대상은 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint) 를 참고하여 Request Body에 명시해주세요._
+
 ## 발송 필수 정보
 
 발송 채널 별로 유저 정보로 등록되어야 할 필수적인 요소들이 존재합니다.
