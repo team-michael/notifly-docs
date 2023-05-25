@@ -75,6 +75,15 @@ sidebar_position: 1
 
 노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 현재 API 기반 발송은 푸시 알림만 지원합니다. 자세한 API 명세는 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)를 참고해주세요. **_API 기반 발송에서 발송 대상 세그먼팅은 UI에서 지정할 수 없습니다. API Request Body에서 발송 대상을 지정해 주세요._**
 
+#### API 기반 발송 캠페인 생성 예시
+
+- **해당 캠페인은 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.**
+
+![api-triggered-campaign-timing-example](./img/api_triggered_campaign_timing_example.png)
+![api-triggered-campaign-message-example](./img/api_triggered_campaign_message_example.png)
+
+- 주의) 해당 user의 `name` property가 정의되어있다는 가정 하에, 위와 같은 캠페인을 생성하였습니다.
+
 ## 사용자 세그먼트
 
 노티플라이 캠페인은 쉽고 빠르게 원하는 사용자에게 도달하는 방법을 제공합니다. 현재 지원하는 대상 설정 방법은 **새로운 세그먼트를 제작하는 방법, 믹스패널 등의 외부 분석 툴로부터 코호트 정보를 불러오는 방법, 그리고 CSV 파일을 업로드 하는 방법**이 있습니다. 자세한 정보는 [발송 대상 세그먼팅](/ko/user-guide/campaigns/segment) 페이지를 확인해주세요.

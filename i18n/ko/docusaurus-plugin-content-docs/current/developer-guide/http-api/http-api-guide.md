@@ -346,13 +346,6 @@ async function triggerCampaign(projectId, campaignId) {
 }
 ```
 
-#### 캠페인 생성 예시
-
-![api-triggered-campaign-timing-example](./img/api-triggered-campaign-timing-example.png)
-![api-triggered-campaign-message-example](./img/api-triggered-campaign-message-example.png)
-
-- 주의) 해당 user의 `name` property가 각각 'Alice', 'Bob'으로 정의되어있다는 가정 하에, 위와 같은 캠페인을 생성하였습니다.
-
 ### 주의 사항
 
 - HTTP Rest API를 이용한 Triggering은 캠페인이 **API 기반 발송**으로 설정되어있는 경우에만 사용 가능합니다.
