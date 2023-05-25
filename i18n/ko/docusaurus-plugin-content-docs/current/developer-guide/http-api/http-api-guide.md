@@ -288,61 +288,70 @@ fetch(url, {
 Node.js
 
 ```js
-// Endpoint
-const projectId = "example_project_id";
-const campaignId = "example_campaign_id";
-const url = `https://api.notifly.tech/campaign/${projectId}/${campaignId}/send`;
-
-// Request header
-const headers = {
-	"Content-Type": "application/json",
-	Authorization: `Bearer ${authToken}`, // retrieve this authToken from authorization endpoint
-};
-
-// Request body
-const body = {
-	recipients: [
-		{
-			userId: "alice",
-			eventParams: {
-				messageTitle: "Hello Alice!",
-				messageBody: "How are you?",
-				// ... more event params
-			},
-		},
-		{
-			userId: "bob",
-			eventParams: {
-				messageTitle: "Hello Bob!",
-				messageBody: "How are you?",
-				// ... more event params
-			},
-		},
-		// ... more recipients
-	],
-};
-
-// Fetch call
-fetch(url, {
-	method: "POST",
-	headers: headers,
-	body: JSON.stringify(body),
-})
-	.then((response) => response.json())
-	.then((data) => {
-		// Get response data
-		if (data.success) {
-			// Campaign triggered successfully
-			console.log("Campaign triggered successfully");
-		} else {
-			// Campaign triggering failed, handle error
-			console.error(data.error);
-		}
-	})
-	.catch((err) => {
-		console.log(err);
+async function triggerCampaign(projectId, campaignId) {
+	// Retrieve authToken from authorization endpoint
+	const authResponse = await fetch("https://api.notifly.tech/authorize", {
+		method: "POST",
+		body: JSON.stringify({
+			userName: "your-user-name",
+			password: "your-password",
+		}),
 	});
+	const {data: authToken} = await authResponse.json();
+
+	// Endpoint
+	const url = `https://api.notifly.tech/campaign/${projectId}/${campaignId}/send`;
+
+	// Request header
+	const headers = {
+		"Content-Type": "application/json",
+		Authorization: `Bearer ${authToken}`, // retrieve this authToken from authorization endpoint
+	};
+
+	// Request body
+	const body = {
+		recipients: [
+			{
+				userId: "alice",
+				eventParams: {
+					messageTitle: "Hello Alice!",
+					messageBody: "How are you?",
+					// ... more event params
+				},
+			},
+			{
+				userId: "bob",
+				eventParams: {
+					messageTitle: "Hello Bob!",
+					messageBody: "How are you?",
+					// ... more event params
+				},
+			},
+			// ... more recipients
+		],
+	};
+
+	const response = await fetch(url, {
+		method: "POST",
+		headers: headers,
+		body: JSON.stringify(body),
+	});
+
+	const result = await response.json();
+	if (!result.success) {
+		console.error(result);
+	} else {
+		console.log("Campaign triggered successfully");
+	}
+}
 ```
+
+#### 캠페인 생성 예시
+
+![api-triggered-campaign-timing-example](./img/api-triggered-campaign-timing-example.png)
+![api-triggered-campaign-message-example](./img/api-triggered-campaign-message-example.png)
+
+- 주의) 해당 user의 `name` property가 각각 'Alice', 'Bob'으로 정의되어있다는 가정 하에, 위와 같은 캠페인을 생성하였습니다.
 
 ### 주의 사항
 
