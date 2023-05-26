@@ -16,11 +16,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다.
+Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다. 다음 과정을 먼저 진행해주세요:
 
 1. [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup)
-
-을 마친 후, Notifly Flutter Plugin 연동을 시작해주세요.
+2. [iOS APNs 인증 정보 설정](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup#1-2-apns-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%93%B1%EB%A1%9D)
 
 ## 1. Notifly Plugin 셋업
 
@@ -145,7 +144,11 @@ await NotiflyPlugin.trackEvent(
 
 ## 4. 연동 테스트
     
-- [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+[Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+
+## 5. (Advanced) 푸시 알림 아이콘 등록 (Android) & 푸시 알림 동의 프롬프트
+
+[(Advanced) Client SDK - Flutter](/ko/developer-guide/client-sdk/advanced/flutter-sdk-advanced) 를 참고해 주세요.
 
 ## FAQ
 
