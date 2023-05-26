@@ -12,12 +12,10 @@ Notifly React Native SDK는 노티플라이를 React Native 어플리케이션�
 - 이벤트, 유저 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다. 
 - 캠페인의 성과를 측정할 수 있도록 이벤트를 로깅합니다. 
 
-Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다.
+Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다. 다음 과정을 먼저 진행해주세요:
 
 1. [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup)
 2. [iOS APNs 인증 정보 설정](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup#1-2-apns-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%93%B1%EB%A1%9D)
-
-을 마친 후, Notifly React Native SDK 연동을 시작해주세요.
 
 ## 1. Notifly SDK 셋업
 
@@ -239,4 +237,9 @@ const handlePurchaseTicket = () => {
 
 ## 4. 연동 테스트
     
-- [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+[Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+
+## FAQ
+
+- Q. 이미 Firebase Cloud Messaging을 사용 중인데 어떻게 해야 할까요?
+    - A. Notifly Flutter Plugin은 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과의 충돌을 방지하기 위한 처리를 이미 자체적으로 구현해 두었기 때문에 안전하게 사용하실 수 있습니다.
