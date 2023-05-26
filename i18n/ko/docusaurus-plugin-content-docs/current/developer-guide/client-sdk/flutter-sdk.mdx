@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)을 활용하고 있습니다. 다음 과정을 먼저 진행해주세요:
 
 1. [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup)
-2. [iOS APNs 인증 정보 설정](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup#1-2-apns-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%93%B1%EB%A1%9D)
+2. [iOS APNs 인증 정보 설정](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup#1-3-apns-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%93%B1%EB%A1%9D)
 
 ## 1. Notifly Plugin 셋업
 
@@ -29,6 +29,7 @@ Plugin을 설치하기 위해, 다음을 실행해 주세요:
 
 ```shell
 flutter pub add notifly_flutter
+cd ios && pod install
 ```
 
 앱 패키지의 pubspec.yaml 파일에 다음과 같이 추가됩니다. (현재 최신 버전: [![Pub](https://img.shields.io/pub/v/notifly_flutter.svg)](https://pub.dev/packages/notifly_flutter)
@@ -39,7 +40,125 @@ dependencies:
   notifly_flutter: ^1.0.0
 ```
 
-### 1-2. Notifly Plugin 초기화 코드 추가
+### 1.2. iOS 설정
+#### 1) Capability 설정
+
+1. Xcode에서 Runner.xcworkspace를 열어주세요.
+    - Xcode에서 Runner.xcworkspace를 열지 않고 Runner.xcodeproj를 열어서 빌드하면, Notifly Plugin을 사용할 수 없습니다.
+    - Runner.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
+2. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **13.0** 혹은 그 이상으로 설정합니다.
+3. Push Notification Capability를 추가합니다.
+   ![Add Capabilities](./image/ios_setting_add_capability1.png)
+
+4. Background Modes Capability를 추가합니다. - Remote notifications과 Background Fetch를 선택합니다.
+   ![Add Capabilities](./image/ios_setting_add_capability2.png)
+
+5. AppDelegate.swift 파일을 열어서 다음 코드를 추가합니다.
+- AppDelegate.swift는 ios 디렉토리의 Runner 디렉토리에 있습니다.
+- `notifly_sdk` 프래임워크를 import 합니다.
+
+```swift
+import notifly_sdk
+```
+
+- AppDelegate.swift의 `FlutterAppDelegate`에서 함수들을 override하여 다음 Notifly코드를 추가해 주세요.
+
+    1. `application(_:didFinishLaunchingWithOptions:)`
+        - UNNotificationCenter의 delegate를 self로 설정합니다.
+    2. `application(_:didRegisterForRemoteNotificationsWithDeviceToken:)`
+        - APNs 토큰을 Notifly에 등록합니다.
+    3. `application(_:didFailToRegisterForRemoteNotificationsWithError:)`
+        - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
+    4. `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`
+        - Notifly로부터 수신한 데이터를 SDK로 전달합니다.
+    5. `userNotificationCenter(_:willPresent:withCompletionHandler:)`
+        - 앱이 실행 중일 때, 앱 푸시 알림 트래픽을 Notifly로 전달합니다.
+    6. `userNotificationCenter(_:didReceive:withCompletionHandler:)`
+        - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
+
+<Tabs>
+<TabItem value="SwiftUIAppDelegate2" label="Swift">
+
+```swift title="Example Code of AppDelegate.swift"
+import Flutter
+import notifly_sdk
+import UIKit
+
+@UIApplicationMain
+@objc class AppDelegate: FlutterAppDelegate {
+
+    override func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        GeneratedPluginRegistrant.register(with: self)
+        // highlight-next-line
+        UNUserNotificationCenter.current().delegate = self
+        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+
+    override func application(
+        _ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: Error
+    ) {
+        // highlight-start
+        Notifly.application(application,
+                            didFailToRegisterForRemoteNotificationsWithError: error)
+        super.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+        // highlight-end
+    }
+
+    override func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        // highlight-start
+        Notifly.application(application,
+                            didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        // highlight-end
+    }
+
+    override func application(_ application: UIApplication,
+                                didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                                fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        // highlight-start
+        Notifly.application(application,
+                            didReceiveRemoteNotification: userInfo)
+        super.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        // highlight-end
+    }
+
+    override func userNotificationCenter(_ notificationCenter: UNUserNotificationCenter,
+                                        didReceive response: UNNotificationResponse,
+                                        withCompletionHandler completion: @escaping () -> Void)
+    {
+        // highlight-start
+        Notifly.userNotificationCenter(notificationCenter,
+                                    didReceive: response)
+        super.userNotificationCenter(notificationCenter, didReceive: response, withCompletionHandler: completion)
+        // highlight-end
+    }
+
+    override func userNotificationCenter(_ notificationCenter: UNUserNotificationCenter,
+                                        willPresent notification: UNNotification,
+                                        withCompletionHandler completion: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        // highlight-start
+        Notifly.userNotificationCenter(notificationCenter,
+                                    willPresent: notification,
+                                    withCompletionHandler: completion)
+        super.userNotificationCenter(notificationCenter, willPresent: notification, withCompletionHandler: completion)
+        // highlight-end
+    }
+}
+```
+</TabItem>
+</Tabs>
+
+
+### 1-3. Notifly Plugin 초기화 코드 추가
 
 Notifly Plugin을 사용하기 위해, 다음과 같이 Notifly Plugin을 초기화하는 코드를 추가해주세요. 다음은 dotenv를 사용하여 환경변수를 읽어오는 예시입니다.
 
@@ -68,7 +187,7 @@ void main() async {
 
 | Parameter | Type      | Required |
 | --------- | --------- | -------- |
-| userId    | `String`  | Yes      |
+| userId    | `String`  | No       |
 
 ```dart
 NotiflyPlugin.setUserId(userId)
@@ -80,11 +199,25 @@ ElevatedButton(
         try {
             final userIdInput = _userIdTextInputController.text;
             // highlight-next-line
-            await NotiflyPlugin.setUserId(userIdInput);
+            await NotiflyPlugin.setUserId(userIdInput); // Set User Id
         } catch (error) {
             ...
         }
     },
+    child: const Text('Set User Id'),
+    ...
+),
+ElevatedButton(
+    onPressed: () async {
+        try {
+            final userIdInput = _userIdTextInputController.text;
+            // highlight-next-line
+            await NotiflyPlugin.setUserId(null); // Remove User Id
+        } catch (error) {
+            ...
+        }
+    },
+    child: const Text('Remove User Id'),
     ...
 ),
 ```
