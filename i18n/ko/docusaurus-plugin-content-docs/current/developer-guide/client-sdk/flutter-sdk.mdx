@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Client SDK - Flutter (준비중)
 
-Notifly Flutter SDK는 노티플라이를 Flutter 어플리케이션과 연동하기 위해 사용할 수 있습니다. 다음과 같은 기능들을 지원합니다:
+Notifly Flutter Plugin은 노티플라이를 Flutter 어플리케이션과 연동하기 위해 사용할 수 있습니다. 다음과 같은 기능들을 지원합니다:
 
 - 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시, 인앱 메시지를 Flutter 앱에서 수신할 수 있습니다.
     - 노티플라이의 인앱 메시지는 앱이 Foreground 상태일 때만 수신됩니다. Background 및 Quit 상태일 때는 무시됩니다.
@@ -20,8 +20,134 @@ Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https:
 
 1. [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup)
 
-을 마친 후, Notifly Flutter SDK 연동을 시작해주세요.
+을 마친 후, Notifly Flutter Plugin 연동을 시작해주세요.
 
-## 1. Notifly SDK 셋업
+## 1. Notifly Plugin 셋업
 
-준비중입니다. 
+### 1-1. Plugin 설치
+
+Plugin을 설치하기 위해, 다음을 실행해 주세요:
+
+```shell
+flutter pub add notifly_flutter
+```
+
+앱 패키지의 pubspec.yaml 파일에 다음과 같이 추가됩니다. (현재 최신 버전: [![Pub](https://img.shields.io/pub/v/notifly_flutter.svg)](https://pub.dev/packages/notifly_flutter)
+)
+
+```yaml
+dependencies:
+  notifly_flutter: ^1.0.0
+```
+
+### 1-2. Notifly Plugin 초기화 코드 추가
+
+Notifly Plugin을 사용하기 위해, 다음과 같이 Notifly Plugin을 초기화하는 코드를 추가해주세요. 다음은 dotenv를 사용하여 환경변수를 읽어오는 예시입니다.
+
+```dart title="Example main.dart code for initialization"
+import 'package:notifly_flutter/notifly_flutter.dart';
+
+void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await NotiflyPlugin.initialize(
+        projectId: dotenv.env['NOTIFLY_PROJECT_ID']!,
+        username: dotenv.env['NOTIFLY_USERNAME']!,
+        password: dotenv.env['NOTIFLY_PASSWORD']!,
+    );
+}
+```
+
+`NOTIFLY_PROJECT_ID`, `NOTIFLY_USERNAME`, `NOTIFLY_PASSWORD` 값은 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
+
+## 2. 유저 프로퍼티 등록하기
+
+- Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+    - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+
+### 2-1. 유저 아이디 등록
+
+| Parameter | Type      | Required |
+| --------- | --------- | -------- |
+| userId    | `String`  | Yes      |
+
+```dart
+NotiflyPlugin.setUserId(userId)
+```
+
+```dart title="Example Dart code for NotiflyPlugin.setUserId"
+ElevatedButton(
+    onPressed: () async {
+        try {
+            final userIdInput = _userIdTextInputController.text;
+            // highlight-next-line
+            await NotiflyPlugin.setUserId(userIdInput);
+        } catch (error) {
+            ...
+        }
+    },
+    ...
+),
+```
+
+### 2-2. 유저 프로퍼티 등록
+
+| Parameter   | Type                  | Required |
+| ----------- | --------------------- | -------- |
+| params      | `Map<String, Object>` | Yes      |
+
+```dart
+NotiflyPlugin.setUserProperties(params)
+```
+
+```dart title="Example Dart code for NotiflyPlugin.setUserProperties"
+ElevatedButton(
+    onPressed: () async {
+        try {
+            final value = _userPropertiesValueInputController.text;
+            // highlight-next-line
+            await NotiflyPlugin.setUserProperties({'name': value});
+        } catch (error) {
+            ...
+        }
+    },
+    ...
+),
+```
+
+## 3. 이벤트 로깅
+
+- Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
+    - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
+- segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams)를 유저 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 유저 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys에 지정해주세요.
+    - **현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.**
+
+### 3-1. 이벤트 로깅
+
+| Parameter                   | Type                  | Required |
+| --------------------------- | --------------------- | -------- |
+| eventName                   | `String`              | Yes      |
+| eventParams                 | `Map<String, Object>` | No       |
+| segmentationEventParamKeys  | `List<String>`        | No       |
+
+```dart
+NotiflyPlugin.trackEvent(params)
+```
+
+```dart title="Example Dart code for NotiflyPlugin.trackEvent"
+...
+await NotiflyPlugin.trackEvent(
+    eventName: 'click_button_1',
+    eventParams: {'show_id': show_id},
+);
+...
+```
+
+## 4. 연동 테스트
+    
+- [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+
+## FAQ
+
+- Q. 이미 Firebase Cloud Messaging을 사용 중인데 어떻게 해야 할까요?
+    - A. Notifly Flutter Plugin은 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과의 충돌을 방지하기 위한 처리를 이미 자체적으로 구현해 두었기 때문에 안전하게 사용하실 수 있습니다.
