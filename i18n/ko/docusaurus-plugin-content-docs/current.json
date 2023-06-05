@@ -39,6 +39,10 @@
     "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Kakao Alimtalk in sidebar userGuide"
   },
+  "sidebar.userGuide.category.Web Message": {
+    "message": "웹사이트 모달",
+    "description": "The label for category Web Message in sidebar userGuide"
+  },
   "sidebar.userGuide.category.Mixpanel Integration": {
     "message": "Mixpanel 연동",
     "description": "The label for category Mixpanel Integration in sidebar userGuide"
