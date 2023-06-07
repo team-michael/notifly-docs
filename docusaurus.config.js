@@ -141,7 +141,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['kotlin', 'java', 'swift', 'gradle', 'dart'],
+        additionalLanguages: ['kotlin', 'java', 'swift', 'gradle', 'dart', 'objectivec'],
       },
       typesense: {
         // Replace this with the name of your index/collection.
