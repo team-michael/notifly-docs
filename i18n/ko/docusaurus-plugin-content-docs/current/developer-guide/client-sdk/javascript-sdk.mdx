@@ -72,13 +72,113 @@ Notifly SDK를 HTML에 직접적으로 추가해 주시면 비동기적으로 �
 </script>
 ```
 
-## 2. 유저 프로퍼티 등록하기
+## 2. 웹 푸시 설정
+
+웹 푸시 설정을 통하여 Notifly에서 웹 푸시 캠페인을 집행할 수 있습니다.
+
+### 2-1. 웹 푸시 인증서 생성하기
+
+웹 푸시를 노티플라이를 통해 발송하고 웹 브라우저에서 수신하기 위해 인증서(VAPID Key)를 생성해야 합니다. 웹 푸시 인증서는 노티플라이 홈페이지의 [설정 페이지](https://www.notifly.tech/console/settings)에서 생성할 수 있습니다.
+
+![Web Push Certificate in Settings](./image/web_push_certificate_settings.png)
+
+### 2-2. Service Worker 생성하기
+
+Service Worker는 브라우저가 백그라운드에서 실행하는 스크립트입니다. 웹페이지가 열려있지 않은 상태에서도 푸시 알림을 수신할 수 있도록 해줍니다.
+프로젝트의 루트 디렉토리에 `service-worker.js` 파일을 생성해 주세요:
+
+<Tabs>
+<TabItem value="react" label="ReactJS project example">
+
+``` title="Example ReactJS project"
+my-react-project/
+├── src/
+├── public/
+│   ├── index.html
+// highlight-next-line
+|   ├── notifly-service-worker.js
+│   └── ...
+├── package.json
+├── README.md
+└── ...
+
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS project example">
+
+``` title="Example JS project"
+
+my-project/
+├── css/
+├── js/
+├── index.html
+// highlight-next-line
+├── notifly-service-worker.js
+└── ...
+
+```
+
+</TabItem>
+</Tabs>
+
+`notifly-service-worker.js` 파일에 다음 코드를 추가해 주세요:
+
+```js title="notifly-service-worker.js"
+self.importScripts('https://cdn.notifly.tech/notifly-js-sdk/dist/NotiflyServiceWorker.js');
+```
+
+### 2-3. Service Worker 등록하기
+
+2-2 에서 생성한 service worker를 다음과 같이 등록해 주세요. 
+
+`NOTIFLY_VAPID_PUBLIC_KEY` 에 2-1 에서 생성한 웹 푸시 인증서 키를 입력해 주세요.
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for registering service worker -- index.js"
+...
+// highlight-start
+import notifly from 'notifly-js-sdk';
+
+notifly.registerServiceWorker(NOTIFLY_VAPID_PUBLIC_KEY);
+// highlight-end
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+    ...
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS">
+
+```html title="Example JS code for registering service worker -- index.html"
+<script type="text/javascript">
+    async function initializeNotifly() {
+        const { default: notifly } = await import('https://cdn.notifly.tech/notifly-js-sdk/dist/index.js');
+        notifly.initialize(NOTIFLY_PROJECT_ID, NOTIFLY_USERNAME, NOTIFLY_PASSWORD);
+        window.notifly = notifly;
+        // highlight-next-line
+        notifly.registerServiceWorker(NOTIFLY_VAPID_PUBLIC_KEY);
+    }
+    initializeNotifly();
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+참고: Service Worker가 웹에 등록되어 있을 때, 브라우저가 푸시를 사용자에게 보여줄 수 있는 권한이 설정되지 않은 경우에는 자동으로 권한을 요청하게 됩니다. 이 때, 사용자가 권한을 허용하지 않으면 푸시 알림을 수신할 수 없습니다. 더 자세한 내용은 [웹 푸시 알림 테스트](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test#5-%EC%9B%B9-%ED%91%B8%EC%8B%9C-%EC%95%8C%EB%A6%BC-%ED%85%8C%EC%8A%A4%ED%8A%B8)를 참고해 주세요.
+
+## 3. 유저 프로퍼티 등록하기
 
 - Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (userProperties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
   - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
-### 2-1. 유저 아이디 등록
+### 3-1. 유저 아이디 등록
 
 | Parameter | Type   | Required |
 | --------- | ------ | -------- |
@@ -117,7 +217,7 @@ userIdSaveButton.addEventListener('click', function () {
 </TabItem>
 </Tabs>
 
-### 2-2. 유저 프로퍼티 등록
+### 3-2. 유저 프로퍼티 등록
 
 | Parameter      | Type                | Required |
 | -------------- | ------------------- | -------- |
@@ -156,14 +256,14 @@ subscribeButton.addEventListener('click', function () {
 </TabItem>
 </Tabs>
 
-## 3. 이벤트 로깅
+## 4. 이벤트 로깅
 
 - Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
   - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
 - segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams의)를 유저 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 유저 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
   - 현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.
 
-### 3-1. 이벤트 로깅
+### 4-1. 이벤트 로깅
 
 | Parameter                  | Type                | Required |
 | -------------------------- | ------------------- | -------- |
@@ -214,9 +314,15 @@ event1Button.addEventListener('click', function () {
 
 </Tabs>
 
-## 4. (Optional) Firebase 웹 푸시 셋업
+## 5. 연동 테스트
+    
+[Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
 
-웹 앱에서 이미 Firebase Cloud Messaging (FCM)으로 웹 푸시를 발송하고 계셨다면, Notifly에서 FCM을 연동할 수 있습니다. 
+## 6. (Optional) Firebase 토큰 등록
+
+_웹 푸시만 필요하신 경우, 이 단계는 생략하셔도 됩니다._
+
+웹과 앱을 동시에 운영하고 계실 때, 웹 앱에서 사용자의 Firebase Cloud Messaging (FCM) 앱 푸시 토큰을 등록하실 수 있습니다. 
 
 다음이 모두 준비되었는지 확인해 주세요.
 

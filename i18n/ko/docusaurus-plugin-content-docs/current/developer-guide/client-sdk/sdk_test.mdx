@@ -85,3 +85,48 @@ sidebar_position: 7
 ![in_app_message_test_message_content](./image/in_app_message_test_result.png)
 
 - 정상적으로 인앱 메시지가 도착했다면 테스트가 완료된 것입니다.
+
+## 5. 웹 푸시 알림 테스트
+
+### 5-1. 웹 푸시 테스트 발송
+
+- [Notifly 캠페인 생성 페이지](https://www.notifly.tech/console/campaign/create)로 이동합니다.
+- 우측 상단 탭에서 개발/프로젝션 중 테스트 유저가 등록된 프로젝트를 선택합니다.
+- 1번 기본 정보 및 채널 섹션에서 `웹 푸시`을 선택합니다.
+- 4번 메시지 및 액션 섹션으로 이동하여 테스트할 메시지를 입력합니다.
+  - `메시지 제목` : 전송할 푸시 알림 제목을 입력합니다.
+  - `메시지 내용` : 전송할 푸시 알림 내용을 입력합니다.
+  - `액션` : 푸시 알림 클릭 시 액션을 지정합니다.
+    - 웹페이지가 Focus (foreground)인 상태, Background인 상태에서 모두 푸시 수신 및 클릭 시 액션이 정상적으로 작동하는지 테스트를 진행해보세요.
+
+![web_push_test_message_content](./image/web_push_test_content.png)
+
+- 우측 하단의 "테스트 발송하기" 버튼을 클릭하고, 테스트 유저 아이디를 입력하고 테스트 발송하기를 클릭합니다.
+
+![web_push_test_sending](./image/web_push_test_result.png)
+
+- 정상적으로 푸시 알림이 도착했다면 테스트가 완료된 것입니다.
+
+### 5-2. 웹 푸시 FAQ
+
+웹 푸시 알림이 정상적으로 도착하지 않는다면, 다음 내용들을 확인해 주세요.
+
+#### 5-2-1. 기기 권한
+
+사용자가 기기 (macOS, Windows 등)에서 브라우저의 알림 권한을 허용해야 합니다.
+
+예시 (macOS):
+
+<img
+  src={require('./image/macOS_notification_settings.png').default}
+  width="500px"
+/>
+
+
+#### 5-2-2. 브라우저 권한
+
+#### 5-2-3. 지원 브라우저 버전
+
+노티플라이는 Web Push Protocol을 통하여 웹 푸시를 발송하고 있습니다. 현재 지원되는 브라우저와 버전은 [Push API - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)를 확인해 주세요.
+
+- 예를 들어, 데스크탑에서 Safari 버전 15 이하에서는 웹 푸시가 지원되지 않습니다.
