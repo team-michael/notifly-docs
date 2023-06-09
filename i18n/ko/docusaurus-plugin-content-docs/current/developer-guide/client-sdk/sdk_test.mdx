@@ -109,7 +109,7 @@ sidebar_position: 7
 
 ### 5-2. 웹 푸시 FAQ
 
-웹 푸시 알림이 정상적으로 도착하지 않는다면, 다음 내용들을 확인해 주세요.
+웹 푸시 알림이 정상적으로 도착하지 않을 경우 가장 흔한 원인들에 대해 확인해보세요.
 
 #### 5-2-1. 기기 권한
 
@@ -125,8 +125,30 @@ sidebar_position: 7
 
 #### 5-2-2. 브라우저 권한
 
+사용자가 브라우저에서 알림 권한을 허용해야 합니다. 브라우저마다 푸시 알림 권한의 기본 설정값과 권한 요청 방식이 다소 다릅니다. 
+
+예시 (Chrome)
+
+<img
+  src={require('./image/chrome-granted-example.png').default}
+  width="400px"
+/>
+
+예시 (Edge)
+
+<img
+  src={require('./image/edge-blocked-example.png').default}
+  width="400px"
+/>
+
+노티플라이 JS SDK 의 셋업 방식에 따라 권한 요청 기본 팝업이 노출되거나 노출되지 않을 수 있습니다. 자세한 내용은 [Notifly JS SDK - Service Worker 등록하기](http://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#2-3-service-worker-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0)를 참고해 주세요.
+
 #### 5-2-3. 지원 브라우저 버전
 
 노티플라이는 Web Push Protocol을 통하여 웹 푸시를 발송하고 있습니다. 현재 지원되는 브라우저와 버전은 [Push API - Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)를 확인해 주세요.
 
 - 예를 들어, 데스크탑에서 Safari 버전 15 이하에서는 웹 푸시가 지원되지 않습니다.
+
+#### 5-2-4. 그 외
+
+노티플라이 팀에 문의해 주시면 빠르게 확인해 드리겠습니다.
