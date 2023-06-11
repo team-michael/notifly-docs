@@ -148,18 +148,20 @@ notifly.registerServiceWorker(vapidPublicKey, true);
 <Tabs>
 <TabItem value="react" label="ReactJS">
 
-```js title="Example ReactJS code for registering service worker -- index.js"
-...
-// highlight-start
+```js title="Example ReactJS code for registering service worker -- index.js, App.js, _app.jsx or equivalent"
 import notifly from 'notifly-js-sdk';
-
-notifly.registerServiceWorker(NOTIFLY_VAPID_PUBLIC_KEY, true);
-// highlight-end
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-    ...
+...
+useEffect(() => {
+    // highlight-next-line
+    notifly.registerServiceWorker(NOTIFLY_VAPID_PUBLIC_KEY, true);
+    if (typeof window !== 'undefined') {
+        notifly.initialize(
+            process.env.NOTIFLY_PROJECT_ID,
+            process.env.NOTIFLY_USERNAME,
+            process.env.NOTIFLY_PASSWORD,
+        );
+    }
+}
 ```
 
 </TabItem>
@@ -169,10 +171,10 @@ root.render(
 <script type="text/javascript">
     async function initializeNotifly() {
         const { default: notifly } = await import('https://cdn.notifly.tech/notifly-js-sdk/dist/index.js');
-        notifly.initialize(NOTIFLY_PROJECT_ID, NOTIFLY_USERNAME, NOTIFLY_PASSWORD);
-        window.notifly = notifly;
         // highlight-next-line
         notifly.registerServiceWorker(NOTIFLY_VAPID_PUBLIC_KEY, true);
+        notifly.initialize(NOTIFLY_PROJECT_ID, NOTIFLY_USERNAME, NOTIFLY_PASSWORD);
+        window.notifly = notifly;
     }
     initializeNotifly();
 </script>
