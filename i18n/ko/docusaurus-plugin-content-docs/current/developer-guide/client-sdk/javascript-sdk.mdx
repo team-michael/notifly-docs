@@ -288,6 +288,36 @@ subscribeButton.addEventListener('click', function () {
 </TabItem>
 </Tabs>
 
+### 3-3. 유저 삭제
+
+```js
+notifly.deleteUser();
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for setUserId"
+const quitMembership = () => {
+    ...
+    notifly.deleteUser(); // delete user from notifly
+    ...
+}
+
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS">
+
+```js title="Example JS code for setUserId"
+quitMembershipButton.addEventListener('click', function () {
+    window.notifly.deleteUser(); // delete user from notifly
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## 4. 이벤트 로깅
 
 - Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
