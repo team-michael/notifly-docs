@@ -78,11 +78,9 @@ cd ios && pod install
         - APNs 토큰을 Notifly에 등록합니다.
     3. `(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error`
         - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
-    4. `(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler`
-        - Notifly로부터 수신한 데이터를 SDK로 전달합니다.
-    5. `(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler`
+    4. `(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler`
         - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
-    6. `(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler`
+    5. `(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler`
         - 앱이 Foreground 상태일 때, Notifly로부터 수신한 데이터를 SDK로 전달합니다.
 
 <Tabs>
@@ -132,15 +130,6 @@ cd ios && pod install
     /* Your Code */
     // highlight-next-line
     [Notifly application:application didFailToRegisterForRemoteNotificationsWithError:error];
-    /* Your Code */
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    /* Your Code */
-    // highlight-start
-    [Notifly application:application didReceiveRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNoData);
-    // highlight-end
     /* Your Code */
 }
 

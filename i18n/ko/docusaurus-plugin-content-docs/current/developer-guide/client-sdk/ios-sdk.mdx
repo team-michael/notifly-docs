@@ -111,8 +111,6 @@ import notifly_sdk
         - APNs 토큰을 Notifly에 등록합니다.
     3. `application(_:didFailToRegisterForRemoteNotificationsWithError:)`
         - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
-    4. `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`
-        - Notifly로부터 수신한 데이터를 SDK로 전달합니다.
         
         <Tabs>
         <TabItem value="SwiftUIAppDelegate1" label="Swift">
@@ -153,18 +151,6 @@ import notifly_sdk
                 // highlight-end
             }
 
-            func application(_ application: UIApplication,
-                didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-                /* ...YOUR CODE */
-
-                // highlight-start
-                Notifly.application(application,
-                                    didReceiveRemoteNotification: userInfo)
-                // highlight-end
-                /* ...YOUR CODE */
-                completionHandler(.noData)
-            }
             /* ...YOUR CODE */
         }
 
