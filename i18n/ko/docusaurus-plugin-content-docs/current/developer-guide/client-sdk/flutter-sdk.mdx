@@ -169,6 +169,7 @@ void main() async {
 - Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
     - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
     - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+    - (권장사항) setUserId method에서 userId를 null로 설정하면, Notifly에서는 해당 유저의 userId를 삭제합니다. 로그아웃 시에 해당 방식을 통해 userId를 삭제해 주세요.
 
 ### 2-1. 유저 아이디 등록
 
