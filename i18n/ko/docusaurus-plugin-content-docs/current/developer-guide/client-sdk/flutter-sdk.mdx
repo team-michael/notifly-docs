@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Client SDK - Flutter
@@ -69,11 +69,9 @@ import notifly_sdk
         - APNs 토큰을 Notifly에 등록합니다.
     3. `application(_:didFailToRegisterForRemoteNotificationsWithError:)`
         - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
-    4. `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`
-        - Notifly로부터 수신한 데이터를 SDK로 전달합니다.
-    5. `userNotificationCenter(_:willPresent:withCompletionHandler:)`
+    4. `userNotificationCenter(_:willPresent:withCompletionHandler:)`
         - 앱이 실행 중일 때, 앱 푸시 알림 트래픽을 Notifly로 전달합니다.
-    6. `userNotificationCenter(_:didReceive:withCompletionHandler:)`
+    5. `userNotificationCenter(_:didReceive:withCompletionHandler:)`
         - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
 
 <Tabs>
@@ -116,17 +114,6 @@ import UIKit
         Notifly.application(application,
                             didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
         super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-        // highlight-end
-    }
-
-    override func application(_ application: UIApplication,
-                                didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                                fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
-    {
-        // highlight-start
-        Notifly.application(application,
-                            didReceiveRemoteNotification: userInfo)
-        super.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         // highlight-end
     }
 
