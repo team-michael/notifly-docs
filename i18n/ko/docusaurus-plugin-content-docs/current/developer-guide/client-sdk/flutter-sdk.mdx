@@ -6,8 +6,9 @@ sidebar_position: 7
 
 Notifly Flutter Plugin은 노티플라이를 Flutter 어플리케이션과 연동하기 위해 사용할 수 있습니다. 다음과 같은 기능들을 지원합니다:
 
-- 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시, 인앱 메시지를 Flutter 앱에서 수신할 수 있습니다.
-    - 노티플라이의 인앱 메시지는 앱이 Foreground 상태일 때만 수신됩니다. Background 및 Quit 상태일 때는 무시됩니다.
+- 기기 정보를 노티플라이에 등록하여 노티플라이를 통해 발송된 앱 푸시를 Flutter 앱에서 수신할 수 있습니다.
+- 노티플라이에서 만든 인앱 메시지 캠페인을 Flutter 앱에서 띄울 수 있습니다.
+  - **Android 플랫폼의 경우, 현재 인앱 메시지는 Android 11 (API Level 30) 이상에서만 지원되며, 이외의 Android 디바이스에서는 인앱 메시지가 표시되지 않습니다.**
 - 이벤트, 유저 정보를 노티플라이와 연동하여 모든 캠페인에서 활용할 수 있습니다.
 - 캠페인의 성과를 측정할 수 있도록 이벤트를 로깅합니다.
 
@@ -41,11 +42,12 @@ dependencies:
 ```
 
 ### 1.2. iOS 설정
+
 #### 1) Capability 설정
 
 1. Xcode에서 Runner.xcworkspace를 열어주세요.
-    - Xcode에서 Runner.xcworkspace를 열지 않고 Runner.xcodeproj를 열어서 빌드하면, Notifly Plugin을 사용할 수 없습니다.
-    - Runner.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
+   - Xcode에서 Runner.xcworkspace를 열지 않고 Runner.xcodeproj를 열어서 빌드하면, Notifly Plugin을 사용할 수 없습니다.
+   - Runner.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
 2. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **13.0** 혹은 그 이상으로 설정합니다.
 3. Push Notification Capability를 추가합니다.
    ![Add Capabilities](./image/ios_setting_add_capability1.png)
@@ -54,6 +56,7 @@ dependencies:
    ![Add Capabilities](./image/ios_setting_add_capability2.png)
 
 5. AppDelegate.swift 파일을 열어서 다음 코드를 추가합니다.
+
 - AppDelegate.swift는 ios 디렉토리의 Runner 디렉토리에 있습니다.
 - `notifly_sdk` 프래임워크를 import 합니다.
 
@@ -63,16 +66,16 @@ import notifly_sdk
 
 - AppDelegate.swift의 `FlutterAppDelegate`에서 함수들을 override하여 다음 Notifly코드를 추가해 주세요.
 
-    1. `application(_:didFinishLaunchingWithOptions:)`
-        - UNNotificationCenter의 delegate를 self로 설정합니다.
-    2. `application(_:didRegisterForRemoteNotificationsWithDeviceToken:)`
-        - APNs 토큰을 Notifly에 등록합니다.
-    3. `application(_:didFailToRegisterForRemoteNotificationsWithError:)`
-        - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
-    4. `userNotificationCenter(_:willPresent:withCompletionHandler:)`
-        - 앱이 실행 중일 때, 앱 푸시 알림 트래픽을 Notifly로 전달합니다.
-    5. `userNotificationCenter(_:didReceive:withCompletionHandler:)`
-        - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
+  1. `application(_:didFinishLaunchingWithOptions:)`
+     - UNNotificationCenter의 delegate를 self로 설정합니다.
+  2. `application(_:didRegisterForRemoteNotificationsWithDeviceToken:)`
+     - APNs 토큰을 Notifly에 등록합니다.
+  3. `application(_:didFailToRegisterForRemoteNotificationsWithError:)`
+     - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
+  4. `userNotificationCenter(_:willPresent:withCompletionHandler:)`
+     - 앱이 실행 중일 때, 앱 푸시 알림 트래픽을 Notifly로 전달합니다.
+  5. `userNotificationCenter(_:didReceive:withCompletionHandler:)`
+     - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
 
 <Tabs>
 <TabItem value="SwiftUIAppDelegate2" label="Swift">
@@ -141,9 +144,9 @@ import UIKit
     }
 }
 ```
+
 </TabItem>
 </Tabs>
-
 
 ### 1-3. Notifly Plugin 초기화 코드 추가
 
@@ -167,14 +170,14 @@ void main() async {
 ## 2. 유저 프로퍼티 등록하기
 
 - Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (params)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
-    - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
-    - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+  - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+  - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
 
 ### 2-1. 유저 아이디 등록
 
-| Parameter | Type      | Required |
-| --------- | --------- | -------- |
-| userId    | `String`  | No       |
+| Parameter | Type     | Required |
+| --------- | -------- | -------- |
+| userId    | `String` | No       |
 
 ```dart
 NotiflyPlugin.setUserId(userId)
@@ -211,9 +214,9 @@ ElevatedButton(
 
 ### 2-2. 유저 프로퍼티 등록
 
-| Parameter   | Type                  | Required |
-| ----------- | --------------------- | -------- |
-| params      | `Map<String, Object>` | Yes      |
+| Parameter | Type                  | Required |
+| --------- | --------------------- | -------- |
+| params    | `Map<String, Object>` | Yes      |
 
 ```dart
 NotiflyPlugin.setUserProperties(params)
@@ -237,17 +240,17 @@ ElevatedButton(
 ## 3. 이벤트 로깅
 
 - Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
-    - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
+  - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
 - segmentationEventParamKeys 활용하여 이벤트 변수 (eventParams)를 유저 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 유저 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys에 지정해주세요.
-    - **현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.**
+  - **현재는 segmentationEventParamKeys 한 개까지 지원하고 있기 때문에, segmentationEventParamKeys 길이는 1이하인 List이어야합니다.**
 
 ### 3-1. 이벤트 로깅
 
-| Parameter                   | Type                  | Required |
-| --------------------------- | --------------------- | -------- |
-| eventName                   | `String`              | Yes      |
-| eventParams                 | `Map<String, Object>` | No       |
-| segmentationEventParamKeys  | `List<String>`        | No       |
+| Parameter                  | Type                  | Required |
+| -------------------------- | --------------------- | -------- |
+| eventName                  | `String`              | Yes      |
+| eventParams                | `Map<String, Object>` | No       |
+| segmentationEventParamKeys | `List<String>`        | No       |
 
 ```dart
 NotiflyPlugin.trackEvent(params)
@@ -263,7 +266,7 @@ await NotiflyPlugin.trackEvent(
 ```
 
 ## 4. 연동 테스트
-    
+
 [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
 
 ## 5. (Advanced) 푸시 알림 아이콘 등록 (Android) & 푸시 알림 동의 프롬프트
@@ -273,4 +276,4 @@ await NotiflyPlugin.trackEvent(
 ## FAQ
 
 - Q. 이미 Firebase Cloud Messaging을 사용 중인데 어떻게 해야 할까요?
-    - A. Notifly Flutter Plugin은 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과의 충돌을 방지하기 위한 처리를 이미 자체적으로 구현해 두었기 때문에 안전하게 사용하실 수 있습니다.
+  - A. Notifly Flutter Plugin은 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과의 충돌을 방지하기 위한 처리를 이미 자체적으로 구현해 두었기 때문에 안전하게 사용하실 수 있습니다.
