@@ -205,7 +205,7 @@ Notifly는 불필요한 다중 로깅을 방지하기 위해, 한 세션의 만�
    - SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
 2. 브라우저의 개발자 도구를 열어주세요. (Chrome: F12)
    - 개발자 도구의 Application Tab으로 이동합니다.
-   - 좌측 Storage -> IndexedDB -> notifly -> notiflyconfig 항목을 열어주세요.
+   - 좌측 Storage > IndexedDB > notifly > notiflyconfig 항목을 열어주세요.
    - `__notiflyLastSessionTime` 값을 선택 후, 우측 상단의 X 버튼을 눌러 해당 row를 삭제해주세요.
    - 브라우저 창을 새로고침하면 SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
 
@@ -385,6 +385,51 @@ event1Button.addEventListener('click', function () {
 </TabItem>
 
 </Tabs>
+
+:::warning 유의 사항
+
+Notifly가 이벤트를 로깅할 때에, 로깅할 유저의 정보는 `setUserId`를 기점으로 변경되게 됩니다. 따라서, 정확한 로깅을 위하여 꼭 **순서관계**를 보장해주세요. 예를 들자면, 로그인 시 기본적으로 `setUserId` -> `setUserProperties` -> `trackEvent`의 Flow가 가장 바람직합니다.
+
+<Tabs>
+<TabItem value="async/await" label="async/await">
+
+```js title="Example codeflow with async/await"
+const handleLogin = async (userId) => {
+    ...
+    await notifly.setUserId(userId);
+    await notifly.setUserProperties({
+        '$phone_number': '01012345678',
+        'paid_membership': true,
+    });
+    await notifly.trackEvent("login");
+    ...
+}
+```
+
+</TabItem>
+
+<TabItem value="callback" label="callback (then)">
+
+```js title="Example JS code for trackEvent"
+function handleLogin(userId) {
+    ...
+    notifly.setUserId(userId).then(() => {
+        notifly.setUserProperties({
+            '$phone_number': '01012345678',
+            'paid_membership': true,
+        }).then(() => {
+            notifly.trackEvent("login");
+        });
+    });
+    ...
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::
 
 ## 4. 연동 테스트
 
