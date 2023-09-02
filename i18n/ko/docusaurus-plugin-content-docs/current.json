@@ -62,5 +62,17 @@
   "sidebar.developerGuide.category.심화 연동 가이드": {
     "message": "심화 연동 가이드",
     "description": "The label for category 심화 연동 가이드 in sidebar developerGuide"
+  },
+  "sidebar.userGuide.category.Email": {
+    "message": "이메일",
+    "description": "The label for category Email in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Email.link.generated-index.description": {
+    "message": "노티플라이에서 이메일 발송을 위한 셋업을 하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category Email in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Web Message.link.generated-index.description": {
+    "message": "Show web messages with Notifly.",
+    "description": "The generated-index page description for category Web Message in sidebar userGuide"
   }
 }
