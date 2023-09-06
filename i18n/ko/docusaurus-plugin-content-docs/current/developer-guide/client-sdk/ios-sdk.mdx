@@ -30,10 +30,10 @@ Notifly에서는 푸시를 발송하기 위해 [Firebase Cloud Messaging](https:
 3. Background Modes Capability를 추가합니다. - Remote notifications과 Background Fetch를 선택합니다.
    ![Add Capabilities](./image/ios_setting_add_capability2.png)
 
-## 2. CocoaPods에서 Notifly iOS SDK 설치
+## 2. iOS SDK 설치
 
-Notifly iOS SDK는 CocoaPods를 통해 설치할 수 있습니다.
-
+Notifly iOS SDK는 CocoaPods 또는 Swift Package Manager를 통해 설치할 수 있습니다.
+### 2-1. CocoaPods
 1. Xcode 프로젝트에 CocoaPods 설치가 되어있는지 확인합니다.
    설치가 되어있지 않은 경우 [CocoaPods 설치 가이드](https://guides.cocoapods.org/using/getting-started.html)를 참고해 주세요.
 2. Podfile 파일의 상단에 **platform :ios, '13.0'** 또는 그 이상의 버전으로 입력해 주세요.
@@ -53,6 +53,16 @@ end
 
 </TabItem>
 </Tabs>
+
+### 2-2. Swift Package Manager
+1. Xcode 프로젝트에 Swift Package Manager 설치가 되어있는지 확인합니다.
+   설치가 되어있지 않은 경우 [Swift Package Manager 설치 가이드](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)를 참고해 주세요.
+2. Project's Settings > Package Dependencies > + 버튼을 클릭합니다.
+3. 다음 URL을 입력하고 Next를 클릭합니다.
+   ```
+   https://github.com/team-michael/notifly-ios-sdk
+    ```
+4. Add Package를 클릭합니다.
 
 ## 3. Notifly 연동 코드 작성
 
