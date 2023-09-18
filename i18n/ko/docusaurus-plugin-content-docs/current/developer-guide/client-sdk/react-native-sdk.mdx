@@ -322,3 +322,6 @@ const handleLogin = () => {
       }
     }
     ```
+- Q. notifly_sdk-Swift.h 파일을 찾을 수 없다는 에러가 뜹니다. 어떻게 해야 할까요? 
+  - notifly_sdk(ios)는 Swift로 작성되어 있습니다. 이에 Objective-C 환경으로 노출시키기 위해 빌드되는 과정에서 Swift Compatibility Header가 생성되는데, 이 헤더 파일의 이름이 notifly_sdk-Swift.h입니다. 빌드를 진행하고자하는 타겟의 Builld Option의 Header Search Paths에 "${PODS_CONFIGURATION_BUILD_DIR}"를 추가해주세요.
+  - [참고](https://developer.apple.com/documentation/swift/importing-swift-into-objective-c)
