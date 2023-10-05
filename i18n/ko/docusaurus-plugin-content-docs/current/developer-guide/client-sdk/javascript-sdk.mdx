@@ -1,0 +1,479 @@
+---
+sidebar_position: 6
+---
+
+# Client SDK - Javascript
+
+Notifly Javascript (JS) SDK는 노티플라이를 웹 어플리케이션과 연동하기 위해 사용할 수 있습니다.
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 1. Notifly JS SDK 셋업
+
+웹 어플리케이션의 환경에 따라 다음 방식 중 하나로 JS SDK를 설치 및 초기화 해주세요.
+
+### 웹 푸시 설정
+
+웹 푸시 설정을 통하여 Notifly에서 웹 푸시 캠페인을 집행할 수 있습니다. 만약 웹 푸시를 필요로 하지 않으시다면, 다음 단계로 이동해주세요.
+
+#### 웹 푸시 인증서 생성하기
+
+웹 푸시를 노티플라이를 통해 발송하고 웹 브라우저에서 수신하기 위해 인증서(VAPID Key)를 생성해야 합니다. 웹 푸시 인증서는 노티플라이 홈페이지의 [설정 페이지](https://www.notifly.tech/console/settings)에서 생성할 수 있습니다.
+
+![Web Push Certificate in Settings](./image/web_push_certificate_settings.png)
+
+#### Service Worker 생성하기
+
+Service Worker는 브라우저가 백그라운드에서 실행하는 스크립트입니다. 웹페이지가 열려있지 않은 상태에서도 푸시 알림을 수신할 수 있도록 해줍니다.
+프로젝트의 루트 디렉토리에 Service Worker 파일을 생성해 주세요:
+
+<Tabs>
+<TabItem value="react" label="ReactJS project example">
+
+```title="Example ReactJS project"
+my-react-project/
+├── src/
+├── public/
+│   ├── index.html
+// highlight-next-line
+|   ├── notifly-service-worker.js
+│   └── ...
+├── package.json
+├── README.md
+└── ...
+
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS project example">
+
+```title="Example JS project"
+
+my-project/
+├── css/
+├── js/
+├── index.html
+// highlight-next-line
+├── notifly-service-worker.js
+└── ...
+
+```
+
+</TabItem>
+</Tabs>
+
+`notifly-service-worker.js` 파일에 다음 코드를 추가해 주세요:
+
+```js title="notifly-service-worker.js"
+self.importScripts("https://cdn.notifly.tech/notifly-js-sdk/dist/NotiflyServiceWorker.js");
+```
+
+:::note 참고: Service Worker 파일 경로 및 이름
+
+Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습니다. 경로와 이름을 [초기화 옵션](#sdk-초기화-옵션)의 `path` 옵션에 잘 맞춰주었는지 반드시 확인해주세요.
+
+:::
+
+:::caution Bundler (Webpack, Rollup, Parcel 등) 사용 시
+
+프로젝트에 Bundler를 사용하고 계신다면, `notifly-service-worker.js` 파일이 Bundler에 의해 번들링되거나, 삭제되지 않도록 Bundler configuration을 적절히 설정해주셔야 합니다.
+
+:::
+
+### SDK 초기화 옵션
+
+| Parameter                 | Type                           | Required | Description                                                                                                                                                                                                                             |
+| ------------------------- | ------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`               | string                         | Yes      | 노티플라이 프로젝트 ID입니다.                                                                                                                                                                                                           |
+| `username`                | boolean                        | Yes      | 노티플라이 프로젝트 사용자 이름입니다.                                                                                                                                                                                                  |
+| `password`                | string                         | Yes      | 노티플라이 프로젝트 사용자 비밀번호입니다.                                                                                                                                                                                              |
+| `sessionDuration`         | number                         | No       | 한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: `1800` (30분)                                                                                                                                      |
+| `deviceToken`             | string                         | No       | Firebase 토큰을 등록합니다. 웹 푸시, 인웹 메시지만 필요하신 경우 입력하지 않으셔도 됩니다. 자세한 정보는 [(Optional) Firebase 토큰 등록](#6-optional-firebase-토큰-등록) 섹션을 참고해 주세요.                                          |
+| `pushSubscriptionOptions` | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다.                                                                                   |
+| - `vapidPublicKey`        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요.                                                                                                                      |
+| - `askPermission`         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true`                                                                                                                                                  |
+| - `path`                  | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. |
+| - `promptDelayMillis`     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000`                                               |
+
+:::note 참고: 푸시 알림 권한 요청
+
+`askPermission`은 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. `true`인 경우 노티플라이는 다음과 같은 팝업을 먼저 웹사이트의 우상단에 보여준 뒤에 실제 브라우저의 알림 권한을 요청합니다.
+
+1. 사용자가 아직 브라우저에서 알림 권한을 설정하지 않은 경우 팝업을 보여줍니다.
+2. 사용자가 이미 알림 권한을 부여한 경우에 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
+3. 사용자가 알림 권한을 거부한 경우에도 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
+
+현재 웹사이트의 스타일과 타이밍에 맞게 알림 권한을 요청하기 위해서는 `askPermission`을 `false`로 하고 직접 팝업을 구현해 주세요. 더 자세한 내용은 [MDN web docs - Notification: requestPermission()](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static)
+를 참고 부탁드립니다.
+
+<img src={require("./image/web_push_permission_prompt.png").default} width='400px' />
+
+:::
+
+### SDK 셋업
+
+#### npm / yarn
+
+패키지를 설치하기 위해, 다음을 실행해 주세요:
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```shell
+npm install notifly-js-sdk@latest --save
+```
+
+</TabItem>
+<TabItem value="yarn" label="yarn">
+
+```shell
+yarn add notifly-js-sdk@latest
+```
+
+</TabItem>
+</Tabs>
+
+설치가 완료되면, `index.js` 또는 `App.js`에서 Notifly SDK 초기화 코드를 추가해 주세요.
+
+`NOTIFLY_PROJECT_ID`, `NOTIFLY_USERNAME`, `NOTIFLY_PASSWORD` 값은 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
+
+```js title="Example ReactJS code for initialization -- index.js, App.js, _app.jsx or equivalent"
+import notifly from 'notifly-js-sdk';
+...
+useEffect(() => {
+    if (typeof window !== 'undefined') {
+        notifly.initialize({
+            projectId: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_ID,
+            username: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_USERNAME,
+            password: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_PASSWORD,
+            // Don't need to specify this if you don't need a web push service
+            pushSubscriptionOptions: {
+                vapidPublicKey: NOTIFLY_VAPID_PUBLIC_KEY,
+                askPermission: true,
+                promptDelayMillis: 5000,
+            },
+        });
+    }
+});
+...
+```
+
+#### Notifly CDN
+
+Notifly SDK를 HTML에 직접적으로 추가해 주시면 비동기적으로 초기화 됩니다.
+
+`NOTIFLY_PROJECT_ID`, `NOTIFLY_USERNAME`, `NOTIFLY_PASSWORD` 값은 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
+
+```html title="Example HTML code for install & initialization"
+<script type="text/javascript">
+	async function initializeNotifly() {
+		const {default: notifly} = await import("https://cdn.notifly.tech/notifly-js-sdk/dist/index.js");
+		await notifly.initialize({
+			projectId: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_ID,
+			username: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_USERNAME,
+			password: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_PASSWORD,
+			// Don't need to specify this if you don't need a web push service
+			pushSubscriptionOptions: {
+				vapidPublicKey: NOTIFLY_VAPID_PUBLIC_KEY,
+				askPermission: true,
+				promptDelayMillis: 5000,
+			},
+		});
+		window.notifly = notifly;
+	}
+	initializeNotifly();
+</script>
+```
+
+:::caution window 객체가 존재하는지 확인하기
+
+Notifly Website SDK는 Browser DOM의 최상단 `window` 객체가 존재할 때만 초기화 되며 잘 동작합니다. 따라서, 꼭 `typeof window !== 'undefined'` 를 통해 `window` 객체가 존재하는지 확인해 주세요.
+
+:::
+
+:::caution 인웹 팝업 사용 시 주의 사항
+
+Notifly는 불필요한 다중 로깅을 방지하기 위해, 한 세션의 만료 기한을 정의합니다. SDK 초기화 옵션에 `sessionDuration` 필드를 통하여 설정할 수 있으며, 이 값은 최소 5분 (300) 이상이어야 합니다. 만약 `sessionDuration`을 설정하지 않는다면, Notifly는 기본값으로 30분 (1800)을 사용합니다.
+또한, 불필요한 네트워킹 리소스 사용을 방지하기 위해, Notifly는 한 세션 내에서는 한 번만 초기화를 시도합니다. 따라서, Notifly SDK 초기화 코드를 여러 번 실행하더라도, Notifly는 한 세션 내에서는 한 번만 초기화를 시도합니다.
+인웹 팝업 캠페인은 초기화 시에 불러지기 때문에, Notifly 콘솔에서 인웹 팝업 캠페인을 생성하셨더라도 이미 한 세션동안의 초기화가 진행된 상태라면 팝업이 정상적으로 노출되지 않을 수 있습니다. 캠페인 집행 전 테스트를 하고 싶으시다면, SDK를 강제 초기화 시키기 위하여 다음 중 한 가지 방법을 사용해주세요.
+
+1. Incognito 모드를 사용하여 테스트합니다.
+   - 브라우저 창을 완전히 닫고, Incognito 모드로 다시 열어주세요.
+   - SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
+2. 브라우저의 개발자 도구를 열어주세요. (Chrome: F12)
+   - 개발자 도구의 Application Tab으로 이동합니다.
+   - 좌측 Storage > IndexedDB > notifly > notiflyconfig 항목을 열어주세요.
+   - `__notiflyLastSessionTime` 값을 선택 후, 우측 상단의 X 버튼을 눌러 해당 row를 삭제해주세요.
+   - 브라우저 창을 새로고침하면 SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
+
+:::
+
+## 2. 유저 프로퍼티 등록하기
+
+- Notifly에서는 유저의 아이디 (userId) 및 프로퍼티 (userProperties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+  - Notifly에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
+  - 카카오 알림톡, 친구톡, 문자 발송을 위해서는 전화번호를 유저 프로퍼티로 설정해야 합니다.
+  - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
+  - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
+  - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+
+### 2-1. 유저 아이디 등록
+
+| Parameter | Type   | Required |
+| --------- | ------ | -------- |
+| userId    | String | No       |
+
+```js
+notifly.setUserId(userId);
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for setUserId"
+const handleLogin = () => {
+    ...
+    notifly.setUserId('example_user_id');
+    ...
+}
+
+const handleLogout = () => {
+    ...
+    notifly.setUserId(null); // unregister user id
+    notifly.setUserId(); // this works too!
+    ...
+}
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS">
+
+```js title="Example JS code for setUserId"
+userIdSaveButton.addEventListener("click", function () {
+	window.notifly.setUserId(userIdInput.value);
+});
+```
+
+</TabItem>
+</Tabs>
+
+### 2-2. 유저 프로퍼티 등록
+
+| Parameter      | Type                | Required |
+| -------------- | ------------------- | -------- |
+| userProperties | Record<string, any> | Yes      |
+
+```js
+notifly.setUserProperties(userProperties);
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for setUserProperties"
+const handleRejectPushNotification = () => {
+    ...
+    notifly.setUserProperties({
+        "paid_membership": true,
+        "subscriptions": ["astro_boy", "x-men"],
+    });
+    ...
+}
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS">
+
+```js title="Example JS code for setUserProperties"
+subscribeButton.addEventListener('click', function () {
+    ...
+    window.notifly.setUserProperties({
+        "subscribed": true,
+    });
+});
+```
+
+</TabItem>
+</Tabs>
+
+### 2-3. 유저 삭제
+
+```js
+notifly.deleteUser();
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for setUserId"
+const quitMembership = () => {
+    ...
+    notifly.deleteUser(); // delete user from notifly
+    ...
+}
+
+```
+
+</TabItem>
+<TabItem value="vanillajs" label="JS">
+
+```js title="Example JS code for setUserId"
+quitMembershipButton.addEventListener("click", function () {
+	window.notifly.deleteUser(); // delete user from notifly
+});
+```
+
+</TabItem>
+</Tabs>
+
+## 3. 이벤트 로깅
+
+- Notifly에서는 유저의 행동 등 이벤트를 트래킹하여 캠페인 집행 시 타겟팅에 활용할 수 있습니다. 트래킹 된 이벤트는 푸시 알림 발송 타이밍, 유저 세그먼트 설정 등에 활용할 수 있습니다.
+  - Notifly SDK 초기화 코드 추가를 마친 후 이벤트 로깅을 시작해 주세요.
+- `segmentationEventParamKeys` 활용하여 이벤트 변수 (eventParams의)를 유저 세그먼트 설정 등에 활용할 수 있습니다. 이를 위해서, 유저 세그멘트 설정에 사용할 eventParams의 특정 field의 key 값을 segmentationEventParamKeys 지정해주세요.
+  - 현재는 `segmentationEventParamKeys` 한 개까지 지원하고 있기 때문에, `segmentationEventParamKeys` 길이는 1이하인 List이어야합니다.
+
+### 3-1. 이벤트 로깅
+
+| Parameter                  | Type                | Required |
+| -------------------------- | ------------------- | -------- |
+| eventName                  | string              | Yes      |
+| eventParams                | Record<string, any> | No       |
+| segmentationEventParamKeys | string[]            | No       |
+
+```js
+notifly.trackEvent(eventName, eventParams, segmentationEventParamKeys);
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for trackEvent"
+const handleContentView = () => {
+    ...
+    notifly.trackEvent("view_content", {
+        "content_name": "mickey_mouse",
+    });
+    ...
+}
+
+// Example code with segmentationEventParamKeys
+const handlePurchaseTicket = () => {
+    ...
+    notifly.trackEvent("ticket_purchase", {
+        "show_id": "sample_show_id",
+        "performance_start_time": 1674104659
+    }, ["show_id"]);
+    ...
+}
+```
+
+</TabItem>
+
+<TabItem value="vanillajs" label="JS">
+
+```js title="Example JS code for trackEvent"
+event1Button.addEventListener('click', function () {
+    ...
+    window.notifly.trackEvent('event1');
+});
+```
+
+</TabItem>
+
+</Tabs>
+
+:::warning 유의 사항
+
+Notifly가 이벤트를 로깅할 때에, 로깅할 유저의 정보는 `setUserId`를 기점으로 변경되게 됩니다. 따라서, 정확한 로깅을 위하여 꼭 **순서관계**를 보장해주세요. 예를 들자면, 로그인 시 기본적으로 `setUserId` -> `setUserProperties` -> `trackEvent`의 Flow가 가장 바람직합니다.
+
+<Tabs>
+<TabItem value="async/await" label="async/await">
+
+```js title="Example codeflow with async/await"
+const handleLogin = async (userId) => {
+    ...
+    await notifly.setUserId(userId);
+    await notifly.setUserProperties({
+        '$phone_number': '01012345678',
+        'paid_membership': true,
+    });
+    await notifly.trackEvent("login");
+    ...
+}
+```
+
+</TabItem>
+
+<TabItem value="callback" label="callback (then)">
+
+```js title="Example JS code for trackEvent"
+function handleLogin(userId) {
+    ...
+    notifly.setUserId(userId).then(() => {
+        notifly.setUserProperties({
+            '$phone_number': '01012345678',
+            'paid_membership': true,
+        }).then(() => {
+            notifly.trackEvent("login");
+        });
+    });
+    ...
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::
+
+## 4. 연동 테스트
+
+[Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
+
+## 5. (Optional) Firebase 토큰 등록
+
+_웹 푸시만 필요하신 경우, 이 단계는 생략하셔도 됩니다._
+
+웹과 앱을 동시에 운영하고 계실 때, 웹 앱에서 사용자의 Firebase Cloud Messaging (FCM) 앱 푸시 토큰을 등록하실 수 있습니다.
+
+다음이 모두 준비되었는지 확인해 주세요.
+
+1. Firebase 프로젝트 셋업이 되어 있어야 푸시 수신이 가능합니다.
+   - [Firebase 프로젝트 연동](http://docs.notifly.tech/ko/developer-guide/client-sdk/firebase_project_setup) 을 마친 후, SDK 연동을 시작해주세요.
+2. Firebase Cloud Messaging에서 사용하는 token을 Notifly에 등록할 수 있는 준비가 되었는지 확인해 주세요.
+3. 푸시를 Foreground 및 Background 상태에서 수신할 수 있는 handler 가 준비되었는지 확인해 주세요.
+
+모두 준비되었다면, 푸시 전송을 위해 Firebase Cloud Messaging의 device token을 Notifly에 등록합니다:
+
+| Parameter   | Type   | Required |
+| ----------- | ------ | -------- |
+| deviceToken | string | Yes      |
+
+```js
+notifly.setDeviceToken(deviceToken);
+```
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+
+```js title="Example ReactJS code for setDeviceToken"
+useEffect(() => {
+	async function initializeFCMToken() {
+		try {
+			const token = await getFCMToken();
+			notifly.setDeviceToken(token);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+	initializeFCMToken();
+}, []);
+```
+
+</TabItem>
+</Tabs>

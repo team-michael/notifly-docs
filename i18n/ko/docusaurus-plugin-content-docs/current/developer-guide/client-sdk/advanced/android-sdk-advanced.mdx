@@ -1,0 +1,77 @@
+---
+sidebar_position: 1
+---
+
+# (Advanced) Client SDK - Android
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 1. 푸시 알림 아이콘 설정
+
+Notifly Android SDK에서는 푸시를 수신할 때 기본적으로 앱의 launcher icon을 푸시 알림 아이콘으로 사용합니다. 
+
+만약 앱의 launcher icon과 다른 아이콘을 푸시 알림 아이콘으로 사용하고 싶은 경우, `ic_stat_notifly_default` 의 이름으로 notification icon을 만들어 주세요. notification icon을 만드는 가이드는 [Android Developers - Create app icons](https://developer.android.com/studio/write/create-app-icons)를 참고해 주세요.
+
+## 2. 푸시 알림 사전 동의
+
+Notifly Android SDK에서는 푸시 알림을 수신하는 시점에 사용자에게 푸시 알림 수신 동의를 받지 않습니다.
+
+사용자 알림 수신 동의는 Notifly Android SDK 설치와 무관하게 앱 내에서 직접 구현하셔야 하며, 특히 Android TIRAMISU(API Level 33) 이상에서는 명시적으로 사용자에게 권한을 획득해야 합니다. 푸시 알림 수신 동의를 사용자에게 런타임에 요청하는 가이드는 [Android Developers - Notification runtime permission](https://developer.android.com/develop/ui/views/notifications/notification-permission)을 참고해 주세요.
+
+다음 코드는 예시입니다. 실제 알림 요청 타이밍, UI, 문구 등은 앱의 특성에 맞게 구현해 주세요.
+
+```kotlin title="Example MainActivity.kt for notification permission request"
+class MainActivity : Activity() {
+
+    companion object {
+        private const val PERMISSION_REQUEST_CODE = 101 // 필요에 따라 변경
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        askNotificationPermission()
+        ...
+    }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                showPermissionRationaleDialog()
+            } else {
+                requestNotificationPermission()
+            }
+        }
+    }
+
+    private fun showPermissionRationaleDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Permission needed")
+            .setMessage("This app needs the notification permission to send you notifications.")
+            .setPositiveButton("ok") { _, _ ->
+                requestNotificationPermission()
+            }
+            .setNegativeButton("No thanks") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create().show()
+    }
+
+    private fun requestNotificationPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+            PERMISSION_REQUEST_CODE
+        )
+    }
+}
+
+```

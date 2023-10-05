@@ -1,0 +1,8 @@
+{
+  "label": "HTTP API",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "HTTP API 사용법을 설명합니다."
+  }
+}

@@ -1,0 +1,18 @@
+---
+sidebar_position: 4
+---
+
+# (Advanced) Client SDK - React Native
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 1. 푸시 알림 사전 동의
+
+유저가 푸시 알림을 수신하기 위해서는 푸시 알림 수신 동의를 받아야 합니다.
+Notifly React Native SDK에서는 따로 사용자에게 푸시 알림 수신 동의를 요청하지 않고 있습니다.
+사용자 알림 수신 동의는 Notifly React Native SDK 설치와 무관하게 앱 내에서 직접 구현하셔야 합니다.
+
+Firebase Messaging을 사용하고 계신 경우, [Firebase Messaging](https://firebase.google.com/docs/cloud-messaging/ios/client#request-permission-to-receive-notifications) 문서를 참고하여 구현하시면 됩니다.

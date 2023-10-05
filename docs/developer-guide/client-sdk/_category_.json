@@ -1,0 +1,8 @@
+{
+  "label": "Client SDK",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Notifly SDK is a software development kit that enables mobile application developers to easily implement push notifications and in-app messages into their applications. The SDK automatically collects data about user sessions, device information, and push tokens. Additionally, it captures data about user engagement with marketing campaigns and enables developers to include custom data specific to their business. The SDK then consolidates all this data into a user profile, which can be used to send targeted and personalized push notifications and in-app messages to users."
+  }
+}
