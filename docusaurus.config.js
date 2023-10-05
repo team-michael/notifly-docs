@@ -72,7 +72,18 @@ const config = {
     ],
   ],
 
-  themes: ['docusaurus-theme-search-typesense'],
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      {
+        hashed: true,
+        docsRouteBasePath: '/',
+        language: ['en', 'ko'],
+        indexBlog: false,
+      },
+    ],
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
