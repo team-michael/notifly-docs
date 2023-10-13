@@ -56,6 +56,8 @@ import TabItem from '@theme/TabItem';
 1. Podfile에서 Extension 타겟에 Notifly SDK를 추가합니다.
 
 ```ruby
+platform :ios, '13.0'
+  ...
 target 'NotiflyNotificationExtension' do
   pod 'notifly_sdk', '~> 1.2.0'
 end
