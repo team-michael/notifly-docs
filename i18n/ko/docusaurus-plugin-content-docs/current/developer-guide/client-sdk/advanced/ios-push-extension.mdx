@@ -9,18 +9,29 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-** 노티플라이 SDK 1.2.0 버전부터 Rich Push Notification을 지원합니다.**
 
-프로젝트에 Notification Extension을 설정함으로써 다음 기능들을 사용하실 수 있습니다.
+:::caution SDK spec for Rich Push Notification
+`iOS Native`: 1.2.0 버전 이상<br/>
+`react-native` : 3.0.4 버전 이상<br/>
+`flutter`: 1.2.1 버전 이상
+:::
 
-1. 노티플라이에서 전송하는 푸시 알림에 이미지 및 비디오를 첨부할 수 있습니다.
+<br/>
+
+:::note 프로젝트에 Notification Extension을 설정함으로써 다음 기능들을 사용하실 수 있습니다.
+1. 노티플라이에서 전송하는 푸시 알림에 이미지 및 비디오를 첨부할 수 있습니다.<br/>
 2. 푸시 수신 지표를 수집할 수 있어, 캠페인 성과를 보다 자세하게 확인하실 수 있습니다.
+:::
 
 ## 1. Notification Service Extension을 추가
 
-1. Xcode에서 프로젝트를 열고, 프로젝트 네비게이터에서 프로젝트를 선택합니다.
+1. Xcode에서 프로젝트를 열고(react_native나 flutter 프로젝트의 경우, ios 폴더 내의 .xcworkspace 파일을 선택), 프로젝트 네비게이터에서 프로젝트를 선택합니다. 
+
+![Add Push Extension](../image/ios_push_extension_open_project_navigator.png)
 
 2. 프로젝트 타겟을 선택하고, `+` 버튼을 눌러 `Notification Service Extension`을 추가합니다.
+
+![Add Push Extension](../image/ios_push_extension_create_extension_target.png)
 
 3. Product Name을 `NotiflyNotificationExtension`으로 입력하고, Finish 버튼을 눌러 추가합니다.
 
@@ -30,7 +41,7 @@ import TabItem from '@theme/TabItem';
 
 ![Push Extension App Version](../image/ios_push_extension_version.png)
 
-### 2. App Groups 설정
+## 2. App Groups 설정
 
 1. TARGETS에서 메인 앱을 선택한 후, Signing & Capabilities 탭에서 App Groups을 추가하고, 그룹 이름을 `group.tech.notifly`로 설정합니다.
         
@@ -40,7 +51,7 @@ import TabItem from '@theme/TabItem';
 
 ![Push Extension App Group](../image/ios_push_extension_app_group2.png)
 
-### 3. Notification Service Extension을 Notifly SDK와 연동
+## 3. Notification Service Extension을 Notifly SDK와 연동
 
 1. Podfile에서 Extension 타겟에 Notifly SDK를 추가합니다.
 
@@ -67,14 +78,14 @@ class NotificationService: NotiflyNotificationServiceExtension {
 </TabItem>
 </Tabs>
 
-### 4. Test 
-1. 이미지 첨부 테스트
-    1-1. [노티플라이 SDK 연동 테스트 가이드](/developer-guide/client-sdk/sdk_test)를 참고하여, 이미지 첨부 후 푸시알림 테스트 발송을 진행합니다.
-    1-2. 푸시 수신 시, 이미지가 정상적으로 표시되는지 확인합니다.
+## 4. Test 
+### 1. 이미지 첨부 테스트
+  1. [노티플라이 SDK 연동 테스트 가이드](/developer-guide/client-sdk/sdk_test)를 참고하여, 이미지 첨부 후 푸시알림 테스트 발송을 진행합니다.<br/>
+  2. 푸시 수신 시, 이미지가 정상적으로 표시되는지 확인합니다.
 
-2. 푸시 수신 지표 수집 테스트 
-    2-1. [노티플라이 SDK 연동 테스트 가이드](/developer-guide/client-sdk/sdk_test)를 참고하여, 푸시알림 테스트 발송을 진행합니다.
-    2-2. [유저 리스트 페이지](https://www.notifly.tech/ko/console/users)에서 테스트한 유저의 상세 페이지로 이동합니다.
-    2-3. 푸시 수신 지표가 정상적으로 수집되었는지 확인합니다.
+### 2. 푸시 수신 지표 수집 테스트
+  1. [노티플라이 SDK 연동 테스트 가이드](/developer-guide/client-sdk/sdk_test)를 참고하여, 푸시알림 테스트 발송을 진행합니다.<br/>
+  2. [유저 리스트 페이지](https://www.notifly.tech/ko/console/users)에서 테스트한 유저의 상세 페이지로 이동합니다.<br/>
+  3. 푸시 수신 지표가 정상적으로 수집되었는지 확인합니다.
 
 ![Add Push Extension](../image/ios_push_delivered.png)
