@@ -73,7 +73,7 @@ self.importScripts("https://cdn.notifly.tech/notifly-js-sdk/dist/NotiflyServiceW
 
 :::note 참고: Service Worker 파일 경로 및 이름
 
-Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습니다. 경로와 이름을 [초기화 옵션](#sdk-초기화-옵션)의 `path` 옵션에 잘 맞춰주었는지 반드시 확인해주세요.
+Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습니다. 경로와 이름을 [초기화 옵션](#sdk-초기화-옵션)의 `serviceWorkerPath` 옵션에 잘 맞춰주었는지 반드시 확인해주세요.
 
 :::
 
@@ -95,7 +95,7 @@ Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습�
 | `pushSubscriptionOptions` | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다.                                                                                   |
 | - `vapidPublicKey`        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요.                                                                                                                      |
 | - `askPermission`         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true`                                                                                                                                                  |
-| - `path`                  | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. |
+| - `serviceWorkerPath`     | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. |
 | - `promptDelayMillis`     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000`                                               |
 
 :::note 참고: 푸시 알림 권한 요청
