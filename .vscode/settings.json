@@ -1,5 +1,4 @@
 {
-  "editor.formatOnSave": true,
-  "editor.renderWhitespace": "all",
-  "files.autoSave": "afterDelay"
+	"editor.formatOnSave": true,
+	"editor.renderWhitespace": "all"
 }
