@@ -137,7 +137,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Michael at Work, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Grey Box, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
