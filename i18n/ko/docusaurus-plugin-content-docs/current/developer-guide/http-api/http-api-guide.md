@@ -349,3 +349,4 @@ async function triggerCampaign(projectId, campaignId) {
 ### 주의 사항
 
 - HTTP Rest API를 이용한 Triggering은 캠페인이 **API 기반 발송**으로 설정되어있는 경우에만 사용 가능합니다.
+- Request body의 recipients 리스트에는 최대 1000개의 유저를 포함할 수 있습니다.
