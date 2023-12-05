@@ -18,8 +18,8 @@ sidebar_position: 1
 
 | Parameter | Type   | Required | Description                                                                                                                                                      |
 | --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| userName  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 이름이 생성됩니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.     |
-| password  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 비밀번호가 생성됩니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다. |
+| userName  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 이름이 생성됩니다. 문의 사항은 contact@greyboxhq.com 으로 이메일 부탁드립니다.     |
+| password  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 사용자 비밀번호가 생성됩니다. 문의 사항은 contact@greyboxhq.com 으로 이메일 부탁드립니다. |
 
 #### Headers
 
@@ -89,11 +89,11 @@ fetch(url, {
 
 | Parameter                  | Type    | Required | Description                                                                                                                                     |
 | -------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| projectID                  | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다.                                      |
+| projectID                  | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@greyboxhq.com 으로 이메일 부탁드립니다.                                      |
 | eventName                  | String  | Yes      | 이벤트명                                                                                                                                        |
 | isGlobalEvent              | Boolean | Yes      | 특정 유저에게만 발생하는 것이 아니라 서비스 레벨에서 발생하는 이벤트인지의 여부                                                                 |
 | eventParams                | Object  | No       | 이벤트 파라미터 값들                                                                                                                            |
-| segmentationEventParamKeys | Array   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다. |
+| segmentationEventParamKeys | Array   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@greyboxhq.com 으로 이메일 부탁드립니다. |
 | userID                     | String  | No       | 유저 ID                                                                                                                                         |
 
 #### Headers
@@ -172,7 +172,7 @@ fetch(url, {
 
 | Parameter      | Type   | Required | Description                                                                                                |
 | -------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------- |
-| projectID      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@workmichael.com 으로 이메일 부탁드립니다. |
+| projectID      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@greyboxhq.com 으로 이메일 부탁드립니다. |
 | userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                                |
 | userID         | String | Yes      | 유저 ID                                                                                                    |
 
