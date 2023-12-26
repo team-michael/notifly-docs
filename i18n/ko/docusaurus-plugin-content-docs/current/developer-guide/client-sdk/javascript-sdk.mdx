@@ -68,7 +68,9 @@ my-project/
 `notifly-service-worker.js` 파일에 다음 코드를 추가해 주세요:
 
 ```js title="notifly-service-worker.js"
-self.importScripts("https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js");
+self.importScripts(
+  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js"
+);
 ```
 
 :::note 참고: Service Worker 파일 경로 및 이름
@@ -85,17 +87,30 @@ Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습�
 
 ### SDK 초기화 옵션 {#initialize-options}
 
-| Parameter                 | Type                           | Required | Description                                                                                                                                                                                                                             |
-| ------------------------- | ------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `projectId`               | string                         | Yes      | 노티플라이 프로젝트 ID입니다.                                                                                                                                                                                                           |
-| `username`                | string                         | Yes      | 노티플라이 프로젝트 사용자 이름입니다.                                                                                                                                                                                                  |
-| `password`                | string                         | Yes      | 노티플라이 프로젝트 사용자 비밀번호입니다.                                                                                                                                                                                              |
-| `sessionDuration`         | number                         | No       | 한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: `1800` (30분)                                                                                                                                      |
-| `pushSubscriptionOptions` | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다.                                                                                   |
-| - `vapidPublicKey`        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요.                                                                                                                      |
-| - `askPermission`         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true`                                                                                                                                                  |
-| - `serviceWorkerPath`     | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. |
-| - `promptDelayMillis`     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000`                                               |
+| Parameter                 | Type                           | Required | Description                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------- | ------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`               | string                         | Yes      | 노티플라이 프로젝트 ID입니다.                                                                                                                                                                                                                                                                                                                |
+| `username`                | string                         | Yes      | 노티플라이 프로젝트 사용자 이름입니다.                                                                                                                                                                                                                                                                                                       |
+| `password`                | string                         | Yes      | 노티플라이 프로젝트 사용자 비밀번호입니다.                                                                                                                                                                                                                                                                                                   |
+| `sessionDuration`         | number                         | No       | 한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: `1800` (30분) **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                      |
+| `pushSubscriptionOptions` | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                   |
+| - `vapidPublicKey`        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                      |
+| - `askPermission`         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                                  |
+| - `serviceWorkerPath`     | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.** |
+| - `promptDelayMillis`     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                               |
+
+:::caution
+v2.5.0 이상 버전 부터는, `projectId`, `username`, `password`를 제외한 모든 필드에 대하여 설정 > SDK 설정 > 웹사이트 설정에서 설정하신 값들이 SDK 초기화 옵션에 반영됩니다.
+
+<img
+  src={require("./image/javascript_sdk_configuration_ui.png").default}
+  width="800px"
+/>
+
+세션 지속 시간은 `sessionDuration`, 권한 요청 팝업 여부는 `askPermission`, Service Worker 경로는 `serviceWorkerPath`, 알림 권한 요청 팝업 지연 시간은 `promptDelayMillis`에 해당합니다.
+웹 푸시 인증서 키는 설정된 키값을 자동으로 반영합니다. 만약 인증서 키가 설정되지 않았다면, 웹 푸시 서비스를 이용하실 수 없습니다.
+
+:::
 
 :::note 참고: 푸시 알림 권한 요청
 
@@ -108,7 +123,10 @@ Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습�
 현재 웹사이트의 스타일과 타이밍에 맞게 알림 권한을 요청하기 위해서는 `askPermission`을 `false`로 하고 직접 팝업을 구현해 주세요. 더 자세한 내용은 [MDN web docs - Notification: requestPermission()](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static)
 를 참고 부탁드립니다.
 
-<img src={require("./image/web_push_permission_prompt.png").default} width='400px' />
+<img
+  src={require("./image/web_push_permission_prompt.png").default}
+  width="400px"
+/>
 
 :::
 
@@ -139,26 +157,44 @@ yarn add notifly-js-sdk@latest
 
 `NOTIFLY_PROJECT_ID`, `NOTIFLY_USERNAME`, `NOTIFLY_PASSWORD` 값은 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
 
-```js title="Example ReactJS code for initialization -- index.js, App.js, _app.jsx or equivalent"
-import notifly from 'notifly-js-sdk';
-...
+<Tabs>
+<TabItem value="v2.5.0 or above" label="v2.5.0 or above">
+
+```js
 useEffect(() => {
-    if (typeof window !== 'undefined') {
-        notifly.initialize({
-            projectId: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_ID,
-            username: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_USERNAME,
-            password: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_PASSWORD,
-            // Don't need to specify this if you don't need a web push service
-            pushSubscriptionOptions: {
-                vapidPublicKey: NOTIFLY_VAPID_PUBLIC_KEY,
-                askPermission: true,
-                promptDelayMillis: 5000,
-            },
-        });
-    }
+  if (typeof window !== "undefined") {
+    notifly.initialize({
+      projectId: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_ID,
+      username: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_USERNAME,
+      password: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_PASSWORD,
+    });
+  }
 });
-...
 ```
+
+</TabItem>
+<TabItem value="v2.4.0 or below" label="v2.4.0 or below">
+
+```js
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    notifly.initialize({
+      projectId: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_ID,
+      username: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_USERNAME,
+      password: process.env.NEXT_PUBLIC_NOTIFLY_PROJECT_PASSWORD,
+      // Don't need to specify this if you don't need a web push service
+      pushSubscriptionOptions: {
+        vapidPublicKey: NOTIFLY_VAPID_PUBLIC_KEY,
+        askPermission: true,
+        promptDelayMillis: 5000,
+      },
+    });
+  }
+});
+```
+
+</TabItem>
+</Tabs>
 
 #### From CDN
 
@@ -167,36 +203,76 @@ useEffect(() => {
 `YOUR_NOTIFLY_PROJECT_ID`, `YOUR_NOTIFLY_USERNAME`, `YOUR_NOTIFLY_PASSWORD` 값은 노티플라이 홈페이지의 설정 페이지에서 확인하실 수 있습니다.
 `YOUR_VAPID_PUBLIC_KEY` 값은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션에서 생성한 웹 푸시 인증서 키를 입력해 주세요.
 
+<Tabs>
+<TabItem value="2.5.0 or above" label="2.5.0 or above">
+
 ```html title="Example HTML code for install & initialization"
 <script type="text/javascript">
-	(function (w, d, p, u, a, o) {
-        var s = d.createElement('script');
-        s.async = !0;
-        s.src = 'https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/index.min.js';
-        s.onload = function () {
-            w.notifly.initialize({ projectId: p, username: u, password: a, pushSubscriptionOptions: o });
-        };
-        s.onerror = function () {
-            console.error('Failed to load Notifly Browser SDK.');
-        };
-        d.getElementsByTagName('head')[0].appendChild(s);
-    })(
-        window,
-        document,
-        // highlight-next-line
-        '<YOUR_NOTIFLY_PROJECT_ID>',
-        // highlight-next-line
-        '<YOUR_NOTIFLY_USERNAME>',
-        // highlight-next-line
-        '<YOUR_NOTIFLY_PASSWORD>',
-        // You don't need below options if you don't need a web push service
-        {
-            vapidPublicKey: '<YOUR_VAPID_PUBLIC_KEY>',
-            askPermission: true,
-        }
-    );
+  (function (w, d, p, u, a) {
+    var s = d.createElement("script");
+    s.async = !0;
+    s.src = "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/index.min.js";
+    s.onload = function () {
+      w.notifly.initialize({ projectId: p, username: u, password: a });
+    };
+    s.onerror = function () {
+      console.error("Failed to load Notifly Browser SDK.");
+    };
+    d.getElementsByTagName("head")[0].appendChild(s);
+  })(
+    window,
+    document,
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PROJECT_ID>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_USERNAME>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PASSWORD>"
+  );
 </script>
 ```
+
+</TabItem>
+<TabItem value="2.4.0 or below" label="2.4.0 or below">
+
+```html title="Example HTML code for install & initialization"
+<script type="text/javascript">
+  (function (w, d, p, u, a, o) {
+    var s = d.createElement("script");
+    s.async = !0;
+    s.src = "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/index.min.js";
+    s.onload = function () {
+      w.notifly.initialize({
+        projectId: p,
+        username: u,
+        password: a,
+        pushSubscriptionOptions: o,
+      });
+    };
+    s.onerror = function () {
+      console.error("Failed to load Notifly Browser SDK.");
+    };
+    d.getElementsByTagName("head")[0].appendChild(s);
+  })(
+    window,
+    document,
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PROJECT_ID>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_USERNAME>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PASSWORD>",
+    // You don't need below options if you don't need a web push service
+    {
+      vapidPublicKey: "<YOUR_VAPID_PUBLIC_KEY>",
+      askPermission: true,
+    }
+  );
+</script>
+```
+
+</TabItem>
+</Tabs>
 
 :::caution window 객체가 존재하는지 확인하기
 
@@ -211,16 +287,16 @@ Notifly는 불필요한 다중 로깅을 방지하기 위해, 한 세션의 만�
 인웹 팝업 캠페인은 초기화 시에 불러지기 때문에, Notifly 콘솔에서 인웹 팝업 캠페인을 생성하셨더라도 이미 한 세션동안의 초기화가 진행된 상태라면 팝업이 정상적으로 노출되지 않을 수 있습니다. 캠페인 집행 전 **테스트**를 하고 싶으시다면, SDK를 강제 초기화 시키기 위하여 다음 중 한 가지 방법을 사용해주세요.
 
 - [방법 1] Incognito 모드를 사용하여 테스트합니다.
-   - 브라우저 창을 완전히 닫고, Incognito 모드로 다시 열어주세요.
-   - SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
+  - 브라우저 창을 완전히 닫고, Incognito 모드로 다시 열어주세요.
+  - SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
 - [방법 2] 유저 아이디를 변경합니다.
-   - `setUserId`를 호출하여 유저 아이디를 변경하면, Notifly SDK는 강제로 초기화됩니다.
+  - `setUserId`를 호출하여 유저 아이디를 변경하면, Notifly SDK는 강제로 초기화됩니다.
 - [방법 3] 브라우저의 개발자 도구를 열어주세요. (Chrome: F12)
-   - 개발자 도구의 Application Tab으로 이동합니다.
-   - 좌측 Storage > IndexedDB > notifly > notiflyconfig 항목을 열어주세요.
-   - `__notiflyLastSessionTime` 값을 선택 후, 우측 상단의 X 버튼을 눌러 해당 row를 삭제해주세요.
-   - 브라우저 창을 새로고침하면 SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
-   - **다른 데이터는 절대 삭제하지 마세요. Notifly SDK가 정상적으로 동작하지 않을 수 있습니다.**
+  - 개발자 도구의 Application Tab으로 이동합니다.
+  - 좌측 Storage > IndexedDB > notifly > notiflyconfig 항목을 열어주세요.
+  - `__notiflyLastSessionTime` 값을 선택 후, 우측 상단의 X 버튼을 눌러 해당 row를 삭제해주세요.
+  - 브라우저 창을 새로고침하면 SDK가 다시 초기화되어 캠페인이 정상적으로 노출됩니다.
+  - **다른 데이터는 절대 삭제하지 마세요. Notifly SDK가 정상적으로 동작하지 않을 수 있습니다.**
 
 :::
 
@@ -265,7 +341,7 @@ const handleLogout = () => {
 
 ```js title="Example JS code for setUserId"
 userIdSaveButton.addEventListener("click", function () {
-	window.notifly.setUserId(userIdInput.value);
+  window.notifly.setUserId(userIdInput.value);
 });
 ```
 
@@ -334,7 +410,7 @@ const quitMembership = () => {
 
 ```js title="Example JS code for setUserId"
 quitMembershipButton.addEventListener("click", function () {
-	window.notifly.deleteUser(); // delete user from notifly
+  window.notifly.deleteUser(); // delete user from notifly
 });
 ```
 
@@ -402,7 +478,6 @@ event1Button.addEventListener('click', function () {
 
 Notifly가 이벤트를 로깅할 때에, 로깅할 유저의 정보는 `setUserId`를 기점으로 변경되게 됩니다. 유저 아이디가 변할 때 (로그인 혹은 로그아웃 등), 정확한 로깅을 위하여 꼭 호출 순서를 지켜주세요. `setUserId`가 호출된 이후로부터 모든 이벤트는, 변경된 유저를 기준으로 기록됩니다. 예를 들자면, 로그인 시 기본적으로 `setUserId` -> `setUserProperties` -> `trackEvent`의 Flow가 가장 바람직합니다.
 
-
 ```js title="Example code when user ID is changed"
 const handleLogin = (userId) => {
     ...
@@ -416,6 +491,7 @@ const handleLogin = (userId) => {
     ...
 }
 ```
+
 :::
 
 ## 4. 연동 테스트
