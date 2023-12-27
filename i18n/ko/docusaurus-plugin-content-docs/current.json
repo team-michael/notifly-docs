@@ -19,6 +19,14 @@
     "message": "노티플라이 캠페인",
     "description": "The label for category Campaigns in sidebar userGuide"
   },
+  "sidebar.userGuide.category.Campaign_Segments": {
+    "message": "캠페인 세그먼트",
+    "description": "The label for category Campaigns Segments in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Campaign_Segments.link.generated-index.description": {
+    "message": "캠페인 세그먼트를 어떻게 생성하고 활용하는지 알아봅니다.",
+    "description": "The label for category Campaigns Segments in sidebar userGuide"
+  },
   "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
     "message": "노티플라이 캠페인에 대한 정보를 설명하고, 생성부터 활용하는 법을 알아봅니다.",
     "description": "The generated-index page description for category Campaigns in sidebar userGuide"

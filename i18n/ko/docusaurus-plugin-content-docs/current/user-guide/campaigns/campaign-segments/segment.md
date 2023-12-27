@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # 발송 대상 세그먼팅
@@ -58,7 +58,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
   2. 연산자: 연산자는 일치, 불일치, 이상(이하), 초과(미만)이 지원됩니다. 조건 변수의 종류에 따라 지원되는 범위가 상이할 수 있으니 유의해주세요.
   3. 변수값: 변수값은 조건 변수와 연산될 값입니다.
 - 세 가지의 정보가 제대로 입력되지 않을 경우, 캠페인을 생성할 수 없으니 주의해주세요.
-- ![Invalid condition example](./img/campaign_invalid_condition.png)
+- ![Invalid condition example](../img/campaign_invalid_condition.png)
 
 <!-- TODO: Detailed explanation -->
 
@@ -72,11 +72,11 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 
 다음은 유효한 조건 작성 예시입니다.
 
-![Valid condition example](./img/campaign_build_segment_condition_example.png)
+![Valid condition example](../img/campaign_build_segment_condition_example.png)
 
 그룹과 조건이 잘 설정되었다면, 그룹 카드 좌측 상단에 초록색 체크 마크가 표시됩니다. 다음은 유효한 세그먼트 제작의 예시입니다.
 
-![Valid segment example](./img/campaign_build_segment_example.png)
+![Valid segment example](../img/campaign_build_segment_example.png)
 
 ### 주의사항
 
@@ -101,7 +101,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 
 - Microsoft Excel 사용시, Excel 문서를 CSV 파일로 내보낼 때에 문자열 인코딩을 UTF-8로 설정하여 저장해주세요. 만약 인코딩에 문제가 있다면, 발송된 메시지의 문자열이 깨져서 보일 수 있습니다.
 
-![MS Excel csv export settings](./img/csv_export_settings.png)
+![MS Excel csv export settings](../img/csv_export_settings.png)
 
 - **CSV 업로드** 기능은 노티플라이에 등록된 유저와 무관하게 발송됩니다. 따라서 메시지 개인화를 할 때에는, 노티플라이 데이터베이스에 등록된 유저 정보를 활용할 수 없습니다. CSV 파일 업로드를 했을 때는 **CSV 파일에 등록된 정보만으로 메시지 개인화를 할 수 있으며**, 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 
