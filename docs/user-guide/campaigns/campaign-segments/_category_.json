@@ -1,8 +1,8 @@
 {
-    "label": "Campaign_Segments",
-    "position": 3,
-    "link": {
-        "type": "generated-index",
-        "description": "How to use Campaign Segments"
-    }
+  "label": "Campaign_Segments",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "How to use Campaign Segments"
+  }
 }

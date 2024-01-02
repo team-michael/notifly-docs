@@ -64,51 +64,52 @@ sidebar_position: 9
 
 ## 4. 인앱 메시지 테스트
 
-- Notifly에서는 자체적으로 몇 가지 이벤트를 로깅하고 있습니다. 이러한 이벤트들은 이벤트명 앞에 notifly__ prefix가 붙어있습니다.
-  - ex: 앱을 처음 시작했을 때, notifly__session_start
-- 본 섹션에서는, notifly__session_start가 발생했을 경우, 인앱 메시지를 전송하는 테스트 캠페인을 생성해봄으로써 정상적으로 인앱 메시지 기능이 작동하는지를 테스트 합니다.
+- Notifly에서는 자체적으로 몇 가지 이벤트를 로깅하고 있습니다. 이러한 이벤트들은 이벤트명 앞에 notifly\_\_ prefix가 붙어있습니다.
+  - ex: 앱을 처음 시작했을 때, notifly\_\_session_start
+- 본 섹션에서는, notifly\_\_session_start가 발생했을 경우, 인앱 메시지를 전송하는 테스트 캠페인을 생성해봄으로써 정상적으로 인앱 메시지 기능이 작동하는지를 테스트 합니다.
 
 ### 4-1. 인앱메시지 템플릿을 제작
-  1. [Notifly 인앱 메시지 템플릿 제작 페이지](https://www.notifly.tech/console/in-app-message)로 이동합니다.
-  2. 템플릿을 선택하고, Image, Text, Button, Aesthetics를 알맞게 설정합니다. 
-      - Button 섹션에서 main_button 클릭 시 이동한 링크 입력을 필수입니다.
+
+1. [Notifly 인앱 메시지 템플릿 제작 페이지](https://www.notifly.tech/console/in-app-message)로 이동합니다.
+2. 템플릿을 선택하고, Image, Text, Button, Aesthetics를 알맞게 설정합니다.
+   - Button 섹션에서 main_button 클릭 시 이동한 링크 입력을 필수입니다.
 
 ![인앱메시지 템플릿 제작](./image/in_app_message_test_create_template.png)
 
-
-  3. 인앱 메시지 저장하기 버튼을 누르고 템플릿 이름을 입력한 후, 저장하기 버튼을 누릅니다.
+3. 인앱 메시지 저장하기 버튼을 누르고 템플릿 이름을 입력한 후, 저장하기 버튼을 누릅니다.
 
 ![인앱메시지 템플릿 제작](./image/in_app_message_test_save_template.png)
 
-
 ### 4-2. 테스트 캠페인 생성
-  1. [Notifly 캠페인 생성 페이지](https://www.notifly.tech/console/campaign/create)로 이동합니다.
-  2. 우측 상단 탭에서 개발/프로젝션 중 테스트 유저가 등록된 프로젝트를 선택합니다.
-  3. 1번 기본 정보 및 채널 섹션에서 캠페인 이름을 입력하고, 발송 채널: `인앱 메시지`을 선택합니다.
-  4. 2번 발송 시점 세션에서 아래 사진을 참고하여 다음과 같이 필요한 정보를 채워줍니다.
-      - 이벤트 기반 발송을 선택합니다.
-      - 무기한 발송을 체크합니다.
-      - 이벤트 선택에서 직접 입력 토글을 활성화한 후, `notifly__session_start`를 입력합니다.
-      - 발송 시점을 이벤트 발생 시 바로 발송을 선택합니다.
+
+1. [Notifly 캠페인 생성 페이지](https://www.notifly.tech/console/campaign/create)로 이동합니다.
+2. 우측 상단 탭에서 개발/프로젝션 중 테스트 유저가 등록된 프로젝트를 선택합니다.
+3. 1번 기본 정보 및 채널 섹션에서 캠페인 이름을 입력하고, 발송 채널: `인앱 메시지`을 선택합니다.
+4. 2번 발송 시점 세션에서 아래 사진을 참고하여 다음과 같이 필요한 정보를 채워줍니다.
+   - 이벤트 기반 발송을 선택합니다.
+   - 무기한 발송을 체크합니다.
+   - 이벤트 선택에서 직접 입력 토글을 활성화한 후, `notifly__session_start`를 입력합니다.
+   - 발송 시점을 이벤트 발생 시 바로 발송을 선택합니다.
 
 ![section1and2](./image/in_app_message_test_section1and2.png)
-  
-  5. 3번 사용자 세그먼트 섹션에서, 테스트 모드를 활성화하고 테스트 유저 아이디를 입력합니다.
+
+5. 3번 사용자 세그먼트 섹션에서, 테스트 모드를 활성화하고 테스트 유저 아이디를 입력합니다.
 
 ![section3](./image/in_app_message_test_section3.png)
 
-  6. 4번 메시지 및 액션 섹션에서, 테스트할 인앱 메시지 템플릿을 선택합니다. (4-1에서 제작한 템플릿)
+6. 4번 메시지 및 액션 섹션에서, 테스트할 인앱 메시지 템플릿을 선택합니다. (4-1에서 제작한 템플릿)
 
 ![section4](./image/in_app_message_test_section4.png)
 ![choose_template](./image/in_app_message_test_select_template.png)
 
-  7. 오른쪽 하단의 최종 확인 버튼을 눌러 필요한 정보가 제대로 기입되었는지 검토한 후, 캠페인을 생성하기 버튼을 클릭합니다.
-![create_campaign](./image/in_app_message_test_campaign_review.png)
+7. 오른쪽 하단의 최종 확인 버튼을 눌러 필요한 정보가 제대로 기입되었는지 검토한 후, 캠페인을 생성하기 버튼을 클릭합니다.
+   ![create_campaign](./image/in_app_message_test_campaign_review.png)
 
 ### 4-3. 테스트 기기에서 인앱 메시지 테스트
+
 - 테스트 유저 아이디를 등록한 기기에서 테스트를 진행합니다.
 - 테스트 기기에서 앱을 종료(terminated) 상태로 만듭니다.
-- 앱을 실행하면, notifly__session_start이벤트가 자동으로 로깅되면서 인앱 메시지가 전송되며 아래와 같은 화면이 나타납니다.
+- 앱을 실행하면, notifly\_\_session_start이벤트가 자동으로 로깅되면서 인앱 메시지가 전송되며 아래와 같은 화면이 나타납니다.
   - 인앱메시지가 보이지 않는다면, 새로 생성된 캠페인 정보를 받아오는데 딜레이가 있을 수 있기에, 앱을 종료했다가 다시 실행해주세요.
 
 ![in_app_message_test_message_content](./image/in_app_message_test_show_popup.png)
@@ -147,28 +148,24 @@ sidebar_position: 9
 예시 (macOS):
 
 <img
-  src={require('./image/macOS_notification_settings.png').default}
+  src={require("./image/macOS_notification_settings.png").default}
   width="500px"
 />
 
-
 #### 5-2-2. 브라우저 권한
 
-사용자가 브라우저에서 알림 권한을 허용해야 합니다. 브라우저마다 푸시 알림 권한의 기본 설정값과 권한 요청 방식이 다소 다릅니다. 
+사용자가 브라우저에서 알림 권한을 허용해야 합니다. 브라우저마다 푸시 알림 권한의 기본 설정값과 권한 요청 방식이 다소 다릅니다.
 
 예시 (Chrome)
 
 <img
-  src={require('./image/chrome-granted-example.png').default}
+  src={require("./image/chrome-granted-example.png").default}
   width="400px"
 />
 
 예시 (Edge)
 
-<img
-  src={require('./image/edge-blocked-example.png').default}
-  width="400px"
-/>
+<img src={require("./image/edge-blocked-example.png").default} width="400px" />
 
 노티플라이 JS SDK 의 셋업 방식에 따라 권한 요청 기본 팝업이 노출되거나 노출되지 않을 수 있습니다. 자세한 내용은 [Notifly JS SDK - Service Worker 등록하기](http://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#2-3-service-worker-%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0)를 참고해 주세요.
 

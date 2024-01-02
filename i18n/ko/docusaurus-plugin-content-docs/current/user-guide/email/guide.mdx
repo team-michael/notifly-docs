@@ -13,7 +13,7 @@ sidebar_position: 1
 1. 발송 도메인: 회사에서 사용하시는 도메인을 등록 및 인증하시면 그 도메인의 모든 이메일이 인증됩니다.
 2. 발송 이메일: 도메인 인증 없이 개별 이메일을 등록 및 인증하여 사용하실 수 있습니다.
 
-<img src={require('./img/email_settings.png').default} width="400px" />
+<img src={require("./img/email_settings.png").default} width="400px" />
 
 ### 1. 발송 이메일 개별적으로 등록하기
 
@@ -28,7 +28,7 @@ sidebar_position: 1
 
 도메일 인증 없이 메일을 발송하게 되면 때때로 수신자에게 메일이 전달되었을 때 다음과 같은 경고가 나타날 수 있습니다.
 
-<img src={require('./img/email_warning.png').default} width="400px" />
+<img src={require("./img/email_warning.png").default} width="400px" />
 
 노티플라이에서는 이메일 도메인 인증을 위해 SPF, DKIM을 설정하시는 것을 권장합니다. 설정을 하시면 위와 같은 경고를 방지하고 스팸으로 분류될 확률을 낮출 수 있습니다.
 
@@ -36,14 +36,15 @@ _SPF, DKIM 설정은 권장 사항일 뿐 필수가 아닙니다. 설정을 하�
 
 1. 등록된 발송 도메인 의 하단에 추가하기 버튼을 클릭하여 사용하실 도메인을 입력합니다 (예: `example.com`)
 
-<img src={require('./img/email_domain_register.png').default} width="400px" />
+<img src={require("./img/email_domain_register.png").default} width="400px" />
 
 2. 등록이 완료되면 등록된 발송 도메인을 클릭하실 수 있습니다. 클릭하시면 다음과 같은 이메일 도메인에 대한 정보가 보이는 팝업이 뜹니다.
 
-<img src={require('./img/email_dkim_register.png').default} width="700px" />
+<img src={require("./img/email_dkim_register.png").default} width="700px" />
 
 3. 도메인 인증을 위해 사용할 커스텀 subdomain을 정해주세요. 'mail'을 사용하시면 됩니다. 저장 후에는 표에 총 5개의 설정값들이 나오게 됩니다.
-<img src={require('./img/email_spf_register.png').default} width="700px" />
+
+   <img src={require("./img/email_spf_register.png").default} width="700px" />
 
 4. 사용하시는 도메인 관리 DNS 설정에 표에 있는 5가지 DNS 설정들을 입력해 주세요. DNS 설정에 어려움을 겪으시는 경우 노티플라이 팀으로 문의 부탁드립니다.
 
@@ -53,20 +54,18 @@ _SPF, DKIM 설정은 권장 사항일 뿐 필수가 아닙니다. 설정을 하�
 - [가비아 도메인 설정](https://customer.gabia.com/manual/domain/287/1201)
 - [후이즈 도메인 DNS 설정](https://cs.whois.co.kr/faq/?p=list&service=1)
 
-
 5. 설정이 완료되면 노티플라이 설정에서 도메인 주소의 상태가 초록색으로 변경됩니다. 클릭해서 모두 Success 상태인지 확인해 주세요.
 
-<img src={require('./img/email_domain_status.png').default} width="300px" />
-<img src={require('./img/email_domain_success.png').default} width="700px" />
+<img src={require("./img/email_domain_status.png").default} width="300px" />
+<img src={require("./img/email_domain_success.png").default} width="700px" />
 
 6. 등록된 발송 이메일에서 이메일 주소를 추가해 주세요 (예: user@example.com). 도메인이 인증된 상태인 경우에 추가적인 인증 없이 바로 등록됩니다.
-
-
 
 ## FAQ
 
 - Q. SPF, DKIM이 뭔가요?
-    - A. SPF(Sender Policy Framework)와 DKIM(DomainKeys Identified Mail)은 이메일 수신 서비스(예: Gmail)에서 발신자가 신뢰할만한지 검증해 이메일 수신자에게 스팸 메일이 전달되는 것을 막기 위해 사용되는 방법입니다. 노티플라이와 같은 서비스를 사용하면 발신자 이메일 주소의 도메인과 실제 이메일이 발송되는 도메인이 다를 수 밖에 없습니다. 예를 들어 user@example.com이라는 발신자 주소로 노티플라이를 사용해 이메일을 발송한다면, 실제 발송 도메인은 notifly.tech가 됩니다. SPF, DKIM 설정을 추가하면 노티플라이는 이메일 발신 시에 "example.com 도메인이 인증되었다"는 사실을 이메일에 기록하여 발송하여 신뢰도를 높이고 스팸 분류 확률을 낮출 수 있습니다.
+
+  - A. SPF(Sender Policy Framework)와 DKIM(DomainKeys Identified Mail)은 이메일 수신 서비스(예: Gmail)에서 발신자가 신뢰할만한지 검증해 이메일 수신자에게 스팸 메일이 전달되는 것을 막기 위해 사용되는 방법입니다. 노티플라이와 같은 서비스를 사용하면 발신자 이메일 주소의 도메인과 실제 이메일이 발송되는 도메인이 다를 수 밖에 없습니다. 예를 들어 user@example.com이라는 발신자 주소로 노티플라이를 사용해 이메일을 발송한다면, 실제 발송 도메인은 notifly.tech가 됩니다. SPF, DKIM 설정을 추가하면 노티플라이는 이메일 발신 시에 "example.com 도메인이 인증되었다"는 사실을 이메일에 기록하여 발송하여 신뢰도를 높이고 스팸 분류 확률을 낮출 수 있습니다.
 
 - Q. SPF, DKIM 설정을 했지만 도메인이 인증이 안 됩니다.
-    - A. SPF, DKIM 설정은 서버 상황에 따라 최대 48시간까지 소요될 수 있습니다. 설정 값이 잘 등록됐다면 보통 48시간 이내에 설정이 안정적으로 적용됩니다. 더 빠르게 설정값이 제대로 등록되었는지 확인이 필요하신 경우 노티플라이 팀에 문의해 주세요.
+  - A. SPF, DKIM 설정은 서버 상황에 따라 최대 48시간까지 소요될 수 있습니다. 설정 값이 잘 등록됐다면 보통 48시간 이내에 설정이 안정적으로 적용됩니다. 더 빠르게 설정값이 제대로 등록되었는지 확인이 필요하신 경우 노티플라이 팀에 문의해 주세요.

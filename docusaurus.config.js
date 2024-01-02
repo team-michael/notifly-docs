@@ -11,8 +11,8 @@ const config = {
   favicon: "img/favicon.ico",
   url: "https://docs.notifly.tech",
   baseUrl: "/",
-  projectName: 'notifly-docs',
-  organizationName: 'team-michael',
+  projectName: "notifly-docs",
+  organizationName: "team-michael",
   trailingSlash: false,
 
   onBrokenLinks: "warn",
