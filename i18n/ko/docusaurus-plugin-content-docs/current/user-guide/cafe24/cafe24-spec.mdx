@@ -10,30 +10,30 @@ sidebar_position: 2
 
 활용 가능한 유저 프로퍼티는 다음과 같습니다. 유저 프로퍼티는 비회원일 경우 활용하실 수 없으며, 회원인 경우에만 활용 가능합니다.
 
-| 프로퍼티 명 | 변수 타입 | 설명 |
-| -------- | ------- | --- |
-| `name` | Text | 이름 |
-| `nick_name` | Text | 닉네임 |
-| `shop_no` | Int | 쇼핑몰 번호 (멀티 쇼핑몰이 아닐 경우 `1` 이 기본값) |
-| `job` | Text | 직업명 |
-| `job_class` | Text | 직종 |
-| `sms` | Text | SMS 수신 동의 여부 T : 동의 / F : 미동의 |
-| `news_mail` | Text | 뉴스레터 (이메일) 수신 동의 여부 T : 동의 / F : 미동의 |
-| `member_type` | Text | 회원타입 p: 개인 / c: 사업자 / f: 외국인 |
-| `member_authority` | Text | 회원 권한 구분 C : 일반회원 / P : 대표 운영자 / A : 부운영자 / S : 공급사 |
-| `country_code` | Text | 회원이 가입 시 입력한 국가 코드 (한국 - KOR) |
-| `city` | Text | 도시명 |
-| `lifetime_member` | Text | 평생회원 여부 T : 평생회원 / F : 일반회원 |
-| `gender` | Text | 성별 M : 남성 / F : 여성 |
-| `birthday` | Text | 생년월일 (YYYY-MM-DD) |
-| `group_no` | Int | 그룹 번호 |
-| `group_name` | Text | 그룹명 |
-| `interest` | Text | 관심사 |
-| `created_date` | Text | 가입일시 (ISO8601 Format) |
-| `last_login_date` | Text | 마지막 로그인 일시 (ISO8601 Format) |
-| `member_authentication` | Text | T : 인증 / F : 미인증 / B : 특별관리회원 / J : 14세미만회원 |
-| `use_blacklist` | Text | T : 블랙리스트 / F : 블랙리스트 아님 |
-| `join_path` | Text | 가입경로, P: PC / M: Mobile |
+| 프로퍼티 명             | 변수 타입 | 설명                                                                      |
+| ----------------------- | --------- | ------------------------------------------------------------------------- |
+| `name`                  | Text      | 이름                                                                      |
+| `nick_name`             | Text      | 닉네임                                                                    |
+| `shop_no`               | Int       | 쇼핑몰 번호 (멀티 쇼핑몰이 아닐 경우 `1` 이 기본값)                       |
+| `job`                   | Text      | 직업명                                                                    |
+| `job_class`             | Text      | 직종                                                                      |
+| `sms`                   | Text      | SMS 수신 동의 여부 T : 동의 / F : 미동의                                  |
+| `news_mail`             | Text      | 뉴스레터 (이메일) 수신 동의 여부 T : 동의 / F : 미동의                    |
+| `member_type`           | Text      | 회원타입 p: 개인 / c: 사업자 / f: 외국인                                  |
+| `member_authority`      | Text      | 회원 권한 구분 C : 일반회원 / P : 대표 운영자 / A : 부운영자 / S : 공급사 |
+| `country_code`          | Text      | 회원이 가입 시 입력한 국가 코드 (한국 - KOR)                              |
+| `city`                  | Text      | 도시명                                                                    |
+| `lifetime_member`       | Text      | 평생회원 여부 T : 평생회원 / F : 일반회원                                 |
+| `gender`                | Text      | 성별 M : 남성 / F : 여성                                                  |
+| `birthday`              | Text      | 생년월일 (YYYY-MM-DD)                                                     |
+| `group_no`              | Int       | 그룹 번호                                                                 |
+| `group_name`            | Text      | 그룹명                                                                    |
+| `interest`              | Text      | 관심사                                                                    |
+| `created_date`          | Text      | 가입일시 (ISO8601 Format)                                                 |
+| `last_login_date`       | Text      | 마지막 로그인 일시 (ISO8601 Format)                                       |
+| `member_authentication` | Text      | T : 인증 / F : 미인증 / B : 특별관리회원 / J : 14세미만회원               |
+| `use_blacklist`         | Text      | T : 블랙리스트 / F : 블랙리스트 아님                                      |
+| `join_path`             | Text      | 가입경로, P: PC / M: Mobile                                               |
 
 ## 이벤트
 
@@ -43,11 +43,11 @@ sidebar_position: 2
 Cafe24 플랫폼 제약 사항으로 인해, 몇 가지 이벤트는 고객이 쇼핑몰에 접속하는 브라우저 상에서 발생하는 이벤트가 아닌 서버 상에서 발생하는 이벤트입니다. 따라서, 해당 이벤트가 발생했을 때 팝업을 트리거할 수 없습니다. 이벤트 목록에 `팝업 트리거 가능 여부` 컬럼을 참고해주세요.
 :::
 
-| 이벤트 명 | 이벤트 패러미터 | 트리거 타이밍 | 인웹 팝업 사용 가능 여부 |
-| ------- | ----------- | --------- | ---------------- |
-| `cafe24__pageview_<pathname>` | 없음 | 고객이 페이지에 방문했을 때 | O |
-| `cafe24__sign_up` | 없음 | 고객이 회원가입을 하였을 때 | X |
-| `cafe24__login` | 없음 | 로그인 했을 때 | O |
-| `cafe24__add_cart` | `product_no` : 추가된 상품 번호 (Int)<br/>`product_price`: 추가된 상품 가격(Int)<br/>`variant_code`: 추가된 상품 코드(Text)  | 장바구니에 상품이 추가되었을 때 | O |
-| `cafe24__add_wishlist` | 없음 | 상품이 관심 목록에 추가되었을 때 | O |
-| `cafe24__order_completed` | `shop_no` : 멀티쇼핑몰 번호(Int)<br/>`currency`: 통화(Text)<br/>`order_date`: 주문 일시(Text)<br/>`name`: 구매자 이름(Text)<br/>`first_order`: 첫 주문 여부(Bool)<br/>`total_price`: 총 주문 금액 (Int)<br/>`product_codes`: 주문 상품 코드(Array)<br/>`product_names`: 주문 상품 이름(Array) | 주문이 완료되었을 때 | X |
+| 이벤트 명                     | 이벤트 패러미터                                                                                                                                                                                                                                                                               | 트리거 타이밍                    | 인웹 팝업 사용 가능 여부 |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------ |
+| `cafe24__pageview_<pathname>` | 없음                                                                                                                                                                                                                                                                                          | 고객이 페이지에 방문했을 때      | O                        |
+| `cafe24__sign_up`             | 없음                                                                                                                                                                                                                                                                                          | 고객이 회원가입을 하였을 때      | X                        |
+| `cafe24__login`               | 없음                                                                                                                                                                                                                                                                                          | 로그인 했을 때                   | O                        |
+| `cafe24__add_cart`            | `product_no` : 추가된 상품 번호 (Int)<br/>`product_price`: 추가된 상품 가격(Int)<br/>`variant_code`: 추가된 상품 코드(Text)                                                                                                                                                                   | 장바구니에 상품이 추가되었을 때  | O                        |
+| `cafe24__add_wishlist`        | 없음                                                                                                                                                                                                                                                                                          | 상품이 관심 목록에 추가되었을 때 | O                        |
+| `cafe24__order_completed`     | `shop_no` : 멀티쇼핑몰 번호(Int)<br/>`currency`: 통화(Text)<br/>`order_date`: 주문 일시(Text)<br/>`name`: 구매자 이름(Text)<br/>`first_order`: 첫 주문 여부(Bool)<br/>`total_price`: 총 주문 금액 (Int)<br/>`product_codes`: 주문 상품 코드(Array)<br/>`product_names`: 주문 상품 이름(Array) | 주문이 완료되었을 때             | X                        |

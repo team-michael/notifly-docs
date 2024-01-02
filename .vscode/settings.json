@@ -1,4 +1,4 @@
 {
-	"editor.formatOnSave": true,
-	"editor.renderWhitespace": "all"
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all"
 }

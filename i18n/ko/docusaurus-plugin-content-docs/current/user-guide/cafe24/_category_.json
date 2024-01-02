@@ -1,8 +1,8 @@
 {
-	"label": "Cafe24 Integration",
-	"position": 9,
-	"link": {
-		"type": "generated-index",
-		"description": "Cafe24 Integration Guide"
-	}
+  "label": "Cafe24 Integration",
+  "position": 9,
+  "link": {
+    "type": "generated-index",
+    "description": "Cafe24 Integration Guide"
+  }
 }

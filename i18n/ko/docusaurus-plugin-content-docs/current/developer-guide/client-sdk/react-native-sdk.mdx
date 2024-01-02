@@ -43,21 +43,24 @@ cd ios && pod install
 
 앱 패키지의 package.json 파일에 notifly-sdk가 추가됩니다. (현재 최신 버전: [![Npm](https://img.shields.io/npm/v/notifly-sdk.svg)](https://www.npmjs.com/package/notifly-sdk))
 
-
 ### 1.2. iOS 설정
 
 #### 1) Capability 설정
 
 1. Xcode에서 {Your_Project_Name}.xcworkspace를 열어주세요.
-  - Xcode에서 {Your_Project_Name}.xcworkspace를 열지 않고 {Your_Project_Name}.xcodeproj를 열어서 빌드하면, Notifly SDK를 사용할 수 없습니다.
-  - {Your_Project_Name}.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
-2. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **13.0** 혹은 그 이상으로 설정합니다. 
-  - Podfile에서도 최소 버전을 13.0으로 설정해주세요.
+
+- Xcode에서 {Your_Project_Name}.xcworkspace를 열지 않고 {Your_Project_Name}.xcodeproj를 열어서 빌드하면, Notifly SDK를 사용할 수 없습니다.
+- {Your_Project_Name}.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
+
+2. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **13.0** 혹은 그 이상으로 설정합니다.
+
+- Podfile에서도 최소 버전을 13.0으로 설정해주세요.
+
 3. Push Notification Capability를 추가합니다.
-  ![Add Capabilities](./image/ios_setting_add_capability1.png)
+   ![Add Capabilities](./image/ios_setting_add_capability1.png)
 
 4. Background Modes Capability를 추가합니다. - Remote notifications과 Background Fetch를 선택합니다.
-  ![Add Capabilities](./image/ios_setting_add_capability2.png)
+   ![Add Capabilities](./image/ios_setting_add_capability2.png)
 
 5. AppDelegate.mm 파일을 열어서 다음 코드를 추가합니다.
 
@@ -72,16 +75,16 @@ cd ios && pod install
 - AppDelegate.h에서 AppDelegate 클래스에 `UNUserNotificationCenterDelegate` 프로토콜을 추가합니다.
   - 아래 예시코드를 참고해주세요.
 - AppDelegate.mm의 `AppDelegate method`들에 Notifly코드를 추가해 주세요.
-    1. `(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
-        - UNNotificationCenter의 delegate를 self로 설정합니다.
-    2. `(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken`
-        - APNs 토큰을 Notifly에 등록합니다.
-    3. `(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error`
-        - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
-    4. `(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler`
-        - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
-    5. `(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler`
-        - 앱이 Foreground 상태일 때, Notifly로부터 수신한 데이터를 SDK로 전달합니다.
+  1. `(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
+     - UNNotificationCenter의 delegate를 self로 설정합니다.
+  2. `(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken`
+     - APNs 토큰을 Notifly에 등록합니다.
+  3. `(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error`
+     - APNs 토큰 등록에 실패한 경우, Notifly에 알립니다.
+  4. `(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler`
+     - 앱 푸시 알림 클릭 이벤트를, Notifly로 전달합니다.
+  5. `(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler`
+     - 앱이 Foreground 상태일 때, Notifly로부터 수신한 데이터를 SDK로 전달합니다.
 
 <Tabs>
 <TabItem value="header" label="AppDelegate.h">
@@ -157,13 +160,15 @@ cd ios && pod install
 </TabItem>
 </Tabs>
 
-### 1-3. (선택) iOS Push Extension 설정 
+### 1-3. (선택) iOS Push Extension 설정
+
 :::caution SDK spec for Rich Push Notification
 `notifly-sdk`: 3.0.4 버전 이상
 :::
+
 - [Notifly의 안내](/developer-guide/client-sdk/advanced/ios-push-extension)에 따라, Notification Service Extension을 설정하시면 다음 기능들이 지원되기 때문에, 설정하시길 권장드립니다.
-    1. 푸시 알림에 이미지 및 비디오를 첨부할 수 있습니다.
-    2. 유저의 푸시 수신 여부를 확인할 수 있어, 캠페인 성과를 보다 자세하게 확인하실 수 있습니다.
+  1. 푸시 알림에 이미지 및 비디오를 첨부할 수 있습니다.
+  2. 유저의 푸시 수신 여부를 확인할 수 있어, 캠페인 성과를 보다 자세하게 확인하실 수 있습니다.
 
 ### 1-4. Notifly SDK 초기화 코드 추가
 
@@ -307,6 +312,7 @@ const handleLogin = () => {
 [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
 
 ## 5. (Advanced) 푸시 알림 아이콘 등록 (Android) & 푸시 알림 동의 프롬프트
+
 [(Advanced) Client SDK - React Native](/ko/developer-guide/client-sdk/advanced/react-native-sdk-advanced) 를 참고해 주세요.
 
 ## FAQ
@@ -330,6 +336,6 @@ const handleLogin = () => {
       }
     }
     ```
-- Q. notifly_sdk-Swift.h 파일을 찾을 수 없다는 에러가 뜹니다. 어떻게 해야 할까요? 
+- Q. notifly_sdk-Swift.h 파일을 찾을 수 없다는 에러가 뜹니다. 어떻게 해야 할까요?
   - notifly_sdk(ios)는 Swift로 작성되어 있습니다. 이에 Objective-C 환경으로 노출시키기 위해 빌드되는 과정에서 Swift Compatibility Header가 생성되는데, 이 헤더 파일의 이름이 notifly_sdk-Swift.h입니다. 빌드를 진행하고자하는 타겟의 Builld Option의 Header Search Paths에 "${PODS_CONFIGURATION_BUILD_DIR}"를 추가해주세요.
   - [참고](https://developer.apple.com/documentation/swift/importing-swift-into-objective-c)

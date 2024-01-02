@@ -21,11 +21,11 @@
   },
   "sidebar.userGuide.category.Campaign_Segments": {
     "message": "캠페인 세그먼트",
-    "description": "The label for category Campaigns Segments in sidebar userGuide"
+    "description": "The label for category Campaign_Segments in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaign_Segments.link.generated-index.description": {
     "message": "캠페인 세그먼트를 어떻게 생성하고 활용하는지 알아봅니다.",
-    "description": "The label for category Campaigns Segments in sidebar userGuide"
+    "description": "The generated-index page description for category Campaign_Segments in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
     "message": "노티플라이 캠페인에 대한 정보를 설명하고, 생성부터 활용하는 법을 알아봅니다.",
@@ -38,14 +38,6 @@
   "sidebar.userGuide.category.SMS.link.generated-index.description": {
     "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category SMS in sidebar userGuide"
-  },
-  "sidebar.userGuide.category.Kakao Alimtalk": {
-    "message": "카카오 알림톡",
-    "description": "The label for category Kakao Alimtalk in sidebar userGuide"
-  },
-  "sidebar.userGuide.category.Kakao Alimtalk.link.generated-index.description": {
-    "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Kakao Alimtalk in sidebar userGuide"
   },
   "sidebar.userGuide.category.Web Message": {
     "message": "웹사이트 모달",
@@ -88,7 +80,15 @@
     "description": "The generated-index page description for category Email in sidebar userGuide"
   },
   "sidebar.userGuide.category.Web Message.link.generated-index.description": {
-    "message": "Show web messages with Notifly.",
+    "message": "노티플라이에서 웹사이트 모달 팝업을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Web Message in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Kakaotalk": {
+    "message": "카카오 친구톡 / 알림톡",
+    "description": "The label for category Kakaotalk in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Kakaotalk.link.generated-index.description": {
+    "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category Kakaotalk in sidebar userGuide"
   }
 }
