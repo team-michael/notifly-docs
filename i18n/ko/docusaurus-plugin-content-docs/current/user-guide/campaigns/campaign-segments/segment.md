@@ -16,7 +16,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 - **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 유저 등록 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 - **이메일 - 이메일 주소** : 이메일 주소 또한 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
-## 1. 유저 그룹 설정
+## 1. 유저 그룹 설정 {#user-group-setup}
 
 노티플라이 데이터베이스에 등록된 사용자들은 유저 리스트에서 확인할 수 있습니다. 사용자의 속성, 디바이스 정보와 이벤트 발생 기록을 활용하여 발송 대상 사용자를 지정할 수 있습니다.
 
@@ -83,7 +83,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 - **유저 그룹 설정**은 노티플라이 시스템 내부에 등록된 유저 정보를 활용하는 기능입니다. 따라서, **메시지 개인화를 할 때에 유저 및 디바이스 정보 뿐만 아니라 발생한 이벤트 파라미터(이벤트 기반 발송일 경우)를 모두 사용**하실 수 있습니다. 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 - [채널 별 발송 필수 정보](#발송-필수-정보)가 노티플라이 유저 데이터베이스에 존재해야 발송이 가능하며, 존재하지 않을 경우에는 발송되지 않습니다.
 
-## 2. CSV 업로드
+## 2. CSV 업로드 {#csv-upload}
 
 노티플라이 데이터베이스에 등록되지 않은 사용자를 대상으로 직접 발송하고 싶다면, CSV 업로드 기능을 활용할 수 있습니다.  
 샘플 파일 (템플릿)을 다운로드 받아 입력해 주시면 됩니다.
