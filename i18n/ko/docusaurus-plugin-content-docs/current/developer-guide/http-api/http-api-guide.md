@@ -79,7 +79,7 @@ fetch(url, {
 
 ## 2. Track Event Endpoint
 
-이 endpoint 를 통해 notifly 엔진에 이벤트 데이터를 보낼 수 있습니다. Notifly 엔진은 수신한 이벤트 데이터를 모으고 분석해 캠페인 진행 시 메시지 발송 타이밍, 사용자 세그먼트 설정 등에 활용할 수 있게 준비합니다.
+이 endpoint 를 통해 notifly 엔진에 이벤트 데이터를 보낼 수 있습니다. Notifly 엔진은 수신한 이벤트 데이터를 모으고 분석해 캠페인 진행 시 메시지 발송 타이밍, 발송 대상 설정 등에 활용할 수 있게 준비합니다.
 
 ### Endpoint
 
@@ -162,7 +162,7 @@ fetch(url, {
 
 ## 3. Set User Properties Endpoint
 
-이 endpoint 를 통해 notifly 엔진에 사용자 속성들을 등록할 수 있습니다. 등록된 속성값들은 캠페인 진행 시 사용자 세그먼트 설정에 활용하여 보다 효율적인 마케팅이 가능합니다.
+이 endpoint 를 통해 notifly 엔진에 사용자 속성들을 등록할 수 있습니다. 등록된 속성값들은 캠페인 진행 시 발송 대상 설정에 활용하여 보다 효율적인 마케팅이 가능합니다.
 
 ### Endpoint
 
@@ -278,10 +278,10 @@ fetch(url, {
 
 #### Path Parameters
 
-| Parameter  | Type   | Required | Description                                                                                                                       |
-| ---------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| projectId  | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                                          |
-| campaignId | String | Yes      | [캠페인 리스트](https://notifly.tech/console/campaign/list)의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
+| Parameter  | Type   | Required | Description                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------ |
+| projectId  | String | Yes      | 설정 페이지에서 확인하실 수 있습니다.                                                      |
+| campaignId | String | Yes      | 캠페인 리스트 페이지의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
 
 #### Request
 

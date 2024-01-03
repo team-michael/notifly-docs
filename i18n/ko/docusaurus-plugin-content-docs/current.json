@@ -8,7 +8,7 @@
     "description": "The label for category Client SDK in sidebar developerGuide"
   },
   "sidebar.developerGuide.category.Client SDK.link.generated-index.description": {
-    "message": "Notifly SDK는 모바일 애플리케이션 개발자가 앱에 푸시 알림과 인앱 메시지를 쉽게 구현할 수 있도록 하는 소프트웨어 개발 키트입니다. 이 SDK는 사용자 세션, 기기 정보 및 푸시 토큰에 대한 데이터를 자동으로 수집합니다. 이 SDK는 이 모든 데이터를 사용자 프로파일로 통합하며, 이를 사용하여 대상 사용자에게 타겟팅된 개인화된 푸시 알림과 인앱 메시지를 보낼 수 있습니다.",
+    "message": "Notifly SDK는 모바일 애플리케이션 개발자가 앱에 푸시 알림과 인앱 팝업을 쉽게 구현할 수 있도록 하는 소프트웨어 개발 키트입니다. 이 SDK는 사용자 세션, 기기 정보 및 푸시 토큰에 대한 데이터를 자동으로 수집합니다. 이 SDK는 이 모든 데이터를 사용자 프로파일로 통합하며, 이를 사용하여 대상 사용자에게 타겟팅된 개인화된 푸시 알림과 인앱 팝업을 보낼 수 있습니다.",
     "description": "The generated-index page description for category Client SDK in sidebar developerGuide"
   },
   "sidebar.developerGuide.category.HTTP API": {
@@ -20,11 +20,11 @@
     "description": "The label for category Campaigns in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaign_Segments": {
-    "message": "캠페인 세그먼트",
+    "message": "캠페인 발송 대상 설정",
     "description": "The label for category Campaign_Segments in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaign_Segments.link.generated-index.description": {
-    "message": "캠페인 세그먼트를 어떻게 생성하고 활용하는지 알아봅니다.",
+    "message": "캠페인 발송 대상을 어떻게 설정하는지 알아봅니다.",
     "description": "The generated-index page description for category Campaign_Segments in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
@@ -40,15 +40,15 @@
     "description": "The generated-index page description for category SMS in sidebar userGuide"
   },
   "sidebar.userGuide.category.Web Message": {
-    "message": "웹사이트 모달",
+    "message": "웹 팝업",
     "description": "The label for category Web Message in sidebar userGuide"
   },
   "sidebar.userGuide.category.Cafe24 Integration": {
-    "message": "Cafe24 연동",
+    "message": "카페24 연동",
     "description": "The label for category Cafe24 Integration in sidebar userGuide"
   },
   "sidebar.userGuide.category.Cafe24 Integration.link.generated-index.description": {
-    "message": "Cafe24 쇼핑몰과 연동하여 CRM 마케팅 캠페인을 바로 집행할 수 있습니다. 이 가이드를 참조하여 Cafe24 연동에 대해 알아보고 코드 없이 클릭 몇 번으로 노티플라이 프로젝트와 Cafe24 쇼핑몰을 연동해보세요.",
+    "message": "카페24 쇼핑몰과 연동하여 CRM 마케팅 캠페인을 바로 집행할 수 있습니다. 이 가이드를 참조하여 카페24 연동에 대해 알아보고 코드 없이 클릭 몇 번으로 노티플라이 프로젝트와 카페24 쇼핑몰을 연동해보세요.",
     "description": "The generated-index page description for category Cafe24 Integration in sidebar userGuide"
   },
   "sidebar.userGuide.category.Mixpanel Integration": {
@@ -56,7 +56,7 @@
     "description": "The label for category Mixpanel Integration in sidebar userGuide"
   },
   "sidebar.userGuide.category.Mixpanel Integration.link.generated-index.description": {
-    "message": "Notifly에서는 Mixpanel과 연동하여 Mixpanel에서 만든 코호트를 대상으로 캠페인을 진행할 수 있습니다. 이 가이드를 참조하여 Mixpanel 연동에 대해 알아보세요.",
+    "message": "노티플라이에서는 Mixpanel과 연동하여 Mixpanel에서 만든 코호트를 대상으로 캠페인을 진행할 수 있습니다. 이 가이드를 참조하여 Mixpanel 연동에 대해 알아보세요.",
     "description": "The generated-index page description for category Mixpanel Integration in sidebar userGuide"
   },
   "sidebar.userGuide.category.Amplitude Integration": {
@@ -64,7 +64,7 @@
     "description": "The label for category Amplitude Integration in sidebar userGuide"
   },
   "sidebar.userGuide.category.Amplitude Integration.link.generated-index.description": {
-    "message": "Notifly에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
+    "message": "노티플라이에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
     "description": "The generated-index page description for category Amplitude Integration in sidebar userGuide"
   },
   "sidebar.developerGuide.category.심화 연동 가이드": {
@@ -80,7 +80,7 @@
     "description": "The generated-index page description for category Email in sidebar userGuide"
   },
   "sidebar.userGuide.category.Web Message.link.generated-index.description": {
-    "message": "노티플라이에서 웹사이트 모달 팝업을 발송하는 방법을 알아봅니다.",
+    "message": "노티플라이에서 웹 팝업을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Web Message in sidebar userGuide"
   },
   "sidebar.userGuide.category.Kakaotalk": {
