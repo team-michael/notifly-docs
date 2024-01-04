@@ -1,4 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "editor.renderWhitespace": "all"
+  "editor.renderWhitespace": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
