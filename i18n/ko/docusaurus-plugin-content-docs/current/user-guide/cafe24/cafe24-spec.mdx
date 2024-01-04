@@ -34,8 +34,18 @@ sidebar_position: 2
 | `member_authentication` | Text      | T : 인증 / F : 미인증 / B : 특별관리회원 / J : 14세미만회원               |
 | `use_blacklist`         | Text      | T : 블랙리스트 / F : 블랙리스트 아님                                      |
 | `join_path`             | Text      | 가입경로, P: PC / M: Mobile                                               |
+| `available_points`      | Int       | 가용 적립금                                                               |
+| `returned_points`       | Int       | 환불 예정 적립금                                                          |
+| `total_points`          | Int       | 총 적립금                                                                 |
+| `unavailable_points`    | Int       | 미가용 적립금                                                             |
+| `used_points`           | Int       | 사용 적립금                                                               |
+| `all_credits`           | Int       | 가용 예치금                                                               |
+| `member_total_credits`  | Int       | 회원테이블에 있는 예치금                                                  |
+| `refund_wait_credits`   | Int       | 환불요청된 예치금                                                         |
+| `total_credits`         | Int       | 총 예치금                                                                 |
+| `used_credits`          | Int       | 사용된 예치금                                                             |
 
-## 이벤트
+## BUILT-IN 이벤트
 
 카페24에서 발생하는 모든 이벤트는 `cafe24__` 접두사가 붙습니다. 활용 가능한 이벤트는 다음과 같습니다.
 
@@ -51,3 +61,7 @@ sidebar_position: 2
 | `cafe24__add_cart`            | `product_no` : 추가된 상품 번호 (Int)<br/>`product_price`: 추가된 상품 가격(Int)<br/>`variant_code`: 추가된 상품 코드(Text)                                                                                                                                                                   | 장바구니에 상품이 추가되었을 때  | O                        |
 | `cafe24__add_wishlist`        | 없음                                                                                                                                                                                                                                                                                          | 상품이 관심 목록에 추가되었을 때 | O                        |
 | `cafe24__order_completed`     | `shop_no` : 멀티쇼핑몰 번호(Int)<br/>`currency`: 통화(Text)<br/>`order_date`: 주문 일시(Text)<br/>`name`: 구매자 이름(Text)<br/>`first_order`: 첫 주문 여부(Bool)<br/>`total_price`: 총 주문 금액 (Int)<br/>`product_codes`: 주문 상품 코드(Array)<br/>`product_names`: 주문 상품 이름(Array) | 주문이 완료되었을 때             | X                        |
+
+## 커스텀 이벤트 추가하기
+
+Built-in 이벤트 외, 쇼핑몰에서 발생하는 커스텀 이벤트를 추가할 수 있습니다. 커스텀 이벤트 추가는 GTM(Google Tag Manager)를 통해 가능합니다. 커스텀 이벤트를 추가하는 방법은 [GTM을 이용한 커스텀 이벤트](/ko/user-guide/cafe24/cafe24-gtm)를 참고해주세요.
