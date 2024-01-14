@@ -112,23 +112,26 @@ v2.5.0 이상 버전 부터는, `projectId`, `username`, `password`를 제외한
 
 :::
 
-:::note 참고: 푸시 알림 권한 요청
+### 푸시 알림 권한 요청
 
-`askPermission`은 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. `true`인 경우 노티플라이는 다음과 같은 팝업을 먼저 웹사이트의 우상단에 보여준 뒤에 실제 브라우저의 알림 권한을 요청합니다.
+`askPermission` (권한 요청 팝업 노출) 은 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. on인 경우 노티플라이는 다음과 같은 팝업을 먼저 웹사이트의 우상단에 보여준 뒤에 실제 브라우저의 알림 권한을 요청합니다.
 
 1. 사용자가 아직 브라우저에서 알림 권한을 설정하지 않은 경우 팝업을 보여줍니다.
 2. 사용자가 이미 알림 권한을 부여한 경우에 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
 3. 사용자가 알림 권한을 거부한 경우에도 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
-
-현재 웹사이트의 스타일과 타이밍에 맞게 알림 권한을 요청하기 위해서는 `askPermission`을 `false`로 하고 직접 팝업을 구현해 주세요. 더 자세한 내용은 [MDN web docs - Notification: requestPermission()](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static)
-를 참고 부탁드립니다.
 
 <img
   src={require("./image/web_push_permission_prompt.png").default}
   width="400px"
 />
 
-:::
+현재 웹사이트의 스타일과 타이밍에 맞게 알림 권한을 요청하기 위해서 SDK 버전 2.5.0 이상인 경우 웹 콘솔에서 권한 알림 요청을 off 시키고, SDK 버전 2.5.0 미만인 경우 초기화 옵션에서 `askPermission`을 `false`로 하고 직접 팝업을 구현해 주세요. 더 자세한 내용은 [MDN web docs - Notification: requestPermission()](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static) 를 참고 부탁드립니다.
+
+**SDK 버전 2.7.0 이상부터는**, `requestPermission` 함수를 통하여 알림 팝업을 노출하도록 할 수 있습니다. **해당 함수는 권한 요청 팝업 노출이 off 되어있는 경우**에만 동작합니다.
+
+```js
+notifly.requestPermission();
+```
 
 ### SDK 셋업
 
