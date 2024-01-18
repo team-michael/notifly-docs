@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 # Client SDK - iOS
@@ -224,11 +224,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 ## 4. 유저 프로퍼티 등록하기
 
 - 노티플라이에서는 유저의 아이디 (userId) 및 프로퍼티 (userProperties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
+
   - 노티플라이에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
   - 카카오 알림톡, 친구톡, 문자 발송을 위해서는 전화번호를 유저 프로퍼티로 설정해야 합니다.
   - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
   - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+  - (권장사항) 로그아웃 시 userId를 nil로 하여 setUserId 호출함으로써 유저의 userId 등록을 해지해 주세요.
+  - <span style={{ color: "red" }}>
+      유저 아이디 등록해지를 호출할 경우, 유저 프로퍼티 및 캠페인 피로도 관리
+      데이터 등 모든 유저 정보가 삭제됩니다.
+    </span>
 
 ### 4-1. userId 등록
 
@@ -239,14 +245,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 <Tabs>
 <TabItem value="swift" label="Swift">
 
-```kotlin title="Example Swift code for Notifly.setUserID"
+```kotlin title="Example Swift code for Notifly.setUserId"
 import notifly_sdk
 
 // set userId
 // highlight-next-line
 Notifly.setUserId(userId: "exampleUserId")
 
-// remove userId
+// Unregister userId
 // highlight-next-line
 Notifly.setUserId(userId: nil)
 ```

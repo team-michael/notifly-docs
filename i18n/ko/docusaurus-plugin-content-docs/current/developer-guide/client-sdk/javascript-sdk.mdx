@@ -314,6 +314,11 @@ Notifly Website SDK는 Browser DOM의 최상단 `window` 객체가 존재할 때
   - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
   - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
+  - (권장사항) 로그아웃 시 userId를 null로 하여 setUserId 호출함으로써 유저의 userId 등록을 해지해 주세요.
+  - <span style={{ color: "red" }}>
+      유저 아이디 등록해지를 호출할 경우, 유저 프로퍼티 및 캠페인 피로도 관리
+      데이터 등 모든 유저 정보가 삭제됩니다.
+    </span>
 
 ### 2-1. 유저 아이디 등록 {#set-user-id}
 
