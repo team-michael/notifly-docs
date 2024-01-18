@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 5
 ---
 
 # Client SDK - Flutter
@@ -37,7 +37,7 @@ cd ios && pod install
 
 ```yaml
 dependencies:
-  notifly_flutter: ^1.2.4
+  notifly_flutter: ^1.3.0
 ```
 
 ### 1.2. iOS 설정
@@ -184,8 +184,11 @@ void main() async {
   - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
   - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
-    - (권장사항) setUserId method에서 userId를 null로 설정하면, 노티플라이에서는 해당 유저의 userId를 삭제합니다. 로그아웃 시에 해당 방식을 통해 userId를 삭제해 주세요.
-  - (권장사항) setUserId method에서 userId를 null로 설정하면, 노티플라이에서는 해당 유저의 userId를 삭제합니다. 로그아웃 시에 해당 방식을 통해 userId를 삭제해 주세요.
+  - (권장사항) 로그아웃 시 userId를 null로 하여 setUserId 호출함으로써 유저의 userId 등록을 해지해 주세요.
+  - <span style={{ color: "red" }}>
+      유저 아이디 등록해지를 호출할 경우, 유저 프로퍼티 및 캠페인 피로도 관리
+      데이터 등 모든 유저 정보가 삭제됩니다.
+    </span>
 
 ### 2-1. 유저 아이디 등록
 
@@ -216,12 +219,12 @@ ElevatedButton(
         try {
             final userIdInput = _userIdTextInputController.text;
             // highlight-next-line
-            await NotiflyPlugin.setUserId(null); // Remove User Id
+            await NotiflyPlugin.setUserId(null); // Unregister User Id
         } catch (error) {
             ...
         }
     },
-    child: const Text('Remove User Id'),
+    child: const Text('Unregister User Id'),
     ...
 ),
 ```
