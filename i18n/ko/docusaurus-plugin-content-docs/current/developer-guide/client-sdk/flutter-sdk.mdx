@@ -37,7 +37,7 @@ cd ios && pod install
 
 ```yaml
 dependencies:
-  notifly_flutter: ^1.3.0
+  notifly_flutter: ^1.3.5
 ```
 
 ### 1.2. iOS 설정
@@ -280,6 +280,49 @@ await NotiflyPlugin.trackEvent(
     eventParams: {'show_id': show_id},
 );
 ...
+```
+
+## 4. (Only Web) Service Worker For Web Push Notification 등록
+
+Flutter Web에서 웹 푸시 알림을 사용하지 않으시는 경우, 이 단계는 생략하셔도 됩니다.
+
+- Flutter 프로젝트의 web 폴더 내에 notifly-service-worker.js 파일을 생성합니다.
+- notifly-service-worker.js 파일에 다음 코드를 추가합니다.
+
+```js title="Code of notifly-service-worker.js"
+self.importScripts(
+  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js"
+);
+```
+
+## 5. (Only Web) 웹 푸시 알림 권한 요청
+
+Flutter Web에서 웹 푸시 알림을 사용하지 않으시는 경우, 이 단계는 생략하셔도 됩니다.
+
+- 노티플라이 콘솔 > 설정 > 웹 푸시 알림 설정에서 권한 요청 팝업 노출 토글을 ON/OFF 할 수 있습니다.
+- ON인 경우, 노티플라이는 웹사이트에 방문한 사용자에게 웹 푸시 알림 권한을 요청하는 팝업을 노출합니다.
+- OFF인 경우, 아래 NotiflyPlugin.requestPermission()를 호출하여 원하는 시점에 권한 요청 팝업을 노출할 수 있습니다.
+
+  <img
+    src={require("./image/flutter_web_push_permission.png").default}
+    width="400px"
+  />
+
+- 푸시 알림 권한 요청은 다음과 같이 동작합니다.
+
+  1. 사용자가 아직 브라우저에서 알림 권한을 설정하지 않은 경우 팝업을 보여줍니다.
+  2. 사용자가 이미 알림 권한을 부여한 경우에 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
+  3. 사용자가 알림 권한을 거부한 경우에도 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
+
+<img
+  src={require("./image/web_push_permission_prompt.png").default}
+  width="400px"
+/>
+
+- **아래 NotiflyPlugin.requestPermission 함수는 콘솔에서 설정한 권한 요청 팝업 노출 옵션이 OFF로 설정 되어있는 경우**에만 동작합니다.
+
+```dart
+NotiflyPlugin.requestPermission();
 ```
 
 ## 4. 연동 테스트
