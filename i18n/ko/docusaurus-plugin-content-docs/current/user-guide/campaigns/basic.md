@@ -75,6 +75,36 @@ sidebar_position: 1
 
 2. **딜레이 지정**: 트리거링 이벤트가 발생한 후, 실제 발송이 일어날 타이밍을 선택할 수 있습니다. 딜레이는 분 단위로 지정할 수 있습니다.
 
+3. **(Optional) 발송 시점 결정 이벤트 추가 필터링 설정**: 특정 이벤트에 **이벤트 패러미터**가 포함되어 발생한다면, 해당 패러미터 값을 이용하여 발송 시점을 결정할 수 있습니다. 예를 들어, 구매 (`purchase`) 이벤트에 `product_category`라는 이벤트 패러미터가 포함되어 발생한다면, `product_category`가 `clothing`인 경우에만 캠페인을 발송하도록 설정할 수 있습니다.
+
+<img
+src={require("./img/triggering-event-filters-example-1.png").default}
+width="700px"
+style={{padding: "20px", margin: "10px", border: "2px solid #eaecef"}}
+/>
+
+또한, AND/OR 조건을 이용하여 더 복잡한 필터링을 설정해 보세요. 아래는 고객이 블로그를 통해 유입되었고 `/product` 경로를 방문하였으며 `id`라는 쿼리 패러미터가 `123`이거나 고객이 배너를 통해 메인 화면으로 유입되었을 때 캠페인을 집행하는 예시입니다. (`page_view` 이벤트가 알맞은 `utm_medium`, `pathname`, `query.id` 라는 패러미터가 포함한다고 가정합니다.)
+
+<img
+src={require("./img/triggering-event-filters-example-2.png").default}
+width="700px"
+style={{padding: "20px", margin: "10px", border: "2px solid #eaecef"}}
+/>
+
+:::caution 팝업 캠페인 집행 시 SDK 버전 호환성
+
+- 인웹 팝업
+  - **Notifly Javascript SDK 2.6.0** 이상
+- 인앱 팝업
+  - **Notifly Android SDK 1.4.0** 이상
+  - **Notifly iOS SDK 1.4.0** 이상
+  - **Notifly Flutter SDK 1.3.0** 이상
+  - **Notifly React Native SDK 3.1.0** 이상
+
+만 **발송 시점 결정 이벤트 추가 필터링 설정** 이 가능합니다.
+
+:::
+
 ### API 기반 발송
 
 노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 현재 API 기반 발송은 푸시 알림만 지원합니다. 자세한 API 명세는 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)를 참고해주세요. **_API 기반 발송에서 발송 대상은 UI에서 지정할 수 없습니다. API Request Body에서 발송 대상을 지정해 주세요._**
