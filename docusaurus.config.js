@@ -39,6 +39,12 @@ const config = {
     },
   },
 
+  scripts: [
+    {
+      src: "/js/redirect-based-on-locale.js",
+    },
+  ],
+
   presets: [
     [
       "classic",
