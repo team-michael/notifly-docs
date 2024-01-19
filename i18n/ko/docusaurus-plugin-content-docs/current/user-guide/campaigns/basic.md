@@ -98,7 +98,7 @@ style={{padding: "20px", margin: "10px", border: "2px solid #eaecef"}}
 - 인앱 팝업
   - **Notifly Android SDK 1.4.0** 이상
   - **Notifly iOS SDK 1.4.0** 이상
-  - **Notifly Flutter SDK 1.3.0** 이상
+  - **Notifly Flutter SDK 1.3.5** 이상
   - **Notifly React Native SDK 3.1.0** 이상
 
 만 **발송 시점 결정 이벤트 추가 필터링 설정** 이 가능합니다.
