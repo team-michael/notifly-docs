@@ -210,6 +210,36 @@ useEffect(() => {
 `YOUR_VAPID_PUBLIC_KEY` 값은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션에서 생성한 웹 푸시 인증서 키를 입력해 주세요.
 
 <Tabs>
+<TabItem value="v2.7.4 or above" label="v2.7.4 or above (Highly Recommended)">
+
+```html title="Using IIFE (Immediately Invoked Function Expression)"
+<script type="text/javascript">
+  (function (w, d, p, u, a) {
+    var s = d.createElement("script");
+    s.async = !0;
+    s.src =
+      "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2.7.5/dist/index.global.min.js";
+    s.onload = function () {
+      w.notifly.initialize({ projectId: p, username: u, password: a });
+    };
+    s.onerror = function () {
+      console.error("Failed to load Notifly Browser SDK.");
+    };
+    d.getElementsByTagName("head")[0].appendChild(s);
+  })(
+    window,
+    document,
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PROJECT_ID>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_USERNAME>",
+    // highlight-next-line
+    "<YOUR_NOTIFLY_PASSWORD>"
+  );
+</script>
+```
+
+</TabItem>
 <TabItem value="2.5.0 or above" label="2.5.0 or above">
 
 ```html title="Example HTML code for install & initialization"
@@ -279,6 +309,10 @@ useEffect(() => {
 
 </TabItem>
 </Tabs>
+
+:::warning CDN 사용 시 주의 사항
+AMD(Asynchronous Module Definition) 형태의 모듈 로더를 사용하고 계신다면, 스크립트 태그가 제대로 동작하지 않을 수 있습니다. 이 경우, 버전 `2.7.4`부터 지원하는 IIFE(Immediately Invoked Function Expression) 형태의 스크립트 태그 (`index.global.min.js` 또는 `index.global.js`) 를 사용해 주세요.
+:::
 
 :::caution window 객체가 존재하는지 확인하기
 
@@ -392,36 +426,6 @@ subscribeButton.addEventListener('click', function () {
     window.notifly.setUserProperties({
         "subscribed": true,
     });
-});
-```
-
-</TabItem>
-</Tabs>
-
-### 2-3. 유저 삭제 {#delete-user}
-
-```js
-notifly.deleteUser();
-```
-
-<Tabs>
-<TabItem value="react" label="ReactJS">
-
-```js title="Example ReactJS code for setUserId"
-const quitMembership = () => {
-    ...
-    notifly.deleteUser(); // delete user from notifly
-    ...
-}
-
-```
-
-</TabItem>
-<TabItem value="vanillajs" label="JS">
-
-```js title="Example JS code for setUserId"
-quitMembershipButton.addEventListener("click", function () {
-  window.notifly.deleteUser(); // delete user from notifly
 });
 ```
 

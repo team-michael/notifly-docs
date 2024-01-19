@@ -24,8 +24,7 @@ Google Tag Manager에서 Notifly 맞춤 템플릿을 추가하여 손쉽게 사�
 2. 태그의 이름을 지정하고 태그 구성을 클릭하여 태그 유형 선택 메뉴를 실행합니다.
 3. 맞춤설정 섹션에서 위에서 추가한 **Notifly Javascript SDK** 를 선택합니다.
    ![맞춤 설정](./image/gtm/gtm-init-1.png)
-4. 태그 구성 화면에서 Tag Type은 SDK 초기화를 선택하고 Project ID, Username, Password 및 기타 설정을 입력합니다. ([Notifly SDK 초기화 옵션](/ko/developer-guide/client-sdk/javascript-sdk#initialize-options) 참고.)
-   - 웹 푸시를 사용하셔야 한다면 [웹 푸시 설정](/ko/developer-guide/client-sdk/javascript-sdk#web-push)문서를 참고하셔서 인증키를 생성 후 `Initialization > pushSubscriptionOptions`란에 관련 설정을 추가해주세요.
+4. 태그 구성 화면에서 Tag Type은 SDK 초기화를 선택하고 Project ID, Username, Password를 입력합니다. ([Notifly SDK 초기화 옵션](/ko/developer-guide/client-sdk/javascript-sdk#initialize-options) 참고.)
 
 ![태그 타입](./image/gtm/gtm-init-2.png) 5. 고급 설정에서 태그 실행 옵션은 페이지당 한번으로 설정 하시고 트리거는 **Initialization - All Pages**로 선택 합니다.
 ![고급 설정](./image/gtm/gtm-init-3.png)
@@ -38,7 +37,8 @@ Google Tag Manager에서 Notifly 맞춤 템플릿을 추가하여 손쉽게 사�
 - 노티플라이에서는 유저의 아이디 (userId) 및 속성 (userProperties)을 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
 - 노티플라이에서는 채널 별 푸시 알림 수신 동의 여부를 유저 속성로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
 - Notifly SDK 초기화 태그 추가를 마친 후 속성 등록을 시작해 주세요.
-  :::
+
+:::
 
 ### 3-1. 유저 아이디 등록 (setUserId)
 
@@ -67,14 +67,6 @@ Google Tag Manager에서 Notifly 맞춤 템플릿을 추가하여 손쉽게 사�
 
 2. 태그 시퀀싱 으로 유저 속성 등록 태그 이전에 유저 아이디 등록 태그가 먼저 실행 될 수 있도록 설정 해줍니다.
    ![태그 시퀀싱](./image/gtm/gtm-set-user-props-2.png)
-
-### 3-3. 유저 삭제 (deleteUser)
-
-1. 유저 아이디, 유저 속성 등록 태그 생성과 동일하게 진행합니다. 유저 삭제는 현재 페이지에 접근한 사용자를 삭제하는 기능이기 때문에 별도의 아이디를 입력받지 않습니다. 노티플라이에서 해당 사용자의 정보를 완전 삭제합니다.
-   ![태그 타입](./image/gtm/gtm-delete-user-1.png)
-
-2. 태그 시퀀싱으로 초기화 태그가 실행 된 이후에 실행 될 수 있도록 설정합니다.
-   ![태그 시퀀싱](./image/gtm/gtm-delete-user-2.png)
 
 ## 4. 이벤트 로깅 (trackEvent)
 
