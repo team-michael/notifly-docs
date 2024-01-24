@@ -45,6 +45,16 @@ const config = {
     },
   ],
 
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap",
+      },
+    },
+  ],
+
   presets: [
     [
       "classic",
