@@ -177,8 +177,9 @@ fetch(url, {
 | userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                              |
 | userID         | String | Yes      | 유저 ID                                                                        |
 
-<span style={{ color: "red", fontWeight: "bold" }}><em>중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email,
-$phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다! 코드 예시를 참고해주세요.</em></span>
+- 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
+  - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
+- <span style={{ color: "red", fontWeight: "bold" }}><em>중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email, $phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다! 코드 예시를 참고해주세요.</em></span>
 
 #### Headers
 
@@ -209,7 +210,7 @@ const headers = {
     Authorization: "some-token", // retrieve this from authorization endpoint
 };
 
-// Body
+// Body (Single User)
 const body = {
     projectID: "provided_project_id",
     userProperties: {
@@ -220,6 +221,27 @@ const body = {
     userID: "some-user-id",
 };
 const encodedBody = JSON.stringify(body);
+
+// Body (Multple Users)
+const user1 = {
+    projectID: "provided_project_id",
+    userProperties: {
+        $email: "user1@example.com",
+        $phone_number: "010-5555-5555",
+        // ... more properties
+    },
+    userID: "some-user-id-1",
+};
+const user2 = {
+    projectID: "provided_project_id",
+    userProperties: {
+        $email: "user2@example.com",
+        $phone_number: "010-7777-7777",
+        // ... more properties
+    },
+    userID: "some-user-id-2",
+};
+const encodedBody = JSON.stringify([user1, user2]);
 
 // Fetch call
 fetch(url, {
