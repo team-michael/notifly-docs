@@ -223,25 +223,25 @@ const body = {
 const encodedBody = JSON.stringify(body);
 
 // Body (Multple Users)
-// const user1 = {
-//     projectID: "provided_project_id",
-//     userProperties: {
-//         $email: "user1@example.com",
-//         $phone_number: "010-5555-5555",
-//         // ... more properties
-//     },
-//     userID: "some-user-id-1",
-// };
-// const user2 = {
-//     projectID: "provided_project_id",
-//     userProperties: {
-//         $email: "user2@example.com",
-//         $phone_number: "010-7777-7777",
-//         // ... more properties
-//     },
-//     userID: "some-user-id-2",
-// };
-// const encodedBody = JSON.stringify([user1, user2]);
+const user1 = {
+    projectID: "provided_project_id",
+    userProperties: {
+        $email: "user1@example.com",
+        $phone_number: "010-5555-5555",
+        // ... more properties
+    },
+    userID: "some-user-id-1",
+};
+const user2 = {
+    projectID: "provided_project_id",
+    userProperties: {
+        $email: "user2@example.com",
+        $phone_number: "010-7777-7777",
+        // ... more properties
+    },
+    userID: "some-user-id-2",
+};
+const encodedBody = JSON.stringify([user1, user2]);
 
 // Fetch call
 fetch(url, {
