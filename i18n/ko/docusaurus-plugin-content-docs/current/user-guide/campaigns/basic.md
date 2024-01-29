@@ -113,7 +113,7 @@ sidebar_position: 1
         - ex) 고객이 `blog`를 통해 유입되었고 `/product` 경로를 방문하였으며 `id`라는 쿼리 파라미터가 `123` **이거나**
         고객이 `banner`를 통해`메인 화면`으로 유입되었을 때 캠페인을 집행하는 예시입니다.
 
-        이 때, `page_view` 이벤트는 `utm_medium`, `pathname`, `query.id` 라는 파라미터가 포함한다고 가정합니다.)
+        (이 때, `page_view` 이벤트는 `utm_medium`, `pathname`, `query.id` 라는 파라미터가 포함한다고 가정합니다.)
 
      </details>
 
