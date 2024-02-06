@@ -1,0 +1,8 @@
+{
+  "label": "In App Message",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다."
+  }
+}
