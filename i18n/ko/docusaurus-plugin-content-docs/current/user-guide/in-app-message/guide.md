@@ -33,5 +33,23 @@ _템플릿 기반 팝업 생성_
 
 ![In App message template creation 2](./img/in_app_message_template_creation_2.png)
 
+### 텍스트 및 버튼 스타일링 커스터마이징
+
+애플리케이션 내 메시지 템플릿을 이용하여 텍스트와 버튼의 내용 및 스타일을 사용자의 요구에 맞춰 변경할 수 있습니다. 색상 선택 및 스타일링 옵션을 통해 애플리케이션의 브랜드에 부합하는 디자인을 적용할 수 있습니다.
+
+_텍스트 및 버튼 스타일링 커스터마이징_
+![In App message template color config](./img/in_app_message_template_color_selection.png)
+
+### '다시 보지 않기' 버튼 기한 설정
+
+메시지 템플릿에 '다시 보지 않기' 버튼을 추가하여 사용자가 메시지를 한 번만 볼 수 있도록 설정할 수 있습니다. 또한, 이 버튼에 대한 기한을 설정함으로써, 사용자가 설정된 기간 동안 해당 메시지를 보지 않도록 할 수 있어, 사용자 경험을 더욱 세밀하게 관리할 수 있습니다.
+
+_'다시 보지 않기' 버튼 기한 설정_
+![In App message template no show config](./img/in_app_message_template_no_show_config.png)
+
+### 완성된 템플릿을 선택해서 캠페인 생성
+
+사용자가 디자인한 인앱 팝업 템플릿은 캠페인 생성 프로세스 중에 쉽게 선택하고 사용할 수 있습니다. 캠페인 생성 옵션을 선택한 후, 이전 단계에서 완성한 템플릿 중 하나를 선택합니다. 캠페인 생성에 대한 자세한 설명은 [여기](/ko/user-guide/campaigns/basic)를 참고하세요.
+
 _생성된 템플릿 선택 (캠페인 생성 플로우)_
 ![In App message template selection](./img/in_app_message_template_selection.png)
