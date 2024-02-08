@@ -90,5 +90,13 @@
   "sidebar.userGuide.category.Kakaotalk.link.generated-index.description": {
     "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Kakaotalk in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.In App Message": {
+    "message": "인앱 팝업",
+    "description": "The label for category In App Message in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.In App Message.link.generated-index.description": {
+    "message": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category In App Message in sidebar userGuide"
   }
 }
