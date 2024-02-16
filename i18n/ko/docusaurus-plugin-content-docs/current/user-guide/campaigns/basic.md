@@ -91,65 +91,52 @@ sidebar_position: 1
 
     - ex) `main_button_click` 이벤트에 `menu`라는 이벤트 파라미터가 포함되어 발생한다면, `menu`가 `trial_click`인 경우에만 캠페인을 발송합니다.
 
-     <details>
-        <summary><b>이벤트 파라미터 필터링 예시</b> 더 보기</summary>
+    <details style={{ margin: "10px" }}>
+      <summary><b>이벤트 파라미터 필터링 예시</b> 더 보기</summary>
 
-        <img
-        src={require("./img/triggering-event-filters-example-1.png").default}
-        width="700px"
-        style={{ padding: "20px", margin: "10px", border: "2px solid #eaecef" }}
-        />
+    <img
+    src={require("./img/triggering-event-filters-example-1.png").default}
+    width="700px"
+    style={{ padding: "20px", margin: "10px", border: "2px solid #eaecef" }}
+    />
 
-        - ex) 구매(`purchase`) 이벤트에 `product_category`라는 이벤트 파라미터가 포함되어 발생한다면, 해당 파라미터 값이 `clothing`인 경우에만 캠페인을 발송합니다.
+    - ex) 구매(`purchase`) 이벤트에 `product_category`라는 이벤트 파라미터가 포함되어 발생한다면, 해당 파라미터 값이 `clothing`인 경우에만 캠페인을 발송합니다.
 
-        **AND/OR 조건**을 이용하여 더 복잡한 필터링을 설정해 보세요.
+    **AND/OR 조건**을 이용하여 더 복잡한 필터링을 설정해 보세요.
 
-        <img
-        src={require("./img/triggering-event-filters-example-2.png").default}
-        width="700px"
-        style={{ padding: "20px", margin: "10px", border: "2px solid #eaecef" }}
-        />
+    <img
+    src={require("./img/triggering-event-filters-example-2.png").default}
+    width="700px"
+    style={{ padding: "20px", margin: "10px", border: "2px solid #eaecef" }}
+    />
 
-        - ex) 고객이 `blog`를 통해 유입되었고 `/product` 경로를 방문하였으며 `id`라는 쿼리 파라미터가 `123` **이거나**
-        고객이 `banner`를 통해`메인 화면`으로 유입되었을 때 캠페인을 집행하는 예시입니다.
+    - ex) 고객이 `blog`를 통해 유입되었고 `/product` 경로를 방문하였으며 `id`라는 쿼리 파라미터가 `123` **이거나**
+      고객이 `banner`를 통해`메인 화면`으로 유입되었을 때 캠페인을 집행하는 예시입니다.
 
-        (이 때, `page_view` 이벤트는 `utm_medium`, `pathname`, `query.id` 라는 파라미터가 포함한다고 가정합니다.)
+    (이 때, `page_view` 이벤트는 `utm_medium`, `pathname`, `query.id` 라는 파라미터가 포함한다고 가정합니다.)
 
-     </details>
+    </details>
 
 - **켐페인 유효 기간 설정**: <u>캠페인을 트리거할 이벤트</u>의 시작일과 종료일을 설정합니다.
 - **이벤트 발생 후 발송 지연**: 이벤트가 트리거된 시점에, 바로 캠페인을 발송할 지 혹은 일정 시간 뒤에 발송할 지 선택할 수 있습니다.
 
   - **발송 취소 이벤트**: '발송 시점 결정 이벤트'가 트리거되어 발송 지연을 기다리던 도중, 해당 이벤트가 발생하면 캠페인이 발송 취소됩니다.
 
-    - ex) `notifly__main_button_click` 이벤트가 발생한 시점부터 `1일 2시간 3분 4초` 후에 캠페인을 발송합니다.
+    - ex) `notifly__main_button_click` 이벤트가 발생한 시점부터 `1일 2시간 3분 4초` 동안 `notifly__push_delivered` 이벤트가 발생하면, 캠페인을 발송하지 않습니다.
 
       :::tip 사용 예시
       고객이 로그인하면, 1시간 이후 상품 구매 프로모션 알림을 보내지만 그 사이에 해당 고객이 이미 물건을 구매한 경우에는 알림을 보내지 않고 싶을 때, `purchase` 등의 이벤트를 발송 취소 이벤트로 설정하는 방식으로 사용할 수 있습니다.
       :::
 
-- **고객 피로도 관리**: '발송 시점 결정 이벤트'가 여러 번 트리거되더라도 유저에게 발송할 캠페인의 횟수를 제어합니다.
+- **고객 피로도 관리**: 고객이 발송 시점 결정 이벤트를 여러번 발생시키는 등의 이유로 고객이 메시지를 단기간 여러번 수신하는 것을 방지하기 위해, **고객 피로도 관리**를 설정할 수 있습니다.
 - **야간 발송 금지**: 캠페인을 발송하지 않을 시간을 설정합니다. 설정된 시간에는 캠페인이 발송되지 않습니다.
 
   - **지연 발송 허용**: 야간 발송 금지 시간에 발송되지 않은 캠페인을 발송 금지 시간이 끝난 뒤에 발송할 지 선택할 수 있습니다.
+
     :::caution 야간 발송 금지!
     _오후 9시부터 그 다음 날 오전 8시까지의 시간에 전자적 전송매체를 이용하여 영리목적의 광고성 정보를 전송하려는 자는 제1항에도 불구하고 그 수신자로부터 별도의 사전 동의를 받아야 한다. 다만, [**대통령령으로 정하는 매체**](<https://www.law.go.kr/법령/정보통신망이용촉진및정보보호등에관한법률시행령/(20231226,34024,20231226)/제61조>)(전자우편)의 경우에는 그러하지 아니하다._
 
     - 정보통신망 이용촉진 및 정보보호 등에 관한 법률 [**제50조 제3항**](https://www.law.go.kr/lsLinkProc.do?lsNm=%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%A7%9D%20%EC%9D%B4%EC%9A%A9%EC%B4%89%EC%A7%84%20%EB%B0%8F%20%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%20%EB%93%B1%EC%97%90%20%EA%B4%80%ED%95%9C%20%EB%B2%95%EB%A5%A0&lsId=000030&chrClsCd=010202&joNo=005000000%5E005000000%5E005002000%5E005003000%5E005004000%5E005005000%5E005006000%5E005007000%5E005008000&mode=2&joLnkStr=%EC%A0%9C50%EC%A1%B0%20%EB%98%90%EB%8A%94%20%EC%A0%9C50%EC%A1%B0%EC%9D%988)
-
-:::note 팝업 캠페인 집행 시 SDK 버전 호환성
-
-- 인웹 팝업
-  - **Notifly Javascript SDK 2.6.0** 이상
-- 인앱 팝업
-  - **Notifly Android SDK 1.4.0** 이상
-  - **Notifly iOS SDK 1.4.0** 이상
-  - **Notifly Flutter SDK 1.3.5** 이상
-  - **Notifly React Native SDK 3.1.0** 이상
-
-만 **발송 시점 결정 이벤트 추가 필터링 설정** 이 가능합니다.
-
-:::
 
 ### 2.3. API 기반 발송
 
@@ -161,8 +148,6 @@ sidebar_position: 1
     <summary><b>API 기반 발송 캠페인 생성 예시</b> 더 보기</summary>
 
 - 해당 캠페인은 [**Campaign Triggering API**](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.
-
-<!-- ![api-triggered-campaign-timing-example](./img/api_triggered_campaign_timing_example.png) -->
 
 ![api-triggered-campaign-message-example](./img/api_triggered_campaign_message_example.png)
 
