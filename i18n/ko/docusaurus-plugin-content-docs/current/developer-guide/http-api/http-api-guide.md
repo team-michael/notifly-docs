@@ -17,21 +17,21 @@ sidebar_position: 1
 
 #### Parameters
 
-| Parameter | Type   | Required | Description                                                                                              |
-|-----------|--------|----------|----------------------------------------------------------------------------------------------------------|
+| Parameter | Type   | Required | Description                                                                                                                                              |
+| --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | accessKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Access Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 | secretKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Secret Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 #### Headers
 
-| Parameter    | Value            | Description              |
-|--------------|------------------|--------------------------|
+| Parameter    | Value            | Description               |
+| ------------ | ---------------- | ------------------------- |
 | Content-Type | application/json | Request body 의 MIME Type |
 
 #### Response (예시)
 
 | Parameter    | Value                              |
-|--------------|------------------------------------|
+| ------------ | ---------------------------------- |
 | Status code  | 200 OK                             |
 | Content-Type | application/json                   |
 | json         | {"data":"some-token","error":null} |
@@ -44,30 +44,30 @@ const url = "https://api.notifly.tech/authenticate";
 
 // Headers
 const headers = {
-    "Content-Type": "application/json",
+  "Content-Type": "application/json",
 };
 
 // Body
 const body = {
-    accessKey: "your-access_key",
-    secretKey: "your-secret-key",
+  accessKey: "your-access_key",
+  secretKey: "your-secret-key",
 };
 const encodedBody = JSON.stringify(body);
 
 // Fetch call
 fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: encodedBody,
+  method: "POST",
+  headers: headers,
+  body: encodedBody,
 })
-    .then((response) => response.json())
-    .then((data) => {
-        // Get response data
-        console.log(data);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .then((response) => response.json())
+  .then((data) => {
+    // Get response data
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /**
  * Response data 예시
@@ -89,26 +89,26 @@ fetch(url, {
 
 ### Specifications
 
-| Parameter                  | Type    | Required | Description                                                                                  |
-|----------------------------|---------|----------|----------------------------------------------------------------------------------------------|
-| projectID                  | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                 |
-| eventName                  | String  | Yes      | 이벤트명                                                                                         |
-| isGlobalEvent              | Boolean | Yes      | 특정 유저에게만 발생하는 것이 아니라 서비스 레벨에서 발생하는 이벤트인지의 여부                                                 |
-| eventParams                | Object  | No       | 이벤트 파라미터 값들                                                                                  |
+| Parameter                  | Type    | Required | Description                                                                                                                                  |
+| -------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| projectID                  | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                                      |
+| eventName                  | String  | Yes      | 이벤트명                                                                                                                                     |
+| isGlobalEvent              | Boolean | Yes      | 특정 유저에게만 발생하는 것이 아니라 서비스 레벨에서 발생하는 이벤트인지의 여부                                                              |
+| eventParams                | Object  | No       | 이벤트 파라미터 값들                                                                                                                         |
 | segmentationEventParamKeys | List    | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userID                     | String  | No       | 유저 ID                                                                                        |
+| userID                     | String  | No       | 유저 ID                                                                                                                                      |
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response (예시)
 
 | Parameter    | Value                                                             |
-|--------------|-------------------------------------------------------------------|
+| ------------ | ----------------------------------------------------------------- |
 | Status code  | 200 OK                                                            |
 | Content-Type | application/json                                                  |
 | json         | {"data":"some-success-response-from-notifly-engine","error":null} |
@@ -123,35 +123,35 @@ const url = "https://api.notifly.tech/track-event";
 
 // Headers
 const headers = {
-    "Content-Type": "application/json",
-    Authorization: "some-token", // retrieve this from authorization endpoint
+  "Content-Type": "application/json",
+  Authorization: "some-token", // retrieve this from authorization endpoint
 };
 
 // Body
 const body = {
-    projectID: "provided_project_id",
-    eventName: "show_end",
-    isGlobalEvent: true, // true if the event is not associated with a specific user
-    eventParams: {},
-    segmentationEventParamKeys: [],
-    userID: null, // null if global event but should be specified otherwise
+  projectID: "provided_project_id",
+  eventName: "show_end",
+  isGlobalEvent: true, // true if the event is not associated with a specific user
+  eventParams: {},
+  segmentationEventParamKeys: [],
+  userID: null, // null if global event but should be specified otherwise
 };
 const encodedBody = JSON.stringify(body);
 
 // Fetch call
 fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: encodedBody,
+  method: "POST",
+  headers: headers,
+  body: encodedBody,
 })
-    .then((response) => response.json())
-    .then((data) => {
-        // Get response data
-        console.log(data);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .then((response) => response.json())
+  .then((data) => {
+    // Get response data
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /**
  * Response data 예시
@@ -172,28 +172,28 @@ fetch(url, {
 
 ### Specifications
 
-| Parameter      | Type   | Required | Description                                                                  |
-|----------------|--------|----------|------------------------------------------------------------------------------|
+| Parameter      | Type   | Required | Description                                                                                             |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
 | projectID      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                              |
-| userID         | String | Yes      | 유저 ID                                                                        |
+| userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                             |
+| userID         | String | Yes      | 유저 ID                                                                                                 |
 
 - 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-    - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
+  - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
 - <span style={{ color: "red", fontWeight: "bold" }}><em>중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email,
   $phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다! 코드 예시를 참고해주세요.</em></span>
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response (예시)
 
 | Parameter    | Value                                                             |
-|--------------|-------------------------------------------------------------------|
+| ------------ | ----------------------------------------------------------------- |
 | Status code  | 200 OK                                                            |
 | Content-Type | application/json                                                  |
 | json         | {"data":"some-success-response-from-notifly-engine","error":null} |
@@ -208,57 +208,57 @@ const url = "https://api.notifly.tech/set-user-properties";
 
 // Headers
 const headers = {
-    "Content-Type": "application/json",
-    Authorization: "some-token", // retrieve this from authorization endpoint
+  "Content-Type": "application/json",
+  Authorization: "some-token", // retrieve this from authorization endpoint
 };
 
 // Body (Single User)
 const body = {
-    projectID: "provided_project_id",
-    userProperties: {
-        $email: "email@example.com",
-        $phone_number: "010-7777-7777",
-        // ... more properties
-    },
-    userID: "some-user-id",
+  projectID: "provided_project_id",
+  userProperties: {
+    $email: "email@example.com",
+    $phone_number: "010-7777-7777",
+    // ... more properties
+  },
+  userID: "some-user-id",
 };
 const encodedBody = JSON.stringify(body);
 
 // Body (Multple Users)
 const user1 = {
-    projectID: "provided_project_id",
-    userProperties: {
-        $email: "user1@example.com",
-        $phone_number: "010-5555-5555",
-        // ... more properties
-    },
-    userID: "some-user-id-1",
+  projectID: "provided_project_id",
+  userProperties: {
+    $email: "user1@example.com",
+    $phone_number: "010-5555-5555",
+    // ... more properties
+  },
+  userID: "some-user-id-1",
 };
 const user2 = {
-    projectID: "provided_project_id",
-    userProperties: {
-        $email: "user2@example.com",
-        $phone_number: "010-7777-7777",
-        // ... more properties
-    },
-    userID: "some-user-id-2",
+  projectID: "provided_project_id",
+  userProperties: {
+    $email: "user2@example.com",
+    $phone_number: "010-7777-7777",
+    // ... more properties
+  },
+  userID: "some-user-id-2",
 };
 const encodedBody = JSON.stringify([user1, user2]);
 
 // Fetch call
 fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: encodedBody,
+  method: "POST",
+  headers: headers,
+  body: encodedBody,
 })
-    .then((response) => response.json())
-    .then((data) => {
-        // Get response data
-        console.log(data);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .then((response) => response.json())
+  .then((data) => {
+    // Get response data
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 /**
  * Response data 예시
@@ -285,30 +285,30 @@ fetch(url, {
 
 #### Path Parameters
 
-| Parameter  | Type   | Required | Description                                                                                   |
-|------------|--------|----------|-----------------------------------------------------------------------------------------------|
-| projectId  | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                       |
+| Parameter  | Type   | Required | Description                                                                                                                       |
+| ---------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| projectId  | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                                          |
 | campaignId | String | Yes      | [캠페인 리스트](https://notifly.tech/console/campaign/list)의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
 
 #### Request
 
-| Parameter     | Type   | Required | Description                                        |
-|---------------|--------|----------|----------------------------------------------------|
-| recipients    | List   | Yes      | 메시지를 발송할 유저의 ID 및 이벤트 파라미터를 포함하는 객체의 리스트 입니다.      |
-| - userId      | String | Yes      | 메시지를 발송할 유저의 ID 입니다.                               |
+| Parameter     | Type   | Required | Description                                                                              |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| recipients    | List   | Yes      | 메시지를 발송할 유저의 ID 및 이벤트 파라미터를 포함하는 객체의 리스트 입니다.            |
+| - userId      | String | Yes      | 메시지를 발송할 유저의 ID 입니다.                                                        |
 | - eventParams | Object | Yes      | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다. |
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response
 
 | Status Code            | Content-Type     | Example Response                                 |
-|------------------------|------------------|--------------------------------------------------|
+| ---------------------- | ---------------- | ------------------------------------------------ |
 | 200 OK                 | application/json | `{"success":true,"error":null}`                  |
 | 400 Bad Request        | application/json | `{"success":false,"error":"some-error-message"}` |
 | 405 Method Not Allowed | application/json | `{"success":false,"error":"Method not allowed"}` |
@@ -319,60 +319,60 @@ Node.js
 
 ```js
 async function triggerCampaign(projectId, campaignId) {
-    // Retrieve authToken from authorization endpoint
-    const authResponse = await fetch("https://api.notifly.tech/authenticate", {
-        method: "POST",
-        body: JSON.stringify({
-            accessKey: "your-access-key",
-            secretKey: "your-secret-key",
-        }),
-    });
-    const { data: authToken } = await authResponse.json();
+  // Retrieve authToken from authorization endpoint
+  const authResponse = await fetch("https://api.notifly.tech/authenticate", {
+    method: "POST",
+    body: JSON.stringify({
+      accessKey: "your-access-key",
+      secretKey: "your-secret-key",
+    }),
+  });
+  const { data: authToken } = await authResponse.json();
 
-    // Endpoint
-    const url = `https://api.notifly.tech/campaign/${projectId}/${campaignId}/send`;
+  // Endpoint
+  const url = `https://api.notifly.tech/campaign/${projectId}/${campaignId}/send`;
 
-    // Request header
-    const headers = {
-        "Content-Type": "application/json",
-        Authorization: authToken,
-    };
+  // Request header
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: authToken,
+  };
 
-    // Request body
-    const body = {
-        recipients: [
-            {
-                userId: "alice",
-                eventParams: {
-                    messageTitle: "Hello Alice!",
-                    messageBody: "How are you?",
-                    // ... more event params
-                },
-            },
-            {
-                userId: "bob",
-                eventParams: {
-                    messageTitle: "Hello Bob!",
-                    messageBody: "How are you?",
-                    // ... more event params
-                },
-            },
-            // ... more recipients
-        ],
-    };
+  // Request body
+  const body = {
+    recipients: [
+      {
+        userId: "alice",
+        eventParams: {
+          messageTitle: "Hello Alice!",
+          messageBody: "How are you?",
+          // ... more event params
+        },
+      },
+      {
+        userId: "bob",
+        eventParams: {
+          messageTitle: "Hello Bob!",
+          messageBody: "How are you?",
+          // ... more event params
+        },
+      },
+      // ... more recipients
+    ],
+  };
 
-    const response = await fetch(url, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body),
-    });
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+  });
 
-    const result = await response.json();
-    if (!result.success) {
-        console.error(result);
-    } else {
-        console.log("Campaign triggered successfully");
-    }
+  const result = await response.json();
+  if (!result.success) {
+    console.error(result);
+  } else {
+    console.log("Campaign triggered successfully");
+  }
 }
 ```
 
@@ -394,26 +394,26 @@ async function triggerCampaign(projectId, campaignId) {
 
 #### Request
 
-| Parameter     | Type   | Required | Description                                                             |
-|---------------|--------|----------|-------------------------------------------------------------------------|
+| Parameter     | Type   | Required | Description                                                                              |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
 | projectId     | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다. |
-| type          | String | Yes      | 메시지 유형 (`sms` 또는 `mms`)                                                 |
-| title         | String | No       | 본문 제목(mms에만 사용)                                                         |
-| body          | String | Yes      | 본문 내용                                                                   |
-| recipientList | List   | Yes      | 수신자 목록(최대 1000명)                                                        |
-| - recipientNo | String | Yes      | 수신 번호                                                                   |
+| type          | String | Yes      | 메시지 유형 (`sms` 또는 `mms`)                                                           |
+| title         | String | No       | 본문 제목(mms에만 사용)                                                                  |
+| body          | String | Yes      | 본문 내용                                                                                |
+| recipientList | List   | Yes      | 수신자 목록(최대 1000명)                                                                 |
+| - recipientNo | String | Yes      | 수신 번호                                                                                |
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -427,11 +427,11 @@ Node.js
 ```js
 // Retrieve authToken from authorization endpoint
 const authResponse = await fetch("https://api.notifly.tech/authenticate", {
-    method: "POST",
-    body: JSON.stringify({
-        accessKey: "your-access-key",
-        secretKey: "your-secret-key",
-    }),
+  method: "POST",
+  body: JSON.stringify({
+    accessKey: "your-access-key",
+    secretKey: "your-secret-key",
+  }),
 });
 const { data: authToken } = await authResponse.json();
 
@@ -440,37 +440,37 @@ const url = `https://api.notifly.tech/messages/text-message`;
 
 // Request header
 const headers = {
-    "Content-Type": "application/json",
-    Authorization: authToken, // retrieve this authToken from authorization endpoint
+  "Content-Type": "application/json",
+  Authorization: authToken, // retrieve this authToken from authorization endpoint
 };
 
 // Request body
 const body = {
-    projectId: projectId,
-    type: "sms",
-    body: "Message Body",
-    recipientList: [
-        {
-            recipientNo: "01012345678",
-        },
-        {
-            recipientNo: "01045671234",
-        },
-        // ... more recipients
-    ]
+  projectId: projectId,
+  type: "sms",
+  body: "Message Body",
+  recipientList: [
+    {
+      recipientNo: "01012345678",
+    },
+    {
+      recipientNo: "01045671234",
+    },
+    // ... more recipients
+  ],
 };
 
 const response = await fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(body),
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(body),
 });
 
 const result = await response.json();
 if (!result.success) {
-    console.error(result);
+  console.error(result);
 } else {
-    console.log("SMS Message sent successfully");
+  console.log("SMS Message sent successfully");
 }
 ```
 
@@ -492,25 +492,25 @@ if (!result.success) {
 
 #### Request
 
-| Parameter           | Type   | Required | Description                                                                             |
-|---------------------|--------|----------|-----------------------------------------------------------------------------------------|
-| projectId           | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                 |
+| Parameter           | Type   | Required | Description                                                                                                    |
+| ------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------- |
+| projectId           | String | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다.                       |
 | templateId          | String | Yes      | 등록한 발송 템플릿 ID ([알림톡 템플릿 리스트](https://notifly.tech/console/kakao-template/list)에서 확인 가능) |
-| recipientList       | List   | Yes      | 수신자 리스트(최대 1000명)                                                                       |
-| - recipientNo       | String | Yes      | 수신 번호                                                                                   |
-| - templateParameter | Object | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                             |
+| recipientList       | List   | Yes      | 수신자 리스트(최대 1000명)                                                                                     |
+| - recipientNo       | String | Yes      | 수신 번호                                                                                                      |
+| - templateParameter | Object | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -524,11 +524,11 @@ Node.js
 ```js
 // Retrieve authToken from authorization endpoint
 const authResponse = await fetch("https://api.notifly.tech/authenticate", {
-    method: "POST",
-    body: JSON.stringify({
-        accessKey: "your-access-key",
-        secretKey: "your-secret-key",
-    }),
+  method: "POST",
+  body: JSON.stringify({
+    accessKey: "your-access-key",
+    secretKey: "your-secret-key",
+  }),
 });
 const { data: authToken } = await authResponse.json();
 
@@ -537,41 +537,41 @@ const url = `https://api.notifly.tech/messages/kakao-alimtalk`;
 
 // Request header
 const headers = {
-    "Content-Type": "application/json",
-    Authorization: authToken, // retrieve this authToken from authorization endpoint
+  "Content-Type": "application/json",
+  Authorization: authToken, // retrieve this authToken from authorization endpoint
 };
 
 // Request body
 const body = {
-    projectId: projectId,
-    templateId: templateId,
-    recipientList: [
-        {
-            "recipientNo": "01012345678",
-            "templateParameter": {
-                "user_name": "Notifly User"
-            }
-        },
-        {
-            "recipientNo": "01056781234",
-            "templateParameter": {
-                "user_name": "Notifly Customer"
-            }
-        }
-    ],
+  projectId: projectId,
+  templateId: templateId,
+  recipientList: [
+    {
+      recipientNo: "01012345678",
+      templateParameter: {
+        user_name: "Notifly User",
+      },
+    },
+    {
+      recipientNo: "01056781234",
+      templateParameter: {
+        user_name: "Notifly Customer",
+      },
+    },
+  ],
 };
 
 const response = await fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(body),
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(body),
 });
 
 const result = await response.json();
 if (!result.success) {
-    console.error(result);
+  console.error(result);
 } else {
-    console.log("SMS Message sent successfully");
+  console.log("SMS Message sent successfully");
 }
 ```
 
@@ -593,26 +593,26 @@ if (!result.success) {
 
 #### Request
 
-| Parameter      | Type    | Required | Description                                                             |
-|----------------|---------|----------|-------------------------------------------------------------------------|
+| Parameter      | Type    | Required | Description                                                                              |
+| -------------- | ------- | -------- | ---------------------------------------------------------------------------------------- |
 | projectId      | String  | Yes      | [Notifly의 설정 페이지](https://notifly.tech/console/settings)에서 확인하실 수 있습니다. |
-| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)                                           |
-| isAd           | Boolean | No       | 광고 여부                                                                   |
-| recipientList  | List    | Yes      | 수신자 리스트(최대 1000명)                                                       |
-| - recipientNo  | String  | Yes      | 수신 번호                                                                   |
-| - content.text | String  | Yes      | 본문 내용                                                                   |
+| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)                                             |
+| isAd           | Boolean | No       | 광고 여부                                                                                |
+| recipientList  | List    | Yes      | 수신자 리스트(최대 1000명)                                                               |
+| - recipientNo  | String  | Yes      | 수신 번호                                                                                |
+| - content.text | String  | Yes      | 본문 내용                                                                                |
 
 #### Headers
 
-| Parameter     | Value            | Description                           |
-|---------------|------------------|---------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type              |
+| Parameter     | Value            | Description                                     |
+| ------------- | ---------------- | ----------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                       |
 | Authorization | some-token       | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -627,11 +627,11 @@ Node.js
 // Example usage of sendFriendtalk function
 // Retrieve authToken from authorization endpoint
 const authResponse = await fetch("https://api.notifly.tech/authenticate", {
-    method: "POST",
-    body: JSON.stringify({
-        accessKey: "your-access-key",
-        secretKey: "your-secret-key",
-    }),
+  method: "POST",
+  body: JSON.stringify({
+    accessKey: "your-access-key",
+    secretKey: "your-secret-key",
+  }),
 });
 const { data: authToken } = await authResponse.json();
 
@@ -640,35 +640,35 @@ const url = `https://api.notifly.tech/messages/kakao-friendtalk`;
 
 // Request header
 const headers = {
-    "Content-Type": "application/json",
-    Authorization: authToken, // retrieve this authToken from authorization endpoint
+  "Content-Type": "application/json",
+  Authorization: authToken, // retrieve this authToken from authorization endpoint
 };
 
 // Request body
 const body = {
-    projectId: projectId,
-    messageType: "text",
-    isAd: false,
-    recipientList: [
-        {
-            recipientNo: "01012345678",
-            content: {
-                text: "test",
-            }
-        }
-    ],
+  projectId: projectId,
+  messageType: "text",
+  isAd: false,
+  recipientList: [
+    {
+      recipientNo: "01012345678",
+      content: {
+        text: "test",
+      },
+    },
+  ],
 };
 
 const response = await fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(body),
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(body),
 });
 
 const result = await response.json();
 if (!result.success) {
-    console.error(result);
+  console.error(result);
 } else {
-    console.log("SMS Message sent successfully");
+  console.log("SMS Message sent successfully");
 }
 ```
