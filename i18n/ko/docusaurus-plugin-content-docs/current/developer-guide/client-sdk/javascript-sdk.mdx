@@ -69,7 +69,7 @@ my-project/
 
 ```js title="notifly-service-worker.js"
 self.importScripts(
-  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js"
+  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js",
 );
 ```
 
@@ -234,7 +234,7 @@ useEffect(() => {
     // highlight-next-line
     "<YOUR_NOTIFLY_USERNAME>",
     // highlight-next-line
-    "<YOUR_NOTIFLY_PASSWORD>"
+    "<YOUR_NOTIFLY_PASSWORD>",
   );
 </script>
 ```
@@ -263,7 +263,7 @@ useEffect(() => {
     // highlight-next-line
     "<YOUR_NOTIFLY_USERNAME>",
     // highlight-next-line
-    "<YOUR_NOTIFLY_PASSWORD>"
+    "<YOUR_NOTIFLY_PASSWORD>",
   );
 </script>
 ```
@@ -302,7 +302,7 @@ useEffect(() => {
     {
       vapidPublicKey: "<YOUR_VAPID_PUBLIC_KEY>",
       askPermission: true,
-    }
+    },
   );
 </script>
 ```
