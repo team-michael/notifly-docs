@@ -77,7 +77,7 @@ sidebar_position: 1
 
 2.  **[HTTP API](/ko/developer-guide/http-api/http-api-guide)**: 노티플라이는 REST API를 통하여 이벤트를 발생시키는 방법을 제공합니다. REST API를 통하여 특정 유저에게만 발생하는 이벤트 뿐만 아니라, 서비스 레벨에서 발생하는 이벤트(예: 판매 기간 종료 이벤트)도 노티플라이에 전달할 수 있습니다.
 
-3.  **외부 분석 도구 연동** : [Amplitude](/ko/user-guide/amplitude/amplitude-introduction) 혹은 [Mixpanel](/ko/docusaurus-plugin-content-docs/current/user-guide/mixpanel/mixpanel-introduction.md) 이미 사용하고 계시다면, 기존에 사용하시던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다.
+3.  **외부 분석 도구 연동** : [Amplitude](/ko/user-guide/amplitude/amplitude-introduction)를 이미 사용하고 계시다면, 기존에 사용하시던 이벤트를 그대로 노티플라이에게 전달할 수 있습니다.
 
 :::
 
