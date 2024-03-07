@@ -30,11 +30,11 @@ sidebar_position: 1
 
 #### Response (예시)
 
-| Parameter    | Value                              |
-| ------------ | ---------------------------------- |
-| Status code  | 200 OK                             |
-| Content-Type | application/json                   |
-| json         | {"data":"some-token","error":null} |
+| Parameter    | Value                                |
+| ------------ | ------------------------------------ |
+| Status code  | 200 OK                               |
+| Content-Type | application/json                     |
+| json         | `{"data":"some-token","error":null}` |
 
 ### 코드 예시
 
@@ -180,8 +180,13 @@ fetch(url, {
 
 - 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
   - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
-- <span style={{ color: "red", fontWeight: "bold" }}><em>중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email,
-  $phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다! 코드 예시를 참고해주세요.</em></span>
+- <span style={{ color: "red", fontWeight: "bold" }}>
+    <em>
+      중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email,
+      $phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다!
+      코드 예시를 참고해주세요.
+    </em>
+  </span>
 
 #### Headers
 
@@ -275,7 +280,7 @@ fetch(url, {
 
 ### 주의 사항
 
-- HTTP REST API를 이용한 Triggering은 캠페인이 **API 기반 발송**으로 설정되어있는 경우에만 사용 가능합니다.
+- HTTP API를 이용한 캠페인 발송의 경우, 캠페인이 **API 기반 발송**으로 설정되어있는 경우에만 사용 가능합니다.
 
 ### Endpoint
 
@@ -294,9 +299,29 @@ fetch(url, {
 
 | Parameter     | Type   | Required | Description                                                                              |
 | ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| recipients    | List   | Yes      | 메시지를 발송할 유저의 ID 및 이벤트 파라미터를 포함하는 객체의 리스트 입니다.            |
-| - userId      | String | Yes      | 메시지를 발송할 유저의 ID 입니다.                                                        |
-| - eventParams | Object | Yes      | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다. |
+| recipients    | List   | Yes      | 메시지 수신자들의 정보입니다.                                                            |
+| - type        | String | No       | 수신자의 유형입니다. (기본값: `user-id`). 현재 `user-id`, `phone-number`만 지원합니다.   |
+| - userId      | String | No       | 메시지를 발송할 유저의 ID 입니다. `type`이 `user-id`인 경우 필수입니다.                  |
+| - phoneNumber | String | No       | 메시지를 발송할 유저의 전화번호 입니다. `type`이 `phone-number`인 경우 필수입니다.       |
+| - eventParams | Object | No       | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다. |
+
+:::caution 수신자 유형과 캠페인 채널
+
+현재 API 기반 발송은 **푸시 알림** 및 **카카오 알림톡** 채널에서만 사용 가능합니다. 설정된 캠페인의 발송 채널마다 지원되는 수신자 유형이 다를 수 있습니다. 만약 캠페인의 발송 채널이 지원하지 않는 수신자 유형을 사용하면, API 응답으로 400 Bad Request가 반환됩니다.
+
+- 푸시 알림: `user-id` 유형의 수신자만 지원됩니다.
+- 카카오 알림톡: `user-id` 및 `phone-number` 유형의 수신자를 지원합니다.
+
+:::
+
+:::tip 중복 제거
+
+API 기반 발송은 중복 발송을 방지하기 위해 수신자의 중복 여부를 체크합니다. 동일한 수신자가 여러 번 포함되어 있는 경우, 중복된 수신자는 한 번만 발송됩니다. 다음은 채널 별 중복 제거 규칙입니다.
+
+- 푸시 알림: 동일한 디바이스일 경우, 하나의 디바이스에만 메시지를 발송합니다.
+- 카카오 알림톡: 동일한 전화번호일 경우, 하나의 전화번호에만 메시지를 발송합니다.
+
+:::
 
 #### Headers
 
@@ -307,11 +332,15 @@ fetch(url, {
 
 #### Response
 
-| Status Code            | Content-Type     | Example Response                                 |
-| ---------------------- | ---------------- | ------------------------------------------------ |
-| 200 OK                 | application/json | `{"success":true,"error":null}`                  |
-| 400 Bad Request        | application/json | `{"success":false,"error":"some-error-message"}` |
-| 405 Method Not Allowed | application/json | `{"success":false,"error":"Method not allowed"}` |
+| Status Code               | Content-Type     | Description                                                                                 | Example Response                                                                  |
+| ------------------------- | ---------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 200 OK                    | application/json | 캠페인이 정상적으로 트리거 되었습니다.                                                      | `{"code": 200, "success":true,"error":null}`                                      |
+| 400 Bad Request           | application/json | 잘못된 요청입니다.                                                                          | `{"code": 400, "success":false,"error":"Bad request: some-error-message"}`        |
+| 401 Unauthorized          | application/json | 토큰이 만료되었거나, 인증 정보가 유효하지 않습니다.                                         | `{"code": 401, "success":false,"error":"Unauthorized: Invalid token"}`            |
+| 405 Method Not Allowed    | application/json | 지원되지 않는 HTTP Method 입니다.                                                           | `{"code": 405, "success":false,"error":"Method not allowed: some-error-message"}` |
+| 413 Payload Too Large     | application/json | 요청 payload가 너무 큽니다.                                                                 | `{"code": 413, "success":false,"error":"Payload too large: some-error-message"}`  |
+| 500 Internal Server Error | application/json | 노티플라이 서버 오류입니다. 지속적으로 500 에러가 발생한다면, 노티플라이 팀에 문의해주세요. | `{"code": 500, "success":false,"error":"some-error-message"}`                     |
+| 501 Not Implemented       | application/json | 아직 지원되지 않는 기능입니다.                                                              | `{"code": 501, "success":false,"error":"Not implemented: some-error-message"}`    |
 
 #### 코드 예시
 
