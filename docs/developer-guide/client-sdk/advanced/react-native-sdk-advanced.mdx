@@ -4,4 +4,15 @@ sidebar_position: 4
 
 # (Advanced) React Native SDK Setup
 
-We apologize for the inconvenience, but this document is currently being prepared and is not yet available. We are working diligently to complete it and will make it available as soon as possible. Thank you for your patience and understanding.
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 1. Pre-permission for Push Notifications
+
+Users must grant permission to receive push notifications.
+The Notifly React Native SDK does not separately request user permission for push notifications.
+Implementing user notification permission must be done directly within the app, independently of the Notifly React Native SDK installation.
+
+If you are using Firebase Messaging, you can implement this by referring to the [Firebase Messaging documentation](https://firebase.google.com/docs/cloud-messaging/ios/client#request-permission-to-receive-notifications).

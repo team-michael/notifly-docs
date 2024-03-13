@@ -4,4 +4,345 @@ sidebar_position: 4
 
 # Client SDK - React Native
 
-We apologize for the inconvenience, but this document is currently being prepared and is not yet available. We are working diligently to complete it and will make it available as soon as possible. Thank you for your patience and understanding.
+The Notifly React Native SDK can be used to integrate Notifly with React Native applications.  
+It supports the following features:
+
+- Register device information with Notifly to receive app push notifications and in-app popups sent through Notifly in your React Native app.
+  - In-app popups from Notifly are received only when the app is in the foreground state. They are ignored when in background or quit states.
+- Integrate events and user information with Notifly to be utilized in all campaigns.
+- Log events to measure the performance of campaigns.
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+Notifly utilizes [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) for sending push notifications.  
+Please proceed with the following steps first:
+
+1. [Integrate Firebase Project](http://docs.notifly.tech/developer-guide/client-sdk/firebase_project_setup)
+2. [Set up iOS APNs Authentication Information](http://docs.notifly.tech/developer-guide/client-sdk/firebase_project_setup#1-3-registering-apns-certificate)
+
+## 1. Notifly SDK Setup
+
+### 1-1. Installing Notifly SDK
+
+- [notifly-sdk npm](https://www.npmjs.com/package/notifly-sdk)
+
+To install the package, please run the following:
+
+```shell
+npm install notifly-sdk@latest --save
+cd ios && pod install
+```
+
+If you are using yarn:
+
+```shell
+yarn add notifly-sdk@latest
+cd ios && pod install
+```
+
+The notifly-sdk will be added to your app's package.json file. (Current latest version: [![Npm](https://img.shields.io/npm/v/notifly-sdk.svg)](https://www.npmjs.com/package/notifly-sdk))
+
+### 1.2. iOS Configuration
+
+#### 1) Capability Settings
+
+1. Open `{Your_Project_Name}.xcworkspace` in Xcode.
+
+- If you open `{Your_Project_Name}.xcodeproj` instead of `{Your_Project_Name}.xcworkspace` in Xcode and build it, you will not be able to use the Notifly SDK.
+- `{Your_Project_Name}.xcworkspace` is located in the ios directory of the Root directory.
+
+2. Set the iOS Deployment Target of the target project and the Minimum Deployment iOS of the Target to **13.0** or higher.
+
+- Please also set the minimum version to 13.0 in the Podfile.
+
+3. Add the Push Notifications capability.
+   ![Add Capabilities](./image/ios_setting_add_capability1.png)
+
+4. Add the Background Modes capability and select Remote notifications and Background Fetch.
+   ![Add Capabilities](./image/ios_setting_add_capability2.png)
+
+5. Open the AppDelegate.mm file and add the following code:
+
+- The AppDelegate.mm file is located in the {ProjectName} folder of the ios directory.
+
+- Import the `notifly_sdk` framework.
+
+```objc
+#import "notifly_sdk-Swift.h"
+```
+
+- In AppDelegate.h, add the `UNUserNotificationCenterDelegate` protocol to the AppDelegate class.
+  - Please refer to the example code below.
+- Add Notifly code to the `AppDelegate methods` in AppDelegate.mm.
+  1. `(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
+     - Set the delegate of UNNotificationCenter to self.
+  2. `(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken`
+     - Register the APNs token with Notifly.
+  3. `(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error`
+     - Notify Notifly if there was a failure to register the APNs token.
+  4. `(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler`
+     - Pass the app push notification click event to Notifly.
+  5. `(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler`
+     - When the app is in the Foreground state, pass the data received from Notifly to the SDK.
+
+<Tabs>
+<TabItem value="header" label="AppDelegate.h">
+
+```objc title="Example Code of AppDelegate.h"
+#import <RCTAppDelegate.h>
+#import <UIKit/UIKit.h>
+#import <UserNotifications/UNUserNotificationCenter.h>
+
+@interface AppDelegate : RCTAppDelegate <UNUserNotificationCenterDelegate>
+
+@end
+```
+
+</TabItem>
+<TabItem value="delegate" label="AppDelegate.mm">
+
+```objc title="Example Code of AppDelegate.mm"
+#import <Firebase.h>
+#import <React/RCTBundleURLProvider.h>
+#import "AppDelegate.h"
+// highlight-next-line
+#import "notifly_sdk-Swift.h"
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    /* Your Code */
+    // highlight-start
+    [FIRApp configure];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    // highlight-end
+    /* Your Code */
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    /* Your Code */
+    // highlight-next-line
+    [Notifly application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    /* Your Code */
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    /* Your Code */
+    // highlight-next-line
+    [Notifly application:application didFailToRegisterForRemoteNotificationsWithError:error];
+    /* Your Code */
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    /* Your Code */
+    // highlight-start
+    [Notifly userNotificationCenter:center didReceive:response];
+    completionHandler();
+    // highlight-end
+    /* Your Code */
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+    /* Your Code */
+    // highlight-next-line
+   [Notifly userNotificationCenter:center willPresent:notification withCompletionHandler:completionHandler];
+    /* Your Code */
+}
+
+/* Your Code */
+@end
+
+```
+
+</TabItem>
+</Tabs>
+
+### 1-3. (Optional) iOS Push Extension Setup
+
+:::caution SDK spec for Rich Push Notification
+`notifly-sdk`: Version 3.0.4 or higher
+:::
+
+- It is recommended to set up a Notification Service Extension following [Notifly's guide](/developer-guide/client-sdk/advanced/ios-push-extension), as it supports the following features:
+  1. You can attach images and videos to push notifications.
+  2. You can verify whether a user has received a push notification, allowing for a more detailed analysis of campaign performance.
+
+### 1-4. Adding Notifly SDK Initialization Code
+
+- Please add the Notifly SDK initialization code in `index.js` or `App.js`.
+
+<Tabs>
+<TabItem value="initialize" label="javascript">
+
+```js title="index.js"
+...
+import messaging from '@react-native-firebase/messaging';
+// highlight-next-line
+import notifly from 'notifly-sdk';
+
+/* Your Code */
+
+// highlight-next-line
+notifly.initialize('myProjectId', 'myUserName', 'myPassword');
+
+/* Your Code */
+
+AppRegistry.registerComponent(...);
+```
+
+</TabItem>
+</Tabs>
+
+`NOTIFLY_PROJECT_ID`, `NOTIFLY_USERNAME`, and `NOTIFLY_PASSWORD` can be found on the settings page of the Notifly console.
+
+## 2. Registering User Properties
+
+- With Notifly, you can set a user's id (`userId`) and properties (`params`) to utilize them in marketing campaign executions.
+  - Notifly allows user's push notification settings (permission & preferences) as a user property, enabling filtering before sending push notifications.
+  - For sending Kakao Alimtalk, Friendtalk, or SMS messages, a phone number must be set as a user property.
+  - For sending emails, an email address must be set as a user property.
+  - The property field names for the phone number and email must be set to `$phone_number` and `$email`, respectively.
+  - Start registering properties after adding the Notifly SDK initialization code.
+  - (Recommendation) When logging out, call `setUserId` with `userId` as null to unregister the user's `userId`.
+  - <span style={{ color: "red" }}>
+      Calling user id unregistration will delete all user information, including
+      user properties and campaign fatigue management data.
+    </span>
+
+### 2-1. Set User Id
+
+| Parameter | Type     | Required |
+| --------- | -------- | -------- |
+| userId    | `String` | Yes      |
+
+```js
+notifly.setUserId(userId);
+```
+
+<Tabs>
+<TabItem value="setUserId" label="javascript">
+
+```js title="Example Code of setUserId"
+const handleLogin = () => {
+    ...
+    notifly.setUserId('example_user_id'); // Set User Id
+    ...
+}
+
+const handleLogout = () => {
+    ...
+    notifly.setUserId(); // Unregister User Id
+    ...
+}
+```
+
+</TabItem>
+</Tabs>
+
+### 2-2. Set User Properties
+
+| Parameter | Type     | Required |
+| --------- | -------- | -------- |
+| params    | `Object` | Yes      |
+
+```js
+notifly.setUserProperties(params);
+```
+
+<Tabs>
+<TabItem value="setUserProperties" label="javascript">
+
+```js title="Example Code of setUserProperties"
+const handleRejectPushNotification = () => {
+    ...
+    notifly.setUserProperties({
+        "push_subscription_channel1": false,
+        "push_subscription_channel2": false,
+        "push_subscription_channel3": false,
+    });
+    ...
+}
+```
+
+</TabItem>
+</Tabs>
+
+## 3. Event Logging
+
+- Notifly allows tracking of user actions to utilize in targeting during campaign executions. Tracked events can be used for determining the timing of push notification delivery and setting the target audience.
+  - Start implementing event logging after adding the Notifly SDK initialization code.
+- You can use `segmentationEventParamKeys` to utilize event parameters (`eventParams`) in setting the target audience, etc. For this, please specify the key value of a specific field in `eventParams` that will be used in setting the target audience in `segmentationEventParamKeys`.
+  - **Currently, only one `segmentationEventParamKeys` is supported, so the length of `segmentationEventParamKeys` must be a list of 1 or fewer.**
+
+### 3-1. Event Logging
+
+| Parameter                  | Type           | Required |
+| -------------------------- | -------------- | -------- |
+| eventName                  | `String`       | Yes      |
+| eventParams                | `Object`       | No       |
+| segmentationEventParamKeys | `List<String>` | No       |
+
+```js
+notifly.trackEvent(eventName, eventParams, segmentationEventParamKeys);
+```
+
+<Tabs>
+<TabItem value="trackEvent" label="javascript">
+
+```js title="Example Code of trackEvent"
+const handlePurchaseTicket = () => {
+    ...
+    notifly.trackEvent("ticket_purchase", {
+        "show_id": "sample_show_id",
+        "performance_start_time": 1674104659
+    }, ["show_id"]);
+    ...
+}
+
+const handleLogin = () => {
+    ...
+    notifly.trackEvent("login");
+    ...
+}
+```
+
+</TabItem>
+</Tabs>
+
+## 4. Integration Testing
+
+Please refer to [Client SDK - Integration Test](https://docs.notifly.tech/developer-guide/client-sdk/sdk_test).
+
+## 5. (Advanced) Registering Push Notification Icons (Android) & Push Notification Consent Prompt
+
+Please refer to [(Advanced) Client SDK - React Native](/developer-guide/client-sdk/advanced/react-native-sdk-advanced).
+
+## FAQ
+
+- Q. What if I am already using Firebase Cloud Messaging?
+  - A. The Notifly SDK has been designed to prevent conflicts with Firebase Cloud Messaging, which may already be used in existing apps, so you can use it safely.
+- Q. I am getting errors related to the Notifly class in the AppDelegate.mm file during build.
+  - A. Please add `use_frameworks! :linkage => :static` to your Podfile to attempt static linking. (If there's already a `use_frameworks!` line, just add the `:linkage => :static` option.)
+- Q. I am not receiving push notifications in the foreground state on iOS devices.
+  - A. If you are already using Firebase Messaging, please configure your firebase.json file as instructed below.
+    - Add the following code to your firebase.json file according to the guide on [Foreground Presentation Options](https://rnfirebase.io/messaging/usage#foreground-presentation-options-ios) by React Native Firebase.
+    ```json
+    {
+      "react-native": {
+        "messaging_ios_foreground_presentation_options": [
+          "badge",
+          "sound",
+          "list",
+          "banner"
+        ]
+      }
+    }
+    ```
+- Q. I get an error saying the notifly_sdk-Swift.h file cannot be found. What should I do?
+  - The notifly_sdk (iOS) is written in Swift. To expose it to the Objective-C environment, a Swift Compatibility Header named notifly_sdk-Swift.h is created during the build process. Please add "${PODS_CONFIGURATION_BUILD_DIR}" to the Header Search Paths in the Build Option of the target you wish to build.
+  - [Reference](https://developer.apple.com/documentation/swift/importing-swift-into-objective-c)
