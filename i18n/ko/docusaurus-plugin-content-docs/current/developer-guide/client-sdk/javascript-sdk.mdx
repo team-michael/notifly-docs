@@ -212,29 +212,17 @@ useEffect(() => {
 <Tabs>
 <TabItem value="v2.7.4 or above" label="v2.7.4 or above (Highly Recommended)">
 
-```html title="Using IIFE (Immediately Invoked Function Expression)"
-<script type="text/javascript">
-  (function (w, d, p, u, a) {
-    var s = d.createElement("script");
-    s.async = !0;
-    s.src =
-      "https://cdn.jsdelivr.net/npm/notifly-js-sdk@<SDK_VERSION>/dist/index.global.min.js";
-    s.onload = function () {
-      w.notifly.initialize({ projectId: p, username: u, password: a });
-    };
-    s.onerror = function () {
-      console.error("Failed to load Notifly Browser SDK.");
-    };
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })(
-    window,
-    document,
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PROJECT_ID>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_USERNAME>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PASSWORD>",
+```html title="Example HTML code for install & initialization"
+<script src="https://cdn.jsdelivr.net/npm/notifly-js-sdk@<SDK_VERSION>/dist/index.global.min.js"></script>
+<script>
+  window.notifly.initialize({
+      // highlight-next-line
+      projectId: "<YOUR_NOTIFLY_PROJECT_ID>",
+      // highlight-next-line
+      username: "<YOUR_NOTIFLY_USERNAME>",
+      // highlight-next-line
+      password: "<YOUR_NOTIFLY_PASSWORD>"
+    }
   );
 </script>
 ```
@@ -243,27 +231,16 @@ useEffect(() => {
 <TabItem value="2.5.0 or above" label="2.5.0 or above">
 
 ```html title="Example HTML code for install & initialization"
-<script type="text/javascript">
-  (function (w, d, p, u, a) {
-    var s = d.createElement("script");
-    s.async = !0;
-    s.src = "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/index.min.js";
-    s.onload = function () {
-      w.notifly.initialize({ projectId: p, username: u, password: a });
-    };
-    s.onerror = function () {
-      console.error("Failed to load Notifly Browser SDK.");
-    };
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })(
-    window,
-    document,
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PROJECT_ID>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_USERNAME>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PASSWORD>",
+<script src="https://cdn.jsdelivr.net/npm/notifly-js-sdk@<SDK_VERSION>/dist/index.min.js"></script>
+<script>
+  window.notifly.initialize({
+      // highlight-next-line
+      projectId: "<YOUR_NOTIFLY_PROJECT_ID>",
+      // highlight-next-line
+      username: "<YOUR_NOTIFLY_USERNAME>",
+      // highlight-next-line
+      password: "<YOUR_NOTIFLY_PASSWORD>"
+    }
   );
 </script>
 ```
@@ -272,37 +249,21 @@ useEffect(() => {
 <TabItem value="2.4.0 or below" label="2.4.0 or below">
 
 ```html title="Example HTML code for install & initialization"
-<script type="text/javascript">
-  (function (w, d, p, u, a, o) {
-    var s = d.createElement("script");
-    s.async = !0;
-    s.src = "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/index.min.js";
-    s.onload = function () {
-      w.notifly.initialize({
-        projectId: p,
-        username: u,
-        password: a,
-        pushSubscriptionOptions: o,
-      });
-    };
-    s.onerror = function () {
-      console.error("Failed to load Notifly Browser SDK.");
-    };
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })(
-    window,
-    document,
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PROJECT_ID>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_USERNAME>",
-    // highlight-next-line
-    "<YOUR_NOTIFLY_PASSWORD>",
-    // You don't need below options if you don't need a web push service
-    {
-      vapidPublicKey: "<YOUR_VAPID_PUBLIC_KEY>",
-      askPermission: true,
-    },
+<script src="https://cdn.jsdelivr.net/npm/notifly-js-sdk@<SDK_VERSION>/dist/index.min.js"></script>
+<script>
+  window.notifly.initialize({
+      // highlight-next-line
+      projectId: "<YOUR_NOTIFLY_PROJECT_ID>",
+      // highlight-next-line
+      username: "<YOUR_NOTIFLY_USERNAME>",
+      // highlight-next-line
+      password: "<YOUR_NOTIFLY_PASSWORD>",
+      // You don't need below options if you don't need a web push service
+      pushSubscriptionOptions: {
+        vapidPublicKey: "<YOUR_VAPID_PUBLIC_KEY>",
+        askPermission: true,
+      },
+    }
   );
 </script>
 ```
