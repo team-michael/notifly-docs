@@ -29,7 +29,7 @@ Notifly Android SDK는 오픈소스 패키지 배포 플랫폼 [JitPack](https:/
 <Tabs>
 <TabItem value="gradle_1" label="Gradle version >= 7.0">
 
-```gradle title="settings.gradle (root)"
+```gradle title="build.gradle (root)"
 dependencyResolutionManagement {
     ...
     repositories {
@@ -60,9 +60,15 @@ Notifly Android SDK를 다음과 같이 설치해 주세요. (현재 최신 버�
 
 ```gradle title="build.gradle (Module: app)"
 dependencies {
-    implementation 'com.github.team-michael:notifly-android-sdk:1.3.1'
+    implementation 'com.github.team-michael:notifly-android-sdk:1.5.0'
 }
 ```
+
+:::tip 최신 버전 SDK를 사용해주세요
+
+Notifly Android SDK는 업데이트가 빈번하게 이루어지고 있으며, 매 업데이트마다 새로운 기능, 안정성 및 보안을 개선하고 있습니다. 원활한 서비스 이용을 위해 항상 최신 버전의 SDK를 사용하시기를 권장합니다.
+
+:::
 
 ### 1-2. Notifly SDK 초기화 코드 추가
 
@@ -349,6 +355,10 @@ button.setOnClickListener(new View.OnClickListener() {
 [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
 
 ## 5. (Advanced) 푸시 알림 아이콘 등록 & 푸시 알림 동의 프롬프트
+
+[(Advanced) Client SDK - Android](/ko/developer-guide/client-sdk/advanced/android-sdk-advanced) 를 참고해 주세요.
+
+## 6. (Advanced) 푸시 알림 클릭 이벤트 구독
 
 [(Advanced) Client SDK - Android](/ko/developer-guide/client-sdk/advanced/android-sdk-advanced) 를 참고해 주세요.
 
