@@ -291,7 +291,7 @@ Flutter Web에서 웹 푸시 알림을 사용하지 않으시는 경우, 이 단
 
 ```js title="Code of notifly-service-worker.js"
 self.importScripts(
-  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js",
+  "https://cdn.jsdelivr.net/npm/notifly-js-sdk@2/dist/NotiflyServiceWorker.js"
 );
 ```
 
@@ -325,11 +325,15 @@ Flutter Web에서 웹 푸시 알림을 사용하지 않으시는 경우, 이 단
 NotiflyPlugin.requestPermission();
 ```
 
-## 4. 연동 테스트
+## 5. 연동 테스트
 
 [Client SDK - 연동 Test](https://docs.notifly.tech/ko/developer-guide/client-sdk/sdk_test) 섹션에서 테스트를 진행합니다.
 
-## 5. (Advanced) 푸시 알림 아이콘 등록 (Android) & 푸시 알림 동의 프롬프트
+## 6. (Advanced) 푸시 알림 클릭 이벤트 구독
+
+[(Advanced) Client SDK - Flutter](/ko/developer-guide/client-sdk/advanced/flutter-sdk-advanced) 를 참고해 주세요.
+
+## 7. (Advanced) 푸시 알림 아이콘 등록 (Android) & 푸시 알림 동의 프롬프트
 
 [(Advanced) Client SDK - Flutter](/ko/developer-guide/client-sdk/advanced/flutter-sdk-advanced) 를 참고해 주세요.
 
