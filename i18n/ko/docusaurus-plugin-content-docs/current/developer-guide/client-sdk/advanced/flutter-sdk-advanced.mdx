@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
 
 ### 3-1. 푸시 알림 클릭 이벤트 인터페이스
 
-`OSNotificationClickEvent` 의 `OSNotificationClickEvent` 멤버에 접근하여, 사용자가 클릭한 푸시에 대한 정보를 확인할 수 있습니다.
+`OSNotificationClickEvent` 의 `notification` 멤버에 접근하여, 사용자가 클릭한 푸시에 대한 정보를 확인할 수 있습니다.
 
 ```dart title="notification.dart"
 /// Callback for handling received notifications.
@@ -189,15 +189,15 @@ class OSNotificationClickEvent {
 
 | Property name           | Type                    | Description                                                                                                             | Since |
 | ----------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----- |
-| `androidNotificationId` | `int?`                  | Android system-level 푸시 알림 ID입니다.                                                                                | 1.5.0 |
-| `campaignId`            | `String?`               | 푸시 알림이 발송된 Notifly 캠페인의 ID입니다.                                                                           | 1.5.0 |
-| `body`                  | `String?`               | 푸시 메시지의 내용입니다.                                                                                               | 1.5.0 |
-| `title`                 | `String?`               | 푸시 메시지의 제목입니다.                                                                                               | 1.5.0 |
-| `url`                   | `String?`               | 푸시 메시지가 클릭되었을 때 이동할 URL입니다. 만약 '앱 실행' 액션으로 푸시 알림을 발송하였다면, `null` 값이 반환됩니다. | 1.5.0 |
-| `customData`            | `Map<String, dynamic>?` | FCM 푸시 메시지의 `data` 필드에 포함된 키-값 쌍의 커스텀 데이터입니다. 노티플라이 콘솔에서 설정할 수 있습니다.          | 1.5.0 |
-| `imageUrl`              | `String?`               | 이미지형 푸시 메시지에 포함된 이미지 URL 입니다.                                                                        | 1.5.0 |
-| `importance`            | `Importance`            | `Importance.high`, `Importance.normal`, `Importance.low` 중 하나의 값입니다.                                            | 1.5.0 |
-| `notiflyMessageId`      | `String?`               | Notifly 서버에서 임의로 생성한 메시지 ID입니다.                                                                         | 1.5.0 |
-| `rawPayload`            | `Map<String, dynamic>?` | FCM data의 가공되지 않은 payload입니다. JSON을 stringify한 형태로 반환됩니다.                                           | 1.5.0 |
-| `sentTime`              | `int?`                  | FCM 서버에서 푸시 알림을 발송한 시간입니다.                                                                             | 1.5.0 |
-| `ttl`                   | `int?`                  | 푸시 알림의 TTL(Time To Live) 값입니다.                                                                                 | 1.5.0 |
+| `androidNotificationId` | `int?`                  | Android system-level 푸시 알림 ID입니다.                                                                                | 1.4.0 |
+| `campaignId`            | `String?`               | 푸시 알림이 발송된 Notifly 캠페인의 ID입니다.                                                                           | 1.4.0 |
+| `body`                  | `String?`               | 푸시 메시지의 내용입니다.                                                                                               | 1.4.0 |
+| `title`                 | `String?`               | 푸시 메시지의 제목입니다.                                                                                               | 1.4.0 |
+| `url`                   | `String?`               | 푸시 메시지가 클릭되었을 때 이동할 URL입니다. 만약 '앱 실행' 액션으로 푸시 알림을 발송하였다면, `null` 값이 반환됩니다. | 1.4.0 |
+| `customData`            | `Map<String, dynamic>?` | FCM 푸시 메시지의 `data` 필드에 포함된 키-값 쌍의 커스텀 데이터입니다. 노티플라이 콘솔에서 설정할 수 있습니다.          | 1.4.0 |
+| `imageUrl`              | `String?`               | 이미지형 푸시 메시지에 포함된 이미지 URL 입니다.                                                                        | 1.4.0 |
+| `importance`            | `Importance`            | `Importance.high`, `Importance.normal`, `Importance.low` 중 하나의 값입니다.                                            | 1.4.0 |
+| `notiflyMessageId`      | `String?`               | Notifly 서버에서 임의로 생성한 메시지 ID입니다.                                                                         | 1.4.0 |
+| `rawPayload`            | `Map<String, dynamic>?` | FCM data의 가공되지 않은 payload입니다. JSON을 stringify한 형태로 반환됩니다.                                           | 1.4.0 |
+| `sentTime`              | `int?`                  | FCM 서버에서 푸시 알림을 발송한 시간입니다.                                                                             | 1.4.0 |
+| `ttl`                   | `int?`                  | 푸시 알림의 TTL(Time To Live) 값입니다.                                                                                 | 1.4.0 |
