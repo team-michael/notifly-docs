@@ -28,7 +28,7 @@ sidebar_position: 3
 ### 2-1. 발송 대상 및 내용 {#friendtalk-dispatch-target-and-content}
 
 - 발송 대상 : 자사 카카오톡 채널을 추가한 유저 중 전화번호를 알고 있는 유저에게만 발송 가능합니다.
-- 발송 내용 : 광고성 메시지만 발송 가능합니다.
+- 발송 내용 : 자유입니다.
 
 ### 2-2. 발송 형태 및 제작 가이드 {#friendtalk-types}
 
