@@ -55,7 +55,7 @@ if (Platform.OS === "android") {
     console.log("Body of clicked notification:", event.notification.body);
     console.log(
       "Custom data of clicked notification:",
-      event.notification.customData
+      event.notification.customData,
     );
     // Do whatever you like when the notification is clicked
   });
@@ -71,7 +71,7 @@ AppRegistry.registerComponent(appName, () => AppWrapper);
 
 ```ts title="notification.d.ts"
 export type NotificationClickListener = (
-  event: OSNotificationClickEvent
+  event: OSNotificationClickEvent,
 ) => void;
 
 export declare enum OSNotificationImportance {
