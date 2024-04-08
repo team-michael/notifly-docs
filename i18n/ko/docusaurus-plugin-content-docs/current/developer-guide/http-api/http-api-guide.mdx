@@ -4,6 +4,11 @@ sidebar_position: 1
 
 # HTTP API
 
+:::note API 필드 변경 사항
+2024-04-05 부터, `projectID`는 `projectId`로, `userID`는 `userId`로 변경되었습니다.
+(호환성을 위해 이전 필드명도 계속 사용 가능합니다.)
+:::
+
 ## 1. Authentication Endpoint
 
 이 endpoint 를 통해 인증 토큰을 받아올 수 있습니다. 인증 토큰은 notifly 서버 API 활용에 필수적입니다. 발급받은 인증 토큰의 유효기간은 1시간입니다. 가급적 매 API호출 시 마다 토큰을 발급받아
@@ -89,14 +94,13 @@ fetch(url, {
 
 ### Specifications
 
-| Parameter                  | Type    | Required | Description                                                                                                                                  |
-| -------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| projectID                  | String  | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                                      |
-| eventName                  | String  | Yes      | 이벤트명                                                                                                                                     |
-| isGlobalEvent              | Boolean | Yes      | 특정 유저에게만 발생하는 것이 아니라 서비스 레벨에서 발생하는 이벤트인지의 여부                                                              |
-| eventParams                | Object  | No       | 이벤트 파라미터 값들                                                                                                                         |
-| segmentationEventParamKeys | List    | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userID                     | String  | No       | 유저 ID                                                                                                                                      |
+| Parameter                  | Type   | Required | Description                                                                                                                                  |
+| -------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| projectId                  | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                                      |
+| userId                     | String | Yes      | 서비스 유저 ID                                                                                                                               |
+| eventName                  | String | Yes      | 이벤트명                                                                                                                                     |
+| eventParams                | Object | No       | 이벤트 파라미터 값들                                                                                                                         |
+| segmentationEventParamKeys | List   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 #### Headers
 
@@ -107,11 +111,11 @@ fetch(url, {
 
 #### Response (예시)
 
-| Parameter    | Value                                                             |
-| ------------ | ----------------------------------------------------------------- |
-| Status code  | 200 OK                                                            |
-| Content-Type | application/json                                                  |
-| json         | {"data":"some-success-response-from-notifly-engine","error":null} |
+| Parameter    | Value                                                               |
+| ------------ | ------------------------------------------------------------------- |
+| Status code  | 200 OK                                                              |
+| Content-Type | application/json                                                    |
+| json         | `{"data":"some-success-response-from-notifly-engine","error":null}` |
 
 ### 코드 예시
 
@@ -129,12 +133,11 @@ const headers = {
 
 // Body
 const body = {
-  projectID: "provided_project_id",
+  projectId: "provided_project_id",
+  userId: "some-user-id",
   eventName: "show_end",
-  isGlobalEvent: true, // true if the event is not associated with a specific user
   eventParams: {},
   segmentationEventParamKeys: [],
-  userID: null, // null if global event but should be specified otherwise
 };
 const encodedBody = JSON.stringify(body);
 
@@ -174,19 +177,16 @@ fetch(url, {
 
 | Parameter      | Type   | Required | Description                                                                                             |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
-| projectID      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
+| projectId      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
+| userId         | String | Yes      | 유저 ID                                                                                                 |
 | userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                             |
-| userID         | String | Yes      | 유저 ID                                                                                                 |
 
 - 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
   - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
-- <span style={{ color: "red", fontWeight: "bold" }}>
-    <em>
-      중요: 이메일과 전화번호 정보는 userProperties Object에 반드시 $email,
-      $phone_number 키값으로 정의해주셔야 캠페인 발송 시 활용할 수 있습니다!
-      코드 예시를 참고해주세요.
-    </em>
-  </span>
+
+:::caution 특수 유저 속성값
+이메일과 전화번호 정보는 `userProperties`에 반드시 `$email`, `$phone_number`를 키값으로 정의해주어야 정상 등록됩니다. 아래 코드 예시를 참고해주세요.
+:::
 
 #### Headers
 
@@ -197,11 +197,11 @@ fetch(url, {
 
 #### Response (예시)
 
-| Parameter    | Value                                         |
-| ------------ | --------------------------------------------- |
-| Status code  | 200 OK                                        |
-| Content-Type | application/json                              |
-| json         | {"data":"업데이트 된 row count","error":null} |
+| Parameter    | Value                                           |
+| ------------ | ----------------------------------------------- |
+| Status code  | 200 OK                                          |
+| Content-Type | application/json                                |
+| json         | `{"data":"업데이트 된 row count","error":null}` |
 
 ### 코드 예시
 
@@ -214,41 +214,32 @@ const url = "https://api.notifly.tech/set-user-properties";
 // Headers
 const headers = {
   "Content-Type": "application/json",
-  Authorization: "some-token", // retrieve this from authorization endpoint
+  Authorization: "some-token", // retrieve this from authentication endpoint
 };
 
-// Body (Single User)
-const body = {
-  projectID: "provided_project_id",
-  userProperties: {
-    $email: "email@example.com",
-    $phone_number: "010-7777-7777",
-    // ... more properties
+// body
+const users = [
+  {
+    projectId: "provided_project_id",
+    userProperties: {
+      $email: "user1@example.com",
+      $phone_number: "010-5555-5555",
+      // ... more properties
+    },
+    userId: "some-user-id-1",
   },
-  userID: "some-user-id",
-};
-const encodedBody = JSON.stringify(body);
+  {
+    projectId: "provided_project_id",
+    userProperties: {
+      $email: "user2@example.com",
+      $phone_number: "010-7777-7777",
+      // ... more properties
+    },
+    userId: "some-user-id-2",
+  },
+];
 
-// Body (Multple Users)
-const user1 = {
-  projectID: "provided_project_id",
-  userProperties: {
-    $email: "user1@example.com",
-    $phone_number: "010-5555-5555",
-    // ... more properties
-  },
-  userID: "some-user-id-1",
-};
-const user2 = {
-  projectID: "provided_project_id",
-  userProperties: {
-    $email: "user2@example.com",
-    $phone_number: "010-7777-7777",
-    // ... more properties
-  },
-  userID: "some-user-id-2",
-};
-const encodedBody = JSON.stringify([user1, user2]);
+const encodedBody = JSON.stringify(users);
 
 // Fetch call
 fetch(url, {
@@ -286,8 +277,8 @@ fetch(url, {
 
 | Parameter       | Type   | Required | Description                                                                                             |
 | --------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
-| projectID       | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userID          | String | No       | 삭제할 유저 ID                                                                                          |
+| projectd        | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
+| userId          | String | No       | 삭제할 유저 ID                                                                                          |
 | userProperties  | Object | No       | 삭제할 유저의 사용자 속성                                                                               |
 | - $email        | String | No       | 삭제할 유저의 이메일 주소                                                                               |
 | - $phone_number | String | No       | 삭제할 유저의 전화번호                                                                                  |
@@ -328,8 +319,8 @@ const headers = {
 
 // Body (Single User)
 const body = {
-  projectID: "provided_project_id",
-  userID: "some-user-id",
+  projectId: "provided_project_id",
+  userId: "some-user-id",
   // if you want to delete by email or phone number.
   // userProperties: {
   //     $email: "email@example.com",
@@ -340,12 +331,12 @@ const encodedBody = JSON.stringify(body);
 
 // Body (Multple Users)
 const user1 = {
-  projectID: "provided_project_id",
-  userID: "some-user-id-1",
+  projectId: "provided_project_id",
+  userId: "some-user-id-1",
 };
 const user2 = {
-  projectID: "provided_project_id",
-  userID: "some-user-id-2",
+  projectId: "provided_project_id",
+  userId: "some-user-id-2",
 };
 const encodedBody = JSON.stringify([user1, user2]);
 
