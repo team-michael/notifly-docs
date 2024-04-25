@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 
 웹 푸시를 노티플라이를 통해 발송하고 웹 브라우저에서 수신하기 위해 인증서(VAPID Key)를 생성해야 합니다. 웹 푸시 인증서는 노티플라이 홈페이지의 설정 페이지에서 생성할 수 있습니다.
 
-![Web Push Certificate in Settings](./image/web_push_certificate_settings.png)
+![Web Push Certificate in Settings](./image/javascript-sdk/web-push/web_push_certificate_settings.png)
 
 #### Service Worker 생성하기
 
@@ -87,23 +87,26 @@ Service Worker 파일의 경로와 이름은 자유롭게 설정할 수 있습�
 
 ### SDK 초기화 옵션 {#initialize-options}
 
-| Parameter                 | Type                           | Required | Description                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------- | ------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `projectId`               | string                         | Yes      | 노티플라이 프로젝트 ID입니다.                                                                                                                                                                                                                                                                                                                |
-| `username`                | string                         | Yes      | 노티플라이 프로젝트 사용자 이름입니다.                                                                                                                                                                                                                                                                                                       |
-| `password`                | string                         | Yes      | 노티플라이 프로젝트 사용자 비밀번호입니다.                                                                                                                                                                                                                                                                                                   |
-| `sessionDuration`         | number                         | No       | 한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: `1800` (30분) **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                      |
-| `pushSubscriptionOptions` | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                   |
-| - `vapidPublicKey`        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                      |
-| - `askPermission`         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                                  |
-| - `serviceWorkerPath`     | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.** |
-| - `promptDelayMillis`     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                               |
+| Parameter                                          | Type                           | Required | Description                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------- | ------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`                                        | string                         | Yes      | 노티플라이 프로젝트 ID입니다.                                                                                                                                                                                                                                                                                                                |
+| `username`                                         | string                         | Yes      | 노티플라이 프로젝트 사용자 이름입니다.                                                                                                                                                                                                                                                                                                       |
+| `password`                                         | string                         | Yes      | 노티플라이 프로젝트 사용자 비밀번호입니다.                                                                                                                                                                                                                                                                                                   |
+| `sessionDuration` (Deprecated since 2.5.0)         | number                         | No       | 한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: `1800` (30분) **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                      |
+| `pushSubscriptionOptions` (Deprecated since 2.5.0) | NotiflyPushSubscriptionOptions | No       | 웹 푸시 구독에 대한 옵션입니다. 자세한 설명은 위 [웹 푸시 설정](#웹-푸시-설정) 섹션을 참고해 주세요. 미입력 시 웹 푸시 서비스를 이용하실 수 없습니다. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                   |
+| - `vapidPublicKey` (Deprecated since 2.5.0)        | string                         | Yes      | 위에서 생성한 웹 푸시 인증서 키입니다. [웹 푸시 설정](#웹-푸시-설정)에서 생성한 웹 푸시 인증서 키를 입력해 주세요. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                      |
+| - `askPermission` (Deprecated since 2.5.0)         | boolean                        | No       | 사용자가 웹페이지에 방문했을 때 알림 권한을 요청할 지에 대한 값입니다. default: `true` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                                                                                                                                  |
+| - `serviceWorkerPath` (Deprecated since 2.5.0)     | string                         | No       | notifly-service-worker의 경로입니다. 만약 위 [Service Worker 생성](#service-worker-생성하기) 섹션에서의 예시와 다른 경로에 Service Worker 파일을 생성하셨다면, 꼭 알맞은 경로를 입력해 주세요. default: `'/notifly-service-worker.js'`. **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.** |
+| - `promptDelayMillis` (Deprecated since 2.5.0)     | number                         | No       | 사용자가 웹페이지에 방문했을 때 알림 권한 요청 팝업을 표시할때 까지의 지연 시간(ms) 입니다. `askPermission`이 `false`인 경우 해당 값은 초기화에서 영향을 미치지 않습니다. default: `5000` **Website SDK v2.5.0 이상 버전 부터는, 설정 > SDK 설정 > 웹사이트 설정에서 직접 설정하셔야 합니다.**                                               |
 
 :::caution
 v2.5.0 이상 버전 부터는, `projectId`, `username`, `password`를 제외한 모든 필드에 대하여 설정 > SDK 설정 > 웹사이트 설정에서 설정하신 값들이 SDK 초기화 옵션에 반영됩니다.
 
 <img
-  src={require("./image/javascript_sdk_configuration_ui.png").default}
+  src={
+    require("./image/javascript-sdk/javascript_sdk_configuration_ui.png")
+      .default
+  }
   width="800px"
 />
 
@@ -121,21 +124,104 @@ v2.5.0 이상 버전 부터는, `projectId`, `username`, `password`를 제외한
 3. 사용자가 알림 권한을 거부한 경우에도 노티플라이는 팝업을 보여주지 않고 알림 권한을 다시 요청하지 않습니다.
 
 <img
-  src={require("./image/web_push_permission_prompt.png").default}
+  src={
+    require("./image/javascript-sdk/web-push/web_push_permission_prompt.png")
+      .default
+  }
   width="400px"
 />
 
-현재 웹사이트의 스타일과 타이밍에 맞게 알림 권한을 요청하기 위해서 SDK 버전 2.5.0 이상인 경우 웹 콘솔에서 권한 알림 요청을 off 시키고, SDK 버전 2.5.0 미만인 경우 초기화 옵션에서 `askPermission`을 `false`로 하고 직접 팝업을 구현해 주세요. 더 자세한 내용은 [MDN web docs - Notification: requestPermission()](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static) 를 참고 부탁드립니다.
+- 더 커스텀한 타이밍으로 알림 권한을 요청하기 위해서는 아래 [매뉴얼하게 팝업 노출하기](#programmatically-request-web-push-permission) 섹션을 참고해 주세요.
+- 알림 권한 요청 팝업을 현재 사이트의 스타일에 맞게 커스터마이즈하고 싶으신 경우, [팝업 커스터마이징](#customize-web-push-permission-popup) 섹션을 참고해 주세요.
+- 더 자유롭게 팝업 스타일을 수정하고싶으신 경우, 노티플라이 콘솔에서 자동 노출 사용 을 off (SDK 버전 2.5.0 이상), 또는 `askPermission`을 false로 SDK를 초기화 (SDK 버전 2.5.0 미만) 시켜주시고 직접 팝업을 디자인해주세요.
+  더 자세한 내용은 [MDN Web Docs - Notification: `requestPermission`](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission_static) 을 참고해 주세요.
 
-**SDK 버전 2.7.0 이상부터는**, `requestPermission` 함수를 통하여 알림 팝업을 노출하도록 할 수 있습니다. **해당 함수는 권한 요청 팝업 노출이 off 되어있는 경우**에만 동작합니다.
+#### 지원 언어 {#supported-languages}
+
+Javascript SDK 버전 2.8.0 부터는 아래 네 가지의 언어를 지원합니다.
+
+> - `ko`: 한국어
+> - `en`: 영어
+> - `ja`: 일본어
+> - `zh`: 중국어
+
+Javascript SDK 버전 2.8.0 미만인 경우
+
+> 한국어 또는 영어만 지원합니다.
+
+#### 웹 푸시 권한 요청 팝업을 매뉴얼하게 노출 {#programmatically-request-web-push-permission}
+
+:::caution 유의사항
+
+- 이 기능은 Javascript SDK 버전 2.7.0 이상에서만 사용 가능합니다.
+
+- 권한 팝업을 매뉴얼하게 노출시키는 기능은 팝업 자동 노출이 비활성화 되어있는 경우에만 사용 가능합니다. 팝업 자동 노출 설정은 노티플라이 웹 콘솔의 설정 > SDK 설정 > 웹사이트 설정에서 확인하실 수 있습니다.
+
+:::
+
+SDK 버전 2.7.0 이상부터는, `requestPermission` 함수를 통하여 알림 팝업을 노출하도록 할 수 있습니다.
 
 ```js
 notifly.requestPermission();
 ```
 
+SDK 버전 2.8.0 이상부터는, `requestPermission` 함수에 `language` argument를 넘겨주어 노출될 팝업의 언어를 강제할 수 있습니다. 지원되는 언어는 위 [지원 언어](#supported-languages)를 참고해 주세요.
+
+만약 `language` 패러미터를 입력하지 않거나, 지원되지 않는 언어 코드를 입력한 경우에는
+
+1. 브라우저의 언어 설정에 따라 팝업 노출을 시도합니다. 만약 브라우저의 언어 설정이 노티플라이에서 지원하는 언어 코드인 경우, 팝업을 노출합니다.
+2. 브라우저의 언어 설정이 노티플라이에서 지원하지 않는 언어 코드인 경우, 기본 노출 언어로 팝업을 노출합니다. **기본 노출 언어**에 대한 내용은 아래를 참고해 주세요.
+
+```js
+notifly.requestPermission("en");
+```
+
+#### 기본 노출 언어 {#default-web-push-prompt-language}
+
+:::caution 버전 호환성
+
+이 기능은 Notifly Javascript SDK `v2.8.0` 버전부터 지원됩니다. 이전 SDK에서는 **한국어 (ko)** 가 기본 노출 언어입니다.
+
+:::
+
+![Web Push Prompt Language in Settings](./image/javascript-sdk/web-push/web_push_permission_prompt_default_language.png)
+
+기본 노출 언어는
+
+1. 브라우저의 언어 설정이 명시되어있지 않거나
+2. 브라우저의 언어 설정이 노티플라이에서 지원하는 언어 코드가 아닌 경우
+
+에 노출되는 언어를 의미합니다. 기본 노출 언어는 노티플라이 웹 콘솔의 설정 > SDK 설정 > 웹사이트 설정에서 변경할 수 있습니다.
+
+#### 커스터마이징 {#customize-web-push-permission-popup}
+
+:::caution 주의
+
+1. 이 기능은 Notifly Javascript SDK `v2.7.0` 버전부터 지원됩니다. 이전 SDK에서는 아래와 같은 기본 팝업이 노출됩니다.
+
+<img
+  src={
+    require("./image/javascript-sdk/web-push/web_push_permission_prompt.png")
+      .default
+  }
+  width="400px"
+/>
+
+2. 설정이 반영되는데 까지는 최대 5분이 소요될 수 있습니다.
+
+:::
+
+1. 웹 콘솔 > 설정 > SDK 설정 > 웹사이트 설정 > 권한 요청 팝업 설정에 디자인 설정 버튼을 눌러, 모달을 열어주세요.
+
+![Web Push Permission Popup in Settings](./image/javascript-sdk/web-push/web_push_permission_prompt_customizing-1.png)
+
+2. 팝업의 디자인을 원하는 대로 수정하고 저장해주세요.
+
+![Web Push Permission Popup Customization Modal](./image/javascript-sdk/web-push/web_push_permission_prompt_customizing-2.png)
+
 ### SDK 셋업
 
-#### npm / yarn
+#### npm / yarn / pnpm
 
 패키지를 설치하기 위해, 다음을 실행해 주세요:
 
@@ -157,7 +243,20 @@ yarn add notifly-js-sdk@latest
 ```
 
 </TabItem>
+<TabItem value="pnpm" label="pnpm">
+
+```shell
+pnpm add notifly-js-sdk@latest
+```
+
+</TabItem>
 </Tabs>
+
+:::tip
+
+Notifly SDK는 성능 개선, 버그 수정 및 새로운 기능 추가 등을 위해 지속적으로 업데이트되고 있습니다. 따라서, 최신 버전을 사용하시는 것을 권장드립니다.
+
+:::
 
 설치가 완료되면, `index.js` 또는 `App.js`에서 Notifly SDK 초기화 코드를 추가해 주세요.
 
@@ -287,10 +386,12 @@ Notifly Website SDK는 Browser DOM의 최상단 `window` 객체가 존재할 때
   - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
   - (권장사항) 로그아웃 시 userId를 null로 하여 setUserId 호출함으로써 유저의 userId 등록을 해지해 주세요.
-  - <span style={{ color: "red" }}>
-      유저 아이디 등록해지를 호출할 경우, 유저 프로퍼티 및 캠페인 피로도 관리
-      데이터 등 모든 유저 정보가 삭제됩니다.
-    </span>
+
+:::caution 유저 아이디 등록 해지 시 주의사항
+
+유저 아이디 등록해지를 호출할 경우, 유저 프로퍼티 및 캠페인 피로도 관리 데이터 등 모든 유저 정보가 삭제됩니다.
+
+:::
 
 ### 2-1. 유저 아이디 등록 {#set-user-id}
 
