@@ -1,8 +1,8 @@
 {
-  "label": "In App Message",
+  "label": "In App Popup",
   "position": 7,
   "link": {
     "type": "generated-index",
-    "description": "Show In App Messages with Notifly."
+    "description": "Show In App Popup with Notifly."
   }
 }

@@ -1,8 +1,8 @@
 {
-  "label": "Web Message",
+  "label": "Web Popup",
   "position": 6,
   "link": {
     "type": "generated-index",
-    "description": "Show web messages with Notifly."
+    "description": "Show web popups with Notifly."
   }
 }
