@@ -39,9 +39,9 @@
     "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category SMS in sidebar userGuide"
   },
-  "sidebar.userGuide.category.Web Message": {
+  "sidebar.userGuide.category.Web Popup": {
     "message": "웹 팝업",
-    "description": "The label for category Web Message in sidebar userGuide"
+    "description": "The label for category Web Popup in sidebar userGuide"
   },
   "sidebar.userGuide.category.Cafe24 Integration": {
     "message": "카페24 연동",
@@ -79,9 +79,9 @@
     "message": "노티플라이에서 이메일 발송을 위한 셋업을 하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Email in sidebar userGuide"
   },
-  "sidebar.userGuide.category.Web Message.link.generated-index.description": {
+  "sidebar.userGuide.category.Web Popup.link.generated-index.description": {
     "message": "노티플라이에서 웹 팝업을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Web Message in sidebar userGuide"
+    "description": "The generated-index page description for category Web Popup in sidebar userGuide"
   },
   "sidebar.userGuide.category.Kakaotalk": {
     "message": "카카오 친구톡 / 알림톡",
@@ -91,12 +91,12 @@
     "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category Kakaotalk in sidebar userGuide"
   },
-  "sidebar.userGuide.category.In App Message": {
+  "sidebar.userGuide.category.In App Popup": {
     "message": "인앱 팝업",
-    "description": "The label for category In App Message in sidebar userGuide"
+    "description": "The label for category In App Popup in sidebar userGuide"
   },
-  "sidebar.userGuide.category.In App Message.link.generated-index.description": {
+  "sidebar.userGuide.category.In App Popup.link.generated-index.description": {
     "message": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category In App Message in sidebar userGuide"
+    "description": "The generated-index page description for category In App Popup in sidebar userGuide"
   }
 }
