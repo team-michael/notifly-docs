@@ -394,7 +394,7 @@ fetch(url, {
 
 | Parameter     | Type   | Required | Description                                                                              |
 | ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| recipients    | List   | Yes      | 메시지 수신자들의 정보입니다.                                                            |
+| recipients    | List   | Yes      | 수신자 목록(최대 1000명)                                                   |
 | - type        | String | No       | 수신자의 유형입니다. (기본값: `user-id`). 현재 `user-id`, `phone-number`만 지원합니다.   |
 | - userId      | String | No       | 메시지를 발송할 유저의 ID 입니다. `type`이 `user-id`인 경우 필수입니다.                  |
 | - phoneNumber | String | No       | 메시지를 발송할 유저의 전화번호 입니다. `type`이 `phone-number`인 경우 필수입니다.       |
@@ -638,7 +638,7 @@ if (!result.success) {
 | ------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------- |
 | projectId           | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                                                |
 | templateId          | String | Yes      | 등록한 발송 템플릿 ID ([알림톡 템플릿 리스트](https://notifly.tech/console/kakao-template/list)에서 확인 가능) |
-| recipientList       | List   | Yes      | 수신자 리스트(최대 1000명)                                                                                     |
+| recipientList       | List   | Yes      | 수신자 목록(최대 1000명)                                                                        |
 | - recipientNo       | String | Yes      | 수신 번호                                                                                                      |
 | - templateParameter | Object | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
 
@@ -740,7 +740,7 @@ if (!result.success) {
 | projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
 | messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)    |
 | isAd           | Boolean | No       | 광고 여부                                       |
-| recipientList  | List    | Yes      | 수신자 리스트(최대 1000명)                      |
+| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)               |
 | - recipientNo  | String  | Yes      | 수신 번호                                       |
 | - content.text | String  | Yes      | 본문 내용                                       |
 
