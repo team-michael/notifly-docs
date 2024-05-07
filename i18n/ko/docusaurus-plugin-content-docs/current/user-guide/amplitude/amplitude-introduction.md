@@ -63,4 +63,4 @@ Amplitude를 분석 도구로 사용하고 계신 고객사들을 위해 Amplitu
 - Q. Amplitude로 전송되는 이벤트 종류 중 일부만 노티플라이에 로깅되는 것 같습니다.
   - A. "1. Amplitude에 Notifly 정보 등록하기"의 Step 5인 Send Events에서 노티플라이에도 로깅할 이벤트가 포함되어 있는지 확인해 주세요.
 - Q. Amplitude내의 여러 개의 프로젝트를 등록할 수 있나요?
-  - A. 현재 노티플라이에서는 하나의 Amplitude 프로젝트만 연동 가능합니다. 여러개의 프로젝트 연동이 필요하신 경우 contact@greyboxhq.com 으로 연락 부탁드립니다.
+  - A. 현재 노티플라이에서는 하나의 Amplitude 프로젝트만 연동 가능합니다. 여러개의 프로젝트 연동이 필요하신 경우 contact@notifly.tech 으로 연락 부탁드립니다.
