@@ -1,0 +1,8 @@
+{
+  "label": "웹 푸시 알림",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Send web push notification with Notifly."
+  }
+}

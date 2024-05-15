@@ -1,6 +1,6 @@
 {
   "label": "In App Popup",
-  "position": 8,
+  "position": 9,
   "link": {
     "type": "generated-index",
     "description": "Show In App Popup with Notifly."
