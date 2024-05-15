@@ -1,6 +1,6 @@
 {
   "label": "Kakaotalk",
-  "position": 4,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "Send Kakaotalk with Notifly."

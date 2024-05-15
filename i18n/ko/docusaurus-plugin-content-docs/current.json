@@ -51,14 +51,6 @@
     "message": "카페24 쇼핑몰과 연동하여 CRM 마케팅 캠페인을 바로 집행할 수 있습니다. 이 가이드를 참조하여 카페24 연동에 대해 알아보고 코드 없이 클릭 몇 번으로 노티플라이 프로젝트와 카페24 쇼핑몰을 연동해보세요.",
     "description": "The generated-index page description for category Cafe24 Integration in sidebar userGuide"
   },
-  "sidebar.userGuide.category.Mixpanel Integration": {
-    "message": "Mixpanel 연동",
-    "description": "The label for category Mixpanel Integration in sidebar userGuide"
-  },
-  "sidebar.userGuide.category.Mixpanel Integration.link.generated-index.description": {
-    "message": "노티플라이에서는 Mixpanel과 연동하여 Mixpanel에서 만든 코호트를 대상으로 캠페인을 진행할 수 있습니다. 이 가이드를 참조하여 Mixpanel 연동에 대해 알아보세요.",
-    "description": "The generated-index page description for category Mixpanel Integration in sidebar userGuide"
-  },
   "sidebar.userGuide.category.Amplitude Integration": {
     "message": "Amplitude 연동",
     "description": "The label for category Amplitude Integration in sidebar userGuide"
@@ -98,5 +90,13 @@
   "sidebar.userGuide.category.In App Popup.link.generated-index.description": {
     "message": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category In App Popup in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.App push": {
+    "message": "앱 푸시 알림",
+    "description": "The label for category App push in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.App push.link.generated-index.description": {
+    "message": "노티플라이에서 앱 푸시 알림을 발송하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category App push in sidebar userGuide"
   }
 }
