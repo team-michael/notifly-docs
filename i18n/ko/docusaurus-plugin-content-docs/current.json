@@ -98,5 +98,13 @@
   "sidebar.userGuide.category.App push.link.generated-index.description": {
     "message": "노티플라이에서 앱 푸시 알림을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category App push in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Web push": {
+    "message": "웹 푸시 알림",
+    "description": "The label for category Web push in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Web push.link.generated-index.description": {
+    "message": "노티플라이에서 웹 푸시 알림을 발송하는 방법을 알아봅니다.",
+    "description": "The generated-index page description for category Web push in sidebar userGuide"
   }
 }

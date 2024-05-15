@@ -2,12 +2,12 @@
 sidebar_position: 1
 ---
 
-# 앱 푸시 알림 발송 {#app-push-notification}
+# 앱 푸시 알림 발송
 
 노티플라이에서 앱 푸시 기능을 이용하기 위해서는 다음 두 가지를 먼저 확인해 주세요:
 
 1. 앱에 [노티플라이 SDK](/ko/category/client-sdk)가 설치되었는지 확인해 주세요.
-2. [연동 테스트 - 앱 푸시 알림 테스트](/ko/developer-guide/client-sdk/sdk_test#3-앱-푸시-알림-테스트)를 진행해 주세요.
+2. [연동 테스트 - 앱 푸시 알림 테스트](/ko/developer-guide/client-sdk/sdk_test#app-push-notification-test)를 진행해 주세요.
 
 ## 1. 발송 시점 설정 {#app-push-notification-send-time}
 
@@ -16,8 +16,8 @@ sidebar_position: 1
 
 사용자가 여러 기기에서 앱을 사용하고 있는 경우, 앱 푸시 알림은 다음과 같이 발송됩니다:
 
-- 예약 발송 (배치 발송), API 기반 발송 인 경우에는 사용자의 모든 기기로 앱 푸시 알림이 발송됩니다.
-- 이벤트 기반 발송 (실시간 발송) 인 경우에는 사용자가 해당 이벤트를 발생시킨 기기로만 앱 푸시 알림이 발송됩니다.
+- 예약 발송, API 기반 발송인 경우에는 사용자의 모든 기기로 앱 푸시 알림이 발송됩니다.
+- 이벤트 기반 발송인 경우에는 사용자가 해당 이벤트를 발생시킨 기기로만 앱 푸시 알림이 발송됩니다.
 
 ## 2. 발송 대상 설정 {#app-push-notification-target}
 
