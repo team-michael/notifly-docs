@@ -13,7 +13,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 발송 채널 별로 유저 정보로 등록되어야 할 필수적인 요소들이 존재합니다.
 
 - **푸시 알림 - 디바이스 토큰** : 디바이스 토큰은 현재 [Client SDK](/ko/category/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 토큰을 매뉴얼하게 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
-- **카카오톡 계열 (카카오 알림톡, 카카오 친구톡), 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 유저 등록 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **카카오 알림톡, 카카오 친구톡, 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 유저 등록 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 - **이메일 - 이메일 주소** : 이메일 주소 또한 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 ## 1. 유저 그룹 설정 {#user-group-setup}
@@ -110,7 +110,6 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 
 - **CSV 업로드** 기능은 노티플라이에 등록된 유저와 무관하게 발송됩니다. 따라서 메시지 개인화를 할 때에는, 노티플라이 데이터베이스에 등록된 유저 정보를 활용할 수 없습니다. CSV 파일 업로드를 했을 때는 **CSV 파일에 등록된 정보만으로 메시지 개인화를 할 수 있으며**, 메시지 개인화에 대한 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 섹션을 참고해주세요.
 
-
 ## 분할 발송 {#throttling}
 
 ![Throttling](../img/throttling.png)
@@ -123,7 +122,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 ### 설정 예시
 
 - 발송 시점: 18:00
-- 예상 모수: 300 
+- 예상 모수: 300
 - 발송 간격: 5분
 - 회당 발송 메시지 수: 100
 - 18:00에 100회, 18:05에 100회, 18:10에 100회 3번에 걸쳐 발송 됩니다.
