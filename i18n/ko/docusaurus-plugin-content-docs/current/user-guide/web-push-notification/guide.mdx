@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # 웹 푸시 알림 발송
@@ -41,12 +41,17 @@ sidebar_position: 1
 
 #### 3-1-2. 웹 푸시 이미지 설정 (Optional)
 
-- 이미지는 .png, .jpeg(.jpg) 파일만 지원합니다.
-- 이미지의 가로:세로 비율은 2:1을 권장합니다.
-- 파일 사이즈는 100KB 이하를 권장합니다.
+- 이미지는 .png, .jpeg(.jpg) 파일만 지원합니다. 200KB 이하의 이미지를 권장합니다.
+- 360x240 픽셀 이상의 이미지를 권장합니다. 데스크톱과 모바일에서 이미지가 보여지는 크기 및 비율이 다르기 때문에 적절한 비율을 테스트한 뒤 사용해 주세요.
 - 이미 업로드된 이미지를 사용하고자 하는 경우 URL 입력 옵션을 선택하시면 됩니다.
 
 ![Web push campaign image](./img/web-push-campaign-image.png)
+
+:::info macOS Chrome에서는 웹 푸시 이미지가 표시되지 않습니다.
+
+참고: [Google Chrome 웹 푸시 전환 공지](https://developer.chrome.com/blog/native-mac-os-notifications?hl=ko)
+
+:::
 
 #### 3-1-3. 웹 푸시 클릭 시 액션 설정 (Optional)
 
