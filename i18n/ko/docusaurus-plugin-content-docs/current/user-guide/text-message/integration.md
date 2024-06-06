@@ -26,7 +26,11 @@ sidebar_class_name: hidden
 
 [알리고](https://smartsms.aligo.in/admin/api/info.html)를 사용하시는 경우에는 반드시 노티플라이의 문자 발송 서버 IP 주소를 알리고에 직접 입력해 주셔야 합니다.
 
-알리고 홈페이지에 로그인 하신 후에 [문자API] - [신청/인증] 탭에 들어가셔서, 발송 서버 IP에 `3.38.74.151`을 입력해 주시기 바랍니다.
+알리고 홈페이지에 로그인 하신 후에 [문자API] - [신청/인증] 탭에 들어가셔서, 발송 서버 IP에 아래 IP들을 모두 입력해주세요.
+
+- `3.38.74.151`
+- `43.201.228.103`
+- `43.200.138.23`
 
 ![Aligo IP address settings](./img/text_message_ip_address.png)
 
