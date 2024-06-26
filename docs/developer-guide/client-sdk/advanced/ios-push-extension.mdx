@@ -73,7 +73,7 @@ platform :ios, '13.0'
 // highlight-start
 target 'NotiflyNotificationExtension' do
   use_frameworks! :linkage => :static
-  pod 'notifly_sdk', '1.7.0', :subspecs => ['Extension']
+  pod 'notifly_sdk_push_extension'
 end
 // highlight-end
 ```
@@ -99,7 +99,7 @@ end
 <TabItem value="NotiflyNotificationExtension/NotificationService.swift" label="NotificationService.swift">
 
 ```swift title="NotiflyNotificationExtension/NotificationService.swift"
-import notifly_sdk
+import notifly_sdk_push_extension
 
 class NotificationService: NotiflyNotificationServiceExtension {
     override init() {
@@ -126,7 +126,7 @@ class NotificationService: NotiflyNotificationServiceExtension {
 <TabItem value="NotiflyNotificationExtension/NotificationService.swift" label="NotificationService.swift">
 
 ```swift title="NotiflyNotificationExtension/NotificationService.swift"
-import notifly_sdk
+import notifly_sdk_push_extension
 
 class NotificationService: NotiflyNotificationServiceExtension {
     override init() {
