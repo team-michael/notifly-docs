@@ -140,14 +140,14 @@ sidebar_position: 1
 
 ### 2.3. API 기반 발송
 
-노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 현재 API 기반 발송은 푸시 알림만 지원합니다. 자세한 API 명세는 [개발자 가이드 - Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)를 참고해주세요.
+노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 자세한 API 명세는 [개발자 가이드 - Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#api-campaign-triggering)를 참고해주세요.
 
 - API 기반 발송에서 발송 대상은 <u>UI에서 지정할 수 없습니다</u>. API Request Body에서 발송 대상을 지정해 주세요.
 
 <details>
     <summary><b>API 기반 발송 캠페인 생성 예시</b> 더 보기</summary>
 
-- 해당 캠페인은 [**Campaign Triggering API**](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.
+- 해당 캠페인은 [**Campaign Triggering API**](/ko/developer-guide/http-api/http-api-guide#api-campaign-triggering)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.
 
 ![api-triggered-campaign-message-example](./img/api_triggered_campaign_message_example.png)
 
