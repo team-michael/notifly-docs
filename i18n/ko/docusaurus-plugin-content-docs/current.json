@@ -19,13 +19,13 @@
     "message": "노티플라이 캠페인",
     "description": "The label for category Campaigns in sidebar userGuide"
   },
-  "sidebar.userGuide.category.Campaign_Segments": {
+  "sidebar.userGuide.category.Campaign Segments": {
     "message": "캠페인 발송 대상 설정",
-    "description": "The label for category Campaign_Segments in sidebar userGuide"
+    "description": "The label for category Campaign Segments in sidebar userGuide"
   },
-  "sidebar.userGuide.category.Campaign_Segments.link.generated-index.description": {
+  "sidebar.userGuide.category.Campaign Segments.link.generated-index.description": {
     "message": "캠페인 발송 대상을 어떻게 설정하는지 알아봅니다.",
-    "description": "The generated-index page description for category Campaign_Segments in sidebar userGuide"
+    "description": "The generated-index page description for category Campaign Segments in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
     "message": "노티플라이 캠페인에 대한 정보를 설명하고, 생성부터 활용하는 법을 알아봅니다.",
@@ -109,7 +109,7 @@
   },
   "sidebar.userGuide.category.Webhook": {
     "message": "웹훅",
-    "description": "The label for category Web push in sidebar userGuide"
+    "description": "The label for category Webhook in sidebar userGuide"
   },
   "sidebar.userGuide.category.Webhook.link.generated-index.description": {
     "message": "노티플라이에서 제공하는 웹훅을 이용하여 자유도 높은 CRM 시나리오를 구현해보세요.",
