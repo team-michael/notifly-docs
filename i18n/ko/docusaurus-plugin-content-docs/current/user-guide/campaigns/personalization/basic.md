@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
-# 메시지 개인화
+# 기본 사용법
 
 노티플라이에서는 [Liquid 템플릿 언어](https://liquidjs.com/tutorials/intro-to-liquid.html)를 기반으로 메시지 개인화를 지원합니다.
 
@@ -75,11 +75,11 @@ Liquid는 동적인 내용을 삽입하기 위해 사용되는 템플릿 언어�
 
 1. 메시지 입력란 우측 상단의 '메시지 개인화' 버튼을 클릭해주세요. (현재 개인화가 지원되지 않는 채널은 해당 버튼이 보이지 않을 수 있습니다.)
 2. 캠페인 발송 시점 타입과 발송 대상 타입에 따라 자동으로 지원되는 변수의 종류(카테고리)가 드랍다운 리스트로 제공됩니다.
-   - ![Message Personalization UI - Build Segment](./img/message_personalization_ui_build_segment.png)
-   - ![Message Personalization UI - CSV Upload Segment](./img/message_personalization_ui_csv.png)
+   - ![Message Personalization UI - Build Segment](../img/message_personalization_ui_build_segment.png)
+   - ![Message Personalization UI - CSV Upload Segment](../img/message_personalization_ui_csv.png)
 3. 변수명에 치환하고 싶은 변수의 필드명을 입력해주세요. 해당 입력란은 필수입니다.
 4. 기본값을 입력해주세요. 기본값은 해당 필드명이 존재하지 않을 때, 빈 값 대신 기본적으로 치환될 문구입니다.
 
 모든 과정을 완료하셨다면 메시지 입력란 속에 Liquid 구문이 잘 들어간 것을 확인할 수 있습니다.
 
-![Message Personalization UI - Result](./img/message_personalization_result.png)
+![Message Personalization UI - Result](../img/message_personalization_result.png)
