@@ -33,6 +33,14 @@ _템플릿 기반 팝업 생성_
 
 ![In App message template creation 2](./img/in_app_message_template_creation_2.png)
 
+### 이미지 삽입
+
+팝업에 포함 될 이미지를 업로드 할 수 있습니다. 템플릿 별로 권장 비율이 다르기 때문에 이미지 업로드시 안내되는 권장 비율을 확인 부탁드립니다. 
+
+_이미지 업로드시 권장 비율 확인_
+![In App message template image_upload](./img/in_app_message_template_image_upload.png)
+
+
 ### 텍스트 및 버튼 스타일링 커스터마이징
 
 애플리케이션 내 메시지 템플릿을 이용하여 텍스트와 버튼의 내용 및 스타일을 사용자의 요구에 맞춰 변경할 수 있습니다. 색상 선택 및 스타일링 옵션을 통해 애플리케이션의 브랜드에 부합하는 디자인을 적용할 수 있습니다.
