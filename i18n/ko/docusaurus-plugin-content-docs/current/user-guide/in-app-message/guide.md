@@ -8,6 +8,8 @@ sidebar_position: 1
 
 1. 노티플라이에서는 인앱 팝업을 원하는 타이밍에 띄울 수 있습니다.
 2. [Android SDK](/ko/developer-guide/client-sdk/android-sdk)/[iOS SDK](/ko/developer-guide/client-sdk/ios-sdk) 개발 세팅이 선행되어야 합니다.
+3. 새롭게 생성 하거나 내용이 변경된 인앱 팝업 캠페인의 정보는 사용자의 애플리케이션이 새로 시작되는 시점에 적용이 됩니다.
+   * 앱이 실행중인 상태에서 생성/변경한 캠페인의 정보는 다음 앱 재시작 시 적용 됩니다.
 
 ## 1. 발송 대상 설정
 
