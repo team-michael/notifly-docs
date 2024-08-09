@@ -21,11 +21,11 @@
   },
   "sidebar.userGuide.category.Message Personalization": {
     "message": "메시지 개인화",
-    "description": "The label for category Campaign Segments in sidebar userGuide"
+    "description": "The label for category Message Personalization in sidebar userGuide"
   },
   "sidebar.userGuide.category.Message Personalization.link.generated-index.description": {
     "message": "사용자별 메시지 개인화 방법에 대해 알아봅니다.",
-    "description": "The generated-index page description for category Campaign Segments in sidebar userGuide"
+    "description": "The generated-index page description for category Message Personalization in sidebar userGuide"
   },
   "sidebar.userGuide.category.Campaign Segments": {
     "message": "캠페인 발송 대상 설정",
