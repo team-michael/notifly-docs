@@ -161,4 +161,4 @@ sidebar_position: 1
 
 ## 4. 메시지 개인화
 
-노티플라이 캠페인은 사용자에게 메시지를 개인화하여 발송할 수 있는 방법을 제공합니다. 자세한 정보는 [메시지 개인화](/ko/user-guide/campaigns/message-personalization) 가이드를 확인해주세요. -->
+노티플라이 캠페인은 사용자에게 메시지를 개인화하여 발송할 수 있는 방법을 제공합니다. 자세한 정보는 [메시지 개인화](/ko/category/message-personalization) 가이드를 확인해주세요. -->
