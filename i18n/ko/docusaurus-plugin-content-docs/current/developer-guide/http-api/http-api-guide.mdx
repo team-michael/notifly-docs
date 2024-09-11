@@ -871,18 +871,6 @@ if (!result.success) {
 | Content-Type  | application/json | Request body의 MIME Type |
 | Authorization | authToken        | 인증 토큰                |
 
-#### Response Body
-
-```json
-{
-  "header": {
-    "isSuccessful": true,
-    "resultCode": 0,
-    "resultMessage": "Success"
-  }
-}
-```
-
 #### Response Headers
 
 | Parameter    | Value            |
@@ -961,23 +949,22 @@ fetch(url, {
 
 ```json
 {
-  "header": {
-    "isSuccessful": true,
-    "resultCode": 0,
-    "resultMessage": "SUCCESS"
-  },
-  "body": {
-    "pageNum": 1,
-    "pageSize": 15,
-    "totalCount": 1,
-    "data": [
-      {
-        "unsubscribeNo": "0808888888",
-        "recipientNo": "01000000000",
-        "requestDate": "2018-05-14 17:07:29.0"
-      }
-    ]
-  }
+  "pageNum": 1,
+  "pageSize": 15,
+  "totalCount": 1,
+  "data": [
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "01000000000",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "010012341234",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    ...
+  ]
 }
 ```
 
@@ -1050,19 +1037,6 @@ fetch(`${url}?${params}`, {
 | Content-Type  | application/json | Request body의 MIME Type |
 | Authorization | authToken        | 인증 토큰                |
 
-#### Response Body
-
-```json
-{
-  "header": {
-    "isSuccessful": true,
-    "resultCode": 0,
-    "resultMessage": "Success"
-  },
-  "body": null
-}
-```
-
 #### Response Headers
 
 | Parameter    | Value            |
@@ -1086,7 +1060,6 @@ const headers = {
 // Query parameters
 const params = new URLSearchParams({
   unsubscribeNo: "0800000000",
-  updateUser: "admin",
   recipientNoList: "0100000000,0100000001",
 });
 
