@@ -55,7 +55,7 @@ Notifly HTTP API의 전체 요청량 제한은 **초당 5,000회**입니다.
 }
 ```
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/authenticate
@@ -114,7 +114,7 @@ Content-Type: application/json
 }
 ```
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/track-event
@@ -180,7 +180,7 @@ Authorization: {auth-key}
 }
 ```
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/set-user-properties
@@ -255,7 +255,7 @@ Authorization: {auth-key}
 }
 ```
 
-### Example
+### Sample Request
 
 ```http
 DELETE https://api.notifly.tech/users
@@ -360,7 +360,7 @@ API 기반 발송은 중복 발송을 방지하기 위해 수신자의 중복 �
 | 500 Internal Server Error | application/json | 노티플라이 서버 오류입니다. 지속적으로 500 에러가 발생한다면, 노티플라이 팀에 문의해주세요. | `{"code": 500, "success":false,"error":"some-error-message"}`                     |
 | 501 Not Implemented       | application/json | 아직 지원되지 않는 기능입니다.                                     | `{"code": 501, "success":false,"error":"Not implemented: some-error-message"}`    |
 
-#### Sample Request
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/campaign/{projectId}/{campaignId}/send
@@ -431,7 +431,7 @@ Authorization: {auth-key}
 | 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
 | 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/messages/text-message
@@ -508,7 +508,7 @@ Authorization: {auth-key}
 | 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
 | 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/messages/kakao-alimtalk
@@ -580,7 +580,7 @@ Authorization: {auth-key}
 | 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
 | 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
 
-### Example
+### Sample Request
 
 ```http
 POST https://api.notifly.tech/messages/kakao-friendtalk
@@ -614,20 +614,20 @@ Authorization: {auth-key}
 
 #### Specifications
 
-#### Request Headers
+##### Request Headers
 
 | Parameter     | Value            | Description                           |
 |---------------|------------------|---------------------------------------|
 | Content-Type  | application/json | Request body의 MIME Type               |
 | Authorization | authToken        | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
-#### Path Parameters
+##### Path Parameters
 
 | Parameter | Type   | Required | Description |
 |-----------|--------|----------|-------------|
 | projectId | String | Yes      | 프로젝트 ID     |
 
-#### Query Parameters
+##### Query Parameters
 
 | Parameter        | Type    | Required | Description                       |
 |------------------|---------|----------|-----------------------------------|
@@ -638,14 +638,14 @@ Authorization: {auth-key}
 | pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                   |
 | pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)           |
 
-#### Response Headers
+##### Response Headers
 
 | Parameter    | Value            |
 |--------------|------------------|
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
-#### Response Body
+##### Response Body
 
 ```http
 {
@@ -684,27 +684,27 @@ Authorization: {auth-key}
 
 #### Specifications
 
-#### Request Headers
+##### Request Headers
 
 | Parameter     | Value            | Description                           |
 |---------------|------------------|---------------------------------------|
 | Content-Type  | application/json | Request body의 MIME Type               |
 | Authorization | authToken        | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
-#### Path Parameters
+##### Path Parameters
 
 | Parameter | Type   | Required | Description |
 |-----------|--------|----------|-------------|
 | projectId | String | Yes      | 프로젝트 ID     |
 
-#### Request Body
+##### Request Body
 
 | Parameter       | Type   | Required | Description           |
 |-----------------|--------|----------|-----------------------|
 | unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)   |
 | recipientNoList | List   | Yes      | 수신 거부 대상자 번호 (최대 10개) |
 
-#### Response Headers
+##### Response Headers
 
 | Parameter    | Value            |
 |--------------|------------------|
@@ -732,27 +732,27 @@ Authorization: {auth-key}
 
 #### Specifications
 
-#### Request Headers
+##### Request Headers
 
 | Parameter     | Value            | Description                           |
 |---------------|------------------|---------------------------------------|
 | Content-Type  | application/json | Request body의 MIME Type               |
 | Authorization | authToken        | Authorization endpoint 를 통해 수령한 인증 토큰 |
 
-#### Path Parameters
+##### Path Parameters
 
 | Parameter | Type   | Required | Description |
 |-----------|--------|----------|-------------|
 | projectId | String | Yes      | 프로젝트 ID     |
 
-#### Query Parameters
+##### Query Parameters
 
 | Parameter       | Type   | Required | Description           |
 |-----------------|--------|----------|-----------------------|
 | unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자) |
 | recipientNoList | String | Yes      | 삭제할 수신 거부 번호 (콤마로 구분) |
 
-#### Response Headers
+##### Response Headers
 
 | Parameter    | Value            |
 |--------------|------------------|
