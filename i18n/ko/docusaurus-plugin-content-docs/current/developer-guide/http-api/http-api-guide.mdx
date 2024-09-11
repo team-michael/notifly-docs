@@ -286,7 +286,7 @@ fetch(url, {
 ### Specifications
 
 | Parameter       | Type   | Required | Description                                                                                             |
-|-----------------| ------ | -------- | ------------------------------------------------------------------------------------------------------- |
+| --------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
 | projectId       | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 | userId          | String | No       | 삭제할 유저 ID                                                                                          |
 | userProperties  | Object | No       | 삭제할 유저의 사용자 속성                                                                               |
@@ -837,4 +837,242 @@ if (!result.success) {
 } else {
   console.log("SMS Message sent successfully");
 }
+```
+
+## 9. 080 Block Service Endpoint
+
+이 섹션에서는 080 수신 거부 서비스와 관련된 API를 설명합니다.
+
+### 9.1 Register Recipients
+
+#### Endpoint
+
+`POST https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Request Body
+
+| Parameter       | Type   | Required | Description                       |
+| --------------- | ------ | -------- | --------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)      |
+| recipientNoList | List   | Yes      | 수신 거부 대상자 번호 (최대 10개) |
+
+##### Request Headers
+
+| Parameter     | Value            | Description              |
+| ------------- | ---------------- | ------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type |
+| Authorization | authToken        | 인증 토큰                |
+
+#### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+#### 코드 예시
+
+```javascript
+// Endpoint
+const projectId = "your-project-id";
+const url = `https://api.notifly.tech/projects/${projectId}/messages/text-message/blockservice/recipients`;
+
+// Headers
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: "authToken",
+};
+
+// Request Body
+const body = {
+  unsubscribeNo: "0800000000",
+  recipientNoList: ["0100000000", "0100000001"],
+};
+const encodedBody = JSON.stringify(body);
+
+// Fetch call
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: encodedBody,
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+### 9.2 Find Recipients
+
+#### Endpoint
+
+`GET https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Query Parameters
+
+| Parameter        | Type    | Required | Description                                |
+| ---------------- | ------- | -------- | ------------------------------------------ |
+| unsubscribeNo    | String  | Yes      | 080 수신 거부 번호 (최대 25자)             |
+| recipientNo      | String  | No       | 수신 거부 대상자 번호 (최대 25자)          |
+| startRequestDate | String  | No       | 수신 거부 요청 시작값(yyyy-MM-dd HH:mm:ss) |
+| endRequestDate   | String  | No       | 수신 거부 요청 종료값(yyyy-MM-dd HH:mm:ss) |
+| pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                    |
+| pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)            |
+
+##### Request Headers
+
+| Parameter     | Value            | Description              |
+| ------------- | ---------------- | ------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type |
+| Authorization | authToken        | 인증 토큰                |
+
+#### Response Body
+
+```json
+{
+  "pageNum": 1,
+  "pageSize": 15,
+  "totalCount": 1,
+  "data": [
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "01000000000",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "010012341234",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    ...
+  ]
+}
+```
+
+#### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+#### 코드 예시
+
+```javascript
+// Endpoint
+const projectId = "your-project-id";
+const url = `https://api.notifly.tech/projects/${projectId}/messages/text-message/blockservice/recipients`;
+
+// Headers
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: "authToken",
+};
+
+// Query parameters
+const params = new URLSearchParams({
+  unsubscribeNo: "0800000000",
+  pageNum: 1,
+  pageSize: 15,
+});
+
+// Fetch call
+fetch(`${url}?${params}`, {
+  method: "GET",
+  headers: headers,
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+### 9.3 Remove Recipients
+
+#### Endpoint
+
+`DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Query Parameters
+
+| Parameter       | Type   | Required | Description                         |
+| --------------- | ------ | -------- | ----------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자)      |
+| recipientNoList | String | Yes      | 삭제할 수신 거부 번호 (콤마로 구분) |
+
+##### Request Headers
+
+| Parameter     | Value            | Description              |
+| ------------- | ---------------- | ------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type |
+| Authorization | authToken        | 인증 토큰                |
+
+#### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+#### 코드 예시
+
+```javascript
+// Endpoint
+const projectId = "your-project-id";
+const url = `https://api.notifly.tech/projects/${projectId}/messages/text-message/blockservice/recipients/removes`;
+
+// Headers
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: "authToken",
+};
+
+// Query parameters
+const params = new URLSearchParams({
+  unsubscribeNo: "0800000000",
+  recipientNoList: "0100000000,0100000001",
+});
+
+// Fetch call
+fetch(`${url}?${params}`, {
+  method: "DELETE",
+  headers: headers,
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 ```
