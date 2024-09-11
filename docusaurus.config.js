@@ -165,6 +165,7 @@ const config = {
           "gradle",
           "dart",
           "objectivec",
+          "http"
         ],
       },
       typesense: {
