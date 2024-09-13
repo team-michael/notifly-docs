@@ -395,33 +395,40 @@ This endpoint allows you to trigger campaigns. You can personalize messages usin
 
 #### Request
 
-| Parameter     | Type   | Required | Description                                                                                      |
-| ------------- | ------ | -------- | ------------------------------------------------------------------------------------------------ |
-| recipients    | List   | Yes      | Information about the message recipients.                                                        |
-| - type        | String | No       | Type of recipient (default: `user-id`). Currently supports `user-id` and `phone-number`.         |
-| - userId      | String | No       | ID of the user to whom the message will be sent. Required if `type` is `user-id`.                |
-| - phoneNumber | String | No       | Phone number of the user to whom the message will be sent. Required if `type` is `phone-number`. |
-| - eventParams | Object | No       | An object containing event parameters to personalize the message.                                |
+| Parameter     | Type   | Required | Description                                                                                       |
+| ------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
+| recipients    | List   | Yes      | Information about the message recipients.                                                         |
+| - type        | String | No       | Type of recipient (default: `user-id`). Currently supports `user-id` `phone-number`, and `email`. |
+| - userId      | String | No       | ID of the user to whom the message will be sent. Required if `type` is `user-id`.                 |
+| - phoneNumber | String | No       | Phone number of the user to whom the message will be sent. Required if `type` is `phone-number`.  |
+| - email       | String | No       | Email address of the user to whom the message will be sent. Required if `type` is `email`.        |
+| - eventParams | Object | No       | An object containing event parameters to personalize the message.                                 |
 
-:::caution Recipient Types
+:::caution Recipient Type Support and Message Personalization
 
-Currently, API-based dispatch is only available for **push notifications** and **Kakao Alimtalk** channels. The supported recipient types may vary depending on the campaign's dispatch channel. If the campaign's dispatch channel does not support the used recipient type, a 400 Bad Request will be returned in the API response.
+The supported recipient types may vary depending on the campaign's dispatch channel. If the campaign uses a recipient type that is not supported by the dispatch channel, a 400 Bad Request will be returned in the API response.
 
 - Push Notifications: Only `user-id` type recipients are supported.
+- Web Push Notifications: Only `user-id` type recipients are supported.
 - Kakao Alimtalk: Supports both `user-id` and `phone-number` type recipients.
+- SMS: Supports both `user-id` and `phone-number` type recipients.
+- Email: Supports both `user-id` and `email` type recipients.
 
-When the recipient type is not `user-id`, Notifly server attempts to send the message based on the information specified in the request payload without fetching user information from the user database. Therefore, **user-based message personalization** is not available when the recipient type is not `user-id`. For example, if the campaign's message content contains `Hello {{ user["name"] }}`, the personalization will fail, and the message `Hello` will be sent.
+When the recipient type is not `user-id`, the Notifly server attempts to send the message based solely on the information specified in the request payload without fetching user data from the user database. Therefore, **user-based message personalization** is not available when the recipient type is not `user-id`. For example, if the campaign message contains `Hello {{ user["name"] }}`, the personalization will fail, and the message `Hello` will be sent.
 
-Event parameters are available for all types. For more detailed examples of API-based dispatch campaigns, please refer to [this section](/ko/user-guide/campaigns/basic#23-api-based-dispatch).
+Event parameters are available for all recipient types. For more detailed examples of API-based dispatch campaigns, please refer to [this section](/ko/user-guide/campaigns/basic#23-api-based-dispatch).
 
 :::
 
 :::tip Deduplication
 
-API-based dispatch checks for duplicate recipients to prevent duplicate dispatches. If the same recipient is included multiple times, the duplicate recipient will be sent only once. The following are the deduplication rules per channel:
+API-based dispatch checks for duplicate recipients to prevent duplicate messages from being sent. If the same recipient is included multiple times, the message will be sent only once. The following are the deduplication rules per channel:
 
-- Push Notifications: If it's the same device, the message is sent to only one device.
-- Kakao Alimtalk: If it's the same phone number, the message is sent to only one phone number.
+- Push Notifications: If it's the same device token, the message will be sent to only one device token.
+- Web Push Notifications: If it's the same device token, the message will be sent to only one device token.
+- Kakao Alimtalk: If it's the same phone number, the message will be sent to only one phone number.
+- SMS: If it's the same phone number, the message will be sent to only one phone number.
+- Email: If it's the same email address, the message will be sent to only one email address.
 
 :::
 
