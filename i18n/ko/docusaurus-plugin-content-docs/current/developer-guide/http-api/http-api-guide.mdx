@@ -28,21 +28,21 @@ Notifly HTTP API의 전체 요청량 제한은 **초당 5,000회**입니다.
 
 #### Request Headers
 
-| Parameter    | Value            | Description              |
-|--------------|------------------|--------------------------|
+| Parameter    | Value            | Description               |
+| ------------ | ---------------- | ------------------------- |
 | Content-Type | application/json | Request body 의 MIME Type |
 
 #### Request Body
 
-| Parameter | Type   | Required | Description                                                                                              |
-|-----------|--------|----------|----------------------------------------------------------------------------------------------------------|
+| Parameter | Type   | Required | Description                                                                                                                                              |
+| --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | accessKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Access Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 | secretKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Secret Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 #### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -80,28 +80,28 @@ Content-Type: application/json
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter                  | Type   | Required | Description                                                                                  |
-|----------------------------|--------|----------|----------------------------------------------------------------------------------------------|
-| projectId                  | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                 |
-| userId                     | String | Yes      | 서비스 유저 ID                                                                                    |
-| eventName                  | String | Yes      | 이벤트명                                                                                         |
-| eventParams                | Object | No       | 이벤트 파라미터 값들                                                                                  |
+| Parameter                  | Type   | Required | Description                                                                                                                                  |
+| -------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| projectId                  | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다.                                      |
+| userId                     | String | Yes      | 서비스 유저 ID                                                                                                                               |
+| eventName                  | String | Yes      | 이벤트명                                                                                                                                     |
+| eventParams                | Object | No       | 이벤트 파라미터 값들                                                                                                                         |
 | segmentationEventParamKeys | List   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 - 한번에 여러 이벤트를 로깅 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-    - 1회 호출당 최대 500개의 이벤트 까지만 로깅 가능합니다.
+  - 1회 호출당 최대 500개의 이벤트 까지만 로깅 가능합니다.
 
 #### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -144,21 +144,21 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter      | Type   | Required | Description                                                                  |
-|----------------|--------|----------|------------------------------------------------------------------------------|
+| Parameter      | Type   | Required | Description                                                                                             |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
 | projectId      | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userId         | String | Yes      | 유저 ID                                                                        |
-| userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                              |
+| userId         | String | Yes      | 유저 ID                                                                                                 |
+| userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                             |
 
 - 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-    - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
+  - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
 
 :::caution 특수 유저 속성값
 이메일과 전화번호 정보는 `userProperties`에 반드시 `$email`, `$phone_number`를 키값으로 정의해주어야 정상 등록됩니다. 아래 Example를 참고해주세요.
@@ -167,7 +167,7 @@ Authorization: {auth-key}
 #### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -219,30 +219,30 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter       | Type   | Required | Description                                                                  |
-|-----------------|--------|----------|------------------------------------------------------------------------------|
+| Parameter       | Type   | Required | Description                                                                                             |
+| --------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------- |
 | projectId       | String | Yes      | Notifly 팀에서 제공드리는 project ID 입니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| userId          | String | No       | 삭제할 유저 ID                                                                    |
-| userProperties  | Object | No       | 삭제할 유저의 사용자 속성                                                               |
-| - $email        | String | No       | 삭제할 유저의 이메일 주소                                                               |
-| - $phone_number | String | No       | 삭제할 유저의 전화번호                                                                 |
+| userId          | String | No       | 삭제할 유저 ID                                                                                          |
+| userProperties  | Object | No       | 삭제할 유저의 사용자 속성                                                                               |
+| - $email        | String | No       | 삭제할 유저의 이메일 주소                                                                               |
+| - $phone_number | String | No       | 삭제할 유저의 전화번호                                                                                  |
 
 - 한번에 여러 사용자의 정보를 삭제 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-    - 1회 호출당 최대 1,000명의 사용자 까지만 삭제 가능합니다.
-    - 유저 ID, 이메일, 전화번호를 기준으로 삭제할 수 있습니다.
-    - 전화번호는 정확히 일치해야 합니다. (010-1234-1234 != 01012341234)
+  - 1회 호출당 최대 1,000명의 사용자 까지만 삭제 가능합니다.
+  - 유저 ID, 이메일, 전화번호를 기준으로 삭제할 수 있습니다.
+  - 전화번호는 정확히 일치해야 합니다. (010-1234-1234 != 01012341234)
 
 #### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -284,28 +284,28 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
-| Parameter  | Type   | Required | Description                                     |
-|------------|--------|----------|-------------------------------------------------|
-| projectId  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                  |
+| Parameter  | Type   | Required | Description                                                                         |
+| ---------- | ------ | -------- | ----------------------------------------------------------------------------------- |
+| projectId  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                     |
 | campaignId | String | Yes      | 캠페인 리스트의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
 
 #### Request Body
 
-| Parameter     | Type   | Required | Description                                                                  |
-|---------------|--------|----------|------------------------------------------------------------------------------|
-| recipients    | List   | Yes      | 수신자 목록(최대 1000명)                                                             |
+| Parameter     | Type   | Required | Description                                                                                      |
+| ------------- | ------ | -------- | ------------------------------------------------------------------------------------------------ |
+| recipients    | List   | Yes      | 수신자 목록(최대 1000명)                                                                         |
 | - type        | String | No       | 수신자의 유형입니다. (기본값: `user-id`). 현재 `user-id`, `phone-number`, `email` 만 지원합니다. |
-| - userId      | String | No       | 메시지를 발송할 유저의 ID 입니다. `type`이 `user-id`인 경우 필수입니다.                            |
-| - phoneNumber | String | No       | 메시지를 발송할 유저의 전화번호 입니다. `type`이 `phone-number`인 경우 필수입니다.                     |
-| - email       | String | No       | 메시지를 발송할 유저의 이메일 주소 입니다. `type`이 `email`인 경우 필수입니다.                          |
-| - eventParams | Object | No       | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다.                           |
+| - userId      | String | No       | 메시지를 발송할 유저의 ID 입니다. `type`이 `user-id`인 경우 필수입니다.                          |
+| - phoneNumber | String | No       | 메시지를 발송할 유저의 전화번호 입니다. `type`이 `phone-number`인 경우 필수입니다.               |
+| - email       | String | No       | 메시지를 발송할 유저의 이메일 주소 입니다. `type`이 `email`인 경우 필수입니다.                   |
+| - eventParams | Object | No       | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다.         |
 
 :::note API 기반 발송 지원 채널
 
@@ -351,15 +351,15 @@ API 기반 발송은 중복 발송을 방지하기 위해 수신자의 중복 �
 
 #### Response
 
-| Status Code               | Content-Type     | Description                                           | Example Response                                                                  |
-|---------------------------|------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------|
-| 200 OK                    | application/json | 캠페인이 정상적으로 트리거 되었습니다.                                 | `{"code": 200, "success":true,"error":null}`                                      |
-| 400 Bad Request           | application/json | 잘못된 요청입니다.                                            | `{"code": 400, "success":false,"error":"Bad request: some-error-message"}`        |
-| 401 Unauthorized          | application/json | 토큰이 만료되었거나, 인증 정보가 유효하지 않습니다.                         | `{"code": 401, "success":false,"error":"Unauthorized: Invalid token"}`            |
-| 405 Method Not Allowed    | application/json | 지원되지 않는 HTTP Method 입니다.                              | `{"code": 405, "success":false,"error":"Method not allowed: some-error-message"}` |
-| 413 Payload Too Large     | application/json | 요청 payload가 너무 큽니다.                                   | `{"code": 413, "success":false,"error":"Payload too large: some-error-message"}`  |
+| Status Code               | Content-Type     | Description                                                                                 | Example Response                                                                  |
+| ------------------------- | ---------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 200 OK                    | application/json | 캠페인이 정상적으로 트리거 되었습니다.                                                      | `{"code": 200, "success":true,"error":null}`                                      |
+| 400 Bad Request           | application/json | 잘못된 요청입니다.                                                                          | `{"code": 400, "success":false,"error":"Bad request: some-error-message"}`        |
+| 401 Unauthorized          | application/json | 토큰이 만료되었거나, 인증 정보가 유효하지 않습니다.                                         | `{"code": 401, "success":false,"error":"Unauthorized: Invalid token"}`            |
+| 405 Method Not Allowed    | application/json | 지원되지 않는 HTTP Method 입니다.                                                           | `{"code": 405, "success":false,"error":"Method not allowed: some-error-message"}` |
+| 413 Payload Too Large     | application/json | 요청 payload가 너무 큽니다.                                                                 | `{"code": 413, "success":false,"error":"Payload too large: some-error-message"}`  |
 | 500 Internal Server Error | application/json | 노티플라이 서버 오류입니다. 지속적으로 500 에러가 발생한다면, 노티플라이 팀에 문의해주세요. | `{"code": 500, "success":false,"error":"some-error-message"}`                     |
-| 501 Not Implemented       | application/json | 아직 지원되지 않는 기능입니다.                                     | `{"code": 501, "success":false,"error":"Not implemented: some-error-message"}`    |
+| 501 Not Implemented       | application/json | 아직 지원되지 않는 기능입니다.                                                              | `{"code": 501, "success":false,"error":"Not implemented: some-error-message"}`    |
 
 ### Sample Request
 
@@ -406,26 +406,26 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter     | Type   | Required | Description                    |
-|---------------|--------|----------|--------------------------------|
+| Parameter     | Type   | Required | Description                                     |
+| ------------- | ------ | -------- | ----------------------------------------------- |
 | projectId     | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
-| type          | String | Yes      | 메시지 유형 (`sms`, `lms` 또는 `mms`) |
-| title         | String | No       | 본문 제목(lms, mms에만 사용)           |
-| body          | String | Yes      | 본문 내용                          |
-| recipientList | List   | Yes      | 수신자 목록(최대 1000명)               |
-| - recipientNo | String | Yes      | 수신 번호                          |
+| type          | String | Yes      | 메시지 유형 (`sms`, `lms` 또는 `mms`)           |
+| title         | String | No       | 본문 제목(lms, mms에만 사용)                    |
+| body          | String | Yes      | 본문 내용                                       |
+| recipientList | List   | Yes      | 수신자 목록(최대 1000명)                        |
+| - recipientNo | String | Yes      | 수신 번호                                       |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -472,38 +472,38 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter           | Type            | Required | Description                                                                            |
-|---------------------|-----------------|----------|----------------------------------------------------------------------------------------|
-| projectId           | String          | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                                         |
+| Parameter           | Type            | Required | Description                                                                                                    |
+| ------------------- | --------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| projectId           | String          | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                                                |
 | templateId          | String          | Yes      | 등록한 발송 템플릿 ID ([알림톡 템플릿 리스트](https://notifly.tech/console/kakao-template/list)에서 확인 가능) |
-| channelId           | String          | No       | 발송할 카카오 채널 ID                                                                          |
-| resendSendNo        | String          | No       | 대체 발송 발신 번호 ([Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide) 이 설정된 번호) |
-| senderGroupingKey   | String          | No       | 발신 그룹핑 키(최대 100자)                                                                      |
-| recipientList       | List            | Yes      | 수신자 목록(최대 1000명)                                                                       |
-| - recipientNo       | String          | Yes      | 수신 번호 (최대 15자)                                                                         |
-| - templateParameter | Object          | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                            |
-| - resendParameter   | ResendParameter | No       | 대체 발송 정보                                                                               |
+| channelId           | String          | No       | 발송할 카카오 채널 ID                                                                                          |
+| resendSendNo        | String          | No       | 대체 발송 발신 번호 ([Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide) 이 설정된 번호)       |
+| senderGroupingKey   | String          | No       | 발신 그룹핑 키(최대 100자)                                                                                     |
+| recipientList       | List            | Yes      | 수신자 목록(최대 1000명)                                                                                       |
+| - recipientNo       | String          | Yes      | 수신 번호 (최대 15자)                                                                                          |
+| - templateParameter | Object          | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
+| - resendParameter   | ResendParameter | No       | 대체 발송 정보                                                                                                 |
 
 #### ResendParameter
 
-| Parameter     | Type    | Required | Description                                        |
-|---------------|---------|----------|----------------------------------------------------|
-| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                  |
-| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.       |
-| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                    |
+| Parameter     | Type    | Required | Description                                                                      |
+| ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
+| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                               |
+| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.             |
+| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                                |
 | resendContent | String  | No       | 대체 발송 내용. 기본값은 메시지 본문과 웹링크 버튼명 - 웹링크 Mobile 링크입니다. |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -555,27 +555,27 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
-| Parameter      | Type    | Required | Description                       |
-|----------------|---------|----------|-----------------------------------|
-| projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.    |
+| Parameter      | Type    | Required | Description                                            |
+| -------------- | ------- | -------- | ------------------------------------------------------ |
+| projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.        |
 | channelId      | String  | No       | 여러 카카오 채널이 등록되어 있을 경우 발송 할 채널 ID. |
-| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)     |
-| isAd           | Boolean | No       | 광고 여부                             |
-| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                  |
-| - recipientNo  | String  | Yes      | 수신 번호                             |
-| - content.text | String  | Yes      | 본문 내용                             |
+| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)           |
+| isAd           | Boolean | No       | 광고 여부                                              |
+| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                               |
+| - recipientNo  | String  | Yes      | 수신 번호                                              |
+| - content.text | String  | Yes      | 본문 내용                                              |
 
 #### Response
 
 | Status Code               | Content-Type     | Example Response                    |
-|---------------------------|------------------|-------------------------------------|
+| ------------------------- | ---------------- | ----------------------------------- |
 | 200 OK                    | application/json | `{"success":true}`                  |
 | 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
 | 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
@@ -618,32 +618,32 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body의 MIME Type                                              |
-| Authorization | authToken        | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
 | Parameter | Type   | Required | Description |
-|-----------|--------|----------|-------------|
-| projectId | String | Yes      | 프로젝트 ID     |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
 
 ##### Query Parameters
 
-| Parameter        | Type    | Required | Description                       |
-|------------------|---------|----------|-----------------------------------|
+| Parameter        | Type    | Required | Description                                |
+| ---------------- | ------- | -------- | ------------------------------------------ |
 | unsubscribeNo    | String  | Yes      | 080 수신 거부 번호 (최대 25자)             |
-| recipientNo      | String  | No       | 수신 거부 대상자 번호 (최대 25자)             |
+| recipientNo      | String  | No       | 수신 거부 대상자 번호 (최대 25자)          |
 | startRequestDate | String  | No       | 수신 거부 요청 시작값(yyyy-MM-dd HH:mm:ss) |
 | endRequestDate   | String  | No       | 수신 거부 요청 종료값(yyyy-MM-dd HH:mm:ss) |
-| pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                   |
-| pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)           |
+| pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                    |
+| pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)            |
 
 ##### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -688,28 +688,28 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body의 MIME Type                                              |
-| Authorization | authToken        | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
 | Parameter | Type   | Required | Description |
-|-----------|--------|----------|-------------|
-| projectId | String | Yes      | 프로젝트 ID     |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
 
 ##### Request Body
 
-| Parameter       | Type   | Required | Description           |
-|-----------------|--------|----------|-----------------------|
-| unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)   |
+| Parameter       | Type   | Required | Description                       |
+| --------------- | ------ | -------- | --------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)      |
 | recipientNoList | List   | Yes      | 수신 거부 대상자 번호 (최대 10개) |
 
 ##### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -736,28 +736,28 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                          |
-|---------------|------------------|----------------------------------------------------------------------|
-| Content-Type  | application/json | Request body의 MIME Type                                              |
-| Authorization | authToken        | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
 | Parameter | Type   | Required | Description |
-|-----------|--------|----------|-------------|
-| projectId | String | Yes      | 프로젝트 ID     |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
 
 ##### Query Parameters
 
-| Parameter       | Type   | Required | Description           |
-|-----------------|--------|----------|-----------------------|
-| unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자) |
+| Parameter       | Type   | Required | Description                         |
+| --------------- | ------ | -------- | ----------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자)      |
 | recipientNoList | String | Yes      | 삭제할 수신 거부 번호 (콤마로 구분) |
 
 ##### Response Headers
 
 | Parameter    | Value            |
-|--------------|------------------|
+| ------------ | ---------------- |
 | Status code  | 200 OK           |
 | Content-Type | application/json |
 
@@ -765,6 +765,155 @@ Authorization: {auth-key}
 
 ```http
 DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes?unsubscribeNo=0800000000&recipientNoList=0100000000,0100000001
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+## 10. Campaign Statistics Retrieval Endpoint
+
+이 endpoint를 통해 캠페인의 발송 현황을 조회하실 수 있습니다.
+
+### Endpoint
+
+`GET https://api.notifly.tech/projects/{projectId}/campaigns/{campaignId}/stats`
+
+### Specifications
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body MIME type                                                         |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Path Parameters
+
+| Parameter  | Type   | Required | Description                                                                         |
+| ---------- | ------ | -------- | ----------------------------------------------------------------------------------- |
+| projectId  | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                     |
+| campaignId | String | Yes      | 캠페인 리스트의 캠페인 목록을 클릭하여 상세보기 팝업 상단에서 확인하실 수 있습니다. |
+
+#### Query Parameters
+
+| Parameter | Type   | Required | Description                                               |
+| --------- | ------ | -------- | --------------------------------------------------------- |
+| start     | String | Yes      | 조회 시작일자 (`yyyy-MM-ddTHH:mm:ss.sssZ` 형식, UTC 기준) |
+| end       | String | Yes      | 조회 종료일자 (`yyyy-MM-ddTHH:mm:ss.sssZ` 형식, UTC 기준) |
+
+#### Response
+
+이 응답에서는 캠페인 메트릭의 최종 수집 날짜, 일별 집계 카운트 및 요청된 경우 특정 메트릭 또는 차원 데이터가 포함됩니다.
+
+| Status Code               | Content-Type     | Description                                                    | Example Response                                                                          |
+| ------------------------- | ---------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| 200 OK                    | application/json | 캠페인 통계를 정상적으로 조회한 경우                           | `{ "data": { "lastCollectedAt": "2024-10-29 04:00:00", "stats": [...] }, "error": null }` |
+| 400 Bad Request           | application/json | 잘못된 요청 파라미터가 있는 경우                               | `{ "data": null, "error": "Invalid project ID" }`                                         |
+| 401 Unauthorized          | application/json | 인증 토큰이 유효하지 않거나 누락된 경우                        | `{ "data": null, "error": "Unauthorized: Invalid Authorization Token" }`                  |
+| 500 Internal Server Error | application/json | 서버 오류가 발생한 경우. 지속적인 500 오류는 Notifly 팀에 문의 | `{ "data": null, "error": "Internal Server Error: some-error-message" }`                  |
+
+#### Response Body
+
+```json
+{
+  "data": {
+    "lastCollectedAt": "2024-10-29 04:00:00",
+    "stats": [
+      {
+        "metricName": "send_success",
+        "metricType": "standard",
+        "totalCount": 550,
+        "dailyCounts": [
+          {
+            "date": "2024-10-28",
+            "count": 250,
+            "dimensionCounts": [
+              {
+                "dimensionKey": "region",
+                "dimensionValue": "us-east",
+                "count": 100
+              },
+              {
+                "dimensionKey": "region",
+                "dimensionValue": "us-west",
+                "count": 150
+              }
+            ]
+          },
+          {
+            "date": "2024-10-29",
+            "count": 300,
+            "dimensionCounts": [
+              {
+                "dimensionKey": "region",
+                "dimensionValue": "us-east",
+                "count": 200
+              },
+              {
+                "dimensionKey": "region",
+                "dimensionValue": "us-west",
+                "count": 100
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "error": null
+}
+```
+
+| Field                                     | Type   | Description                                                                                                                                                           |
+| ----------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| lastCollectedAt                           | String | 최종 집계 시간. KST 기준 날짜와 시간(`yyyy-MM-dd HH:mm:ss` 형식)으로 반환됩니다.                                                                                      |
+| stats                                     | Array  | 캠페인 발송 현황 데이터 배열                                                                                                                                          |
+| - metricName                              | String | 집계된 메트릭의 이름 (예: `send_success`, `send_failure`, `push_click` 등).<br/>메트릭 이름에 대한 설명은 [Standard Metric 종류](#standard-metric-종류)를 참조하세요. |
+| - metricType                              | String | 메트릭의 타입 (`standard` 또는 `conversion`)                                                                                                                          |
+| - totalCount                              | Number | 지정된 기간 동안 해당 메트릭이 누적된 총 횟수                                                                                                                         |
+| - dailyCounts                             | Array  | 일별로 집계된 메트릭 데이터                                                                                                                                           |
+| &nbsp;&nbsp; - date                       | String | 집계 날짜 (`yyyy-MM-dd` 형식, KST 기준)                                                                                                                               |
+| &nbsp;&nbsp; - count                      | Number | 해당 날짜에 발생한 메트릭 횟수                                                                                                                                        |
+| &nbsp;&nbsp; - dimensionCounts            | Array  | 대시보드 구성 - 사용자 속성을 입력한 경우 속성별로 집계된 메트릭 데이터                                                                                               |
+| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionKey   | String | 사용자 속성 키                                                                                                                                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionValue | String | 사용자 속성 값                                                                                                                                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp; - count          | Number | 해당 속성 값에 대한 메트릭 횟수                                                                                                                                       |
+
+#### Standard Metric 종류
+
+| Metric Name                              | Description                                       |
+| ---------------------------------------- | ------------------------------------------------- |
+| send_success                             | 발송 성공                                         |
+| send_failure                             | 발송 실패                                         |
+| rendering_failure                        | 개인화 메시지 렌더링 실패                         |
+| pending                                  | 발송 시도(집계 중)                                |
+| push_delivered                           | 푸시알림 수신                                     |
+| push_click                               | 푸시알림 클릭                                     |
+| failover_text_message_send_success       | 대체 문자 메시지 발송 성공                        |
+| failover_text_message_send_failure       | 대체 문자 메시지 발송 실패                        |
+| email_send                               | 이메일 발송                                       |
+| email_delivery                           | 이메일 도달                                       |
+| email_open                               | 이메일 오픈                                       |
+| email_click                              | 이메일 클릭                                       |
+| email_bounce                             | 이메일 반송                                       |
+| email_complaint                          | 이메일 수신 거부                                  |
+| email_rendering_failure                  | 이메일 렌더링 실패                                |
+| in_app_message_show                      | 앱 팝업 노출                                      |
+| in_web_message_show                      | 웹 팝업 노출                                      |
+| main_button_click                        | 팝업 메인버튼 클릭                                |
+| close_button_click                       | 팝업 닫기 버튼 클릭                               |
+| hide_in_app_message_button_click         | 인앱 팝업 다시(특정 기간) 보지 않기 버튼 클릭     |
+| cancelled                                | 취소 이벤트로 인한 발송 취소                      |
+| skipped\_\_noisy_filter                  | 중복 발송으로 인한 발송 취소                      |
+| skipped\_\_fatigue_management            | 피로도 관리로 인한 발송 취소                      |
+| skipped\_\_forbidden_timing_filter       | 금지된 발송 시간으로 인한 발송 취소               |
+| skipped\_\_excluded_user_filter          | 발신 제외 유저로 인한 발송 취소                   |
+| skipped\_\_aborted_message               | 메시지 Abort로 인한 발송 취소(Connected Contents) |
+| skipped\_\_global_frequency_limit_filter | 발송량 제한 조건으로 인한 발송 취소               |
+
+### Sample Request
+
+```http
+GET https://api.notifly.tech/projects/{projectId}/campaigns/{campaignId}/stats?start=2024-10-27T15:00:00.000Z&end=2024-10-29T14:59:59.999Z
 Content-Type: application/json
 Authorization: {auth-key}
 ```
