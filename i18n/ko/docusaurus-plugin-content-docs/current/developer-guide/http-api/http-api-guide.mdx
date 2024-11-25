@@ -15,7 +15,7 @@ Notifly HTTP API의 전체 요청량 제한은 **초당 5,000회**입니다.
 (호환성을 위해 이전 필드명도 계속 사용 가능합니다.)
 :::
 
-## 1. Authentication Endpoint
+## 1. Authentication
 
 이 endpoint 를 통해 인증 토큰을 받아올 수 있습니다. 인증 토큰은 notifly 서버 API 활용에 필수적입니다. 발급받은 인증 토큰의 유효기간은 1시간입니다. 과도한 API 호출을 방지하기 위해 1시간
 이내의 재호출은 기존에 발급 받으신 토큰을 재활용 하시는 것을 권장해드립니다.
@@ -67,7 +67,7 @@ Content-Type: application/json
 }
 ```
 
-## 2. Track Event Endpoint
+## 2. Track Event
 
 이 endpoint 를 통해 notifly 엔진에 이벤트 데이터를 보낼 수 있습니다. Notifly 엔진은 수신한 이벤트 데이터를 모으고 분석해 캠페인 진행 시 메시지 발송 타이밍, 사용자 세그먼트 설정 등에 활용할
 수 있게 준비합니다.
@@ -96,7 +96,7 @@ Content-Type: application/json
 | segmentationEventParamKeys | List   | No       | 정교한 캠페인 집행을 위해 특정 파라미터들을 notifly 엔진에서 특수하게 처리합니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 - 한번에 여러 이벤트를 로깅 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-  - 1회 호출당 최대 500개의 이벤트 까지만 로깅 가능합니다.
+- 1회 호출당 최대 500개의 이벤트 까지만 로깅 가능합니다.
 
 #### Response Headers
 
@@ -132,7 +132,7 @@ Authorization: {auth-key}
 ]
 ```
 
-## 3. Set User Properties Endpoint
+## 3. Set User Properties
 
 이 endpoint 를 통해 notifly 엔진에 사용자 속성들을 등록할 수 있습니다. 등록된 속성값들은 캠페인 진행 시 사용자 세그먼트 설정에 활용하여 보다 효율적인 마케팅이 가능합니다.
 
@@ -158,7 +158,7 @@ Authorization: {auth-key}
 | userProperties | Object | Yes      | 업데이트 할 사용자 속성값들                                                                             |
 
 - 한번에 여러 사용자의 정보를 업데이트 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-  - 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
+- 1회 호출당 최대 1,000명의 사용자 까지만 업데이트 가능합니다.
 
 :::caution 특수 유저 속성값
 이메일과 전화번호 정보는 `userProperties`에 반드시 `$email`, `$phone_number`를 키값으로 정의해주어야 정상 등록됩니다. 아래 Example를 참고해주세요.
@@ -207,7 +207,7 @@ Authorization: {auth-key}
 ]
 ```
 
-## 4. Delete Users Endpoint
+## 4. Delete Users
 
 이 endpoint 를 통해 notifly에 등록된 사용자들을 삭제할 수 있습니다.
 
@@ -235,9 +235,9 @@ Authorization: {auth-key}
 | - $phone_number | String | No       | 삭제할 유저의 전화번호                                                                                  |
 
 - 한번에 여러 사용자의 정보를 삭제 할 수도 있습니다. 같은 형식의 Object들을 Array 형태로 호출 해주시면 됩니다.
-  - 1회 호출당 최대 1,000명의 사용자 까지만 삭제 가능합니다.
-  - 유저 ID, 이메일, 전화번호를 기준으로 삭제할 수 있습니다.
-  - 전화번호는 정확히 일치해야 합니다. (010-1234-1234 != 01012341234)
+- 1회 호출당 최대 1,000명의 사용자 까지만 삭제 가능합니다.
+- 유저 ID, 이메일, 전화번호를 기준으로 삭제할 수 있습니다.
+- 전화번호는 정확히 일치해야 합니다. (010-1234-1234 != 01012341234)
 
 #### Response Headers
 
@@ -268,7 +268,7 @@ Authorization: {auth-key}
 }
 ```
 
-## 5. Campaign Triggering Endpoint {#api-campaign-triggering}
+## 5. Campaign Triggering {#api-campaign-triggering}
 
 이 endpoint 를 통해 캠페인을 트리거링할 수 있습니다. 등록된 유저 및 디바이스의 속성 뿐만 아니라 API Request Body의 파라미터까지 모두 사용하여 메시지를 개인화할 수 있습니다.
 
@@ -388,389 +388,7 @@ Authorization: {auth-key}
 }
 ```
 
-## 6. Send Text Message Endpoint
-
-이 endpoint 를 통해 문자 메시지(SMS, LMS, MMS)를 보낼 수 있습니다.
-
-### 주의 사항
-
-- HTTP REST API를 이용한 문자 발송은 **[Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide)** 설정이 되어있을 경우에만 가능합니다.
-- 발신 번호는 자체 발송 설정에 입력된 번호가 사용 됩니다.
-- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
-
-### Endpoint
-
-`POST https://api.notifly.tech/messages/text-message`
-
-### Specifications
-
-#### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-#### Request Body
-
-| Parameter     | Type   | Required | Description                                     |
-| ------------- | ------ | -------- | ----------------------------------------------- |
-| projectId     | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
-| type          | String | Yes      | 메시지 유형 (`sms`, `lms` 또는 `mms`)           |
-| title         | String | No       | 본문 제목(lms, mms에만 사용)                    |
-| body          | String | Yes      | 본문 내용                                       |
-| sendNo        | String | No       | 여러 발신 번호가 등록되어 있을 경우 발송할 번호 |
-| recipientList | List   | Yes      | 수신자 목록(최대 1000명)                        |
-| - recipientNo | String | Yes      | 수신 번호                                       |
-
-#### Response
-
-| Status Code               | Content-Type     | Example Response                    |
-| ------------------------- | ---------------- | ----------------------------------- |
-| 200 OK                    | application/json | `{"success":true}`                  |
-| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
-| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
-| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
-| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
-
-### Sample Request
-
-```http
-POST https://api.notifly.tech/messages/text-message
-Content-Type: application/json
-Authorization: {auth-key}
-
-{
-  "projectId": "project-id",
-  "type": "sms",
-  "body": "Message Body",
-  "recipientList": [
-    {
-      "recipientNo": "01012345678"
-    },
-    {
-      "recipientNo": "01045671234"
-    }
-  ]
-}
-```
-
-## 7.Send Kakao Alimtalk Message Endpoint
-
-이 endpoint 를 통해 카카오 알림톡 메시지를 발송할 수 있습니다. 알림톡 템플릿 코드와 수신자 리스트를 사용하여 메시지를 전송합니다.
-
-### 주의 사항
-
-- HTTP REST API를 이용한 카카오 알림톡 발송은 **[Notifly 카카오톡 자체 발송](/ko/user-guide/kakaotalk/integration#notifly)** 설정이 되어있을 경우에만
-  가능합니다.
-- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
-
-### Endpoint
-
-`POST https://api.notifly.tech/messages/kakao-alimtalk`
-
-### Specifications
-
-#### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-#### Request Body
-
-| Parameter           | Type            | Required | Description                                                                                                    |
-| ------------------- | --------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| projectId           | String          | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                                                |
-| templateId          | String          | Yes      | 등록한 발송 템플릿 ID ([알림톡 템플릿 리스트](https://notifly.tech/console/kakao-template/list)에서 확인 가능) |
-| channelId           | String          | No       | 발송할 카카오 채널 ID                                                                                          |
-| resendSendNo        | String          | No       | 대체 발송 발신 번호 ([Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide) 이 설정된 번호)       |
-| senderGroupingKey   | String          | No       | 발신 그룹핑 키(최대 100자)                                                                                     |
-| recipientList       | List            | Yes      | 수신자 목록(최대 1000명)                                                                                       |
-| - recipientNo       | String          | Yes      | 수신 번호 (최대 15자)                                                                                          |
-| - templateParameter | Object          | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
-| - resendParameter   | ResendParameter | No       | 대체 발송 정보                                                                                                 |
-
-#### ResendParameter
-
-| Parameter     | Type    | Required | Description                                                                      |
-| ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
-| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                               |
-| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.             |
-| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                                |
-| resendContent | String  | No       | 대체 발송 내용. 기본값은 메시지 본문과 웹링크 버튼명 - 웹링크 Mobile 링크입니다. |
-
-#### Response
-
-| Status Code               | Content-Type     | Example Response                    |
-| ------------------------- | ---------------- | ----------------------------------- |
-| 200 OK                    | application/json | `{"success":true}`                  |
-| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
-| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
-| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
-| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
-
-### Sample Request
-
-```http
-POST https://api.notifly.tech/messages/kakao-alimtalk
-Content-Type: application/json
-Authorization: {auth-key}
-
-{
-  "projectId": "project-id",
-  "templateId": "template-id",
-  "recipientList": [
-    {
-      "recipientNo": "01012345678",
-      "templateParameter": {
-        "user_name": "Notifly User"
-      }
-    },
-    {
-      "recipientNo": "01056781234",
-      "templateParameter": {
-        "user_name": "Notifly Customer"
-      }
-    }
-  ]
-}
-```
-
-## 8. Send Kakao Friendtalk Message Endpoint
-
-이 endpoint 를 통해 카카오 친구톡 메시지를 발송할 수 있습니다. 프렌드톡 메시지는 수신자 목록, 광고 여부, 메시지 유형 등을 설정하여 전송합니다.
-
-### 주의 사항
-
-- HTTP REST API를 이용한 카카오 친구톡 발송은 **[Notifly 카카오톡 자체 발송](/ko/user-guide/kakaotalk/integration#notifly)** 설정이 되어있을 경우에만
-  가능합니다.
-- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
-
-### Endpoint
-
-`POST https://api.notifly.tech/messages/kakao-friendtalk`
-
-### Specifications
-
-#### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-#### Request Body
-
-| Parameter      | Type    | Required | Description                                            |
-| -------------- | ------- | -------- | ------------------------------------------------------ |
-| projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.        |
-| channelId      | String  | No       | 여러 카카오 채널이 등록되어 있을 경우 발송 할 채널 ID. |
-| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)           |
-| isAd           | Boolean | No       | 광고 여부                                              |
-| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                               |
-| - recipientNo  | String  | Yes      | 수신 번호                                              |
-| - content.text | String  | Yes      | 본문 내용                                              |
-
-#### Response
-
-| Status Code               | Content-Type     | Example Response                    |
-| ------------------------- | ---------------- | ----------------------------------- |
-| 200 OK                    | application/json | `{"success":true}`                  |
-| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
-| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
-| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
-| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
-
-### Sample Request
-
-```http
-POST https://api.notifly.tech/messages/kakao-friendtalk
-Content-Type: application/json
-Authorization: {auth-key}
-
-{
-  "projectId": "project-id",
-  "messageType": "text",
-  "isAd": false,
-  "recipientList": [
-    {
-      "recipientNo": "01012345678",
-      "content": {
-        "text": "test"
-      }
-    }
-  ]
-}
-```
-
-## 9. 080 Block Service Endpoint
-
-이 섹션에서는 080 수신 거부 서비스와 관련된 API를 설명합니다.
-
-### 9.1 Find Recipients
-
-#### Endpoint
-
-`GET https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
-
-#### Specifications
-
-##### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-##### Path Parameters
-
-| Parameter | Type   | Required | Description |
-| --------- | ------ | -------- | ----------- |
-| projectId | String | Yes      | 프로젝트 ID |
-
-##### Query Parameters
-
-| Parameter        | Type    | Required | Description                                |
-| ---------------- | ------- | -------- | ------------------------------------------ |
-| unsubscribeNo    | String  | Yes      | 080 수신 거부 번호 (최대 25자)             |
-| recipientNo      | String  | No       | 수신 거부 대상자 번호 (최대 25자)          |
-| startRequestDate | String  | No       | 수신 거부 요청 시작값(yyyy-MM-dd HH:mm:ss) |
-| endRequestDate   | String  | No       | 수신 거부 요청 종료값(yyyy-MM-dd HH:mm:ss) |
-| pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                    |
-| pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)            |
-
-##### Response Headers
-
-| Parameter    | Value            |
-| ------------ | ---------------- |
-| Status code  | 200 OK           |
-| Content-Type | application/json |
-
-##### Response Body
-
-```http
-{
-  "pageNum": 1,
-  "pageSize": 15,
-  "totalCount": 1,
-  "data": [
-    {
-      "unsubscribeNo": "0808888888",
-      "recipientNo": "01000000000",
-      "requestDate": "2018-05-14 17:07:29.0"
-    },
-    {
-      "unsubscribeNo": "0808888888",
-      "recipientNo": "010012341234",
-      "requestDate": "2018-05-14 17:07:29.0"
-    },
-    ...
-  ]
-}
-```
-
-#### Sample Request
-
-```http
-GET https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients?unsubscribeNo=0800000000&pageNum=1&pageSize=15
-Content-Type: application/json
-Authorization: {auth-key}
-```
-
-### 9.2 Register Recipients
-
-#### Endpoint
-
-`POST https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
-
-#### Specifications
-
-##### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-##### Path Parameters
-
-| Parameter | Type   | Required | Description |
-| --------- | ------ | -------- | ----------- |
-| projectId | String | Yes      | 프로젝트 ID |
-
-##### Request Body
-
-| Parameter       | Type   | Required | Description                       |
-| --------------- | ------ | -------- | --------------------------------- |
-| unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)      |
-| recipientNoList | List   | Yes      | 수신 거부 대상자 번호 (최대 10개) |
-
-##### Response Headers
-
-| Parameter    | Value            |
-| ------------ | ---------------- |
-| Status code  | 200 OK           |
-| Content-Type | application/json |
-
-#### Sample Request
-
-```http
-POST https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients
-Content-Type: application/json
-Authorization: {auth-key}
-
-{
-  "unsubscribeNo": "0800000000",
-  "recipientNoList": ["0100000000", "0100000001"]
-}
-```
-
-### 9.3 Remove Recipients
-
-#### Endpoint
-
-`DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes`
-
-#### Specifications
-
-##### Request Headers
-
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
-
-##### Path Parameters
-
-| Parameter | Type   | Required | Description |
-| --------- | ------ | -------- | ----------- |
-| projectId | String | Yes      | 프로젝트 ID |
-
-##### Query Parameters
-
-| Parameter       | Type   | Required | Description                         |
-| --------------- | ------ | -------- | ----------------------------------- |
-| unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자)      |
-| recipientNoList | String | Yes      | 삭제할 수신 거부 번호 (콤마로 구분) |
-
-##### Response Headers
-
-| Parameter    | Value            |
-| ------------ | ---------------- |
-| Status code  | 200 OK           |
-| Content-Type | application/json |
-
-#### Sample Request
-
-```http
-DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes?unsubscribeNo=0800000000&recipientNoList=0100000000,0100000001
-Content-Type: application/json
-Authorization: {auth-key}
-```
-
-## 10. Campaign Statistics Retrieval Endpoint
+## 6. Campaign Statistics Retrieval
 
 이 endpoint를 통해 캠페인의 발송 현황을 조회하실 수 있습니다.
 
@@ -915,4 +533,879 @@ Authorization: {auth-key}
 GET https://api.notifly.tech/projects/{projectId}/campaigns/{campaignId}/stats?start=2024-10-27T15:00:00.000Z&end=2024-10-29T14:59:59.999Z
 Content-Type: application/json
 Authorization: {auth-key}
+```
+
+## 7. Send Text Message
+
+이 endpoint 를 통해 문자 메시지(SMS, LMS, MMS)를 보낼 수 있습니다.
+
+### 주의 사항
+
+- HTTP REST API를 이용한 문자 발송은 **[Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide)** 설정이 되어있을 경우에만 가능합니다.
+- 발신 번호는 자체 발송 설정에 입력된 번호가 사용 됩니다.
+- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
+
+### Endpoint
+
+`POST https://api.notifly.tech/messages/text-message`
+
+### Specifications
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Request Body
+
+| Parameter     | Type   | Required | Description                                     |
+| ------------- | ------ | -------- | ----------------------------------------------- |
+| projectId     | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+| type          | String | Yes      | 메시지 유형 (`sms`, `lms` 또는 `mms`)           |
+| title         | String | No       | 본문 제목(lms, mms에만 사용)                    |
+| body          | String | Yes      | 본문 내용                                       |
+| sendNo        | String | No       | 여러 발신 번호가 등록되어 있을 경우 발송할 번호 |
+| recipientList | List   | Yes      | 수신자 목록(최대 1000명)                        |
+| - recipientNo | String | Yes      | 수신 번호                                       |
+
+#### Response
+
+| Status Code               | Content-Type     | Example Response                    |
+| ------------------------- | ---------------- | ----------------------------------- |
+| 200 OK                    | application/json | `{"success":true}`                  |
+| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
+| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
+| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
+| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
+
+### Sample Request
+
+```http
+POST https://api.notifly.tech/messages/text-message
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "projectId": "project-id",
+  "type": "sms",
+  "body": "Message Body",
+  "recipientList": [
+    {
+      "recipientNo": "01012345678"
+    },
+    {
+      "recipientNo": "01045671234"
+    }
+  ]
+}
+```
+
+## 8. Manage Text Message 080 Block Service
+
+이 섹션에서는 080 수신 거부 서비스와 관련된 API를 설명합니다.
+
+### 8.1 Find Recipients
+
+#### Endpoint
+
+`GET https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
+
+#### Specifications
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Query Parameters
+
+| Parameter        | Type    | Required | Description                                |
+| ---------------- | ------- | -------- | ------------------------------------------ |
+| unsubscribeNo    | String  | Yes      | 080 수신 거부 번호 (최대 25자)             |
+| recipientNo      | String  | No       | 수신 거부 대상자 번호 (최대 25자)          |
+| startRequestDate | String  | No       | 수신 거부 요청 시작값(yyyy-MM-dd HH:mm:ss) |
+| endRequestDate   | String  | No       | 수신 거부 요청 종료값(yyyy-MM-dd HH:mm:ss) |
+| pageNum          | Integer | No       | 페이지 번호(기본값 : 1)                    |
+| pageSize         | Integer | No       | 검색 수(기본값 : 15, 최대 1000)            |
+
+##### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+##### Response Body
+
+```http
+{
+  "pageNum": 1,
+  "pageSize": 15,
+  "totalCount": 1,
+  "data": [
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "01000000000",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    {
+      "unsubscribeNo": "0808888888",
+      "recipientNo": "010012341234",
+      "requestDate": "2018-05-14 17:07:29.0"
+    },
+    ...
+  ]
+}
+```
+
+#### Sample Request
+
+```http
+GET https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients?unsubscribeNo=0800000000&pageNum=1&pageSize=15
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+### 8.2 Register Recipients
+
+#### Endpoint
+
+`POST https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients`
+
+#### Specifications
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Request Body
+
+| Parameter       | Type   | Required | Description                       |
+| --------------- | ------ | -------- | --------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신거부번호 (최대 25자)      |
+| recipientNoList | List   | Yes      | 수신 거부 대상자 번호 (최대 10개) |
+
+##### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+#### Sample Request
+
+```http
+POST https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "unsubscribeNo": "0800000000",
+  "recipientNoList": ["0100000000", "0100000001"]
+}
+```
+
+### 8.3 Remove Recipients
+
+#### Endpoint
+
+`DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes`
+
+#### Specifications
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body의 MIME Type                                                       |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| projectId | String | Yes      | 프로젝트 ID |
+
+##### Query Parameters
+
+| Parameter       | Type   | Required | Description                         |
+| --------------- | ------ | -------- | ----------------------------------- |
+| unsubscribeNo   | String | Yes      | 080 수신 거부 번호 (최대 20자)      |
+| recipientNoList | String | Yes      | 삭제할 수신 거부 번호 (콤마로 구분) |
+
+##### Response Headers
+
+| Parameter    | Value            |
+| ------------ | ---------------- |
+| Status code  | 200 OK           |
+| Content-Type | application/json |
+
+#### Sample Request
+
+```http
+DELETE https://api.notifly.tech/projects/{projectId}/messages/text-message/blockservice/recipients/removes?unsubscribeNo=0800000000&recipientNoList=0100000000,0100000001
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+## 9.Send Kakao Alimtalk Message
+
+이 endpoint 를 통해 카카오 알림톡 메시지를 발송할 수 있습니다. 알림톡 템플릿 코드와 수신자 리스트를 사용하여 메시지를 전송합니다.
+
+### 주의 사항
+
+- HTTP REST API를 이용한 카카오 알림톡 발송은 **[Notifly 카카오톡 자체 발송](/ko/user-guide/kakaotalk/integration#notifly)** 설정이 되어있을 경우에만
+  가능합니다.
+- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
+
+### Endpoint
+
+`POST https://api.notifly.tech/messages/kakao-alimtalk`
+
+### Specifications
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Request Body
+
+| Parameter           | Type            | Required | Description                                                                                                    |
+| ------------------- | --------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| projectId           | String          | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.                                                                |
+| templateId          | String          | Yes      | 등록한 발송 템플릿 ID ([알림톡 템플릿 리스트](https://notifly.tech/console/kakao-template/list)에서 확인 가능) |
+| channelId           | String          | No       | 발송할 카카오 채널 ID                                                                                          |
+| resendSendNo        | String          | No       | 대체 발송 발신 번호 ([Notifly 문자 자체 발송](/ko/user-guide/text-message/notifly_guide) 이 설정된 번호)       |
+| senderGroupingKey   | String          | No       | 발신 그룹핑 키(최대 100자)                                                                                     |
+| recipientList       | List            | Yes      | 수신자 목록(최대 1000명)                                                                                       |
+| - recipientNo       | String          | Yes      | 수신 번호 (최대 15자)                                                                                          |
+| - templateParameter | Object          | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
+| - resendParameter   | ResendParameter | No       | 대체 발송 정보                                                                                                 |
+
+#### ResendParameter
+
+| Parameter     | Type    | Required | Description                                                                      |
+| ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
+| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                               |
+| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.             |
+| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                                |
+| resendContent | String  | No       | 대체 발송 내용. 기본값은 메시지 본문과 웹링크 버튼명 - 웹링크 Mobile 링크입니다. |
+
+#### Response
+
+| Status Code               | Content-Type     | Example Response                    |
+| ------------------------- | ---------------- | ----------------------------------- |
+| 200 OK                    | application/json | `{"success":true}`                  |
+| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
+| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
+| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
+| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
+
+### Sample Request
+
+```http
+POST https://api.notifly.tech/messages/kakao-alimtalk
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "projectId": "project-id",
+  "templateId": "template-id",
+  "recipientList": [
+    {
+      "recipientNo": "01012345678",
+      "templateParameter": {
+        "user_name": "Notifly User"
+      }
+    },
+    {
+      "recipientNo": "01056781234",
+      "templateParameter": {
+        "user_name": "Notifly Customer"
+      }
+    }
+  ]
+}
+```
+
+## 10. Manage Kakao Alimtalk Template
+
+### 10.1 템플릿 등록
+
+**Endpoint**
+
+`POST https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| projectId | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                   |
+| ------------- | ---------------- | ----------------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+
+##### Request Body
+
+```json
+{
+  "channelId": "String",
+  "templateName": "String",
+  "templateContent": "String",
+  "templateMessageType": "String",
+  "templateEmphasizeType": "String",
+  "templateExtra": "String",
+  "templateTitle": "String",
+  "templateSubtitle": "String",
+  "templateHeader": "String",
+  "templateItem": {
+    "list": [
+      {
+        "title": "String",
+        "description": "String"
+      }
+    ],
+    "summary": {
+      "title": "String",
+      "description": "String"
+    }
+  },
+  "templateItemHighlight": {
+    "title": "String",
+    "description": "String",
+    "imageUrl": "String"
+  },
+  "templateRepresentLink": {
+    "linkMo": "String",
+    "linkPc": "String",
+    "schemeIos": "String",
+    "schemeAndroid": "String"
+  },
+  "templateImageName": "String",
+  "templateImageUrl": "String",
+  "securityFlag": "Boolean",
+  "categoryCode": "String",
+  "buttons": [
+    {
+      "ordering": "Integer",
+      "type": "String",
+      "name": "String",
+      "linkMo": "String",
+      "linkPc": "String",
+      "schemeIos": "String",
+      "schemeAndroid": "String",
+      "bizFormId": "Integer",
+      "pluginId": "String"
+    }
+  ],
+  "quickReplies": [
+    {
+      "ordering": "Integer",
+      "type": "String",
+      "name": "String",
+      "linkMo": "String",
+      "linkPc": "String",
+      "schemeIos": "String",
+      "schemeAndroid": "String",
+      "bizFormId": "Integer"
+    }
+  ]
+}
+```
+
+###### 필드 설명
+
+| Parameter                             | Type            | Required | Description                                                                                                                                                                                                                                                           |
+| ------------------------------------- | --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `channelId`                           | String          | No       | 알림톡 채널 ID. 등록된 채널이 여러개일 경우 사용됩니다. 넘기지 않을 경우 먼저 등록된 채널로 지정 됩니다.                                                                                                                                                              |
+| `templateCode`                        | String          | Yes      | 템플릿 코드 (최대 20자), Unique한 코드를 직접 생성해서 보내주세요. 콭솔에서는 9자의 랜덤한 문자열을 생성해서 사용 하고 있습니다.                                                                                                                                      |
+| `templateName`                        | String          | Yes      | 템플릿명 (최대 150자)                                                                                                                                                                                                                                                 |
+| `templateContent`                     | String          | Yes      | 템플릿 본문 (최대 1000자)                                                                                                                                                                                                                                             |
+| `templateMessageType`                 | String          | No       | 템플릿 메시지 유형 (`BA`: 기본형, `EX`: 부가 정보형, `AD`: 채널 추가형, `MI`: 복합형, 기본값: `BA`)                                                                                                                                                                   |
+| `templateEmphasizeType`               | String          | No       | 템플릿 강조 표시 타입 (`NONE`: 기본, `TEXT`: 강조 표시, `IMAGE`: 이미지형, `ITEM_LIST`: 아이템리스트형, 기본값: `NONE`)                                                                                                                                               |
+| `templateExtra`                       | String          | No       | 템플릿 부가 정보 (템플릿 메시지 유형이 `EX` 또는 `MI`일 경우 필수)                                                                                                                                                                                                    |
+| `templateTitle`                       | String          | No       | 템플릿 제목 (최대 50자, Android: 2줄, 23자 이상 말줄임 처리, iOS: 2줄, 27자 이상 말줄임 처리)                                                                                                                                                                         |
+| `templateSubtitle`                    | String          | No       | 템플릿 보조 문구 (최대 50자, Android: 18자 이상 말줄임 처리, iOS: 21자 이상 말줄임 처리)                                                                                                                                                                              |
+| `templateHeader`                      | String          | No       | 템플릿 헤더 (최대 16자)                                                                                                                                                                                                                                               |
+| `templateItem`                        | Object          | No       | 아이템 정보                                                                                                                                                                                                                                                           |
+| `templateItem.list`                   | List of Objects | No       | 아이템 리스트 (최소 2개, 최대 10개)                                                                                                                                                                                                                                   |
+| `templateItem.list.title`             | String          | Yes      | 아이템 타이틀 (최대 6자)                                                                                                                                                                                                                                              |
+| `templateItem.list.description`       | String          | Yes      | 아이템 디스크립션 (최대 23자)                                                                                                                                                                                                                                         |
+| `templateItem.summary`                | Object          | Yes      | 아이템 요약 정보                                                                                                                                                                                                                                                      |
+| `templateItem.summary.title`          | String          | Yes      | 요약 타이틀 (최대 6자)                                                                                                                                                                                                                                                |
+| `templateItem.summary.description`    | String          | Yes      | 요약 디스크립션 (변수 및 화폐 단위, 숫자, 쉼표, 마침표만 사용 가능, 최대 14자)                                                                                                                                                                                        |
+| `templateItemHighlight`               | Object          | No       | 아이템 하이라이트                                                                                                                                                                                                                                                     |
+| `templateItemHighlight.title`         | String          | Yes      | 하이라이트 타이틀 (최대 30자, 섬네일 이미지가 있을 경우 21자)                                                                                                                                                                                                         |
+| `templateItemHighlight.description`   | String          | Yes      | 하이라이트 디스크립션 (최대 19자, 섬네일 이미지가 있을 경우 13자)                                                                                                                                                                                                     |
+| `templateItemHighlight.imageUrl`      | String          | Yes      | 섬네일 이미지 URL                                                                                                                                                                                                                                                     |
+| `templateRepresentLink`               | Object          | Yes      | 대표 링크                                                                                                                                                                                                                                                             |
+| `templateRepresentLink.linkMo`        | String          | Yes      | 모바일 웹 링크 (최대 500자)                                                                                                                                                                                                                                           |
+| `templateRepresentLink.linkPc`        | String          | No       | PC 웹 링크 (최대 500자)                                                                                                                                                                                                                                               |
+| `templateRepresentLink.schemeIos`     | String          | No       | iOS 앱 링크 (최대 500자)                                                                                                                                                                                                                                              |
+| `templateRepresentLink.schemeAndroid` | String          | No       | 안드로이드 앱 링크 (최대 500자)                                                                                                                                                                                                                                       |
+| `templateImageName`                   | String          | No       | 이미지명 (업로드한 파일명)                                                                                                                                                                                                                                            |
+| `templateImageUrl`                    | String          | No       | 이미지 URL                                                                                                                                                                                                                                                            |
+| `securityFlag`                        | Boolean         | No       | 보안 템플릿 여부 (OTP 등 보안 메시지일 경우 설정, 기본값: `false`)                                                                                                                                                                                                    |
+| `categoryCode`                        | String          | No       | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, 기본값: `999999`)                                                                                                                                                                                                |
+| `buttons`                             | List of Objects | No       | 버튼 리스트 (최대 5개)                                                                                                                                                                                                                                                |
+| `buttons.ordering`                    | Integer         | Yes      | 버튼 순서 (1~5)                                                                                                                                                                                                                                                       |
+| `buttons.type`                        | String          | Yes      | 버튼 타입 (`WL`: 웹 링크, `AL`: 앱 링크, `DS`: 배송 조회, `BK`: 봇 키워드, `MD`: 메시지 전달, `BC`: 상담톡 전환, `BT`: 봇 전환, `AC`: 채널 추가, `BF`: 비즈니스폼, `P1`: 이미지 보안 전송 플러그인 ID, `P2`: 개인정보이용 플러그인 ID, `P3`: 원클릭 결제 플러그인 ID) |
+| `buttons.name`                        | String          | Yes      | 버튼 이름 (최대 14자)                                                                                                                                                                                                                                                 |
+| `buttons.linkMo`                      | String          | 조건부   | 모바일 웹 링크 (`WL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                    |
+| `buttons.linkPc`                      | String          | No       | PC 웹 링크 (`WL` 타입일 경우 선택, 최대 500자)                                                                                                                                                                                                                        |
+| `buttons.schemeIos`                   | String          | 조건부   | iOS 앱 링크 (`AL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                       |
+| `buttons.schemeAndroid`               | String          | 조건부   | 안드로이드 앱 링크 (`AL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                |
+| `buttons.bizFormId`                   | Integer         | 조건부   | 비즈니스폼 ID (`BF` 타입일 경우 필수)                                                                                                                                                                                                                                 |
+| `buttons.pluginId`                    | String          | No       | 플러그인 ID (최대 24자)                                                                                                                                                                                                                                               |
+| `quickReplies`                        | List of Objects | No       | 바로연결 리스트 (최대 5개)                                                                                                                                                                                                                                            |
+| `quickReplies.ordering`               | Integer         | Yes      | 바로연결 순서 (필수)                                                                                                                                                                                                                                                  |
+| `quickReplies.type`                   | String          | Yes      | 바로연결 타입 (`WL`: 웹 링크, `AL`: 앱 링크, `BK`: 봇 키워드, `BC`: 상담톡 전환, `BT`: 봇 전환, `BF`: 비즈니스폼)                                                                                                                                                     |
+| `quickReplies.name`                   | String          | Yes      | 바로연결 이름 (최대 14자)                                                                                                                                                                                                                                             |
+| `quickReplies.linkMo`                 | String          | 조건부   | 모바일 웹 링크 (`WL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                    |
+| `quickReplies.linkPc`                 | String          | No       | PC 웹 링크 (`WL` 타입일 경우 선택, 최대 500자)                                                                                                                                                                                                                        |
+| `quickReplies.schemeIos`              | String          | 조건부   | iOS 앱 링크 (`AL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                       |
+| `quickReplies.schemeAndroid`          | String          | 조건부   | 안드로이드 앱 링크 (`AL` 타입일 경우 필수, 최대 500자)                                                                                                                                                                                                                |
+| `quickReplies.bizFormId`              | Integer         | 조건부   | 비즈니스폼 ID (`BF` 타입일 경우 필수)                                                                                                                                                                                                                                 |
+
+###### 주의 사항
+
+- **템플릿 메시지 유형**이 `EX` 또는 `MI`일 경우, `templateExtra` 필드를 반드시 포함해야 합니다.
+- **템플릿 강조 표시 타입**이 `TEXT`일 경우, `templateTitle`과 `templateSubtitle` 필드를 필수로 포함해야 합니다.
+- **템플릿 강조 표시 타입**이 `IMAGE`일 경우, `templateImageName`과 `templateImageUrl` 필드를 필수로 포함해야 합니다.
+- **템플릿 아이템 리스트**는 최소 2개에서 최대 10개까지 포함할 수 있습니다.
+- **버튼 타입**에 따라 필수 필드가 다릅니다. 예를 들어, `WL` 타입의 버튼은 `linkMo`가 필수이며, `AL` 타입의 버튼은 `schemeIos` 및 `schemeAndroid`가 필수입니다.
+- **빠른 연결(Quick Replies)** 역시 버튼과 유사하게 타입에 따라 필수 필드가 다릅니다.
+
+##### Response Headers
+
+| Parameter   | Value                     |
+| ----------- | ------------------------- |
+| Status code | 200 OK                    |
+| Status code | 400 Bad Request           |
+| Status code | 500 Internal Server Error |
+
+##### Response Body
+
+```json
+{
+  "resultCode": 0,
+  "resultMessage": "Success"
+}
+```
+
+###### 필드 설명
+
+| Field           | Type    | Description |
+| --------------- | ------- | ----------- |
+| `resultCode`    | Integer | 결과 코드   |
+| `resultMessage` | String  | 결과 메시지 |
+
+#### Sample Request
+
+```http
+POST https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "templateCode": "template-code",
+  "templateName": "template-name",
+  "templateContent": "This is a template content.",
+  "templateMessageType": "BA",
+  "templateEmphasizeType": "NONE",
+  "templateTitle": "Template Title",
+  "templateSubtitle": "Template Subtitle",
+  "templateItem": {
+    "list": [
+      {
+        "title": "Item 1",
+        "description": "Description 1"
+      },
+      {
+        "title": "Item 2",
+        "description": "Description 2"
+      }
+    ],
+    "summary": {
+      "title": "Summary Title",
+      "description": "Summary Description"
+    }
+  },
+  "templateRepresentLink": {
+    "linkMo": "http://example.com",
+    "linkPc": "http://example.com",
+    "schemeIos": "app://example",
+    "schemeAndroid": "app://example"
+  },
+  "categoryCode": "999999",
+  "buttons": [
+    {
+      "ordering": 1,
+      "type": "WL",
+      "name": "Visit Site",
+      "linkMo": "http://example.com",
+      "linkPc": "http://example.com"
+    }
+  ],
+  "quickReplies": [
+    {
+      "ordering": 1,
+      "type": "WL",
+      "name": "Help",
+      "linkMo": "http://example.com/help",
+      "linkPc": "http://example.com/help"
+    }
+  ]
+}
+```
+
+### 10.2 템플릿 수정
+
+**Endpoint**
+
+`PUT https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter    | Type   | Required | Description                                     |
+| ------------ | ------ | -------- | ----------------------------------------------- |
+| projectId    | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+| templateCode | String | Yes      | 수정할 템플릿 코드                              |
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                   |
+| ------------- | ---------------- | ----------------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+
+##### Request Body
+
+템플릿 등록과 동일한 형식으로 요청 본문을 구성합니다. 다만, `templateCode`는 URL의 Path Parameter로 전달되므로 본문에서는 제외할 수 있습니다.
+
+```json
+{
+  "channelId": "String",
+  "templateName": "String",
+  "templateContent": "String",
+  "templateMessageType": "String",
+  "templateEmphasizeType": "String",
+  "templateExtra": "String",
+  "templateTitle": "String",
+  "templateSubtitle": "String",
+  "templateHeader": "String",
+  "templateItem": {
+    "list": [
+      {
+        "title": "String",
+        "description": "String"
+      }
+    ],
+    "summary": {
+      "title": "String",
+      "description": "String"
+    }
+  },
+  "templateItemHighlight": {
+    "title": "String",
+    "description": "String",
+    "imageUrl": "String"
+  },
+  "templateRepresentLink": {
+    "linkMo": "String",
+    "linkPc": "String",
+    "schemeIos": "String",
+    "schemeAndroid": "String"
+  },
+  "templateImageName": "String",
+  "templateImageUrl": "String",
+  "securityFlag": true,
+  "categoryCode": "String",
+  "buttons": [
+    {
+      "ordering": 1,
+      "type": "String",
+      "name": "String",
+      "linkMo": "String",
+      "linkPc": "String",
+      "schemeIos": "String",
+      "schemeAndroid": "String",
+      "bizFormId": "Integer",
+      "pluginId": "String"
+    }
+  ],
+  "quickReplies": [
+    {
+      "ordering": 1,
+      "type": "String",
+      "name": "String",
+      "linkMo": "String",
+      "linkPc": "String",
+      "schemeIos": "String",
+      "schemeAndroid": "String",
+      "bizFormId": "Integer"
+    }
+  ]
+}
+```
+
+##### 필드 설명
+
+템플릿 등록과 동일한 필드 설명을 참고하세요. 단, `templateCode`는 URL 경로에서 지정되므로 본문에서는 제외됩니다.
+
+##### 주의 사항
+
+- 템플릿 수정 시, **템플릿 메시지 유형** 및 **템플릿 강조 표시 타입**에 따른 필수 필드를 준수해야 합니다.
+- **템플릿 아이템 리스트**, **버튼**, **빠른 연결** 등은 필요에 따라 포함하거나 제외할 수 있습니다.
+- **버튼 타입**에 따라 필수 필드가 다르므로 주의하여 입력해야 합니다.
+
+##### Response Headers
+
+| Parameter   | Value                     |
+| ----------- | ------------------------- |
+| Status code | 200 OK                    |
+| Status code | 400 Bad Request           |
+| Status code | 500 Internal Server Error |
+
+##### Response Body
+
+```json
+{
+  "resultCode": 0,
+  "resultMessage": "Success"
+}
+```
+
+###### 필드 설명
+
+| Field           | Type    | Description |
+| --------------- | ------- | ----------- |
+| `resultCode`    | Integer | 결과 코드   |
+| `resultMessage` | String  | 결과 메시지 |
+
+#### Sample Request
+
+```http
+PUT https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "channelId": "Channel ID",
+  "templateName": "Updated Template Name",
+  "templateContent": "Updated template content.",
+  "templateMessageType": "EX",
+  "templateEmphasizeType": "TEXT",
+  "templateExtra": "Additional information.",
+  "templateTitle": "Updated Title",
+  "templateSubtitle": "Updated Subtitle",
+  "templateItem": {
+    "list": [
+      {
+        "title": "New Item 1",
+        "description": "New Description 1"
+      },
+      {
+        "title": "New Item 2",
+        "description": "New Description 2"
+      }
+    ],
+    "summary": {
+      "title": "New Summary Title",
+      "description": "New Summary Description"
+    }
+  },
+  "templateRepresentLink": {
+    "linkMo": "http://newexample.com",
+    "linkPc": "http://newexample.com",
+    "schemeIos": "newapp://example",
+    "schemeAndroid": "newapp://example"
+  },
+  "categoryCode": "888888",
+  "buttons": [
+    {
+      "ordering": 1,
+      "type": "AL",
+      "name": "Open App",
+      "schemeIos": "app://open",
+      "schemeAndroid": "app://open"
+    }
+  ],
+  "quickReplies": [
+    {
+      "ordering": 1,
+      "type": "WL",
+      "name": "Support",
+      "linkMo": "http://newexample.com/support",
+      "linkPc": "http://newexample.com/support"
+    }
+  ]
+}
+```
+
+---
+
+### 10.3 템플릿 삭제
+
+**Endpoint**
+
+`DELETE https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter    | Type   | Required | Description                                     |
+| ------------ | ------ | -------- | ----------------------------------------------- |
+| projectId    | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+| templateCode | String | Yes      | 삭제할 템플릿 코드                              |
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                   |
+| ------------- | ---------------- | ----------------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+
+##### Request Body
+
+```json
+{
+  "channelId": "String"
+}
+```
+
+###### 필드 설명
+
+| Parameter   | Type   | Required | Description                                                                                              |
+| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| `channelId` | String | No       | 알림톡 채널 ID. 등록된 채널이 여러개일 경우 사용됩니다. 넘기지 않을 경우 먼저 등록된 채널이 지정 됩니다. |
+
+##### Response Headers
+
+| Parameter   | Value                     |
+| ----------- | ------------------------- |
+| Status code | 200 OK                    |
+| Status code | 400 Bad Request           |
+| Status code | 500 Internal Server Error |
+
+##### Response Body
+
+```json
+{
+  "resultCode": 0,
+  "resultMessage": "Success"
+}
+```
+
+###### 필드 설명
+
+| Field           | Type    | Description |
+| --------------- | ------- | ----------- |
+| `resultCode`    | Integer | 결과 코드   |
+| `resultMessage` | String  | 결과 메시지 |
+
+#### Sample Request
+
+```http
+DELETE https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+## 11. Send Kakao Friendtalk Message
+
+이 endpoint 를 통해 카카오 친구톡 메시지를 발송할 수 있습니다. 프렌드톡 메시지는 수신자 목록, 광고 여부, 메시지 유형 등을 설정하여 전송합니다.
+
+### 주의 사항
+
+- HTTP REST API를 이용한 카카오 친구톡 발송은 **[Notifly 카카오톡 자체 발송](/ko/user-guide/kakaotalk/integration#notifly)** 설정이 되어있을 경우에만
+  가능합니다.
+- 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
+
+### Endpoint
+
+`POST https://api.notifly.tech/messages/kakao-friendtalk`
+
+### Specifications
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Request Body
+
+| Parameter      | Type    | Required | Description                                            |
+| -------------- | ------- | -------- | ------------------------------------------------------ |
+| projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.        |
+| channelId      | String  | No       | 여러 카카오 채널이 등록되어 있을 경우 발송 할 채널 ID. |
+| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)           |
+| isAd           | Boolean | No       | 광고 여부                                              |
+| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                               |
+| - recipientNo  | String  | Yes      | 수신 번호                                              |
+| - content.text | String  | Yes      | 본문 내용                                              |
+
+#### Response
+
+| Status Code               | Content-Type     | Example Response                    |
+| ------------------------- | ---------------- | ----------------------------------- |
+| 200 OK                    | application/json | `{"success":true}`                  |
+| 400 Bad Request           | application/json | `{"error":"some-error-message"}`    |
+| 405 Method Not Allowed    | application/json | `{"error":"Method not allowed"}`    |
+| 413 Payload Too Large     | application/json | `{"error":"Payload Too Large"}`     |
+| 500 Internal Server Error | application/json | `{"error":"Internal Server Error"}` |
+
+### Sample Request
+
+```http
+POST https://api.notifly.tech/messages/kakao-friendtalk
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "projectId": "project-id",
+  "messageType": "text",
+  "isAd": false,
+  "recipientList": [
+    {
+      "recipientNo": "01012345678",
+      "content": {
+        "text": "test"
+      }
+    }
+  ]
+}
 ```
