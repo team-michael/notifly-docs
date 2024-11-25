@@ -852,7 +852,157 @@ Authorization: {auth-key}
 
 ## 10. Manage Kakao Alimtalk Template
 
-### 10.1 템플릿 등록
+### 10.1 템플릿 리스트 조회
+
+**Endpoint**
+
+`GET https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates`
+
+#### Specifications
+
+##### Path Parameters
+
+| Parameter | Type   | Required | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| projectId | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+
+##### Request Headers
+
+| Parameter     | Value            | Description                                                                   |
+| ------------- | ---------------- | ----------------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+
+##### Query Parameters
+
+| Parameter        | Type    | Required | Description                                                                                              |
+| ---------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| `channelId`      | String  | No       | 알림톡 채널 ID. 등록된 채널이 여러개일 경우 사용됩니다. 넘기지 않을 경우 먼저 등록된 채널로 지정 됩니다. |
+| `templateCode`   | String  | No       | 템플릿 코드                                                                                              |
+| `templateName`   | String  | No       | 템플릿 이름                                                                                              |
+| `templateStatus` | String  | No       | 템플릿 상태 코드                                                                                         |
+| `pageNum`        | Integer | No       | 페이지 번호(Default: 1)                                                                                  |
+| `pageSize`       | Integer | No       | 조회 건수(Default: 15, Max: 1000)                                                                        |
+
+##### Template Status Code
+
+| Code  | Description |
+| ----- | ----------- |
+| TSC01 | 요청        |
+| TSC02 | 검수 중     |
+| TSC03 | 승인        |
+| TSC04 | 반려        |
+
+#### Sample Request
+
+```http
+GET https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+#### Response
+
+```json
+{
+  "resultCode": 0,
+  "resultMessage": "Success",d
+  "templateListResponse": {
+    "templates": [
+      {
+        "plusFriendId": "String",
+        "senderKey": "String",
+        "plusFriendType": "String",
+        "templateCode": "String",
+        "kakaoTemplateCode": "String",
+        "templateName": "String",
+        "templateMessageType": "String",
+        "templateEmphasizeType": "String",
+        "templateContent": "String",
+        "templateExtra": "String",
+        "templateAd": "String",
+        "templateTitle": "String",
+        "templateSubtitle": "String",
+        "templateHeader": "String",
+        "templateItem": {
+          "list": [
+            {
+              "title": "String",
+              "description": "String"
+            }
+          ],
+          "summary": {
+            "title": "String",
+            "description": "String"
+          }
+        },
+        "templateItemHighlight": {
+          "title": "String",
+          "description": "String",
+          "imageUrl": "String"
+        },
+        "templateRepresentLink": {
+          "linkMo": "String",
+          "linkPc": "String",
+          "schemeIos": "String",
+          "schemeAndroid": "String"
+        },
+        "templateImageName": "String",
+        "templateImageUrl": "String",
+        "buttons": [
+          {
+            "ordering": 1,
+            "type": "String",
+            "name": "String",
+            "linkMo": "String",
+            "linkPc": "String",
+            "schemeIos": "String",
+            "schemeAndroid": "String",
+            "bizFormId": 1,
+            "pluginId": "String"
+          }
+        ],
+        "quickReplies": [
+          {
+            "ordering": 1,
+            "type": "String",
+            "name": "String",
+            "linkMo": "String",
+            "linkPc": "String",
+            "schemeIos": "String",
+            "schemeAndroid": "String",
+            "bizFormId": 1
+          }
+        ],
+        "comments": [
+          {
+            "id": 1,
+            "content": "String",
+            "userName": "String",
+            "createdAt": "String",
+            "attachment": [
+              {
+                "originalFileName": "String",
+                "filePath": "String"
+              }
+            ],
+            "status": "String"
+          }
+        ],
+        "status": "String",
+        "statusName": "String",
+        "securityFlag": true,
+        "categoryCode": "String",
+        "createDate": "String",
+        "updateDate": "String"
+      }
+    ],
+    "totalCount": 100
+  }
+}
+```
+
+### 10.2 템플릿 등록
 
 **Endpoint**
 
@@ -1087,7 +1237,7 @@ Authorization: {auth-key}
 }
 ```
 
-### 10.2 템플릿 수정
+### 10.3 템플릿 수정
 
 **Endpoint**
 
@@ -1275,11 +1425,11 @@ Authorization: {auth-key}
 
 ---
 
-### 10.3 템플릿 삭제
+### 10.4 템플릿 삭제
 
 **Endpoint**
 
-`DELETE https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}`
+`DELETE https://api.notifly.tech/projects/{projectId}/messages/kakao-alimtalk/templates/{templateCode}?channelId=${channelId}`
 
 #### Specifications
 
@@ -1290,26 +1440,18 @@ Authorization: {auth-key}
 | projectId    | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
 | templateCode | String | Yes      | 삭제할 템플릿 코드                              |
 
+##### Query Parameters
+
+| Parameter   | Type   | Required | Description                                                                                              |
+| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| `channelId` | String | No       | 알림톡 채널 ID. 등록된 채널이 여러개일 경우 사용됩니다. 넘기지 않을 경우 먼저 등록된 채널로 지정 됩니다. |
+
 ##### Request Headers
 
 | Parameter     | Value            | Description                                                                   |
 | ------------- | ---------------- | ----------------------------------------------------------------------------- |
 | Content-Type  | application/json | Request body의 MIME Type                                                      |
 | Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
-
-##### Request Body
-
-```json
-{
-  "channelId": "String"
-}
-```
-
-###### 필드 설명
-
-| Parameter   | Type   | Required | Description                                                                                              |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
-| `channelId` | String | No       | 알림톡 채널 ID. 등록된 채널이 여러개일 경우 사용됩니다. 넘기지 않을 경우 먼저 등록된 채널이 지정 됩니다. |
 
 ##### Response Headers
 
