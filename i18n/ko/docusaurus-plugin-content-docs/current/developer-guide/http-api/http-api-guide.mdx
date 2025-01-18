@@ -36,8 +36,8 @@ Notifly HTTP API의 전체 요청량 제한은 **초당 5,000회**입니다.
 
 | Parameter | Type   | Required | Description                                                                                                                                              |
 | --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| accessKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Access Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
-| secretKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프로젝트 별로 하나의 Secret Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
+| accessKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프러덕트 별로 하나의 Access Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
+| secretKey | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. 프러덕트 별로 하나의 Secret Key가 생성됩니다. 문의 사항은 contact@notifly.tech 으로 이메일 부탁드립니다. |
 
 #### Response Headers
 
@@ -268,7 +268,7 @@ Authorization: {auth-key}
 }
 ```
 
-## 5. Campaign Triggering {#api-campaign-triggering}
+## 5. Campaign Triggering
 
 이 endpoint 를 통해 캠페인을 트리거링할 수 있습니다. 등록된 유저 및 디바이스의 속성 뿐만 아니라 API Request Body의 파라미터까지 모두 사용하여 메시지를 개인화할 수 있습니다.
 
