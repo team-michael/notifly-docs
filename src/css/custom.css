@@ -21,7 +21,12 @@
   --ifm-color-primary-lightest: #6699ff;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-font-family-base: "Noto Sans KR", sans-serif;
+  --ifm-font-family-base: "Pretendard", "Noto Sans KR", sans-serif;
+  --ifm-h1-font-size: 30px;
+  --ifm-h2-font-size: 24px;
+  --ifm-h3-font-size: 20px;
+  --ifm-toc-border-color: rgba(119, 114, 111, 0.05);
+  --ifm-spacing-horizontal: 1rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -51,4 +56,70 @@ h4,
 h5,
 h6 {
   font-family: "Pretendard";
+}
+
+aside.theme-doc-sidebar-container {
+  min-height: 100vh;
+}
+
+article {
+  line-height: 1.75;
+  /* padding: 0 5%; */
+}
+
+.markdown {
+  --ifm-leading: calc(1.5 * 1rem);
+}
+
+.markdown > h1 {
+  --ifm-h1-font-size: 30px;
+}
+
+.markdown > h1:first-child {
+  --ifm-h1-font-size: 36px;
+}
+
+.markdown > h2 {
+  --ifm-h2-font-size: 24px;
+}
+
+.markdown > h3 {
+  --ifm-h3-font-size: 20px;
+}
+
+h1.title_node_modules-\@docusaurus-theme-classic-lib-theme-DocCategoryGeneratedIndexPage-styles-module {
+  --ifm-h1-font-size: 32px;
+}
+
+a.menu__link {
+  font-size: 14px;
+}
+
+.menu__caret:before {
+  background-size: 1.5rem 1.5rem;
+}
+
+main .container {
+  padding: 0 5%;
+  margin-bottom: 4rem;
+}
+
+footer.footer {
+  --ifm-footer-background-color: #f1f5f9;
+  --ifm-footer-title-color: #64748b;
+  --ifm-footer-link-color: #64748b;
+  padding: 2.5rem;
+}
+
+footer.footer .container {
+  padding: 1.5rem 5%;
+}
+
+.footer__copyright {
+  margin: 4rem 0 0;
+  opacity: 0.5;
+}
+
+.alert {
+  font-size: 14px;
 }
