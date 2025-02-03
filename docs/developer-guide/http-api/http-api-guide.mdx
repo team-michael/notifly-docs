@@ -404,6 +404,17 @@ This endpoint allows you to trigger campaigns. You can personalize messages usin
 | - email       | String | No       | Email address of the user to whom the message will be sent. Required if `type` is `email`.        |
 | - eventParams | Object | No       | An object containing event parameters to personalize the message.                                 |
 
+:::note API-based Delivery Supported Channels
+
+Currently, API-based delivery is supported for the following channels.
+
+- Push Notification
+- Web Push Notification
+- Kakao AlimTalk
+- Kakao FriendTalk
+- Text Message
+- Email
+
 :::caution Recipient Type Support and Message Personalization
 
 The supported recipient types may vary depending on the campaign's dispatch channel. If the campaign uses a recipient type that is not supported by the dispatch channel, a 400 Bad Request will be returned in the API response.
@@ -411,6 +422,7 @@ The supported recipient types may vary depending on the campaign's dispatch chan
 - Push Notifications: Only `user-id` type recipients are supported.
 - Web Push Notifications: Only `user-id` type recipients are supported.
 - Kakao Alimtalk: Supports both `user-id` and `phone-number` type recipients.
+- Kakao Friendtalk: Supports both `user-id` and `phone-number` type recipients.
 - SMS: Supports both `user-id` and `phone-number` type recipients.
 - Email: Supports both `user-id` and `email` type recipients.
 
@@ -427,6 +439,7 @@ API-based dispatch checks for duplicate recipients to prevent duplicate messages
 - Push Notifications: If it's the same device token, the message will be sent to only one device token.
 - Web Push Notifications: If it's the same device token, the message will be sent to only one device token.
 - Kakao Alimtalk: If it's the same phone number, the message will be sent to only one phone number.
+- Kakao Friendtalk: If it's the same phone number, the message will be sent to only one phone number.
 - SMS: If it's the same phone number, the message will be sent to only one phone number.
 - Email: If it's the same email address, the message will be sent to only one email address.
 
