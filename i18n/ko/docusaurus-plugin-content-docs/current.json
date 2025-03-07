@@ -124,7 +124,7 @@
     "description": "The generated-index page description for category Webhook in sidebar userGuide"
   },
   "sidebar.userGuide.category.User Journey": {
-    "message": "유저 여정",
+    "message": "유저 여정 (베타)",
     "description": "The generated-index page description for category Web push in sidebar userGuide"
   },
   "sidebar.userGuide.category.User Journey.link.generated-index.description": {
