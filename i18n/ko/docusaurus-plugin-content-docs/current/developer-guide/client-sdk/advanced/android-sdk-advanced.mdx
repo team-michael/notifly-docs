@@ -212,7 +212,71 @@ class SampleApplication : Application() {
 Android 8.0 (API 레벨 26) 이상에서는 알림 채널 설정이 우선적으로 적용됩니다. 예를 들어, 알림 채널에 이미 소리가 설정되어 있다면, `builder.setSound()`로 설정한 소리는 무시될 수 있습니다. 알림의 주요 설정을 변경하려면 알림 채널 설정을 함께 고려해야 합니다.
 :::
 
-## 5. WebView
+## 5. 인앱 팝업 이벤트 리스너
+
+:::warning SDK 버전
+
+해당 기능은 Notifly Android SDK 1.16.0 이상 버전부터 지원됩니다.
+
+:::
+
+Notifly Android SDK에서는 인앱 팝업에서 발생하는 이벤트를 감지하고 처리할 수 있는 이벤트 리스너를 제공합니다. 이를 통해 인앱 팝업에서 사용자가 특정 행동을 했을 때, 추가적인 행동을 앱에서 처리할 수 있습니다.
+
+```kotlin title="Example code snippet for adding in-app message event listener"
+package com.your.project
+
+import android.app.Application
+import android.util.Log
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import tech.notifly.Notifly
+import tech.notifly.push.interfaces.IInAppMessageEventListener
+
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        // Initialize Notifly SDK
+        Notifly.initialize(
+            context = applicationContext,
+            projectId = BuildConfig.NOTIFLY_PROJECT_ID,
+            username = BuildConfig.NOTIFLY_USERNAME,
+            password = BuildConfig.NOTIFLY_PASSWORD,
+        )
+
+        // Add Notifly in-app message event listener
+        Notifly.addInAppMessageEventListener(
+            object : IInAppMessageEventListener {
+                override fun handleEvent(
+                    eventName: String,
+                    eventParams: JSONObject?,
+                ) {
+                    Log.d("SampleApplication", "InAppMessage event dispatched: $eventName, $eventParams")
+                }
+            },
+        )
+    }
+}
+```
+
+### 5-1. 인앱 팝업 이벤트 리스너 인터페이스
+
+`IInAppMessageEventListener` 인터페이스의 `handleEvent` 메소드를 구현하여 인앱 팝업에서 발생하는 이벤트들을 감지할 수 있습니다. 이 메소드는 다음과 같은 파라미터를 받습니다:
+
+- `eventName`: 발생한 이벤트의 이름입니다.
+- `eventParams`: 발생한 이벤트와 관련된 추가 정보가 포함된 객체입니다.
+
+### 5-2. 인앱 팝업 이벤트 목록
+
+`handleEvent`로 전달되는 eventName 목록입니다.
+
+- `in_app_message_show`: 인앱 팝업 노출.
+- `main_button_click`: 팝업 내 메인 버튼 클릭.
+- `hide_in_app_message_button_click`: 다시 보지 않기 버튼 클릭.
+- `close_button_click`: 팝업 내 닫기 버튼 클릭.
+- `survey_submit_button_click`: 설문 조사 제출 버튼 클릭.
+
+## 6. WebView
 
 Notifly Android SDK에서는 인앱 메시지를 표시하기 위해 WebView를 사용합니다.
 안드로이드의 경우, 앱이 백그라운드에 있을 때에도 WebView의 Javascript 코드가 실행되며, 이로 인해 불필요한 자원 소모가 발생할 수 있어
