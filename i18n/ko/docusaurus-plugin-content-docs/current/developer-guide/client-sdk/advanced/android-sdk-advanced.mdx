@@ -249,7 +249,7 @@ class SampleApplication : Application() {
             object : IInAppMessageEventListener {
                 override fun handleEvent(
                     eventName: String,
-                    eventParams: JSONObject?,
+                    eventParams: Map<String, Any?>?,
                 ) {
                     Log.d("SampleApplication", "InAppMessage event dispatched: $eventName, $eventParams")
                 }
