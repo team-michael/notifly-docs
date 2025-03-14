@@ -1555,3 +1555,75 @@ Authorization: {auth-key}
   ]
 }
 ```
+
+## 12. User Journey Triggering
+
+이 endpoint 를 통해 유저 여정을 트리거링할 수 있습니다. 등록된 유저 및 디바이스의 속성 뿐만 아니라 API Request Body의 파라미터까지 모두 사용하여 메시지를 개인화할 수 있습니다.
+
+### 주의 사항
+
+- HTTP API를 이용한 유저 여정 진입의 경우, 유저 여정의 진입 시점 유형이 **API 기반 진입**으로 설정되어있는 경우에만 사용 가능합니다.
+
+### Endpoint
+
+`POST https://api.notifly.tech/projects/{projectId}/user-journeys/{userJourneyId}/enter`
+
+### Specifications
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Path Parameters
+
+| Parameter     | Type   | Required | Description                                     |
+| ------------- | ------ | -------- | ----------------------------------------------- |
+| projectId     | String | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다. |
+| userJourneyId | String | Yes      | 유저 여정 상세 페이지에서 확인하실 수 있습니다. |
+
+#### Request Body
+
+| Parameter     | Type   | Required | Description                                                                              |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| users         | List   | Yes      | 유저 여정에 진입할 유저 목록(최대 1000명)                                                |
+| - userId      | String | Yes      | 유저 여정에 진입할 유저의 ID 입니다.                                                     |
+| - eventParams | Object | No       | 이벤트 파라미터를 포함하는 객체 입니다. 해당 파라미터로 메시지를 개인화시킬 수 있습니다. |
+
+#### Response
+
+| Status Code               | Content-Type     | Description                                                                                 | Example Response                                                           |
+| ------------------------- | ---------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| 200 OK                    | application/json | 유저 여정에 정상적으로 진입되었습니다.                                                      | `{"code": 200, "success":true,"error":null}`                               |
+| 400 Bad Request           | application/json | 잘못된 요청입니다.                                                                          | `{"code": 400, "success":false,"error":"Bad request: some-error-message"}` |
+| 401 Unauthorized          | application/json | 토큰이 만료되었거나, 인증 정보가 유효하지 않습니다.                                         | `{"code": 401, "success":false,"error":"Unauthorized: Invalid token"}`     |
+| 500 Internal Server Error | application/json | 노티플라이 서버 오류입니다. 지속적으로 500 에러가 발생한다면, 노티플라이 팀에 문의해주세요. | `{"code": 500, "success":false,"error":"some-error-message"}`              |
+
+### Sample Request
+
+```http
+POST https://api.notifly.tech/projects/{projectId}/user-journeys/{userJourneyId}/enter
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "users": [
+    {
+      "userId": "alice",
+      "eventParams": {
+        "messageTitle": "Hello Alice!",
+        "messageBody": "How are you?"
+      }
+    },
+    {
+      "userId": "bob",
+      "eventParams": {
+        "messageTitle": "Hello Bob!",
+        "messageBody": "How are you?"
+      }
+    }
+  ]
+}
+```
