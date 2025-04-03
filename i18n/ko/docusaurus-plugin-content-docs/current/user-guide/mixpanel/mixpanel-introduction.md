@@ -35,8 +35,8 @@ Mixpanel의 integration 기능을 사용하기 위해서는 Mixpanel의 유료 �
 
 ## 2. 노티플라이에서 Mixpanel Cohort 연동하기
 
-1. 연동이 시작되면 각 유저의 mixpanel_cohorts 라는 유저 속성에, 해당하는 cohort가 문자 배열로 추가됩니다.
-2. 발송 대상에서 커스텀 프로퍼티 > mixpanel_cohorts 의 조건을 추가하여 사용할 수 있습니다.
+1. 연동이 시작되면 해당 cohort에 대해 노티플라이의 유저 그룹이 생성됩니다.
+2. 발송 대상에서 유저 그룹 불러오기를 통해서 cohort를 불러올 수 있으며, 추가 조건을 설정할 수 있습니다.
    ![mixpanel_integration_usage](./img/mixpanel_integration_usage.png)
 
 ## FAQ
