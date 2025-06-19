@@ -1627,3 +1627,196 @@ Authorization: {auth-key}
   ]
 }
 ```
+
+---
+
+## 13. Campaign Event Data Export API (Beta)
+
+### 13.1 Campaign Event Data Export 요청
+
+이 endpoint를 통해 캠페인/유저 여정 이벤트 데이터를 비동기적으로 추출 요청할 수 있습니다.
+
+#### Endpoint
+
+`POST https://api.notifly.tech/projects/{projectId}/campaign_event_data/exports`
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Path Parameters
+
+| Parameter | Type   | Required | Description                       |
+| --------- | ------ | -------- | --------------------------------- |
+| projectId | String | Yes      | Notifly 설정 페이지에서 확인 가능 |
+
+#### Request Body
+
+| Parameter | Type   | Required | Description                                                                           |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------- |
+| start     | String | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                    |
+| end       | String | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 1달 이내) |
+
+#### Response
+
+| Status Code               | Content-Type     | Description                                  | Example Response                                       |
+| ------------------------- | ---------------- | -------------------------------------------- | ------------------------------------------------------ |
+| 200 OK                    | application/json | Export 요청 성공                             | `{ "export_id": "xyz123" }`                            |
+| 400 Bad Request           | application/json | 요청 파라미터 오류 (날짜 형식, 범위 오류 등) | `{ "error": "InvalidRequest", "message": "..." }`      |
+| 401 Unauthorized          | application/json | 인증 실패                                    | `{ "error": "Unauthorized" }`                          |
+| 500 Internal Server Error | application/json | 서버 내부 오류                               | `{ "error": "InternalServerError", "message": "..." }` |
+
+#### Response Body
+
+```json
+{
+  "export_id": "xyz123"
+}
+```
+
+#### Sample Request
+
+```http
+POST https://api.notifly.tech/projects/{projectId}/campaign_event_data/exports
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "start": "2025-06-01T00:00:00.000Z",
+  "end": "2025-06-30T23:59:59.999Z"
+}
+```
+
+---
+
+### 13.2 Campaign Event Data Export 결과 조회
+
+비동기로 생성된 Export 데이터를 페이지 당 최대 1000개 단위로 조회합니다.
+
+#### 페이지네이션 방식
+
+이 API는 페이지 기반 페이지네이션을 사용합니다:
+
+- **페이지 번호**: 0부터 시작하는 정수 값
+- **페이지 크기**: 각 페이지당 최대 1,000개의 이벤트 데이터
+- **전체 페이지 수**: `total_page_count` 필드로 제공
+- **유효한 페이지 범위**: 0 ~ (total_page_count - 1)
+
+예를 들어, `total_page_count`가 5인 경우:
+
+- 유효한 페이지: 0, 1, 2, 3, 4
+- 각 페이지는 최대 1,000개의 이벤트 데이터를 포함
+- 마지막 페이지(페이지 4)는 1,000개 미만의 데이터를 포함할 수 있음
+
+#### Endpoint
+
+`GET https://api.notifly.tech/projects/{projectId}/campaign_event_data/exports/{exportId}/result?page={page}`
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                                    |
+| ------------- | ---------------- | ------------------------------------------------------------------------------ |
+| Content-Type  | application/json | Request body 의 MIME Type                                                      |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+
+#### Path Parameters
+
+| Parameter | Type   | Required | Description                       |
+| --------- | ------ | -------- | --------------------------------- |
+| projectId | String | Yes      | Notifly 설정 페이지에서 확인 가능 |
+| exportId  | String | Yes      | Export 요청 시 발급된 ID          |
+
+#### Query Parameters
+
+| Parameter | Type   | Required | Description                                                   |
+| --------- | ------ | -------- | ------------------------------------------------------------- |
+| page      | Number | Yes      | 0부터 시작하는 페이지 번호 (범위 : `0 ~ total_page_count -1`) |
+
+#### Response
+
+| Status Code               | Content-Type     | Description                        | Example Response                                                                                     |
+| ------------------------- | ---------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 200 OK                    | application/json | 해당 페이지 데이터 조회 성공       | `{ "status": "success", "data": [...], "total_page_count": 3 }`                                      |
+| 202 Accepted              | application/json | 데이터 생성 중                     | `{ "status": "processing", "message": "Data is being generated." }`                                  |
+| 404 Not Found             | application/json | 존재하지 않는 projectId나 exportId | `{ "status": "not_found", "message": "The specified project_id and export_id could not be found." }` |
+| 416 Range Not Satisfiable | application/json | 잘못된 page 요청                   | `{ "status": "invalid_page", "message": "The requested page does not exist." }`                      |
+| 500 Internal Server Error | application/json | 서버 내부 오류                     | `{ "status": "error", "message": "An error occurred while processing the data." }`                   |
+
+#### Response Body (200 OK)
+
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "user_id": "user_12345",
+      "notifly_user_id": "notifly_user_abcde",
+      "device_id": "ios_device_98765",
+      "notifly_device_id": "notifly_device_xyz",
+      "channel": "push_notification",
+      "event_name": "send_success",
+      "failure_reason": null,
+      "resource_title": "6월 신규 혜택 안내",
+      "resource_type": "campaign",
+      "campaign_id": "camp_202406_promo",
+      "experiment_group_name": "A",
+      "user_journey_id": null,
+      "user_journey_node_id": null,
+      "time": "1749373994",
+      "message_data": {
+        "title": "지금 확인하고 혜택 받기!",
+        "body": "6월 신규 회원님만을 위한 특별 이벤트 🎁",
+        "link": "link://link/feed?id=1243"
+      }
+    }
+  ],
+  "total_page_count": 1
+}
+```
+
+#### Sample Request
+
+```http
+GET https://api.notifly.tech/projects/{projectId}/campaign_event_data/exports/{exportId}/result?page=0
+Content-Type: application/json
+Authorization: {auth-key}
+```
+
+### Event Name의 종류
+
+| **이벤트 이름**                                                                | **이벤트 의미**                     | **설명**                                                                                       |
+| ------------------------------------------------------------------------------ | ----------------------------------- | ---------------------------------------------------------------------------------------------- |
+| send_success                                                                   | 발송 성공                           | 노티플라이 발송 엔진에서 발송 시도를 성공                                                      |
+| send_failure                                                                   | 발송 실패                           | 발송 시도 실패 건수.                                                                           |
+| 일부 채널(문자, 카카오 친구톡 및 알림톡)은 실패 원인(failure_reason) 별도 제공 |
+| rendering_failure                                                              | 개인화 메시지 렌더링 실패           | -                                                                                              |
+| pending                                                                        | 발송 시도(집계 중)                  | 일부 채널(문자, 카카오 친구톡 및 알림톡)에 대해서 발송 시도 후, 수신 결과 집계가 진행중인 상태 |
+| push_delivered                                                                 | 푸시알림 수신                       | 사용자에게 푸시알림이 도달                                                                     |
+| push_click                                                                     | 푸시알림 클릭                       | -                                                                                              |
+| failover_text_message_send_success                                             | 대체 문자 메시지 발송 성공          | 발송 실패 시 대체 문자로 발송 성공                                                             |
+| failover_text_message_send_failure                                             | 대체 문자 메시지 발송 실패          | 대체 문자 발송 실패                                                                            |
+| email_send                                                                     | 이메일 발송                         | -                                                                                              |
+| email_delivery                                                                 | 이메일 도달                         | 수신함에 도달                                                                                  |
+| 이메일을 열지 않아도 도달한 것으로 판단                                        |
+| email_open                                                                     | 이메일 오픈                         | -                                                                                              |
+| email_click                                                                    | 이메일 본문 링크 클릭               | -                                                                                              |
+| email_bounce                                                                   | 수신 불가로 반송된 이메일 반송      | -                                                                                              |
+| email_complaint                                                                | 이메일 수신 거부                    | 수신자가 스팸으로 신고                                                                         |
+| email_rendering_failure                                                        | 이메일 렌더링 실패                  | -                                                                                              |
+| in_app_message_show                                                            | 앱 팝업 노출                        | -                                                                                              |
+| in_web_message_show                                                            | 웹 팝업 노출                        | -                                                                                              |
+| main_button_click                                                              | 팝업 메인버튼 클릭                  | -                                                                                              |
+| close_button_click                                                             | 팝업 닫기 버튼 클릭                 | -                                                                                              |
+| hide_in_app_message_button_click                                               | 인앱 팝업 다시 보지 않기 클릭       | -                                                                                              |
+| link_open                                                                      | 링크 오픈                           | 트래킹 링크 클릭. 중복 클릭도 집계됨                                                           |
+| cancelled                                                                      | 취소 이벤트로 인한 발송 취소        | 취소 이벤트 발생으로 예약 발송이 중단된 경우                                                   |
+| skipped\_\_noisy_filter                                                        | 중복 발송으로 인한 발송 취소        | 단시간 내 동일 유저에 중복 발송 방지                                                           |
+| skipped\_\_fatigue_management                                                  | 피로도 관리로 인한 발송 취소        | 피로도 관리 설정으로 인한 취소                                                                 |
+| skipped\_\_forbidden_timing_filter                                             | 금지된 발송 시간으로 인한 발송 취소 | 발송 금지 시간 조건으로 인한 취소                                                              |
+| skipped\_\_kakao_forbidden_timing                                              | 카카오 금지 시간으로 인한 발송 취소 | 카카오 광고 메시지 금지 시간에 해당                                                            |
+| skipped\_\_excluded_user_filter                                                | 발신 제외 유저로 인한 발송 취소     | 특정 유저 제외 조건에 해당하는 경우                                                            |
+| skipped\_\_aborted_message                                                     | 메시지 Abort로 인한 발송 취소       | -                                                                                              |
+| skipped\_\_global_frequency_limit_filter                                       | 발송량 제한 조건으로 인한 발송 취소 | 프로젝트의 발송량 제한에 의해 취소                                                             |
