@@ -1695,7 +1695,7 @@ Authorization: {auth-key}
 
 ### 13.2 Campaign Event Data Export 결과 조회
 
-비동기로 생성된 Export 데이터를 페이지 당 최대 1000개 단위로 조회합니다.
+export 요청으로 얻은 export_id를 활용해 비동기로 생성된 Export 데이터를 페이지 당 최대 1000개 단위로 조회합니다. 데이터가 생성중이라면 요청에 대한 응답코드로 202를 반환합니다.
 
 #### 페이지네이션 방식
 
