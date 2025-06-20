@@ -1656,10 +1656,10 @@ Authorization: {auth-key}
 
 #### Request Body
 
-| Parameter | Type   | Required | Description                                                                           |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| start     | String | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                    |
-| end       | String | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 1달 이내) |
+| Parameter | Type   | Required | Description                                                                              |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| start     | String | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                       |
+| end       | String | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 일주일 이내) |
 
 #### Response
 
@@ -1687,7 +1687,7 @@ Authorization: {auth-key}
 
 {
   "start": "2025-06-01T00:00:00.000Z",
-  "end": "2025-06-30T23:59:59.999Z"
+  "end": "2025-06-07T23:59:59.999Z"
 }
 ```
 
