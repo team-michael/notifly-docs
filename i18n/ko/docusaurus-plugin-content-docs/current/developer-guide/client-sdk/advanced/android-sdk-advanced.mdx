@@ -17,37 +17,45 @@ Notifly Android SDK에서는 푸시를 수신할 때 기본적으로 앱의 laun
 
 ## 2. 푸시 알림 사전 동의
 
-Notifly Android SDK에서는 푸시 알림을 수신하는 시점에 사용자에게 푸시 알림 수신 동의를 받지 않습니다.
+Notifly Android SDK에서는 자체적으로 알림 권한을 요청하지 않습니다.
 
-사용자 알림 수신 동의는 Notifly Android SDK 설치와 무관하게 앱 내에서 직접 구현하셔야 하며, 특히 Android TIRAMISU(API Level 33) 이상에서는 명시적으로 사용자에게 권한을 획득해야 합니다. 푸시 알림 수신 동의를 사용자에게 런타임에 요청하는 가이드는 [Android Developers - Notification runtime permission](https://developer.android.com/develop/ui/views/notifications/notification-permission)을 참고해 주세요.
+사용자 알림 수신 동의는 Notifly Android SDK 설치와 무관하게 앱 내에서 직접 구현하셔야 하며, 특히 Android 13 TIRAMISU(API Level 33) 이상에서는 명시적으로 사용자에게 `POST_NOTIFICATIONS` 권한을 획득해야 합니다. 푸시 알림 수신 동의를 사용자에게 런타임에 요청하는 가이드는 [런타임 권한 요청](https://developer.android.com/training/permissions/requesting?hl=ko)을 참고해 주세요.
+
+```xml title="AndroidManifest.xml for notification permission"
+<manifest ...>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <application ...>
+        ...
+    </application>
+</manifest>
+```
 
 다음 코드는 예시입니다. 실제 알림 요청 타이밍, UI, 문구 등은 앱의 특성에 맞게 구현해 주세요.
 
 ```kotlin title="Example MainActivity.kt for notification permission request"
-class MainActivity : Activity() {
+class MainActivity : ComponentActivity() {
 
-    companion object {
-        private const val PERMISSION_REQUEST_CODE = 101 // 필요에 따라 변경
-    }
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                // 권한 허용됨 – 알림 전송 가능
+            } else {
+                // 권한 거부됨 – 대체 동작 처리
+            }
+        }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         askNotificationPermission()
-        ...
     }
 
     private fun askNotificationPermission() {
-        // This is only necessary for API level >= 33 (TIRAMISU)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 showPermissionRationaleDialog()
             } else {
-                requestNotificationPermission()
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
     }
@@ -57,20 +65,10 @@ class MainActivity : Activity() {
             .setTitle("Permission needed")
             .setMessage("This app needs the notification permission to send you notifications.")
             .setPositiveButton("ok") { _, _ ->
-                requestNotificationPermission()
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
-            .setNegativeButton("No thanks") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create().show()
-    }
-
-    private fun requestNotificationPermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-            PERMISSION_REQUEST_CODE
-        )
+            .setNegativeButton("No thanks", null)
+            .show()
     }
 }
 
