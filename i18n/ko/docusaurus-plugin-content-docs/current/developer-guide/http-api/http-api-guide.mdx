@@ -80,10 +80,10 @@ Content-Type: application/json
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -144,10 +144,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -219,10 +219,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -284,10 +284,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
@@ -403,10 +403,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body MIME type                                                         |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body MIME type                                                |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
@@ -438,6 +438,69 @@ Authorization: {auth-key}
   "data": {
     "lastCollectedAt": "2024-10-29 04:00:00",
     "stats": [
+      {
+          "metricName": "구매_이벤트",
+          "metricType": "conversion",
+          "conversionType": "sales_conversion",
+          "totalSum": 930832,
+          "dailySums": [
+            {
+              "date": "2024-09-30",
+              "sum": 0,
+              "dimensionSums": [
+                {
+                  "dimensionKey": "이름",
+                  "dimensionValue": "이름1",
+                  "sum": 0
+                },
+                ...
+              ]
+            },
+            ...
+          ]
+      },
+      {
+          "metricName": "구매_이벤트",
+          "metricType": "conversion",
+          "conversionType": "total_count_conversion",
+          "totalCount": 15,
+          "dailyCounts": [
+            {
+              "date": "2024-09-30",
+              "count": 0,
+              "dimensionCounts": [
+                {
+                  "dimensionKey": "이름",
+                  "dimensionValue": "이름1",
+                  "count": 0
+                },
+                ...
+              ]
+            },
+            ...
+          ]
+      },
+      {
+          "metricName": "구매_이벤트",
+          "metricType": "conversion",
+          "conversionType": "direct_count_conversion",
+          "totalCount": 3,
+          "dailyCounts": [
+            {
+              "date": "2024-09-30",
+              "count": 0,
+              "dimensionCounts": [
+                {
+                  "dimensionKey": "이름",
+                  "dimensionValue": "이름1",
+                  "count": 0
+                },
+                ...
+              ]
+            },
+            ...
+          ]
+      },
       {
         "metricName": "send_success",
         "metricType": "standard",
@@ -483,20 +546,21 @@ Authorization: {auth-key}
 }
 ```
 
-| Field                                     | Type   | Description                                                                                                                                                           |
-| ----------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| lastCollectedAt                           | String | 최종 집계 시간. KST 기준 날짜와 시간(`yyyy-MM-dd HH:mm:ss` 형식)으로 반환됩니다.                                                                                      |
-| stats                                     | Array  | 캠페인 발송 현황 데이터 배열                                                                                                                                          |
-| - metricName                              | String | 집계된 메트릭의 이름 (예: `send_success`, `send_failure`, `push_click` 등).<br/>메트릭 이름에 대한 설명은 [Standard Metric 종류](#standard-metric-종류)를 참조하세요. |
-| - metricType                              | String | 메트릭의 타입 (`standard` 또는 `conversion`)                                                                                                                          |
-| - totalCount                              | Number | 지정된 기간 동안 해당 메트릭이 누적된 총 횟수                                                                                                                         |
-| - dailyCounts                             | Array  | 일별로 집계된 메트릭 데이터                                                                                                                                           |
-| &nbsp;&nbsp; - date                       | String | 집계 날짜 (`yyyy-MM-dd` 형식, KST 기준)                                                                                                                               |
-| &nbsp;&nbsp; - count                      | Number | 해당 날짜에 발생한 메트릭 횟수                                                                                                                                        |
-| &nbsp;&nbsp; - dimensionCounts            | Array  | 대시보드 구성 - 사용자 속성을 입력한 경우 속성별로 집계된 메트릭 데이터                                                                                               |
-| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionKey   | String | 사용자 속성 키                                                                                                                                                        |
-| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionValue | String | 사용자 속성 값                                                                                                                                                        |
-| &nbsp;&nbsp;&nbsp;&nbsp; - count          | Number | 해당 속성 값에 대한 메트릭 횟수                                                                                                                                       |
+| Field                                          | Type   | Description                                                                                                                                                           |
+| ---------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| lastCollectedAt                                | String | 최종 집계 시간. KST 기준 날짜와 시간(`yyyy-MM-dd HH:mm:ss` 형식)으로 반환됩니다.                                                                                      |
+| stats                                          | Array  | 캠페인 발송 현황 데이터 배열                                                                                                                                          |
+| - metricName                                   | String | 집계된 메트릭의 이름 (예: `send_success`, `send_failure`, `push_click` 등).<br/>메트릭 이름에 대한 설명은 [Standard Metric 종류](#standard-metric-종류)를 참조하세요. |
+| - metricType                                   | String | 메트릭의 타입 (`standard` 또는 `conversion`)                                                                                                                          |
+| - conversionType                               | String | 전환 지표의 타입 (`direct_count_conversion` 또는 `total_count_conversion` 또는 `sales_conversion`). metricType이 `conversion`인 경우만 존재.                          |
+| - totalCount (totalSum)                        | Number | 지정된 기간 동안 해당 메트릭이 누적된 총 횟수 (`전환 매출액 (sales_convesion)`에 대해서는 합)                                                                         |
+| - dailyCounts (dailySums)                      | Array  | 일별로 집계된 메트릭 데이터                                                                                                                                           |
+| &nbsp;&nbsp; - date                            | String | 집계 날짜 (`yyyy-MM-dd` 형식, KST 기준)                                                                                                                               |
+| &nbsp;&nbsp; - count (sum)                     | Number | 해당 날짜에 발생한 메트릭 횟수 (`전환 매출액 (sales_convesion)`에 대해서는 합)                                                                                        |
+| &nbsp;&nbsp; - dimensionCounts (dimensionSums) | Array  | 대시보드 구성 - 사용자 속성을 입력한 경우 속성별로 집계된 메트릭 데이터                                                                                               |
+| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionKey        | String | 사용자 속성 키                                                                                                                                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp; - dimensionValue      | String | 사용자 속성 값                                                                                                                                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp; - count (sum)         | Number | 해당 속성 값에 대한 메트릭 횟수 (`전환 매출액 (sales_convesion)`에 대해서는 합)                                                                                       |
 
 #### Standard Metric 종류
 
@@ -538,6 +602,10 @@ Content-Type: application/json
 Authorization: {auth-key}
 ```
 
+:::note Campaign Statisticas API 변경 사항
+2025-07-06 부터, conversionType 필드가 추가되었습니다.
+:::
+
 ## 7. Send Text Message
 
 이 endpoint 를 통해 문자 메시지(SMS, LMS, MMS)를 보낼 수 있습니다.
@@ -556,10 +624,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -619,10 +687,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                              |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
@@ -689,10 +757,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                              |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
@@ -737,10 +805,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body의 MIME Type                                                       |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                              |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 ##### Path Parameters
 
@@ -788,10 +856,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -871,10 +939,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                   |
-| ------------- | ---------------- | ----------------------------------------------------------------------------- |
-| Content-Type  | application/json | Request body의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                          |
+| ------------- | ---------------- | -------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication)를 통해 수령한 인증 토큰 |
 
 ##### Query Parameters
 
@@ -1021,10 +1089,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                   |
-| ------------- | ---------------- | ----------------------------------------------------------------------------- |
-| Content-Type  | application/json | Request body의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                          |
+| ------------- | ---------------- | -------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication)를 통해 수령한 인증 토큰 |
 
 ##### Request Body
 
@@ -1258,10 +1326,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                   |
-| ------------- | ---------------- | ----------------------------------------------------------------------------- |
-| Content-Type  | application/json | Request body의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                          |
+| ------------- | ---------------- | -------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication)를 통해 수령한 인증 토큰 |
 
 ##### Request Body
 
@@ -1452,10 +1520,10 @@ Authorization: {auth-key}
 
 ##### Request Headers
 
-| Parameter     | Value            | Description                                                                   |
-| ------------- | ---------------- | ----------------------------------------------------------------------------- |
-| Content-Type  | application/json | Request body의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint)를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                          |
+| ------------- | ---------------- | -------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication)를 통해 수령한 인증 토큰 |
 
 ##### Response Headers
 
@@ -1507,10 +1575,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Request Body
 
@@ -1572,10 +1640,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
@@ -1643,10 +1711,10 @@ Authorization: {auth-key}
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
@@ -1718,10 +1786,10 @@ Export 요청으로 얻은 export_id를 활용해 비동기로 생성된 데이�
 
 #### Request Headers
 
-| Parameter     | Value            | Description                                                                    |
-| ------------- | ---------------- | ------------------------------------------------------------------------------ |
-| Content-Type  | application/json | Request body 의 MIME Type                                                      |
-| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication-endpoint) 를 통해 수령한 인증 토큰 |
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
 
 #### Path Parameters
 
