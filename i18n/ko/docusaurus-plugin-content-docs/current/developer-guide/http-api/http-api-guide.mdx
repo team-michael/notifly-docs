@@ -1889,3 +1889,154 @@ Authorization: {auth-key}
 | skipped\_\_excluded_user_filter                                                | 발신 제외 유저로 인한 발송 취소     | 특정 유저 제외 조건에 해당하는 경우                                                            |
 | skipped\_\_aborted_message                                                     | 메시지 Abort로 인한 발송 취소       | -                                                                                              |
 | skipped\_\_global_frequency_limit_filter                                       | 발송량 제한 조건으로 인한 발송 취소 | 프로젝트의 발송량 제한에 의해 취소                                                             |
+
+### Message Body Examples
+
+:::note Message Body 채널 별 지원 조건
+push-notification을 제외한 다른 채널의 messae_body 컬럼은 2025-07-18 이후의 데이터만 지원합니다.
+또한, in-app-message와 in-web-message 채널은 아래의 SDK 버전 이후부터 지원됩니다.
+
+- Ios SDK : 1.17.2
+- Android SDK : 1.18.1
+- React Native SDK : 3.10.1
+- JS SDK : 2.17.4
+
+:::
+
+#### text-message
+
+```json
+{
+  "requestId": "요청 ID",
+  "requestDate": "YYYY-MM-DD HH:mm:ss",
+  "templateId": "템플릿 ID",
+  "title": "메시지 제목",
+  "body": "본문 내용",
+  "sendNo": "07000000000",
+  "recipientNo": "01012345678",
+  "messageType": "MMS",
+  "countryCode": "82",
+  "adYn": "N",
+  "attachFileList": [
+    {
+      "fileId": 123456789,
+      "fileName": "image.jpg",
+      "filePath": "/path/to/image/",
+      "saveFileName": "saved.jpg",
+      "uploadType": "TEMPORARY"
+    }
+  ]
+}
+```
+
+#### email
+
+```json
+{
+  "title": "메일 제목",
+  "body": {
+    "html": "<html><body><p>메일 본문</p></body></html>",
+    "text": "내용"
+  }
+}
+```
+
+#### kakao-friendtalk
+
+```json
+{
+  "plusFriendId": "@채널명",
+  "senderKey": "발신 키",
+  "recipientNo": "01012345678",
+  "content": "메시지 내용",
+  "buttons": [
+    {
+      "ordering": 1,
+      "type": "WL",
+      "name": "버튼명",
+      "linkMo": "<https://m.example.com>",
+      "linkPc": "<https://example.com>",
+      "schemeIos": "",
+      "schemeAndroid": ""
+    }
+  ],
+  "isAd": true
+}
+```
+
+#### kakao-alimtalk
+
+```json
+{
+  "plusFriendId": "@채널명",
+  "senderKey": "발신 키",
+  "recipientNo": "01012345678",
+  "templateCode": "템플릿 코드",
+  "content": "[브랜드] 메시지 본문",
+  "templateExtra": "추가 안내",
+  "buttons": [
+    {
+      "ordering": 1,
+      "type": "WL",
+      "name": "버튼명",
+      "linkMo": "<https://m.example.com>",
+      "linkPc": "<https://example.com>"
+    }
+  ]
+}
+```
+
+#### in-app-message
+
+```json
+{
+  "templateName": "템플릿 이름"
+}
+```
+
+#### in-web-message
+
+```json
+{
+  "templateName": "템플릿 이름"
+}
+```
+
+#### web-push-notification
+
+```json
+{
+  "notifly": {
+    "ti": "제목",
+    "bd": "본문",
+    "cid": "캠페인 ID",
+    "mid": "메시지 ID",
+    "u": "<https://your-link.com>",
+    "ic": "<https://your-icon.png>",
+    "bg": "#ffffff",
+    "im": "<https://your-image.jpg>",
+    "sd": "/push-sound.mp3",
+    "tg": "notifly-push-notification",
+    "vb": [200, 100, 200],
+    "ri": false,
+    "data": {},
+    "ac": [
+      { "action": "click", "title": "Go to Link" },
+      { "action": "close", "title": "Close" }
+    ]
+  }
+}
+```
+
+#### webhook
+
+```json
+{
+  "url": "<https://your.webhook.endpoint>",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": "{ \\"key\\": \\"value\\" }"
+}
+```
