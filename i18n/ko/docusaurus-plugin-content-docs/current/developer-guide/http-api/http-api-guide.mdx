@@ -2028,6 +2028,45 @@ push-notification을 제외한 다른 채널의 messae_body 컬럼은 2025-07-18
 }
 ```
 
+#### push-notification
+
+#### Ios
+```json
+{
+  "token": "사용자 토큰",
+  "notification": {
+    "title": "알림 제목",
+    "body": "알림 본문 내용입니다."
+  },
+  "apns": {
+    "payload": {
+      "aps": {
+        "content-available": 1,
+        "mutable-content": 1
+      },
+      "notifly_message_type": "push-notification",
+      "campaign_id": "캠페인_ID",
+      "notifly_user_id": "노티플라이_유저_ID",
+      "sent_time": 1234567890123,
+      "notifly_message_id": "메시지_ID"
+    }
+  }
+}
+```
+
+#### Android
+```json
+{
+  "token": "사용자 토큰",
+  "data": {
+    "notifly": "{\"type\":\"push-notification\",\"ti\":\"알림 제목\",\"bd\":\"알림 본문 내용입니다.\",\"u\":\"https://example.com/deep-link\",\"cid\":\"캠페인_ID\",\"imp\":\"normal\",\"mid\":\"메시지_ID\",\"st\":1234567890123}"
+  },
+  "android": {
+    "priority": "high"
+  }
+}
+```
+
 #### webhook
 
 ```json
