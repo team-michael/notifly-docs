@@ -2043,7 +2043,7 @@ push-notification을 제외한 다른 채널의 message_data 컬럼은 2025-07-1
 
 ## 14. Campaign Statistics API (Beta)
 
-이 endpoint를 통해 날짜, 캠페인, 채널 별로 발송 성공, 실패, 도달, 클릭, 전환 수를 조회할 수 있습니다. (조회 당일 제외)
+이 endpoint를 통해 일자, 캠페인, 채널 별로 발송 성공, 실패, 도달, 클릭, 전환 수를 조회할 수 있습니다. (조회 당일 제외)
 
 :::note 조회 조건
 전일 데이터는 매일 오전 7시(KST)에 집계가 완료됩니다. 정확한 전일 데이터 조회를 위해서는 오전 7시 이후에 API를 호출하시기를 권장합니다.
@@ -2051,6 +2051,10 @@ push-notification을 제외한 다른 채널의 message_data 컬럼은 2025-07-1
 
 :::note 집계 표기 일자
 일자별 데이터는 발생 일자 기준으로 집계 및 표기됩니다. 예를들어 7월 23일 발송한 캠페인의 클릭이 24일에 발생했다면, 23일에 발송, 24일에 클릭 이벤트가 집계됩니다.
+:::
+
+:::note Campaign Statistics Retrieval의 차이점
+Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Statistics는 요청한 기간동안 집계된 모든 캠페인/유저여정에 대해 일자별 집표 수를 제공합니다.
 :::
 
 #### Endpoint
