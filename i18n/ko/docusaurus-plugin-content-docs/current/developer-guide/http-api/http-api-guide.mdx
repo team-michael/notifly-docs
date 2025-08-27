@@ -2040,3 +2040,163 @@ push-notification을 제외한 다른 채널의 message_data 컬럼은 2025-07-1
   "data": "{ \\"key\\": \\"value\\" }"
 }
 ```
+
+## 14. Campaign Statistics API (Beta)
+
+이 endpoint를 통해 일자, 캠페인, 채널 별로 발송 성공, 실패, 도달, 클릭, 전환 수를 조회할 수 있습니다. (조회 당일 제외)
+
+:::note 조회 조건
+전일 데이터는 매일 오전 7시(KST)에 집계가 완료됩니다. 정확한 전일 데이터 조회를 위해서는 오전 7시 이후에 API를 호출하시기를 권장합니다.
+:::
+
+:::note 집계 표기 일자
+일자별 데이터는 발생 일자 기준으로 집계 및 표기됩니다. 예를들어 7월 23일 발송한 캠페인의 클릭이 24일에 발생했다면, 23일에 발송, 24일에 클릭 이벤트가 집계됩니다.
+:::
+
+:::note Campaign Statistics Retrieval의 차이점
+Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Statistics는 요청한 기간동안 집계된 모든 캠페인/유저여정에 대해 일자별 집표 수를 제공합니다.
+:::
+
+#### Endpoint
+
+`POST https://api.notifly.tech/v1/projects/{projectId}/statistics`
+
+#### Request Headers
+
+| Parameter     | Value            | Description                                                           |
+| ------------- | ---------------- | --------------------------------------------------------------------- |
+| Content-Type  | application/json | Request body 의 MIME Type                                             |
+| Authorization | {auth-key}       | [Authentication endpoint](#1-authentication) 를 통해 수령한 인증 토큰 |
+
+#### Path Parameters
+
+| Parameter | Type   | Required | Description                       |
+| --------- | ------ | -------- | --------------------------------- |
+| projectId | String | Yes      | Notifly 설정 페이지에서 확인 가능 |
+
+#### Request Body
+
+| Parameter | Type   | Required | Description                                                                              |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| start     | String | Yes      | 조회 시작일자 (yyyy-MM-dd, KST 기준)                                       |
+| end       | String | Yes      | 조회 종료일자 (yyyy-MM-dd, KST 기준, 조회 당일 제외)                          |
+| tags       | String[] | No      | 필터링 하고자 하는 캠페인 태그 (복수 개의 태그인 경우, 배열 내의 모든 태그를 포함하는 캠페인만 반환됩니다. OR 연산)                         |
+
+#### Response
+
+| Status Code               | Content-Type     | Description                                  | Example Response                                       |
+| ------------------------- | ---------------- | -------------------------------------------- | ------------------------------------------------------ |
+| 200 OK                    | application/json | Export 요청 성공                             | `{ "export_id": "xyz123" }`                            |
+| 400 Bad Request           | application/json | 요청 파라미터 오류 (날짜 형식, 범위 오류 등) | `{ "error": "InvalidRequest", "message": "..." }`      |
+| 401 Unauthorized          | application/json | 인증 실패                                    | `{ "error": "Unauthorized" }`                          |
+| 408 Timeout          | application/json | 타임 아웃                                    | `{ "error": "Timeout" }`                          |
+| 500 Internal Server Error | application/json | 서버 내부 오류                               | `{ "error": "InternalServerError", "message": "..." }` |
+
+#### Response Body (200 OK)
+
+```json
+  [
+    {
+      "date": "2025-06-01",
+      "resource_type": "campaign",
+      "message": {
+        "title": "여름 할인 이벤트",
+        "body": "최대 50% 할인 혜택을 놓치지 마세요!"
+      },
+      "campaign_id": "xyz123",
+      "campaign_name": "2025 여름 할인 캠페인",
+      "variant_id": "xyz123",
+      "variant_name": "할인율 50%",
+      "campaign_tags": ["summer", "discount", "mobile"],
+      "user_journey_id": null,
+      "user_journey_name": null,
+      "user_journey_node_id": null,
+      "user_journey_node_name": null,
+      "channel": "push_notification",
+      "message_sent": 1500,
+      "message_failed": 23,
+      "delivered": 1477,
+      "click": 234,
+      "conversion": [
+        {
+          "conversion_name": "구매완료",
+          "conversion_type": "total_count_conversion", 
+          "conversion_count": 45
+        },
+        {
+          "conversion_name": "구매완료",
+          "conversion_type": "direct_count_conversion", 
+          "conversion_count": 45
+        }
+      ]
+    },
+    {
+      "date": "2025-06-01",
+      "resource_type": "user-journey",
+      "message": {
+        "subject": "온보딩 완료 축하",
+        "content": "회원가입을 축하드립니다!"
+      },
+      "campaign_id": null,
+      "campaign_name": null,
+      "variant_id": null,
+      "variant_name": null,
+      "campaign_tags": [],
+      "user_journey_id": "xyz123",
+      "user_journey_name": "신규 회원 온보딩",
+      "user_journey_node_id": "xyz123",
+      "user_journey_node_name": "환영 메시지",
+      "channel": "email",
+      "message_sent": 892,
+      "message_failed": 5,
+      "delivered": 887,
+      "click": 156,
+      "conversion": [
+        {
+          "conversion_name": "프로필완성",
+          "conversion_type": "total_count_conversion", 
+          "conversion_count": 78
+        }
+      ]
+    }
+  ]
+```
+
+#### 필드 설명
+
+| Field                      | Type             | Description                                                                                                   |
+| -------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| `date`                     | string           | 통계 데이터 날짜 (YYYY-MM-DD 형식)                                                                           |
+| `resource_type`            | string           | 리소스 타입 (`campaign` 또는 `user-journey`)                                                                 |
+| `message`                  | object           | 메시지 내용 (채널별로 상이한 구조)                                                                           |
+| `campaign_id`              | string \| undefined | 캠페인 ID (캠페인 리소스인 경우에만 존재)                                                                   |
+| `campaign_name`            | string \| undefined | 캠페인 이름 (캠페인 리소스인 경우에만 존재)                                                                 |
+| `variant_id`               | string \| undefined | Variant ID (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                     |
+| `variant_name`             | string \| undefined | Variant 이름 (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                   |
+| `campaign_tags`            | string[]         | 캠페인 태그 목록                                                                                              |
+| `user_journey_id`          | string \| undefined | 유저 여정 ID (유저 여정 리소스인 경우에만 존재)                                                             |
+| `user_journey_name`        | string \| undefined | 유저 여정 이름 (유저 여정 리소스인 경우에만 존재)                                                           |
+| `user_journey_node_id`     | string \| undefined | 유저 여정 노드 ID (유저 여정 리소스인 경우에만 존재)                                                        |
+| `user_journey_node_name`   | string \| undefined | 유저 여정 노드 이름 (유저 여정 리소스인 경우에만 존재)                                                      |
+| `channel`                  | string          | 발송 채널 정보                                                           |
+| `message_sent`             | number           | 발송 시도된 메시지 수                                                                                        |
+| `message_failed`           | number           | 발송 실패한 메시지 수                                                                                        |
+| `delivered`                | number \| null   | 전달 완료된 메시지 수 (채널에서 지원하지 않는 경우 null)                                                     |
+| `click`                    | number \| null   | 클릭된 메시지 수 (채널에서 지원하지 않는 경우 null)                                                          |
+| `conversion`               | object[] | 전환 데이터 배열 (name, type, count)                               |
+
+#### Sample Request
+
+```http
+POST https://api.notifly.tech/v1/projects/{projectId}/statistics
+Content-Type: application/json
+Authorization: {auth-key}
+
+{
+  "start": "2025-06-01",
+  "end": "2025-06-07",
+  "tags": ['exampleTag']
+}
+```
+
+---
