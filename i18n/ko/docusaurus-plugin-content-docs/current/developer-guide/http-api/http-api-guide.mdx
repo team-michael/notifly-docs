@@ -1811,6 +1811,7 @@ Export 요청으로 얻은 export_id를 활용해 비동기로 생성된 데이�
 | 200 OK                    | application/json | 해당 페이지 데이터 조회 성공       | `{ "status": "success", "data": [...], "total_page_count": 3 }`                                      |
 | 202 Accepted              | application/json | 데이터 생성 중                     | `{ "status": "processing", "message": "Data is being generated." }`                                  |
 | 404 Not Found             | application/json | 존재하지 않는 projectId나 exportId | `{ "status": "not_found", "message": "The specified project_id and export_id could not be found." }` |
+| 408 Timeout          | application/json | 타임 아웃                                    | `{ "error": "Timeout" }`                          |
 | 416 Range Not Satisfiable | application/json | 잘못된 page 요청                   | `{ "status": "invalid_page", "message": "The requested page does not exist." }`                      |
 | 500 Internal Server Error | application/json | 서버 내부 오류                     | `{ "status": "error", "message": "An error occurred while processing the data." }`                   |
 
