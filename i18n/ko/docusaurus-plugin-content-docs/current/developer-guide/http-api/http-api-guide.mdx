@@ -2107,26 +2107,26 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
       "campaign_name": "2025 여름 할인 캠페인",
       "variant_id": "xyz123",
       "variant_name": "할인율 50%",
-      "campaign_tags": ["summer", "discount", "mobile"],
+      "tags": ["summer", "discount", "mobile"],
       "user_journey_id": null,
       "user_journey_name": null,
       "user_journey_node_id": null,
       "user_journey_node_name": null,
-      "channel": "push_notification",
+      "channel": "push-notification",
       "message_sent": 1500,
       "message_failed": 23,
       "delivered": 1477,
       "click": 234,
       "conversion": [
         {
-          "conversion_name": "구매완료",
-          "conversion_type": "total_count_conversion", 
-          "conversion_count": 45
+          "name": "구매완료",
+          "type": "total_count_conversion", 
+          "count": 45
         },
         {
-          "conversion_name": "구매완료",
-          "conversion_type": "direct_count_conversion", 
-          "conversion_count": 45
+          "name": "구매완료",
+          "type": "direct_count_conversion", 
+          "count": 45
         }
       ]
     },
@@ -2141,7 +2141,7 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
       "campaign_name": null,
       "variant_id": null,
       "variant_name": null,
-      "campaign_tags": [],
+      "tags": [],
       "user_journey_id": "xyz123",
       "user_journey_name": "신규 회원 온보딩",
       "user_journey_node_id": "xyz123",
@@ -2153,9 +2153,9 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
       "click": 156,
       "conversion": [
         {
-          "conversion_name": "프로필완성",
-          "conversion_type": "total_count_conversion", 
-          "conversion_count": 78
+          "name": "프로필완성",
+          "type": "total_count_conversion", 
+          "count": 78
         }
       ]
     }
@@ -2173,7 +2173,7 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
 | `campaign_name`            | string \| undefined | 캠페인 이름 (캠페인 리소스인 경우에만 존재)                                                                 |
 | `variant_id`               | string \| undefined | Variant ID (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                     |
 | `variant_name`             | string \| undefined | Variant 이름 (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                   |
-| `campaign_tags`            | string[]         | 캠페인 태그 목록                                                                                              |
+| `tags`            | string[]         | 캠페인 태그 목록                                                                                              |
 | `user_journey_id`          | string \| undefined | 유저 여정 ID (유저 여정 리소스인 경우에만 존재)                                                             |
 | `user_journey_name`        | string \| undefined | 유저 여정 이름 (유저 여정 리소스인 경우에만 존재)                                                           |
 | `user_journey_node_id`     | string \| undefined | 유저 여정 노드 ID (유저 여정 리소스인 경우에만 존재)                                                        |
