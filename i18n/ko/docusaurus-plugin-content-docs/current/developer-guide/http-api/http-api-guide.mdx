@@ -1728,6 +1728,7 @@ Authorization: {auth-key}
 | --------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
 | start     | String | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                       |
 | end       | String | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 일주일 이내) |
+| isMessageDataIncluded       | Boolean | No      | message data 포함 여부 (default: false) |
 
 #### Response
 
@@ -1756,6 +1757,7 @@ Authorization: {auth-key}
 {
   "start": "2025-06-01T00:00:00.000Z",
   "end": "2025-06-07T23:59:59.999Z"
+  "isMessageDataIncluded": true
 }
 ```
 
@@ -1891,7 +1893,7 @@ Authorization: {auth-key}
 | skipped\_\_aborted_message                                                     | 메시지 Abort로 인한 발송 취소       | -                                                                                              |
 | skipped\_\_global_frequency_limit_filter                                       | 발송량 제한 조건으로 인한 발송 취소 | 프로젝트의 발송량 제한에 의해 취소                                                             |
 
-### Message Body Examples
+### Message Data Examples
 
 :::note Message Data 채널 별 지원 조건
 push-notification을 제외한 다른 채널의 message_data 컬럼은 2025-07-18 이후의 데이터만 지원합니다.
