@@ -107,6 +107,14 @@
     "message": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다.",
     "description": "The generated-index page description for category In App Popup in sidebar userGuide"
   },
+  "sidebar.userGuide.category.Share Link": {
+    "message": "쉐어 링크",
+    "description": "The label for category Share Link in sidebar userGuide"
+  },
+  "sidebar.userGuide.category.Share Link.link.generated-index.description": {
+    "message": "노티플라이에서 쉐어 링크 기능을 활용하는 방법을 안내합니다.",
+    "description": "The generated-index page description for category Share Link in sidebar userGuide"
+  },
   "sidebar.userGuide.category.App push": {
     "message": "앱 푸시 알림",
     "description": "The label for category App push in sidebar userGuide"
