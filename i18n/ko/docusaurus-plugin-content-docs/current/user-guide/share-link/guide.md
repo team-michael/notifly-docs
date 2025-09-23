@@ -152,6 +152,8 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 
 ## Error Responses
 
+아래 에러 메시지는 API 응답 입니다. IMPORTDATA 를 사용하는 경우, 구글 시트의 함수 에러를 확인해주세요.
+
 | Status | Message                                                                                   | When                                                                   |
 | ------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | 400    | Invalid project ID                                                                        | `project_id`가 32자리가 아니거나 없음                                  |
