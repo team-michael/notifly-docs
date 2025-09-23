@@ -18,21 +18,12 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 - 전환 수
   :::
 
-## Endpoint
+## Google 스프레드시트 연동방법
 
-`GET https://api.notifly.tech/${version}/projects/${project_id}/statistics.csv`
+Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합니다.
 
-## Specifications
-
-### Request Headers
-
-| Parameter     | Value      | Description                                                               |
-| ------------- | ---------- | ------------------------------------------------------------------------- |
-| Authorization | {auth-key} | 인증 토큰. [HTTP API - Authentication]을 통해 발급받은 토큰을 사용합니다. |
-| Accept        | text/csv   | (선택) CSV 응답 기대 시 지정 가능                                         |
-
-:::note 인증
-401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
+:::tip Google 스프레드시트 사용 예
+스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`
 :::
 
 ### Query Parameters
@@ -56,6 +47,7 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 - `offset`은 위 기간 지정 파라미터와 함께 사용할 수 있습니다.
 - `timeUnit`은 `last`/`offset`에만 적용됩니다. 미지정 시 `day` 단위입니다.
 - `last=0`은 허용되지 않습니다. 오늘은 조회 기간에 포함되지 않습니다.
+- Query Parameter가 없다면 최근 7일을 기준으로 조회됩니다.
 
 :::caution 날짜 형식
 날짜는 `YYYY-MM-DD` 형식을 따라야 합니다. 형식 불일치 시 400 응답이 반환됩니다.
@@ -65,41 +57,56 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 
 ### 1) 특정 기간 지정
 
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")
+```
+
 ```http
 GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01
-Authorization: {auth-key}
 Accept: text/csv
 ```
 
 ### 2) 특정 시점부터 오늘 전일까지
 
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01")
+```
+
 ```http
 GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01
-Authorization: {auth-key}
 Accept: text/csv
 ```
 
 ### 3) 최근 N일(오늘 미포함)
 
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3")
+```
+
 ```http
 GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3
-Authorization: {auth-key}
 Accept: text/csv
 ```
 
 ### 4) 최근 N주 + 기준일 오프셋
 
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week")
+```
+
 ```http
 GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week
-Authorization: {auth-key}
 Accept: text/csv
 ```
 
 ### 5) 태그 필터(다중 OR)
 
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb")
+```
+
 ```http
 GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb
-Authorization: {auth-key}
 Accept: text/csv
 ```
 
@@ -157,6 +164,22 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 | 408    | Request timeout. Check the Input Parameters or try again with a shorter date range.       | 대용량 데이터로 인한 타임아웃                                          |
 | 500    | Internal Server Error                                                                     | 내부 서버 오류                                                         |
 
-:::tip Google 스프레드시트 사용 예
-스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`
+# API 가이드
+
+Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. CSV 형식의 response를 목적에 맞게 변환하여 사용해주세요.
+
+## Endpoint
+
+`GET https://api.notifly.tech/${version}/projects/${project_id}/statistics.csv`
+
+## Specifications
+
+### Request Headers
+
+| Parameter | Value    | Description                       |
+| --------- | -------- | --------------------------------- |
+| Accept    | text/csv | (선택) CSV 응답 기대 시 지정 가능 |
+
+:::note 인증
+401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
 :::
