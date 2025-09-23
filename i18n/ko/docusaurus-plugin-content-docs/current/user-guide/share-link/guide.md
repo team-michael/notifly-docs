@@ -113,6 +113,15 @@ Accept: text/csv
 | Content-Type        | text/csv                              |
 | Content-Disposition | attachment; filename="statistics.csv" |
 
+### Errors
+
+구글 시트의 ImportData 함수를 사용하는 경우, 응답 크기가 최대 2MB를 초과할 수 없습니다.
+아래의 에러가 표시되는 경우, 날짜를 조절해서 응답 크기를 줄여주세요.
+
+:::note Response Size Error
+File size exceeds 2MB limit. Please try a shorter date range or filter by specific campaigns/tags.
+:::
+
 ### CSV Columns
 
 아래와 같은 컬럼 순서로 CSV가 반환됩니다.
