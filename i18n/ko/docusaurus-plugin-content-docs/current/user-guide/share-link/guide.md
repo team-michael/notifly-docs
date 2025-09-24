@@ -15,16 +15,14 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 - 발송 수
 - 수신 수
 - 클릭 수
-- 전환 수
-  :::
+- 전환 수:::
 
 ## Google 스프레드시트 연동방법
 
 Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합니다.
 
 :::tip Google 스프레드시트 사용 예
-스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`
-:::
+스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`:::
 
 ### Query Parameters
 
@@ -52,6 +50,23 @@ Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합�
 :::caution 날짜 형식
 날짜는 `YYYY-MM-DD` 형식을 따라야 합니다. 형식 불일치 시 400 응답이 반환됩니다.
 :::
+
+:::note 기준 시간
+쉐어 링크 데이터의 기준 시간은 KST입니다. (UTC+9시간)
+:::
+
+:::note 전일 데이터 집계 완료 시간
+전일 데이터는 매일 오전 7시(KST)에 집계가 완료됩니다. 정확한 전일 데이터 조회를 위해서는 오전 7시 이후에 지표를 확인하시기 바랍니다.
+:::
+
+:::note 당일 데이터 미포함
+쉐어 링크는 당일 데이터를 포함하지 않습니다.
+:::
+
+:::note 집계 표기 일자
+일자별 데이터는 발생 일자 기준으로 집계 및 표기됩니다. 예를들어 7월 23일 발송한 캠페인의 클릭이 24일에 발생했다면, 23일에 발송, 24일에 클릭 이벤트가 집계됩니다.
+:::
+
 
 ## Sample Requests
 
@@ -110,6 +125,36 @@ GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-
 Accept: text/csv
 ```
 
+### Errors
+
+구글 시트의 ImportData 함수를 사용하는 경우, 응답 크기가 최대 2MB를 초과할 수 없습니다.
+아래의 에러가 표시되는 경우, 날짜를 조절해서 응답 크기를 줄여주세요.
+
+:::note Response Size Error
+File size exceeds 2MB limit. Please try a shorter date range or filter by specific campaigns/tags.
+:::
+
+
+# API 가이드
+
+Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. CSV 형식의 response를 목적에 맞게 변환하여 사용해주세요.
+
+## Endpoint
+
+`GET https://api.notifly.tech/${version}/projects/${project_id}/statistics.csv`
+
+## Specifications
+
+### Request Headers
+
+| Parameter | Value    | Description                       |
+| --------- | -------- | --------------------------------- |
+| Accept    | text/csv | (선택) CSV 응답 기대 시 지정 가능 |
+
+:::note 인증
+401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
+:::
+
 ## Response
 
 ### Response Headers
@@ -120,14 +165,6 @@ Accept: text/csv
 | Content-Type        | text/csv                              |
 | Content-Disposition | attachment; filename="statistics.csv" |
 
-### Errors
-
-구글 시트의 ImportData 함수를 사용하는 경우, 응답 크기가 최대 2MB를 초과할 수 없습니다.
-아래의 에러가 표시되는 경우, 날짜를 조절해서 응답 크기를 줄여주세요.
-
-:::note Response Size Error
-File size exceeds 2MB limit. Please try a shorter date range or filter by specific campaigns/tags.
-:::
 
 ### CSV Columns
 
@@ -166,22 +203,3 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 | 408    | Request timeout. Check the Input Parameters or try again with a shorter date range.       | 대용량 데이터로 인한 타임아웃                                          |
 | 500    | Internal Server Error                                                                     | 내부 서버 오류                                                         |
 
-# API 가이드
-
-Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. CSV 형식의 response를 목적에 맞게 변환하여 사용해주세요.
-
-## Endpoint
-
-`GET https://api.notifly.tech/${version}/projects/${project_id}/statistics.csv`
-
-## Specifications
-
-### Request Headers
-
-| Parameter | Value    | Description                       |
-| --------- | -------- | --------------------------------- |
-| Accept    | text/csv | (선택) CSV 응답 기대 시 지정 가능 |
-
-:::note 인증
-401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
-:::
