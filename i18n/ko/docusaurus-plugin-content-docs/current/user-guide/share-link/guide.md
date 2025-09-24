@@ -15,14 +15,17 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 - 발송 수
 - 수신 수
 - 클릭 수
-- 전환 수:::
+- 전환 수
+  
+:::
 
 ## Google 스프레드시트 연동방법
 
 Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합니다.
 
 :::tip Google 스프레드시트 사용 예
-스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`:::
+스프레드시트에서 `IMPORTDATA` 함수를 사용할 수 있습니다. 예: `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")`
+:::
 
 ### Query Parameters
 
@@ -67,63 +70,6 @@ Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합�
 일자별 데이터는 발생 일자 기준으로 집계 및 표기됩니다. 예를들어 7월 23일 발송한 캠페인의 클릭이 24일에 발생했다면, 23일에 발송, 24일에 클릭 이벤트가 집계됩니다.
 :::
 
-
-## Sample Requests
-
-### 1) 특정 기간 지정
-
-```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")
-```
-
-```http
-GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01
-Accept: text/csv
-```
-
-### 2) 특정 시점부터 오늘 전일까지
-
-```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01")
-```
-
-```http
-GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01
-Accept: text/csv
-```
-
-### 3) 최근 N일(오늘 미포함)
-
-```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3")
-```
-
-```http
-GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3
-Accept: text/csv
-```
-
-### 4) 최근 N주 + 기준일 오프셋
-
-```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week")
-```
-
-```http
-GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week
-Accept: text/csv
-```
-
-### 5) 태그 필터(다중 OR)
-
-```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb")
-```
-
-```http
-GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb
-Accept: text/csv
-```
 
 ### Errors
 
@@ -203,3 +149,60 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 | 408    | Request timeout. Check the Input Parameters or try again with a shorter date range.       | 대용량 데이터로 인한 타임아웃                                          |
 | 500    | Internal Server Error                                                                     | 내부 서버 오류                                                         |
 
+
+# Sample Requests
+
+### 1) 특정 기간 지정
+
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")
+```
+
+```http
+GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01
+Accept: text/csv
+```
+
+### 2) 특정 시점부터 오늘 전일까지
+
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01")
+```
+
+```http
+GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01
+Accept: text/csv
+```
+
+### 3) 최근 N일(오늘 미포함)
+
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3")
+```
+
+```http
+GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=3
+Accept: text/csv
+```
+
+### 4) 최근 N주 + 기준일 오프셋
+
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week")
+```
+
+```http
+GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&offset=3&timeUnit=week
+Accept: text/csv
+```
+
+### 5) 태그 필터(다중 OR)
+
+```excel
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb")
+```
+
+```http
+GET https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2022-01-01&tag=aa&tag=bb
+Accept: text/csv
+```
