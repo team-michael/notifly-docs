@@ -17,7 +17,8 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 - 클릭 수
 - 전환 수
   
-:::
+:::  
+
 
 ## Google 스프레드시트 연동방법
 
@@ -39,6 +40,7 @@ Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합�
 | `timeUnit` | Enum   | No       | `last`/`offset`의 기간 단위. `day`/`week`/`month`. 기본값 `day`.                                                   | `timeUnit=week`    |
 | `tag`      | String | No       | 특정 태그로 필터링. 다중 지정 가능. 지정된 태그 중 하나라도 포함(OR)한 리소스만 반환. 현재 캠페인에 대해서만 제공. | `tag=aa&tag=bb`    |
 
+  
 #### 기간 지정 규칙
 
 - 다음 중 정확히 하나의 방식으로 기간을 지정해야 합니다.
@@ -71,6 +73,7 @@ Google 스프레드시트에 연동할 cell에 `IMPORTDATA` 함수를 사용합�
 :::
 
 
+  
 ### Errors
 
 구글 시트의 ImportData 함수를 사용하는 경우, 응답 크기가 최대 2MB를 초과할 수 없습니다.
@@ -81,17 +84,19 @@ File size exceeds 2MB limit. Please try a shorter date range or filter by specif
 :::
 
 
-# API 가이드
+    
+
+## API 가이드
 
 Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. CSV 형식의 response를 목적에 맞게 변환하여 사용해주세요.
 
-## Endpoint
+### Endpoint
 
 `GET https://api.notifly.tech/${version}/projects/${project_id}/statistics.csv`
 
-## Specifications
+### Specifications
 
-### Request Headers
+#### Request Headers
 
 | Parameter | Value    | Description                       |
 | --------- | -------- | --------------------------------- |
@@ -101,9 +106,9 @@ Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. 
 401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
 :::
 
-## Response
+### Response
 
-### Response Headers
+#### Response Headers
 
 | Parameter           | Value                                 |
 | ------------------- | ------------------------------------- |
@@ -133,7 +138,7 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 2025-09-02,cmp_12345,장바구니 리마인드,web_push,980,920,102,28
 ```
 
-## Error Responses
+### Error Responses
 
 아래 에러 메시지는 API 응답 입니다. IMPORTDATA 를 사용하는 경우, 구글 시트의 함수 에러를 확인해주세요.
 
@@ -150,7 +155,7 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 | 500    | Internal Server Error                                                                     | 내부 서버 오류                                                         |
 
 
-# Sample Requests
+## Sample Requests
 
 ### 1) 특정 기간 지정
 
