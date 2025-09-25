@@ -102,10 +102,6 @@ Notifly Share Link는 API로도 직접 호출하여 사용할 수 있습니다. 
 | --------- | -------- | --------------------------------- |
 | Accept    | text/csv | (선택) CSV 응답 기대 시 지정 가능 |
 
-:::note 인증
-401 Unauthorized 응답 방지를 위해 유효한 인증 토큰이 필요합니다.
-:::
-
 ### Response
 
 #### Response Headers
@@ -150,7 +146,6 @@ date,campaignId,campaignTitle,channel,sent,delivered,clicks,conversions
 | 400    | Bad Request: Today's date cannot be included in the query range.                          | 오늘 날짜가 조회 범위에 포함된 경우                                    |
 | 400    | Invalid request body.                                                                     | 기간 관련 파라미터를 복수로 혼합 사용한 경우 (`start/end` + `last` 등) |
 | 400    | Bad Request: Invalid date range: start date cannot be after end date due to large offset. | `offset`으로 인해 날짜 범위가 역전된 경우                              |
-| 401    | Unauthorized: Invalid token                                                               | 인증 토큰이 없거나 유효하지 않음                                       |
 | 408    | Request timeout. Check the Input Parameters or try again with a shorter date range.       | 대용량 데이터로 인한 타임아웃                                          |
 | 500    | Internal Server Error                                                                     | 내부 서버 오류                                                         |
 
