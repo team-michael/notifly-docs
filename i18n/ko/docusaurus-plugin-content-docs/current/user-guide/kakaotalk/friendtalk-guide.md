@@ -21,7 +21,7 @@ sidebar_position: 3
 
 ### 1-2. 노티플라이와 카카오 채널 연결하기 {#friendtalk-connect-kakao-channel-with-notifly}
 
-[카카오 비즈메시지 발송 환경 셋팅 방법](/ko/user-guide/kakaotalk/integration)을 참고하여 채널을 노티플라이에 등록해 주세요.
+[카카오 비즈메시지 발송 환경 셋팅 방법](/ko/user-guide/kakaotalk/setup)을 참고하여 채널을 노티플라이에 등록해 주세요.
 
 ## 2. 카카오 친구톡의 특성 {#friendtalk-characteristics}
 
