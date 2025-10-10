@@ -15,7 +15,7 @@ sidebar_position: 2
 
 ## 1. 카카오 알림톡 발신자 정보 등록하기 {#sender-profile}
 
-[카카오 비즈메시지 발송 환경 셋팅 방법](/ko/user-guide/kakaotalk/integration)을 참고하여 채널을 노티플라이에 등록해 주세요.
+[카카오 비즈메시지 발송 환경 셋팅 방법](/ko/user-guide/kakaotalk/setup)을 참고하여 채널을 노티플라이에 등록해 주세요.
 
 ## 2. 카카오 알림톡 캠페인 시작하기
 
