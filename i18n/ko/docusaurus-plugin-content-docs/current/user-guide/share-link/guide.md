@@ -43,7 +43,7 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 | delivered          | 1150                       | 메시지 수신 수                                                      | 푸시, 이메일처럼 '수신' 또는 '도달'을 확인할 수 있는 경우에만 집계됩니다.<br>※ 기기의 상태, 네트워크 이슈 등의 원인으로 푸시 발송처리는 성공하여도 기기에서 수신되지 않을 수 있습니다.<br>※ 메일박스가 꽉 차있거나 스팸처리 된 경우 이메일 발송은 되어도 수신함에 도달되지 않을 수 있습니다.<br>카카오 메시지, 문자, 팝업은 해당사항이 없기 때문에 공란으로 표기됩니다.                                              |
 | click              | 200                        | 클릭 수                                                             | 푸시, 이메일, 팝업처럼 클릭을 집계하는 채널의 경우 표기합니다. <br>카카오 메시지, 문자처럼 클릭을 지원하지 않는 채널은 공란으로 처리합니다.(트래킹링크를 사용하면 카카오 메시지, 문자 채널에서도 클릭을 측정할 수 있습니다.)                                       |
 | conversion_1_name  | "구매"                     | 전환이벤트 이름                                                        | 전환이벤트가 발생하지 않은 경우 공란으로 처리됩니다.                                                                    |
-| conversion_1_type  | "direct_count_conversion"  | 전환 타입 (`direct_count_conversion` 또는 `total_count_conversion`) | 전환이벤트가 발생하지 않은 경우 공란으로 처리됩니다. <br>※ `direct_count_conversion`: 클릭 이후 추적기간 동안 전환 이벤트가 발생한 경우를 집계※ `total_count_conversion`: 메시지 발송 이후 추적 기간 동안 전환 이벤트가 발생한 경우를 집계(클릭 여부를 고려하지 않음) |
+| conversion_1_type  | "direct_count_conversion"  | 전환 타입 (`direct_count_conversion` 또는 `total_count_conversion`) | 전환이벤트가 발생하지 않은 경우 공란으로 처리됩니다. <br>※ `direct_count_conversion`: 클릭 이후 추적기간 동안 전환 이벤트가 발생한 경우를 집계<br>※ `total_count_conversion`: 메시지 발송 이후 추적 기간 동안 전환 이벤트가 발생한 경우를 집계(클릭 여부를 고려하지 않음) |
 | conversion_1_count | 20                         | 전환 이벤트 수                                                      | 전환이벤트가 발생하지 않은 경우 공란으로 처리됩니다.                                                                    |
 
     
@@ -55,7 +55,7 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 | `start` & `end` |  특정 기간.                                                                             | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")` |  2022-01-01 ~ 2022-03-01|
 | `since`    | 특정 일자부터 오늘 전일까지.                                                                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2025-05-01")` | 2025-05-01 ~ 2025-06-30|
 | `last`     | 전일부터 최근 N기간. <br>`timeUnit` 미지정 시 day 단위로 집계됩니다.                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")` | 2025-06-24 ~ 2025-06-30(전일부터 최근 7일)|
-| `timeUnit` | 기간 단위를 변경. <br>(`day`(기본)/`week`/`month`)`last` 또는 `offset`과 함께 사용합니다.      | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&timeUnit=week")` | 2025-06-03 ~ 2025-06-30<br>(전일부터 최근 4주) | 
+| `timeUnit` | 기간 단위를 변경. <br>(`day`(기본)/`week`/`month`)<br>`last` 또는 `offset`과 함께 사용합니다.      | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&timeUnit=week")` | 2025-06-03 ~ 2025-06-30<br>(전일부터 최근 4주) | 
 | `offset`   | 기준일을 "N기간 전"으로 이동. <br>`start/end`,`since` 또는 `last`)과 함께 사용해야 합니다.|`=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&timeUnit=week&offset=4")`| 2025-05-06 ~ 2025-06-02<br>(전일부터 4주 전을 기준으로 이전 4주간) |
 | `tag`      |  특정 태그로 필터링. <br>지정된 태그 중 하나라도 포함(OR)하면 출력합니다.| `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?tag=프로모션&tag=공지")` | 태그 '프로모션'과 '공지'를 포함하는 모든 캠페인|
 
