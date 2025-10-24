@@ -10,9 +10,11 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 
 1. Google 스프레드시트를 생성해주세요.
 2. 연동할 셀에 `IMPORTDATA` 아래 함수를 복사해 붙여넣기 합니다.
- ```excel
+   
+```excel
 =IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv")
 ```
+
 3. 입력한 함수에서 '{project_id}'을 실제 project_id로 대체합니다.
 
 :::tip project_id 확인하는 방법
