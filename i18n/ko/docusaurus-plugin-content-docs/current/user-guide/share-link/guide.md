@@ -11,7 +11,7 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 1. Google 스프레드시트를 생성해주세요.
 2. 연동할 셀에 `IMPORTDATA` 아래 함수를 복사해 붙여넣기 합니다.
  ```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv)
+=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv")
 ```
 3. 입력한 함수에서 '{project_id}'을 실제 project_id로 대체합니다.
 
@@ -50,7 +50,7 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 
 ### 기간/태그 파라미터
 
-| 이름       |  설명                                                                                        | 작성 예시          | 예시 적용 시 기간 <br>(ex.오늘 = 2025-07-01) |
+| 이름       |  설명                                                                                        | 작성 예시          | 예시 적용 시 기간 <br>(ex.오늘 = 2025-07-01)</br> |
 | ---------- |  -------------------------------------------------------------------------------------------| ------------------ | ------------------ |
 | `start` & `end` |  특정 기간.                                                                             | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")` |  2022-01-01 ~ 2022-03-01|
 | `since`    | 특정 일자부터 오늘 전일까지.                                                                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2025-05-01")` | 2025-05-01 ~ 2025-06-30|
