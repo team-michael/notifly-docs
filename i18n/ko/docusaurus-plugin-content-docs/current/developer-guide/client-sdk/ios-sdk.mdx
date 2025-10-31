@@ -230,7 +230,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
   - 전화번호와, 이메일의 프로퍼티 필드명은 꼭 각각 $phone_number, $email로 설정해 주세요.
   - Notifly SDK 초기화 코드 추가를 마친 후 프로퍼티 등록을 시작해 주세요.
-  -(권장사항) 로그아웃 시 userId를 null로 하여 setUserId 호출함으로써 기기와 유저의 연결을 해지해 주세요.
+  - (권장사항) 로그아웃 시 userId를 null로 하여 setUserId 호출함으로써 기기와 유저의 연결을 해지해 주세요.
   - (권장사항) 탈퇴 유저는 [Delete Users API](/ko/developer-guide/http-api/http-api-guide#4-delete-users)를 구현하여 유저 정보를 삭제해 주세요.
 
 ### 4-1. userId 등록
