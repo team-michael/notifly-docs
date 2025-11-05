@@ -1593,6 +1593,16 @@ Authorization: {auth-key}
 | recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                               |
 | - recipientNo  | String  | Yes      | 수신 번호                                              |
 | - content.text | String  | Yes      | 본문 내용                                              |
+| - resendParameter | ResendParameter | No | 대체 발송 정보                                       |
+
+#### ResendParameter
+
+| Parameter     | Type    | Required | Description                                                                      |
+| ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
+| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                               |
+| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.             |
+| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                                |
+| resendContent | String  | No       | 대체 발송 내용. 기본값은 메시지 본문과 웹링크 버튼명 - 웹링크 Mobile 링크입니다. |
 
 #### Response
 
