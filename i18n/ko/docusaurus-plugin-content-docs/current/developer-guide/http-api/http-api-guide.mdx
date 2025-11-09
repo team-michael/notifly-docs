@@ -877,7 +877,7 @@ Authorization: {auth-key}
 | - templateParameter | Object          | No       | 템플릿 파라미터, 치환할 변수가 포함된 경우 필수                                                                |
 | - resendParameter   | ResendParameter | No       | 대체 발송 정보                                                                                                 |
 
-#### ResendParameter
+#### resendParameter
 
 | Parameter     | Type    | Required | Description                                                                      |
 | ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
@@ -1569,6 +1569,13 @@ Authorization: {auth-key}
   가능합니다.
 - 아직 API를 이용한 발송 결과에 대한 통계는 UI로 제공 되지 않습니다. 정보가 필요하실 경우 contact@notifly.tech 으로 이메일 부탁드립니다.
 
+:::caution 친구톡 광고 메시지 대체 발송 시 주의사항
+친구톡 광고 메시지가 실패하여 광고 SMS로 대체 발송되는 경우, 반드시 080 수신 거부 번호가 등록되어 있어야 합니다.
+
+- `resendContent` 필드를 입력한 경우: SMS 광고 API의 광고 문구 규격에 맞게 필수 광고 문구를 포함해야 정상 대체 발송됩니다.
+- `resendContent` 필드를 입력하지 않은 경우: 등록된 080 수신 거부 번호를 활용하여 광고 문구를 자동 생성하여 대체 발송됩니다.
+:::
+
 ### Endpoint
 
 `POST https://api.notifly.tech/messages/kakao-friendtalk`
@@ -1584,15 +1591,25 @@ Authorization: {auth-key}
 
 #### Request Body
 
-| Parameter      | Type    | Required | Description                                            |
-| -------------- | ------- | -------- | ------------------------------------------------------ |
-| projectId      | String  | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.        |
-| channelId      | String  | No       | 여러 카카오 채널이 등록되어 있을 경우 발송 할 채널 ID. |
-| messageType    | String  | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)           |
-| isAd           | Boolean | No       | 광고 여부                                              |
-| recipientList  | List    | Yes      | 수신자 목록(최대 1000명)                               |
-| - recipientNo  | String  | Yes      | 수신 번호                                              |
-| - content.text | String  | Yes      | 본문 내용                                              |
+| Parameter         | Type            | Required | Description                                            |
+| ----------------- | --------------- | -------- | ------------------------------------------------------ |
+| projectId         | String          | Yes      | Notifly의 설정 페이지에서 확인하실 수 있습니다.        |
+| channelId         | String          | No       | 여러 카카오 채널이 등록되어 있을 경우 발송 할 채널 ID. |
+| messageType       | String          | Yes      | 메시지 타입. (현재 `text`타입만 지원합니다.)           |
+| isAd              | Boolean         | No       | 광고 여부                                              |
+| recipientList     | List            | Yes      | 수신자 목록(최대 1000명)                               |
+| - recipientNo     | String          | Yes      | 수신 번호                                              |
+| - content.text    | String          | Yes      | 본문 내용                                              |
+| - resendParameter | ResendParameter | No       | 대체 발송 정보                                         |
+
+#### resendParameter
+
+| Parameter     | Type    | Required | Description                                                                      |
+| ------------- | ------- | -------- | -------------------------------------------------------------------------------- |
+| isResend      | Boolean | No       | 발송 실패 시, 문자 대체 발송 여부. 기본값은 false.                               |
+| resendType    | String  | No       | 대체 발송 타입(SMS, LMS). 템플릿 본문 길이에 따라 타입이 구분됩니다.             |
+| resendTitle   | String  | No       | LMS 대체 발송 제목. 기본값은 플러스친구 ID입니다.                                |
+| resendContent | String  | No       | 대체 발송 내용. 기본값은 메시지 본문과 웹링크 버튼명 - 웹링크 Mobile 링크입니다. |
 
 #### Response
 
@@ -1726,11 +1743,11 @@ Authorization: {auth-key}
 
 #### Request Body
 
-| Parameter | Type   | Required | Description                                                                              |
-| --------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| start     | String | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                       |
-| end       | String | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 일주일 이내) |
-| isMessageDataIncluded       | Boolean | No      | message data 포함 여부 (default: false) |
+| Parameter             | Type    | Required | Description                                                                              |
+| --------------------- | ------- | -------- | ---------------------------------------------------------------------------------------- |
+| start                 | String  | Yes      | 조회 시작일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준)                                       |
+| end                   | String  | Yes      | 조회 종료일자 (yyyy-MM-ddTHH:mm:ss.sssZ, UTC 기준, 조회 시작일자로부터 최대 일주일 이내) |
+| isMessageDataIncluded | Boolean | No       | message data 포함 여부 (default: false)                                                  |
 
 #### Response
 
@@ -1815,7 +1832,7 @@ Export 요청으로 얻은 export_id를 활용해 비동기로 생성된 데이�
 | 200 OK                    | application/json | 해당 페이지 데이터 조회 성공       | `{ "status": "success", "data": [...], "total_page_count": 3 }`                                      |
 | 202 Accepted              | application/json | 데이터 생성 중                     | `{ "status": "processing", "message": "Data is being generated." }`                                  |
 | 404 Not Found             | application/json | 존재하지 않는 projectId나 exportId | `{ "status": "not_found", "message": "The specified project_id and export_id could not be found." }` |
-| 408 Timeout          | application/json | 타임 아웃                                    | `{ "error": "Timeout" }`                          |
+| 408 Timeout               | application/json | 타임 아웃                          | `{ "error": "Timeout" }`                                                                             |
 | 416 Range Not Satisfiable | application/json | 잘못된 page 요청                   | `{ "status": "invalid_page", "message": "The requested page does not exist." }`                      |
 | 500 Internal Server Error | application/json | 서버 내부 오류                     | `{ "status": "error", "message": "An error occurred while processing the data." }`                   |
 
@@ -2082,11 +2099,11 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
 
 #### Request Body
 
-| Parameter | Type   | Required | Description                                                                              |
-| --------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
-| start     | String | Yes      | 조회 시작일자 (yyyy-MM-dd, KST 기준)                                       |
-| end       | String | Yes      | 조회 종료일자 (yyyy-MM-dd, KST 기준, 조회 당일 제외)                          |
-| tags       | String[] | No      | 필터링 하고자 하는 캠페인 태그 (복수 개의 태그인 경우, 배열 내의 모든 태그를 포함하는 캠페인만 반환됩니다. OR 연산)                         |
+| Parameter | Type     | Required | Description                                                                                                         |
+| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
+| start     | String   | Yes      | 조회 시작일자 (yyyy-MM-dd, KST 기준)                                                                                |
+| end       | String   | Yes      | 조회 종료일자 (yyyy-MM-dd, KST 기준, 조회 당일 제외)                                                                |
+| tags      | String[] | No       | 필터링 하고자 하는 캠페인 태그 (복수 개의 태그인 경우, 배열 내의 모든 태그를 포함하는 캠페인만 반환됩니다. OR 연산) |
 
 #### Response
 
@@ -2095,101 +2112,101 @@ Campaign Statistics Retrieval은 캠페인을 특정해야하지만 Campaign Sta
 | 200 OK                    | application/json | Export 요청 성공                             | `{ "export_id": "xyz123" }`                            |
 | 400 Bad Request           | application/json | 요청 파라미터 오류 (날짜 형식, 범위 오류 등) | `{ "error": "InvalidRequest", "message": "..." }`      |
 | 401 Unauthorized          | application/json | 인증 실패                                    | `{ "error": "Unauthorized" }`                          |
-| 408 Timeout          | application/json | 타임 아웃                                    | `{ "error": "Timeout" }`                          |
+| 408 Timeout               | application/json | 타임 아웃                                    | `{ "error": "Timeout" }`                               |
 | 500 Internal Server Error | application/json | 서버 내부 오류                               | `{ "error": "InternalServerError", "message": "..." }` |
 
 #### Response Body (200 OK)
 
 ```json
-  [
-    {
-      "date": "2025-06-01",
-      "resource_type": "campaign",
-      "message": {
-        "title": "여름 할인 이벤트",
-        "body": "최대 50% 할인 혜택을 놓치지 마세요!"
-      },
-      "campaign_id": "xyz123",
-      "campaign_name": "2025 여름 할인 캠페인",
-      "variant_id": "xyz123",
-      "variant_name": "할인율 50%",
-      "tags": ["summer", "discount", "mobile"],
-      "user_journey_id": null,
-      "user_journey_name": null,
-      "user_journey_node_id": null,
-      "user_journey_node_name": null,
-      "channel": "push-notification",
-      "message_sent": 1500,
-      "message_failed": 23,
-      "delivered": 1477,
-      "click": 234,
-      "conversion": [
-        {
-          "name": "구매완료",
-          "type": "total_count_conversion", 
-          "count": 45
-        },
-        {
-          "name": "구매완료",
-          "type": "direct_count_conversion", 
-          "count": 45
-        }
-      ]
+[
+  {
+    "date": "2025-06-01",
+    "resource_type": "campaign",
+    "message": {
+      "title": "여름 할인 이벤트",
+      "body": "최대 50% 할인 혜택을 놓치지 마세요!"
     },
-    {
-      "date": "2025-06-01",
-      "resource_type": "user-journey",
-      "message": {
-        "subject": "온보딩 완료 축하",
-        "content": "회원가입을 축하드립니다!"
+    "campaign_id": "xyz123",
+    "campaign_name": "2025 여름 할인 캠페인",
+    "variant_id": "xyz123",
+    "variant_name": "할인율 50%",
+    "tags": ["summer", "discount", "mobile"],
+    "user_journey_id": null,
+    "user_journey_name": null,
+    "user_journey_node_id": null,
+    "user_journey_node_name": null,
+    "channel": "push-notification",
+    "message_sent": 1500,
+    "message_failed": 23,
+    "delivered": 1477,
+    "click": 234,
+    "conversion": [
+      {
+        "name": "구매완료",
+        "type": "total_count_conversion",
+        "count": 45
       },
-      "campaign_id": null,
-      "campaign_name": null,
-      "variant_id": null,
-      "variant_name": null,
-      "tags": [],
-      "user_journey_id": "xyz123",
-      "user_journey_name": "신규 회원 온보딩",
-      "user_journey_node_id": "xyz123",
-      "user_journey_node_name": "환영 메시지",
-      "channel": "email",
-      "message_sent": 892,
-      "message_failed": 5,
-      "delivered": 887,
-      "click": 156,
-      "conversion": [
-        {
-          "name": "프로필완성",
-          "type": "total_count_conversion", 
-          "count": 78
-        }
-      ]
-    }
-  ]
+      {
+        "name": "구매완료",
+        "type": "direct_count_conversion",
+        "count": 45
+      }
+    ]
+  },
+  {
+    "date": "2025-06-01",
+    "resource_type": "user-journey",
+    "message": {
+      "subject": "온보딩 완료 축하",
+      "content": "회원가입을 축하드립니다!"
+    },
+    "campaign_id": null,
+    "campaign_name": null,
+    "variant_id": null,
+    "variant_name": null,
+    "tags": [],
+    "user_journey_id": "xyz123",
+    "user_journey_name": "신규 회원 온보딩",
+    "user_journey_node_id": "xyz123",
+    "user_journey_node_name": "환영 메시지",
+    "channel": "email",
+    "message_sent": 892,
+    "message_failed": 5,
+    "delivered": 887,
+    "click": 156,
+    "conversion": [
+      {
+        "name": "프로필완성",
+        "type": "total_count_conversion",
+        "count": 78
+      }
+    ]
+  }
+]
 ```
 
 #### 필드 설명
 
-| Field                      | Type             | Description                                                                                                   |
-| -------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- |
-| `date`                     | string           | 통계 데이터 날짜 (YYYY-MM-DD 형식)                                                                           |
-| `resource_type`            | string           | 리소스 타입 (`campaign` 또는 `user-journey`)                                                                 |
-| `message`                  | object           | 메시지 내용 (채널별로 상이한 구조)                                                                           |
-| `campaign_id`              | string \| undefined | 캠페인 ID (캠페인 리소스인 경우에만 존재)                                                                   |
-| `campaign_name`            | string \| undefined | 캠페인 이름 (캠페인 리소스인 경우에만 존재)                                                                 |
-| `variant_id`               | string \| undefined | Variant ID (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                     |
-| `variant_name`             | string \| undefined | Variant 이름 (캠페인 리소스이고, A/B 테스트인 경우에만 존재)                                                                   |
-| `tags`            | string[]         | 캠페인 태그 목록                                                                                              |
-| `user_journey_id`          | string \| undefined | 유저 여정 ID (유저 여정 리소스인 경우에만 존재)                                                             |
-| `user_journey_name`        | string \| undefined | 유저 여정 이름 (유저 여정 리소스인 경우에만 존재)                                                           |
-| `user_journey_node_id`     | string \| undefined | 유저 여정 노드 ID (유저 여정 리소스인 경우에만 존재)                                                        |
-| `user_journey_node_name`   | string \| undefined | 유저 여정 노드 이름 (유저 여정 리소스인 경우에만 존재)                                                      |
-| `channel`                  | string          | 발송 채널 정보                                                           |
-| `message_sent`             | number           | 발송 시도된 메시지 수                                                                                        |
-| `message_failed`           | number           | 발송 실패한 메시지 수                                                                                        |
-| `delivered`                | number \| null   | 전달 완료된 메시지 수 (채널에서 지원하지 않는 경우 null)                                                     |
-| `click`                    | number \| null   | 클릭된 메시지 수 (채널에서 지원하지 않는 경우 null)                                                          |
-| `conversion`               | object[] | 전환 데이터 배열 (name, type, count)                               |
+| Field                    | Type                | Description                                                  |
+| ------------------------ | ------------------- | ------------------------------------------------------------ |
+| `date`                   | string              | 통계 데이터 날짜 (YYYY-MM-DD 형식)                           |
+| `resource_type`          | string              | 리소스 타입 (`campaign` 또는 `user-journey`)                 |
+| `message`                | object              | 메시지 내용 (채널별로 상이한 구조)                           |
+| `campaign_id`            | string \| undefined | 캠페인 ID (캠페인 리소스인 경우에만 존재)                    |
+| `campaign_name`          | string \| undefined | 캠페인 이름 (캠페인 리소스인 경우에만 존재)                  |
+| `variant_id`             | string \| undefined | Variant ID (캠페인 리소스이고, A/B 테스트인 경우에만 존재)   |
+| `variant_name`           | string \| undefined | Variant 이름 (캠페인 리소스이고, A/B 테스트인 경우에만 존재) |
+| `tags`                   | string[]            | 캠페인 태그 목록                                             |
+| `user_journey_id`        | string \| undefined | 유저 여정 ID (유저 여정 리소스인 경우에만 존재)              |
+| `user_journey_name`      | string \| undefined | 유저 여정 이름 (유저 여정 리소스인 경우에만 존재)            |
+| `user_journey_node_id`   | string \| undefined | 유저 여정 노드 ID (유저 여정 리소스인 경우에만 존재)         |
+| `user_journey_node_name` | string \| undefined | 유저 여정 노드 이름 (유저 여정 리소스인 경우에만 존재)       |
+| `channel`                | string              | 발송 채널 정보                                               |
+| `message_sent`           | number              | 발송 시도된 메시지 수                                        |
+| `message_failed`         | number              | 발송 실패한 메시지 수                                        |
+| `delivered`              | number \| null      | 전달 완료된 메시지 수 (채널에서 지원하지 않는 경우 null)     |
+| `click`                  | number \| null      | 클릭된 메시지 수 (채널에서 지원하지 않는 경우 null)          |
+| `conversion`             | object[]            | 전환 데이터 배열 (name, type, count)                         |
 
 #### Sample Request
 
