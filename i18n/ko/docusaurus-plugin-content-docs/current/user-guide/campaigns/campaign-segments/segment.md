@@ -6,15 +6,15 @@ sidebar_position: 1
 
 노티플라이 캠페인은 쉽고 빠르게 원하는 사용자에게 도달할 수 있는 방법을 제공합니다. 발송 대상을 설정하는 방법은 **유저 그룹 설정**, **노티플라이 AI**, **CSV 파일**이 지원됩니다.
 
-_[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)인 경우 아래 방법들을 사용할 수 없습니다. 해당 경우 발송 대상은 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#4-campaign-triggering-endpoint) 를 참고하여 Request Body에 명시해주세요._
+_[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#23-api-기반-발송)인 경우 아래 방법들을 사용할 수 없습니다. 해당 경우 발송 대상은 [Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#5-campaign-triggering) 를 참고하여 Request Body에 명시해주세요._
 
 ## 발송 필수 정보
 
 발송 채널 별로 유저 정보로 등록되어야 할 필수적인 요소들이 존재합니다.
 
 - **푸시 알림 - 디바이스 토큰** : 디바이스 토큰은 현재 [Client SDK](/ko/category/client-sdk)에서 자동으로 수집된 정보로만 사용 가능합니다. 디바이스 토큰을 매뉴얼하게 업로드 할 수 있는 기능도 제공될 예정이니 조금만 기다려주세요.
-- **카카오 알림톡, 카카오 친구톡, 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 유저 등록 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
-- **이메일 - 이메일 주소** : 이메일 주소 또한 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **카카오 알림톡, 카카오 친구톡, 문자 메시지 - 휴대폰 번호** : 휴대폰 번호는 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 휴대폰 번호는 `$phone_number` 특수 필드 이름으로 등록해야 합니다. 자세한 정보는 유저 등록 페이지의 '특수 항목' 섹션을 참고해 주세요. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-유저-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- **이메일 - 이메일 주소** : 이메일 주소 또한 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. 이메일 주소는 `$email` 특수 필드 이름으로 등록해야 합니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-유저-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 ## 1. 유저 그룹 설정 {#user-group-setup}
 
@@ -35,7 +35,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 
 1. 사용자의 속성
 
-- 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties-endpoint)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-사용자-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
+- 유저 등록 페이지에서 CSV 업로드, 또는 직접 입력하여 등록할 수 있습니다. [HTTP API - Set User Properties](/ko/developer-guide/http-api/http-api-guide#3-set-user-properties)나 [Client SDK](/ko/developer-guide/client-sdk/react-native-sdk#2-유저-프로퍼티-등록하기)를 통해서도 등록할 수 있습니다.
 
 2. 사용자의 디바이스 정보
 
@@ -43,7 +43,7 @@ _[API 기반 발송 캠페인](/ko/user-guide/campaigns/basic#api-기반-발송)
 
 3. 사용자의 이벤트 발생 기록
 
-- 이벤트를 발생시키는 방법은 [캠페인 시작하기 - 이벤트 기반 발송](/ko/user-guide/campaigns/basic#이벤트-기반-발송) 섹션을 참고해주세요.
+- 이벤트를 발생시키는 방법은 [캠페인 시작하기 - 이벤트 기반 발송](/ko/user-guide/campaigns/basic#22-이벤트-기반-발송) 섹션을 참고해주세요.
 - 노티플라이 엔진은 자동으로 사용자별로 발생한 이벤트를 적재하고 있습니다. 유저 별로 발생한 이벤트의 목록은 유저 리스트 페이지에서 표 항목 클릭 - 유저 상세 정보 페이지에서도 확인할 수 있습니다.
 
 :::caution 비회원 상태에서 발생한 이벤트
