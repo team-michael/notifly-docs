@@ -5,154 +5,150 @@
   },
   "sidebar.developerGuide.category.Client SDK": {
     "message": "Client SDK",
-    "description": "The label for category Client SDK in sidebar developerGuide"
+    "description": "The label for category 'Client SDK' in sidebar 'developerGuide'"
   },
   "sidebar.developerGuide.category.Client SDK.link.generated-index.description": {
     "message": "Notifly SDK는 모바일 애플리케이션 개발자가 앱에 푸시 알림과 인앱 팝업을 쉽게 구현할 수 있도록 하는 소프트웨어 개발 키트입니다. 이 SDK는 사용자 세션, 기기 정보 및 푸시 토큰에 대한 데이터를 자동으로 수집합니다. 이 SDK는 이 모든 데이터를 사용자 프로파일로 통합하며, 이를 사용하여 대상 사용자에게 타겟팅된 개인화된 푸시 알림과 인앱 팝업을 보낼 수 있습니다.",
-    "description": "The generated-index page description for category Client SDK in sidebar developerGuide"
+    "description": "The generated-index page description for category 'Client SDK' in sidebar 'developerGuide'"
   },
   "sidebar.developerGuide.category.HTTP API": {
     "message": "HTTP API",
-    "description": "The label for category HTTP API in sidebar developerGuide"
+    "description": "The label for category 'HTTP API' in sidebar 'developerGuide'"
   },
   "sidebar.userGuide.category.Campaigns": {
     "message": "노티플라이 캠페인",
-    "description": "The label for category Campaigns in sidebar userGuide"
+    "description": "The label for category 'Campaigns' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Message Personalization": {
     "message": "메시지 개인화",
-    "description": "The label for category Message Personalization in sidebar userGuide"
+    "description": "The label for category 'Message Personalization' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Message Personalization.link.generated-index.description": {
     "message": "사용자별 메시지 개인화 방법에 대해 알아봅니다.",
-    "description": "The generated-index page description for category Message Personalization in sidebar userGuide"
+    "description": "The generated-index page description for category 'Message Personalization' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Campaign Segments": {
     "message": "캠페인 발송 대상 설정",
-    "description": "The label for category Campaign Segments in sidebar userGuide"
+    "description": "The label for category 'Campaign Segments' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Campaign Segments.link.generated-index.description": {
     "message": "캠페인 발송 대상을 어떻게 설정하는지 알아봅니다.",
-    "description": "The generated-index page description for category Campaign Segments in sidebar userGuide"
+    "description": "The generated-index page description for category 'Campaign Segments' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Campaigns.link.generated-index.description": {
     "message": "노티플라이 캠페인에 대한 정보를 설명하고, 생성부터 활용하는 법을 알아봅니다.",
-    "description": "The generated-index page description for category Campaigns in sidebar userGuide"
+    "description": "The generated-index page description for category 'Campaigns' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.SMS": {
     "message": "문자",
-    "description": "The label for category SMS in sidebar userGuide"
+    "description": "The label for category 'SMS' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.SMS.link.generated-index.description": {
     "message": "노티플라이에서 문자 발송을 위한 셋업을 하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category SMS in sidebar userGuide"
+    "description": "The generated-index page description for category 'SMS' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Web Popup": {
     "message": "웹 팝업",
-    "description": "The label for category Web Popup in sidebar userGuide"
+    "description": "The label for category 'Web Popup' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Cafe24 Integration": {
     "message": "카페24 연동",
-    "description": "The label for category Cafe24 Integration in sidebar userGuide"
+    "description": "The label for category 'Cafe24 Integration' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Cafe24 Integration.link.generated-index.description": {
     "message": "카페24 쇼핑몰과 연동하여 CRM 마케팅 캠페인을 바로 집행할 수 있습니다. 이 가이드를 참조하여 카페24 연동에 대해 알아보고 코드 없이 클릭 몇 번으로 노티플라이 프로젝트와 카페24 쇼핑몰을 연동해보세요.",
-    "description": "The generated-index page description for category Cafe24 Integration in sidebar userGuide"
+    "description": "The generated-index page description for category 'Cafe24 Integration' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Amplitude Integration": {
     "message": "Amplitude 연동",
-    "description": "The label for category Amplitude Integration in sidebar userGuide"
+    "description": "The label for category 'Amplitude Integration' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Amplitude Integration.link.generated-index.description": {
     "message": "노티플라이에서는 Amplitude와 연동하여 Amplitude로 수집된 데이터를 활용할 수 있습니다. 이 가이드를 참조하여 Amplitude 연동에 대해 알아보고 연동을 설정하세요.",
-    "description": "The generated-index page description for category Amplitude Integration in sidebar userGuide"
+    "description": "The generated-index page description for category 'Amplitude Integration' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Mixpanel Integration": {
     "message": "Mixpanel 연동",
-    "description": "The label for category Mixpanel Integration in sidebar userGuide"
+    "description": "The label for category 'Mixpanel Integration' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Mixpanel Integration.link.generated-index.description": {
     "message": "노티플라이에서는 Mixpanel 연동하여 Mixpanel의 Cohort를 연동할 수 있습니다. 이 가이드를 참조하여 Mixpanel Cohort 연동에 대해 알아보고 연동을 설정하세요.",
-    "description": "The generated-index page description for category Mixpanel Integration in sidebar userGuide"
+    "description": "The generated-index page description for category 'Mixpanel Integration' in sidebar 'userGuide'"
   },
   "sidebar.developerGuide.category.심화 연동 가이드": {
     "message": "심화 연동 가이드",
-    "description": "The label for category 심화 연동 가이드 in sidebar developerGuide"
+    "description": "The label for category '심화 연동 가이드' in sidebar 'developerGuide'"
   },
   "sidebar.userGuide.category.Email": {
     "message": "이메일",
-    "description": "The label for category Email in sidebar userGuide"
+    "description": "The label for category 'Email' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Email.link.generated-index.description": {
     "message": "노티플라이에서 이메일 발송을 위한 셋업을 하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Email in sidebar userGuide"
+    "description": "The generated-index page description for category 'Email' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Web Popup.link.generated-index.description": {
     "message": "노티플라이에서 웹 팝업을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Web Popup in sidebar userGuide"
+    "description": "The generated-index page description for category 'Web Popup' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Kakaotalk": {
     "message": "카카오 친구톡 / 알림톡",
-    "description": "The label for category Kakaotalk in sidebar userGuide"
+    "description": "The label for category 'Kakaotalk' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Kakaotalk.link.generated-index.description": {
     "message": "노티플라이에서 카카오 알림톡을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Kakaotalk in sidebar userGuide"
+    "description": "The generated-index page description for category 'Kakaotalk' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.In App Popup": {
     "message": "인앱 팝업",
-    "description": "The label for category In App Popup in sidebar userGuide"
+    "description": "The label for category 'In App Popup' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.In App Popup.link.generated-index.description": {
     "message": "노티플라이에서 인앱 팝업을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category In App Popup in sidebar userGuide"
+    "description": "The generated-index page description for category 'In App Popup' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Share Link": {
     "message": "쉐어 링크",
-    "description": "The label for category Share Link in sidebar userGuide"
-  },
-  "sidebar.userGuide.category.Share Link.link.generated-index.description": {
-    "message": "노티플라이에서 쉐어 링크 기능을 활용하는 방법을 안내합니다.",
-    "description": "The generated-index page description for category Share Link in sidebar userGuide"
+    "description": "The label for category 'Share Link' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.App push": {
     "message": "앱 푸시 알림",
-    "description": "The label for category App push in sidebar userGuide"
+    "description": "The label for category 'App push' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.App push.link.generated-index.description": {
     "message": "노티플라이에서 앱 푸시 알림을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category App push in sidebar userGuide"
+    "description": "The generated-index page description for category 'App push' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Web push": {
     "message": "웹 푸시 알림",
-    "description": "The label for category Web push in sidebar userGuide"
+    "description": "The label for category 'Web push' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Web push.link.generated-index.description": {
     "message": "노티플라이에서 웹 푸시 알림을 발송하는 방법을 알아봅니다.",
-    "description": "The generated-index page description for category Web push in sidebar userGuide"
+    "description": "The generated-index page description for category 'Web push' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Webhook": {
     "message": "웹훅",
-    "description": "The label for category Webhook in sidebar userGuide"
+    "description": "The label for category 'Webhook' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.Webhook.link.generated-index.description": {
     "message": "노티플라이에서 제공하는 웹훅을 이용하여 자유도 높은 CRM 시나리오를 구현해보세요.",
-    "description": "The generated-index page description for category Webhook in sidebar userGuide"
+    "description": "The generated-index page description for category 'Webhook' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.User Journey": {
     "message": "유저 여정",
-    "description": "The label for category User Journey in sidebar userGuide"
+    "description": "The label for category 'User Journey' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.User Journey.link.generated-index.description": {
     "message": "고객 관리 메시지는 고객의 사용 시나리오에 따라 적절히 메시지를 전달하는 것이 중요합니다. 노티플라이의 유저 여정 기능을 활용해 복잡한 유저 시나리오에 따라 메시지를 보낼 수 있습니다. 유저 여정을 활용하면, 유저의 행동이나 속성에 따른 분기, 일정 시간 대기, 다양한 채널의 메시지 발송 등의 기능을 연결하여 하나의 시나리오로 구현하여 더 높은 목표 전환을 달성하도록 돕습니다.",
-    "description": "The generated-index page description for category User Journey in sidebar userGuide"
+    "description": "The generated-index page description for category 'User Journey' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.User Journey Nodes": {
     "message": "유저 여정 노드",
-    "description": "The label for category User Journey Nodes in sidebar userGuide"
+    "description": "The label for category 'User Journey Nodes' in sidebar 'userGuide'"
   },
   "sidebar.userGuide.category.User Journey Nodes.link.generated-index.description": {
     "message": "유저 여정 구성에 사용할 수 있는 다양한 종류의 노드에 대해 설명합니다. 각 노드는 서로 다른 노드에 연결될 수 있습니다. 다양한 노드를 연결하거나 분기하여 더 복잡한 시나리오를 대응하고, 높은 효율을 기대할 수 있는 입체적인 메시지를 구성할 수 있습니다.",
-    "description": "The generated-index page description for category User Journey Nodes in sidebar userGuide"
+    "description": "The generated-index page description for category 'User Journey Nodes' in sidebar 'userGuide'"
   }
 }

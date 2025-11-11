@@ -37,7 +37,7 @@ sidebar_position: 1
   :::caution
   - 카카오, 이메일 발송 시 발신자 정보 등록이 필요합니다. 발신자 정보는 프로덕트 좌측 하단 **설정**에서 등록하실 수 있습니다.
   - 발신자 정보를 잘못 등록하시면, 발송에 실패할 수 있으니 주의해주세요.
-  - 채널 별로 발신자 정보를 등록하는 방법은 좌측 카테고리의 채널 별 가이드**([카카오](/ko/docusaurus-plugin-content-docs/current/user-guide/kakaotalk/integration.md), [이메일](/ko/docusaurus-plugin-content-docs/current/user-guide/email/guide.mdx))** 에서 확인해주세요.
+  - 채널 별로 발신자 정보를 등록하는 방법은 각 채널 가이드에서 확인해주세요: [앱 푸시](/user-guide/app-push-notification/guide), [웹 푸시](/user-guide/web-push-notification/guide), [인앱 팝업](/user-guide/in-app-message/guide), [웹 팝업](/user-guide/web-message/guide), [이메일](/user-guide/email/guide), [문자](/user-guide/text-message/notifly_guide), [카카오톡](/user-guide/kakaotalk/setup), [웹훅](/user-guide/webhook/guide)
 
 ## 2. 발송 시점
 
@@ -49,10 +49,10 @@ sidebar_position: 1
 노티플라이 캠페인은 선택한 시간에 원하는 유저들에게 알림을 발송할 수 있는 기능을 지원합니다. 예약 발송은 네 가지 타이밍을 지원합니다.
 
 1. **즉시 발송**
-   - 캠페인을 생성하는 <최종 확인> 버튼을 누르는 즉시 캠페인을 발송하며, 이후에는 <u>발송을 취소할 수 없습니다.</u>
+   - 캠페인을 생성하는 **최종 확인** 버튼을 누르는 즉시 캠페인을 발송하며, 이후에는 발송을 취소할 수 없습니다.
 2. **1회 예약 발송**
    - 원하는 시각에 캠페인 집행을 예약합니다.
-   - 캠페인 예약 시점 <u>5분 전부터는 발송을 취소할 수 없으며</u>, **종료** 상태로 저장되니 참고해주세요.
+   - 캠페인 예약 시점 **5분 전부터는 발송을 취소할 수 없으며**, **종료** 상태로 저장되니 참고해주세요.
 3. **1일 1회 발송**
    - 시작일부터 종료일까지 매일 설정하신 시각에 캠페인을 집행합니다.
 4. **매주 정해진 요일에 발송**
@@ -134,14 +134,14 @@ sidebar_position: 1
 
 ### 2.3. API 기반 발송
 
-노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 자세한 API 명세는 [개발자 가이드 - Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#api-campaign-triggering)를 참고해주세요.
+노티플라이 캠페인을 HTTP REST API를 통하여 직접 트리거할 수 있습니다. 자세한 API 명세는 [개발자 가이드 - Campaign Triggering API](/ko/developer-guide/http-api/http-api-guide#5-campaign-triggering)를 참고해주세요.
 
 - API 기반 발송에서 발송 대상은 <u>UI에서 지정할 수 없습니다</u>. API Request Body에서 발송 대상을 지정해 주세요.
 
 <details>
     <summary><b>API 기반 발송 캠페인 생성 예시</b> 더 보기</summary>
 
-- 해당 캠페인은 [**Campaign Triggering API**](/ko/developer-guide/http-api/http-api-guide#api-campaign-triggering)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.
+- 해당 캠페인은 [**Campaign Triggering API**](/ko/developer-guide/http-api/http-api-guide#5-campaign-triggering)의 예시 코드에 기반하여 제작된 캠페인 예시입니다.
 
 ![api-triggered-campaign-message-example](./img/api_triggered_campaign_message_example.png)
 

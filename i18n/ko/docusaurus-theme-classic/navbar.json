@@ -14,5 +14,9 @@
   "item.label.Developer Guide": {
     "message": "개발자 가이드",
     "description": "Navbar item with label Developer Guide"
+  },
+  "logo.alt": {
+    "message": "Notifly Logo",
+    "description": "The alt text of navbar logo"
   }
 }

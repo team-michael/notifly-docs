@@ -224,7 +224,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 ## 4. 유저 프로퍼티 등록하기
 
 - 노티플라이에서는 유저의 아이디 (userId) 및 프로퍼티 (userProperties)를 설정하여 마케팅 캠페인 집행 시에 활용할 수 있습니다.
-
   - 노티플라이에서는 채널 별 푸시 알림 수신 동의 여부를 유저 프로퍼티로 설정하여, 푸시 알림 전송 전에 필터링 할 수 있습니다.
   - 카카오 알림톡, 친구톡, 문자 발송을 위해서는 전화번호를 유저 프로퍼티로 설정해야 합니다.
   - 이메일 발송을 위해서는 이메일 주소를 유저 프로퍼티로 설정해야 합니다.
@@ -369,7 +368,6 @@ Notifly.getNotiflyUserId()
 ## FAQ
 
 - Q. 이미 Firebase Cloud Messaging을 사용 중인데 어떻게 해야 할까요?
-
   - A. Notifly iOS SDK는 기존 앱에서 사용하고 있을 수 있는 Firebase Cloud Messaging과 함께 사용하실 수 있습니다.
 
 - Q. SwiftUI를 사용하고 있습니다. 연동 후, 앱 푸시는 작동하는데 인앱 팝업이 작동하지 않는데 무엇이 문제일까요?

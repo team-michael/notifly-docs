@@ -105,11 +105,11 @@ This endpoint allows you to send event data to the Notifly engine. The Notifly e
 
 #### Response (Example)
 
-| Parameter    | Value                                                             |
-| ------------ | ----------------------------------------------------------------- |
-| Status code  | 200 OK                                                            |
-| Content-Type | application/json                                                  |
-| json         | {"data":"some-success-response-from-notifly-engine","error":null} |
+| Parameter    | Value                                                               |
+| ------------ | ------------------------------------------------------------------- |
+| Status code  | 200 OK                                                              |
+| Content-Type | application/json                                                    |
+| json         | `{"data":"some-success-response-from-notifly-engine","error":null}` |
 
 ### Example Code
 
@@ -196,11 +196,11 @@ This endpoint allows you to register user properties with the Notifly engine. Th
 
 #### Response (Example)
 
-| Parameter    | Value                                     |
-| ------------ | ----------------------------------------- |
-| Status code  | 200 OK                                    |
-| Content-Type | application/json                          |
-| json         | {"data":"updated row count","error":null} |
+| Parameter    | Value                                       |
+| ------------ | ------------------------------------------- |
+| Status code  | 200 OK                                      |
+| Content-Type | application/json                            |
+| json         | `{"data":"updated row count","error":null}` |
 
 ### Example Code
 
@@ -305,11 +305,11 @@ This endpoint allows you to delete users registered in Notifly.
 
 #### Response (Example)
 
-| Parameter    | Value                                     |
-| ------------ | ----------------------------------------- |
-| Status code  | 200 OK                                    |
-| Content-Type | application/json                          |
-| json         | {"data":"deleted row count","error":null} |
+| Parameter    | Value                                       |
+| ------------ | ------------------------------------------- |
+| Status code  | 200 OK                                      |
+| Content-Type | application/json                            |
+| json         | `{"data":"deleted row count","error":null}` |
 
 ### Example Code
 
@@ -428,7 +428,7 @@ The supported recipient types may vary depending on the campaign's dispatch chan
 
 When the recipient type is not `user-id`, the Notifly server attempts to send the message based solely on the information specified in the request payload without fetching user data from the user database. Therefore, **user-based message personalization** is not available when the recipient type is not `user-id`. For example, if the campaign message contains `Hello {{ user["name"] }}`, the personalization will fail, and the message `Hello` will be sent.
 
-Event parameters are available for all recipient types. For more detailed examples of API-based dispatch campaigns, please refer to [this section](/ko/user-guide/campaigns/basic#23-api-based-dispatch).
+Event parameters are available for all recipient types.
 
 :::
 
@@ -731,7 +731,7 @@ This endpoint allows you to send Kakao Friendtalk messages. Friendtalk messages 
 
 ### Caution
 
-- Kakao Friendtalk dispatch via HTTP REST API is only possible when **[Notifly KakaoTalk self-dispatch](/ko/user-guide/kakaotalk/integration#notifly)** settings are configured.
+- Kakao Friendtalk dispatch via HTTP REST API is only possible when **Notifly KakaoTalk self-dispatch settings** are configured.
 - Statistics on the dispatch results via API are not yet provided in the UI. If you need information, please email contact@notifly.tech.
 
 ### Endpoint
