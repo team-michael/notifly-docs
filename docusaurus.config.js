@@ -96,6 +96,7 @@ const config = {
         indexBlog: false,
       },
     ],
+    "@signalwire/docusaurus-theme-llms-txt",
   ],
 
   themeConfig:
@@ -198,6 +199,21 @@ const config = {
         contextualSearch: true,
       },
     }),
+  plugins: [
+    [
+      "@signalwire/docusaurus-plugin-llms-txt",
+      {
+        ui: {
+          copyPageContent: {
+            buttonLabel: "Copy Page",
+            display: {
+              docs: true,
+            },
+          },
+        },
+      },
+    ],
+  ],
 };
 
 module.exports = config;
