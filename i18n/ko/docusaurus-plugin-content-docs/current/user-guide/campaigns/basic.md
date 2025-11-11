@@ -37,7 +37,7 @@ sidebar_position: 1
   :::caution
   - 카카오, 이메일 발송 시 발신자 정보 등록이 필요합니다. 발신자 정보는 프로덕트 좌측 하단 **설정**에서 등록하실 수 있습니다.
   - 발신자 정보를 잘못 등록하시면, 발송에 실패할 수 있으니 주의해주세요.
-  - 채널 별로 발신자 정보를 등록하는 방법은 좌측 카테고리의 채널 별 가이드에서 확인해주세요.
+  - 채널 별로 발신자 정보를 등록하는 방법은 각 채널 가이드에서 확인해주세요: [앱 푸시](/user-guide/app-push-notification/guide), [웹 푸시](/user-guide/web-push-notification/guide), [인앱 팝업](/user-guide/in-app-message/guide), [웹 팝업](/user-guide/web-message/guide), [이메일](/user-guide/email/guide), [문자](/user-guide/text-message/notifly_guide), [카카오톡](/user-guide/kakaotalk/setup), [웹훅](/user-guide/webhook/guide)
 
 ## 2. 발송 시점
 

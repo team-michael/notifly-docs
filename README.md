@@ -12,7 +12,7 @@ This repo contains the website configuration and documentation powering the [Not
 ### Prerequisites
 
 1.  [Git](https://git-scm.com/downloads).
-1.  [Node](https://nodejs.org/en/download/) _(version 16 or greater)_.
+1.  [Node](https://nodejs.org/en/download/) _(version 20 or greater)_.
 1.  A fork of the repo _(for any contributions)_.
 1.  A clone of the `notifly-docs` repo.
 
