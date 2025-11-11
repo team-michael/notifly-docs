@@ -24,12 +24,12 @@ Mixpanel의 integration 기능을 사용하기 위해서는 Mixpanel의 유료 �
 3.  아래의 정보를 정확하게 입력해주세요.
     ![mixpanel_integration_step_3](./img/mixpanel_integration_step_3.png)
 
-    | 필드명         | 값                                                                          | 설명                                                                   |
-    | -------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-    | Connector Name | 원하는 커넥션 이름                                                          | 예를 들면, Notifly - cohort sync                                       |
-    | URL            | https://integration.notifly.tech/mixpanel/projects/{{ project_id }}/cohorts | project_id는 노티플라이 콘솔 > 설정에서 확인 가능                      |
-    | USERNAME       | {{ access_key }}                                                            | access_key는 노티플라이 콘솔 > 설정 > API 인증 정보 영역에서 확인 가능 |
-    | PASSWORD       | {{ secret_key }}                                                            | secret_key는 노티플라이 콘솔 > 설정 > API 인증 정보 영역에서 확인 가능 |
+    | 필드명         | 값                                                                                 | 설명                                                                   |
+    | -------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+    | Connector Name | 원하는 커넥션 이름                                                                 | 예를 들면, Notifly - cohort sync                                       |
+    | URL            | `https://integration.notifly.tech/mixpanel/projects/<project_id>/cohorts`         | project_id는 노티플라이 콘솔 > 설정에서 확인 가능                      |
+    | USERNAME       | `<access_key>`                                                                     | access_key는 노티플라이 콘솔 > 설정 > API 인증 정보 영역에서 확인 가능 |
+    | PASSWORD       | `<secret_key>`                                                                     | secret_key는 노티플라이 콘솔 > 설정 > API 인증 정보 영역에서 확인 가능 |
 
 4.  연동이 완료되었다면, Mixpanel > cohort 에서 연동을 원하는 cohort에 export 메뉴를 클릭해 연동 타입을 선택한 후 연동합니다. (One-time, Recurring sync)
 

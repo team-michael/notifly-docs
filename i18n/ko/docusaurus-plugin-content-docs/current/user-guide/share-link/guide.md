@@ -12,10 +12,10 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 2. 연동할 셀에 아래 함수를 복사해 붙여넣기 합니다.
    
 ```excel
-=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv")
+=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv")
 ```
 
-3. 입력한 함수에서 '{project_id}'을 실제 project_id로 대체합니다.
+3. 입력한 함수에서 `<project_id>`을 실제 project_id로 대체합니다.
 4. 외부 URL에서 데이터를 가져오도록 액세스 권한을 허용해야 합니다. '권한 허용' 버튼을 클릭해주세요.
 5. [기간/태그 파라미터](user-guide/share-link/guide#기간태그-파라미터)와 작성 예시를 참고하여 불러올 기간을 수정해보세요.
 6. 반드시 [주의사항](ko/user-guide/share-link/guide#주의사항)을 확인해주세요.
@@ -53,12 +53,12 @@ Notifly Share Link는 외부 도구(예: Google 스프레드시트)의 `IMPORTDA
 
 | 이름       |  설명                                                                                        | 작성 예시          | 예시 적용 시 기간 <br/>(ex.오늘 = 2025-07-01) |
 | ---------- |  -------------------------------------------------------------------------------------------| ------------------ | ------------------ |
-| `start` & `end` |  특정 기간.                                                                             | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?start=2022-01-01&end=2022-03-01")` |  2022-01-01 ~ 2022-03-01|
-| `since`    | 특정 일자부터 오늘 전일까지.                                                                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?since=2025-05-01")` | 2025-05-01 ~ 2025-06-30|
-| `last`     | 전일부터 최근 N기간. <br/>`timeUnit` 미지정 시 day 단위로 집계됩니다.                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=7")` | 2025-06-24 ~ 2025-06-30(전일부터 최근 7일)|
-| `timeUnit` | 기간 단위를 변경. <br/>(`day`(기본)/`week`/`month`)<br/>`last` 또는 `offset`과 함께 사용합니다.      | `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&timeUnit=week")` | 2025-06-03 ~ 2025-06-30<br/>(전일부터 최근 4주) | 
-| `offset`   | 기준일을 "N기간 전"으로 이동. <br/>`start/end`,`since` 또는 `last`)과 함께 사용해야 합니다.|`=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?last=4&timeUnit=week&offset=4")`| 2025-05-06 ~ 2025-06-02<br/>(전일부터 4주 전을 기준으로 이전 4주간) |
-| `tag`      |  특정 태그로 필터링. <br/>지정된 태그 중 하나라도 포함(OR)하면 출력합니다.| `=IMPORTDATA("https://api.notifly.tech/v1/projects/{project_id}/statistics.csv?tag=프로모션&tag=공지")` | 태그 '프로모션'과 '공지'를 포함하는 모든 캠페인|
+| `start` & `end` |  특정 기간.                                                                             | `=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?start=2022-01-01&end=2022-03-01")` |  2022-01-01 ~ 2022-03-01|
+| `since`    | 특정 일자부터 오늘 전일까지.                                                                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?since=2025-05-01")` | 2025-05-01 ~ 2025-06-30|
+| `last`     | 전일부터 최근 N기간. <br/>`timeUnit` 미지정 시 day 단위로 집계됩니다.                 | `=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?last=7")` | 2025-06-24 ~ 2025-06-30(전일부터 최근 7일)|
+| `timeUnit` | 기간 단위를 변경. <br/>(`day`(기본)/`week`/`month`)<br/>`last` 또는 `offset`과 함께 사용합니다.      | `=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?last=4&timeUnit=week")` | 2025-06-03 ~ 2025-06-30<br/>(전일부터 최근 4주) |
+| `offset`   | 기준일을 "N기간 전"으로 이동. <br/>`start/end`,`since` 또는 `last`)과 함께 사용해야 합니다.|`=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?last=4&timeUnit=week&offset=4")`| 2025-05-06 ~ 2025-06-02<br/>(전일부터 4주 전을 기준으로 이전 4주간) |
+| `tag`      |  특정 태그로 필터링. <br/>지정된 태그 중 하나라도 포함(OR)하면 출력합니다.| `=IMPORTDATA("https://api.notifly.tech/v1/projects/<project_id>/statistics.csv?tag=프로모션&tag=공지")` | 태그 '프로모션'과 '공지'를 포함하는 모든 캠페인|
 
 
 ### 주의사항

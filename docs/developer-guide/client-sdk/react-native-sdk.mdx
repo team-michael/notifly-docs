@@ -52,7 +52,7 @@ The notifly-sdk will be added to your app's package.json file. (Current latest v
 1. Open `{Your_Project_Name}.xcworkspace` in Xcode.
 
 - If you open `{Your_Project_Name}.xcodeproj` instead of `{Your_Project_Name}.xcworkspace` in Xcode and build it, you will not be able to use the Notifly SDK.
-- `{Your_Project_Name}.xcworkspace` is located in the ios directory of the Root directory.
+- `{Your_Project_Name}.xcworkspace` is located in the ios directory of the Root directory (replace `{Your_Project_Name}` with your actual project name).
 
 2. Set the iOS Deployment Target of the target project and the Minimum Deployment iOS of the Target to **13.0** or higher.
 
@@ -66,7 +66,7 @@ The notifly-sdk will be added to your app's package.json file. (Current latest v
 
 5. Open the AppDelegate.mm file and add the following code:
 
-- The AppDelegate.mm file is located in the {ProjectName} folder of the ios directory.
+- The AppDelegate.mm file is located in the `{ProjectName}` folder of the ios directory (replace `{ProjectName}` with your actual project name).
 
 - Import the `notifly_sdk` framework.
 
@@ -344,5 +344,5 @@ Please refer to [(Advanced) Client SDK - React Native](/developer-guide/client-s
     }
     ```
 - Q. I get an error saying the notifly_sdk-Swift.h file cannot be found. What should I do?
-  - The notifly_sdk (iOS) is written in Swift. To expose it to the Objective-C environment, a Swift Compatibility Header named notifly_sdk-Swift.h is created during the build process. Please add "${PODS_CONFIGURATION_BUILD_DIR}" to the Header Search Paths in the Build Option of the target you wish to build.
+  - The notifly_sdk (iOS) is written in Swift. To expose it to the Objective-C environment, a Swift Compatibility Header named notifly_sdk-Swift.h is created during the build process. Please add `"${PODS_CONFIGURATION_BUILD_DIR}"` to the Header Search Paths in the Build Option of the target you wish to build.
   - [Reference](https://developer.apple.com/documentation/swift/importing-swift-into-objective-c)

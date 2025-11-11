@@ -44,15 +44,15 @@ import TabItem from '@theme/TabItem';
 
 ## 2. App Groups 설정
 
-1. 그룹 id는 group.notifly.{username}과 같습니다. (Ex: group.notifly.greybox)
+1. 그룹 id는 `group.notifly.<username>`과 같습니다. (Ex: group.notifly.greybox)
 
 - username은 노티플라이의 설정 페이지의 API, SDK 인증 정보 섹션에서 확인하실 수 있습니다. (initialize method에서 사용하는 값과 동일합니다.)
 
-2. TARGETS에서 메인 앱을 선택한 후, Signing & Capabilities 탭에서 App Groups을 추가하고, 그룹 이름을 `group.notifly.{username}`로 설정합니다.
+2. TARGETS에서 메인 앱을 선택한 후, Signing & Capabilities 탭에서 App Groups을 추가하고, 그룹 이름을 `group.notifly.<username>`로 설정합니다.
 
 ![Main App Group](../image/ios_push_extension_app_group1.png)
 
-3. TARGETS에서 생성된 Extension을 선택하고, Signing & Capabilities 탭에서 App Groups을 추가하고, 그룹 이름을 `group.notifly.{username}`로 설정합니다.
+3. TARGETS에서 생성된 Extension을 선택하고, Signing & Capabilities 탭에서 App Groups을 추가하고, 그룹 이름을 `group.notifly.<username>`로 설정합니다.
 
 ![Push Extension App Group](../image/ios_push_extension_app_group2.png)
 
@@ -110,7 +110,7 @@ class NotificationService: NotiflyNotificationServiceExtension {
     }
 
     func setup() {
-        self.register(projectId: "{YOUR_PROJECT_ID}", username: "{YOUR_USERNAME}")
+        self.register(projectId: "<YOUR_PROJECT_ID>", username: "<YOUR_USERNAME>")
     }
 }
 
@@ -137,7 +137,7 @@ class NotificationService: NotiflyNotificationServiceExtension {
     }
 
     func setup() {
-        self.register(projectId: "{YOUR_PROJECT_ID}", username: "{YOUR_USERNAME}")
+        self.register(projectId: "<YOUR_PROJECT_ID>", username: "<YOUR_USERNAME>")
     }
 
     override open func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {

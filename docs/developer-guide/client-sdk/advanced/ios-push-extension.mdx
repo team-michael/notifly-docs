@@ -42,15 +42,15 @@ import TabItem from '@theme/TabItem';
 
 ## 2. Setting up App Groups
 
-1. The group id is formatted as group.notifly.{username}. (Ex: group.notifly.greybox)
+1. The group id is formatted as `group.notifly.<username>` (Ex: group.notifly.greybox)
 
 - The username can be found on the Notifly settings page, in the API, SDK authentication section. (This is the same value used in the initialize method.)
 
-2. In TARGETS, select the main app, then add App Groups in the Signing & Capabilities tab, setting the group name as `group.notifly.{username}`.
+2. In TARGETS, select the main app, then add App Groups in the Signing & Capabilities tab, setting the group name as `group.notifly.<username>`.
 
 ![Main App Group](../image/ios_push_extension_app_group1.png)
 
-3. In TARGETS, select the created Extension, then add App Groups in the Signing & Capabilities tab, setting the group name as `group.notifly.{username}`.
+3. In TARGETS, select the created Extension, then add App Groups in the Signing & Capabilities tab, setting the group name as `group.notifly.<username>` (replace `<username>` with your actual username).
 
 ![Push Extension App Group](../image/ios_push_extension_app_group2.png)
 
@@ -108,7 +108,7 @@ class NotificationService: NotiflyNotificationServiceExtension {
     }
 
     func setup() {
-        self.register(projectId: "{YOUR_PROJECT_ID}", username: "{YOUR_USERNAME}")
+        self.register(projectId: "<YOUR_PROJECT_ID>", username: "<YOUR_USERNAME>")
     }
 }
 
@@ -135,7 +135,7 @@ class NotificationService: NotiflyNotificationServiceExtension {
     }
 
     func setup() {
-        self.register(projectId: "{YOUR_PROJECT_ID}", username: "{YOUR_USERNAME}")
+        self.register(projectId: "<YOUR_PROJECT_ID>", username: "<YOUR_USERNAME>")
     }
 
     override open func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {

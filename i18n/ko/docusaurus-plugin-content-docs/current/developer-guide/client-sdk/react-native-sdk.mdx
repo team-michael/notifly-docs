@@ -47,10 +47,10 @@ cd ios && pod install
 
 #### 1) Capability 설정
 
-1. Xcode에서 {Your_Project_Name}.xcworkspace를 열어주세요.
+1. Xcode에서 `<Your_Project_Name>.xcworkspace`를 열어주세요.
 
-- Xcode에서 {Your_Project_Name}.xcworkspace를 열지 않고 {Your_Project_Name}.xcodeproj를 열어서 빌드하면, Notifly SDK를 사용할 수 없습니다.
-- {Your_Project_Name}.xcworspace는 Root 디렉토리의 ios 디렉토리에 있습니다.
+- Xcode에서 `<Your_Project_Name>.xcworkspace`를 열지 않고 `<Your_Project_Name>.xcodeproj`를 열어서 빌드하면, Notifly SDK를 사용할 수 없습니다.
+- `<Your_Project_Name>.xcworspace`는 Root 디렉토리의 ios 디렉토리에 있습니다.
 
 2. 대상 Project의 iOS Deployment Target과 Target의 Minimum Deployments iOS를 **13.0** 혹은 그 이상으로 설정합니다.
 
@@ -64,7 +64,7 @@ cd ios && pod install
 
 5. AppDelegate.mm 파일을 열어서 다음 코드를 추가합니다.
 
-- AppDelegate.mm ios 디렉토리의 {ProjectName} 폴더에 있습니다.
+- AppDelegate.mm ios 디렉토리의 `<ProjectName>` 폴더에 있습니다 (`<ProjectName>`을 실제 프로젝트 이름으로 대체하세요).
 
 - `notifly_sdk` 프래임워크를 import 합니다.
 
@@ -356,5 +356,5 @@ notifly.getNotiflyUserId();
     }
     ```
 - Q. notifly_sdk-Swift.h 파일을 찾을 수 없다는 에러가 뜹니다. 어떻게 해야 할까요?
-  - notifly_sdk(ios)는 Swift로 작성되어 있습니다. 이에 Objective-C 환경으로 노출시키기 위해 빌드되는 과정에서 Swift Compatibility Header가 생성되는데, 이 헤더 파일의 이름이 notifly_sdk-Swift.h입니다. 빌드를 진행하고자하는 타겟의 Builld Option의 Header Search Paths에 "${PODS_CONFIGURATION_BUILD_DIR}"를 추가해주세요.
+  - notifly_sdk(ios)는 Swift로 작성되어 있습니다. 이에 Objective-C 환경으로 노출시키기 위해 빌드되는 과정에서 Swift Compatibility Header가 생성되는데, 이 헤더 파일의 이름이 notifly_sdk-Swift.h입니다. 빌드를 진행하고자하는 타겟의 Builld Option의 Header Search Paths에 `"${PODS_CONFIGURATION_BUILD_DIR}"`를 추가해주세요.
   - [참고](https://developer.apple.com/documentation/swift/importing-swift-into-objective-c)
