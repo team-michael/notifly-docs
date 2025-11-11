@@ -12,7 +12,7 @@ This repo contains the website configuration and documentation powering the [Not
 ### Prerequisites
 
 1.  [Git](https://git-scm.com/downloads).
-1.  [Node](https://nodejs.org/en/download/) _(version 12 or greater)_.
+1.  [Node](https://nodejs.org/en/download/) _(version 16 or greater)_.
 1.  A fork of the repo _(for any contributions)_.
 1.  A clone of the `notifly-docs` repo.
 
@@ -23,7 +23,7 @@ This repo contains the website configuration and documentation powering the [Not
 ### Running locally
 
 1.  `npm run write-translations -- --locale ko` to generate translations for Korean language.
-1.  `npm run start` to start the development server _(powered by [Docusaurus](https://v2.docusaurus.io))_.
+1.  `npm run start` to start the development server _(powered by [Docusaurus](https://docusaurus.io))_.
     - `npm run start -- --locale ko` to start the server in Korean.
 1.  Open http://localhost:3000/ site in your favorite browser.
 1.  **NOTE: Each locale is a distinct standalone single-page application: it is not possible to start the Docusaurus sites in all locales at the same time.**
