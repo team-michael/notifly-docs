@@ -133,7 +133,7 @@ const config = {
             label: "Developer Guide",
           },
           {
-            href: "https://www.notifly.tech",
+            href: "https://notifly.tech",
             label: "Notifly",
             position: "right",
           },
@@ -156,7 +156,7 @@ const config = {
             items: [
               {
                 label: "Notifly Homepage",
-                href: "https://www.notifly.tech",
+                href: "https://notifly.tech",
               },
             ],
           },
