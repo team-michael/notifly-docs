@@ -13,7 +13,7 @@
   },
   "link.item.label.Notifly Homepage": {
     "message": "Notifly Homepage",
-    "description": "The label of footer link with label=Notifly Homepage linking to https://www.notifly.tech"
+    "description": "The label of footer link with label=Notifly Homepage linking to https://notifly.tech"
   },
   "copyright": {
     "message": "Copyright © 2023 Grey Box, Inc. Built with Docusaurus.",
