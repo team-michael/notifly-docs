@@ -1,3 +1,5 @@
+# [Deprecated]
+Migrated to: https://github.com/notifly-tech/notifly-docs
 # [docs.notifly.tech](https://docs.notifly.tech/)
 
 This repo contains the website configuration and documentation powering the [Notifly Documentation](https://docs.notifly.tech/).
